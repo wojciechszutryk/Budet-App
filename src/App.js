@@ -1,25 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import GlobalStyles from 'indexStyle';
+import {ThemeProvider} from 'styled-components';
+import theme from 'utilities/theme'
+
+import React from 'react';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import { useTranslation } from 'react-i18next';
+
+import {Loading, Navigation, Wrapper} from 'components'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const { t, i18n } = useTranslation('common');
+    return (
+        <>
+          <GlobalStyles/>
+          <Router>
+              <Navigation pages={[
+                  {
+                      name:t('Start'),
+                      link:'/'
+                  },
+                  {
+                      name:t('Budget'),
+                      link:'/budget'
+                  },
+              ]} LanguageSwitcher={(
+                  <div>
+                      <button onClick={() => i18n.changeLanguage('en')}>En</button>
+                      <button onClick={() => i18n.changeLanguage('de')}>De</button>
+                      <button onClick={() => i18n.changeLanguage('pl')}>Pl</button>
+                  </div>
+              )}
+              />
+              <Wrapper>
+                  <Switch>
+                      <Route path='/' exact>Start Page</Route>
+                      <Route path='/budget'>Budget</Route>
+                  </Switch>
+              </Wrapper>
+          </Router>
+        </>
+    );
 }
 
-export default App;
+function RootApp(){
+    return(
+        <ThemeProvider theme={theme}>
+            <React.Suspense fallback={<Loading/>}>
+                <App/>
+            </React.Suspense>
+        </ThemeProvider>
+    )
+}
+
+export default RootApp;
