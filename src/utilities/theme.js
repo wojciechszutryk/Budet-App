@@ -39,6 +39,10 @@ const styles = {
         normal: 14,
         l: 17,
         xl: 20,
+    },
+    images: {
+        pl: './images/PL.png',
+        de: ''
     }
 }
 
