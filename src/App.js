@@ -3,12 +3,16 @@ import {ThemeProvider} from 'styled-components';
 import theme from 'utilities/theme'
 
 import React from 'react';
+import {connect} from 'react-redux';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
 
 import {Button, Loading, Navigation, Wrapper} from 'components'
+import {fetchBudget} from "./data/actions/budgetActions";
 
-function App() {
+function App({budget, fetchBudget}) {
+    fetchBudget(1);
+    console.log(budget);
     const { t, i18n } = useTranslation('common');
     return (
         <>
@@ -25,9 +29,9 @@ function App() {
                       },
                   ]} LanguageSwitcher={(
                       <div>
-                          <Button type="inline" onClick={() => i18n.changeLanguage('en')}>En</Button>
-                          <Button type="inline" onClick={() => i18n.changeLanguage('de')}>De</Button>
-                          <Button type="inline" onClick={() => i18n.changeLanguage('pl')}>Pl</Button>
+                          <Button buttonType="inline" onClick={() => i18n.changeLanguage('en')}>En</Button>
+                          <Button buttonType="inline" onClick={() => i18n.changeLanguage('de')}>De</Button>
+                          <Button buttonType="inline" onClick={() => i18n.changeLanguage('pl')}>Pl</Button>
                       </div>
                   )}
               />
@@ -42,11 +46,15 @@ function App() {
     );
 }
 
+const ConnectedApp = connect(state => ({budget: state.budget.budget}),
+    {fetchBudget}
+    )(App);
+
 function RootApp(){
     return(
         <ThemeProvider theme={theme}>
             <React.Suspense fallback={<Loading/>}>
-                <App/>
+                <ConnectedApp/>
             </React.Suspense>
         </ThemeProvider>
     )

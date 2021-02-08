@@ -1,22 +1,23 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {InlineButton, NormalButton, ButtonWrapper} from'./ButtonStyles'
 
-const Button = ({type, children}) => {
-    const CustomButton = (() => {
-        switch (type){
+const Button = ({buttonType, children, ...props}) => {
+
+    const CustomButton = useMemo(() => {
+        switch (buttonType){
             case 'inline':
-                return InlineButton
+                return InlineButton;
             default:
-                return NormalButton
+                return NormalButton;
         }
-    })();
+    },[buttonType]);
 
     return (
-        <ButtonWrapper>
-            <CustomButton>
+        useMemo(() => (<ButtonWrapper>
+            <CustomButton {...props}>
                 {children}
             </CustomButton>
-        </ButtonWrapper>
+        </ButtonWrapper>),[children, props])
     );
 };
 

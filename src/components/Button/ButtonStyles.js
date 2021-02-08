@@ -35,6 +35,10 @@ const ParentButton = styled.button`
   height: 30px;
   border: none;
   background-color: transparent;
+  background-image: ${props => props.clicked ? 'url("./images/EN.png")' : 'none'};
+  background-position: center;
+  background-size: cover;
+  font-size: ${props => props.clicked ? '0' : '16px'};
   outline:none;
   color: ${({theme}) => theme.colors.black.normal};
 `;
@@ -42,9 +46,10 @@ const ParentButton = styled.button`
 const Container = styled.div`
   display: inline-block;
   position: relative;
-  width: 30px;
-  height: 30px;
-  border: none;
+  width: 34px;
+  height: 34px;
+  margin-left: ${({theme}) => theme.spacing.xs}px;
+  border: 2px solid ${({theme}) => theme.colors.black.normal};
   border-radius: 50%;
   overflow: hidden;
   &:hover ${HoverLine}{
