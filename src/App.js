@@ -7,14 +7,14 @@ import {connect} from 'react-redux';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 import {Loading, Navigation, Wrapper} from 'components'
-import {fetchBudget, fetchCategories} from "./data/actions/budgetActions";
+import {fetchBudget, fetchBudgetCategories} from "./data/actions/budgetActions";
 
-function App({budget, fetchBudget, fetchCategories}) {
+function App({fetchBudget, fetchBudgetCategories}) {
 
     useEffect(()=>{
         fetchBudget(1);
-        fetchCategories(1);
-    },[fetchBudget, fetchCategories])
+        fetchBudgetCategories(1);
+    },[fetchBudget, fetchBudgetCategories])
 
     return (
         <>
@@ -43,7 +43,7 @@ function App({budget, fetchBudget, fetchCategories}) {
 }
 
 const ConnectedApp = connect(state => ({budget: state.budget.budget}),
-    {fetchBudget, fetchCategories}
+    {fetchBudget, fetchBudgetCategories}
     )(App);
 
 function RootApp(){

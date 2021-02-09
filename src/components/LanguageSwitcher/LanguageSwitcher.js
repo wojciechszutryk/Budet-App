@@ -6,15 +6,15 @@ const LanguageSwitcher = () => {
     const [language, setLanguage] = useState('en')
     const { i18n } = useTranslation();
 
-    const changeLanguage = (lng) => {
+    const changeLanguage = React.useCallback((lng) =>  {
         const availableLanguages = ['en', 'de', 'pl']
         if (availableLanguages.includes(lng)) setLanguage(lng);
         i18n.changeLanguage(lng);
-    }
+    },[i18n]);
 
     useEffect(()=>{
         changeLanguage(navigator.language);
-    },[])
+    },[changeLanguage])
 
     return (
         <div>

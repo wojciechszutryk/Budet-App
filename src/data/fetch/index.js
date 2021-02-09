@@ -1,5 +1,5 @@
 import * as budget from './budgetFetch'
 
-export default{
-    budget
-}
+const fetchAPIBudget = {budget}
+
+export default fetchAPIBudget;
