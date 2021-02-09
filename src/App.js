@@ -2,38 +2,34 @@ import GlobalStyles from 'indexStyle';
 import {ThemeProvider} from 'styled-components';
 import theme from 'utilities/theme'
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-import { useTranslation } from 'react-i18next';
 
-import {Button, Loading, Navigation, Wrapper} from 'components'
-import {fetchBudget} from "./data/actions/budgetActions";
+import {Loading, Navigation, Wrapper} from 'components'
+import {fetchBudget, fetchCategories} from "./data/actions/budgetActions";
 
-function App({budget, fetchBudget}) {
-    fetchBudget(1);
-    console.log(budget);
-    const { t, i18n } = useTranslation('common');
+function App({budget, fetchBudget, fetchCategories}) {
+
+    useEffect(()=>{
+        fetchBudget(1);
+        fetchCategories(1);
+    },[fetchBudget, fetchCategories])
+
     return (
         <>
           <GlobalStyles/>
           <Router>
               <Navigation pages={[
                       {
-                          name:t('Start'),
+                          name: 'Start',
                           link:'/'
                       },
                       {
-                          name:t('Budget'),
+                          name:'Budget',
                           link:'/budget'
                       },
-                  ]} LanguageSwitcher={(
-                      <div>
-                          <Button buttonType="inline" onClick={() => i18n.changeLanguage('en')}>En</Button>
-                          <Button buttonType="inline" onClick={() => i18n.changeLanguage('de')}>De</Button>
-                          <Button buttonType="inline" onClick={() => i18n.changeLanguage('pl')}>Pl</Button>
-                      </div>
-                  )}
+                  ]}
               />
               <Wrapper>
                   <Switch>
@@ -47,7 +43,7 @@ function App({budget, fetchBudget}) {
 }
 
 const ConnectedApp = connect(state => ({budget: state.budget.budget}),
-    {fetchBudget}
+    {fetchBudget, fetchCategories}
     )(App);
 
 function RootApp(){

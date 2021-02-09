@@ -6,7 +6,8 @@ import configureStore from 'data/store';
 import './indexStyle';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import './LanguageTranslation/i18n';
+import './i18n';
+
 
 const store = configureStore();
 
