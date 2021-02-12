@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {fetchBudget, fetchBudgetCategories} from "data/actions/budgetActions";
 import {fetchAllCategories} from "data/actions/commonActions";
 import {Loading} from "components";
+import {BudgetCategories} from "./components/BudgetCategories";
 
 const BudgetPage = ({budgetState, commonState, fetchBudget, fetchBudgetCategories, fetchAllCategories}) => {
     useEffect(()=>{
@@ -19,7 +20,7 @@ const BudgetPage = ({budgetState, commonState, fetchBudget, fetchBudgetCategorie
     return (
         <Grid>
             <section>
-                {finishedLoading ? 'Cat List' : <Loading/>}
+                {finishedLoading ? <BudgetCategories/> : <Loading/>}
             </section>
             <section>
                 {finishedLoading ? 'Trans List' : <Loading/>}
