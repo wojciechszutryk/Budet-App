@@ -1,15 +1,14 @@
-import {LOADING_STATES,  CATEGORIES_REQUEST, CATEGORIES_SUCCESS, CATEGORIES_FAILURE} from 'data/constants'
+import {LOADING_STATES,  ALL_CATEGORIES_REQUEST, ALL_CATEGORIES_SUCCESS, ALL_CATEGORIES_FAILURE} from 'data/constants'
 
-const startBudget = {
-    loading: {},
-    budget: {},
+const startCommon = {
+    loading: null,
     categories: [],
 }
 
-const budget = (state= startBudget, action) => {
+const common = (state= startCommon, action) => {
     const newLoading = {...state.loading};
     switch (action.type) {
-        case CATEGORIES_REQUEST:
+        case ALL_CATEGORIES_REQUEST:
             return {
                 ...state,
                 loading: {
@@ -18,16 +17,16 @@ const budget = (state= startBudget, action) => {
                 }
             }
 
-        case CATEGORIES_SUCCESS:
-            delete newLoading.CATEGORIES_REQUEST;
+        case ALL_CATEGORIES_SUCCESS:
+            delete newLoading.ALL_CATEGORIES_REQUEST;
             return{
                 ...state,
                 categories: action.payload,
                 loading: newLoading,
             }
 
-        case CATEGORIES_FAILURE:
-            delete newLoading.CATEGORIES_REQUEST;
+        case ALL_CATEGORIES_FAILURE:
+            delete newLoading.ALL_CATEGORIES_REQUEST;
             return{
                 ...state,
                 categories: [],
@@ -39,4 +38,4 @@ const budget = (state= startBudget, action) => {
     }
 }
 
-export default budget;
+export default common;

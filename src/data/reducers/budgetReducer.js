@@ -1,7 +1,7 @@
 import {LOADING_STATES, BUDGET_REQUEST, BUDGET_SUCCESS, BUDGET_FAILURE, BUDGET_CATEGORIES_FAILURE, BUDGET_CATEGORIES_SUCCESS, BUDGET_CATEGORIES_REQUEST} from 'data/constants'
 
 const startBudget = {
-    loading: {},
+    loading: null,
     budget: {},
     categories: [],
 }

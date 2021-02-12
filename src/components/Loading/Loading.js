@@ -1,7 +1,6 @@
 import React from 'react';
 import  styled, {keyframes} from 'styled-components';
 
-//Pure css loader
 const dots1 = keyframes`
   0% {
     transform: scale(0);
@@ -37,7 +36,10 @@ const Content = styled.div`
 `;
 const Root = styled.div`
   display: inline-block;
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
   width: 80px;
   height: 80px;
   ${Content}:nth-child(1) {
@@ -61,12 +63,12 @@ const Root = styled.div`
 
 const Loading = () => {
     return (
-        <Root>
-            <Content/>
-            <Content/>
-            <Content/>
-            <Content/>
-        </Root>
+            <Root>
+                <Content/>
+                <Content/>
+                <Content/>
+                <Content/>
+            </Root>
     );
 };
 

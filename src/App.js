@@ -2,20 +2,13 @@ import GlobalStyles from 'indexStyle';
 import {ThemeProvider} from 'styled-components';
 import theme from 'utilities/theme'
 
-import React, {useEffect} from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
+import {BudgetPage} from "./RoutePages"
 import {Loading, Navigation, Wrapper} from 'components'
-import {fetchBudget, fetchBudgetCategories} from "./data/actions/budgetActions";
 
-function App({fetchBudget, fetchBudgetCategories}) {
-
-    useEffect(()=>{
-        fetchBudget(1);
-        fetchBudgetCategories(1);
-    },[fetchBudget, fetchBudgetCategories])
-
+function App() {
     return (
         <>
           <GlobalStyles/>
@@ -34,7 +27,7 @@ function App({fetchBudget, fetchBudgetCategories}) {
               <Wrapper>
                   <Switch>
                       <Route path='/' exact>Start Page</Route>
-                      <Route path='/budget'>Budget</Route>
+                      <Route path='/budget'><BudgetPage/></Route>
                   </Switch>
               </Wrapper>
           </Router>
@@ -42,15 +35,11 @@ function App({fetchBudget, fetchBudgetCategories}) {
     );
 }
 
-const ConnectedApp = connect(state => ({budget: state.budget.budget}),
-    {fetchBudget, fetchBudgetCategories}
-    )(App);
-
 function RootApp(){
     return(
         <ThemeProvider theme={theme}>
             <React.Suspense fallback={<Loading/>}>
-                <ConnectedApp/>
+                <App/>
             </React.Suspense>
         </ThemeProvider>
     )
