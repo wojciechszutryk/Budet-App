@@ -5,26 +5,25 @@ import {SwitchList} from 'components';
 import ParentCategory from "./ParentCategory";
 import ChildrenCategory from "./ChildrenCategory";
 
-const BudgetCategories = ({budgetCategories,allCategories}) => {
+const BudgetCategories = ({budgetCategories,allCategories, budget}) => {
     const groupedCategories = groupBy(
         budgetCategories,
             budgetCategory => allCategories.find(
                 category => budgetCategory.categoryId === category.id).parentCategory.name
     );
 
-    const categoriesList = Object.entries(groupedCategories).map(category =>
-    // {
-    //     console.log(category[0]);
-    //     return ;
-    // });
+    console.log(groupedCategories)
 
-
-        ({
+    const categoriesList = Object.entries(groupedCategories).map(category => ({
         id: category[0],
         Trigger: ({onClick}) => (
             <ParentCategory
                 name={category[0]}
                 onClick={() => onClick(category[0])}
+                categoriesInside={category[1]}
+                transactions={budget.transactions.filter(transaction => category[1].find(
+                    cat => transaction.categoryId === cat.categoryId
+                ))}
             />
         ),
         children: category[1].map(budgetCategory => {
@@ -46,6 +45,7 @@ const BudgetCategories = ({budgetCategories,allCategories}) => {
 };
 
 const mapStateToProps = state => ({
+    budget: state.budget.budget,
     budgetCategories: state.budget.categories,
     allCategories: state.common.categories,
 });

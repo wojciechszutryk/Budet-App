@@ -16,3 +16,8 @@ export const StyledChildrenCategory = styled(StyledCategory)`
   background-color: ${({theme}) => theme.colors.gray.light};
   color: ${({theme}) => theme.colors.black.normal};
 `;
+
+export const Money = styled.span`
+  font-style: italic;
+  color: ${({theme, money}) => money ? theme.colors.green.dark : theme.colors.red.normal};
+`;
