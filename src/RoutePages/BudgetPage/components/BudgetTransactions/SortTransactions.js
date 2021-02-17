@@ -22,7 +22,7 @@ const SortTransactions = ({allTransactions, transactions, categories}) => {
                     category={category}
                     description={transaction.description}
                 />
-            )
+            );
         });
     }
 
