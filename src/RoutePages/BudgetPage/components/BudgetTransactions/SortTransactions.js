@@ -23,7 +23,7 @@ const SortTransactions = ({allTransactions, transactions, categories}) => {
                     description={transaction.description}
                 />
             );
-        });
+        })
     };
 
     const [inputText, setInputText] = useState('');
