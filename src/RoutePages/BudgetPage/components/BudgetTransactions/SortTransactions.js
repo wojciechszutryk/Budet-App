@@ -24,7 +24,7 @@ const SortTransactions = ({allTransactions, transactions, categories}) => {
                 />
             );
         });
-    }
+    };
 
     const [inputText, setInputText] = useState('');
     const [order, setOrder] = useState('');
