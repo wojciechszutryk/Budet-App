@@ -6,6 +6,8 @@ import {fetchAllCategories} from "data/actions/commonActions";
 import {Loading} from "components";
 import {BudgetCategories} from "./components/BudgetCategories";
 
+import {BudgetTransactions} from "./components/BudgetTransactions";
+
 const BudgetPage = ({budgetState, commonState, fetchBudget, fetchBudgetCategories, fetchAllCategories}) => {
     useEffect(()=>{
         fetchBudget(1);
@@ -23,7 +25,7 @@ const BudgetPage = ({budgetState, commonState, fetchBudget, fetchBudgetCategorie
                 {finishedLoading ? <BudgetCategories/> : <Loading/>}
             </section>
             <section>
-                {finishedLoading ? 'Trans List' : <Loading/>}
+                {finishedLoading ? <BudgetTransactions/> : <Loading/>}
             </section>
         </Grid>
     );

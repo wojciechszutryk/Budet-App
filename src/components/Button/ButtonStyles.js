@@ -41,6 +41,7 @@ const ParentButton = styled.button`
   font-size: ${props => props.clicked ? '0' : '16px'};
   outline:none;
   color: ${({theme}) => theme.colors.black.normal};
+  cursor: pointer;
 `;
 
 const Container = styled.div`
@@ -80,5 +81,6 @@ export const InlineButton = styled(ParentButton)`
 `;
 
 export const NormalButton = styled(ParentButton)`
+    text-align:left;
     color: red;
 `;

@@ -3,13 +3,19 @@ import styled from 'styled-components';
 const StyledCategory = styled.div`
   display: flex;
   justify-content: space-between;
-  border: 1px solid ${({theme}) => theme.colors.gray.normal};
+  border: 1px solid ${({theme}) => theme.colors.gray.dark};
   padding: ${({theme})=> theme.spacing.s};
+`;
+
+export const StyledBudgetMoney = styled(StyledCategory)`
+  background-color: ${({theme}) => theme.colors.white.normal};
+  color: ${({theme}) => theme.colors.black.normal};
 `;
 
 export const StyledParentCategory = styled(StyledCategory)`
   background-color: ${({theme}) => theme.colors.gray.normal};
   color: ${({theme}) => theme.colors.black.normal};
+  cursor: pointer;
 `;
 
 export const StyledChildrenCategory = styled(StyledCategory)`

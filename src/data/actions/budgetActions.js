@@ -1,4 +1,4 @@
-import {BUDGET, BUDGET_CATEGORIES} from 'data/constants';
+import {BUDGET, BUDGET_ACTIVE_CATEGORIES_ADD, BUDGET_ACTIVE_CATEGORIES_REMOVE, BUDGET_CATEGORIES} from 'data/constants';
 import API from 'data/fetch';
 
 export const fetchBudget = id => {
@@ -18,3 +18,17 @@ export const fetchBudgetCategories = id => {
         promise
     };
 };
+
+export const addActiveCategory = id => {
+    return{
+        type: BUDGET_ACTIVE_CATEGORIES_ADD,
+        payload: id
+    }
+}
+
+export const removeActiveCategory = id => {
+    return{
+        type: BUDGET_ACTIVE_CATEGORIES_REMOVE,
+        payload: id
+    }
+}
