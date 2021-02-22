@@ -75,6 +75,7 @@ const BudgetCategories = ({budgetCategories, allCategories, budget, activeCatego
 
 const mapStateToProps = state => ({
     budget: state.budget.budget,
+    activeCategories: state.budget.activeCategories,
     budgetCategories: state.budget.categories,
     allCategories: state.common.categories,
 });

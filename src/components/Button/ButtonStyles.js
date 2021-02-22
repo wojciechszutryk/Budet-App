@@ -77,7 +77,6 @@ export const InlineButton = styled(ParentButton)`
     color: ${({theme}) => theme.colors.black.normal};
     font-weight: 700;
     z-index: 2;
-    cursor: pointer;
 `;
 
 export const NormalButton = styled(ParentButton)`

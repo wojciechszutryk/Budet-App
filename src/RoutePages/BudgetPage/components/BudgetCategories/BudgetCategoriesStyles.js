@@ -24,6 +24,10 @@ export const StyledChildrenCategory = styled(StyledCategory)`
 `;
 
 export const Money = styled.span`
+  color: ${({theme}) =>  theme.colors.black.normal};
+`;
+
+export const MoneyLeft = styled.span`
   font-style: italic;
   color: ${({theme, money}) => money ? theme.colors.green.dark : theme.colors.red.normal};
 `;

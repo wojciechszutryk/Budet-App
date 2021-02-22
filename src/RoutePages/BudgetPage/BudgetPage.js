@@ -5,7 +5,6 @@ import {fetchBudget, fetchBudgetCategories} from "data/actions/budgetActions";
 import {fetchAllCategories} from "data/actions/commonActions";
 import {Loading} from "components";
 import {BudgetCategories} from "./components/BudgetCategories";
-
 import {BudgetTransactions} from "./components/BudgetTransactions";
 
 const BudgetPage = ({budgetState, commonState, fetchBudget, fetchBudgetCategories, fetchAllCategories}) => {
