@@ -7,11 +7,12 @@ import {connect} from "react-redux";
 import {StyledOrderBar} from "./BudgetTransactionsStyles";
 import {NormalButton} from "components/Button/ButtonStyles";
 import {useEffect} from "react";
+import {useCallback} from "react";
 
 const SortTransactions = ({allTransactions, transactions, categories}) => {
     const {t} = useTranslation();
 
-    const makeListFromTransaction = (transactions) => {
+    const makeListFromTransaction = useCallback((transactions) => {
         return transactions.map(transaction => {
             const category = (categories.find(category => category.id === transaction.categoryId) || {}).name || t('Other');
             return (
@@ -24,7 +25,7 @@ const SortTransactions = ({allTransactions, transactions, categories}) => {
                 />
             );
         })
-    };
+    },[t, categories]);
 
     const [inputText, setInputText] = useState('');
     const [order, setOrder] = useState('');
@@ -34,7 +35,7 @@ const SortTransactions = ({allTransactions, transactions, categories}) => {
         setListToRender(makeListFromTransaction(transactions))
         setInputText('');
         document.querySelector('input').value = '';
-    }, [transactions])
+    }, [makeListFromTransaction, transactions]);
 
     let searchTransaction = transactions.filter(transaction => transaction.description.toLowerCase().includes(inputText.toLowerCase()))
 

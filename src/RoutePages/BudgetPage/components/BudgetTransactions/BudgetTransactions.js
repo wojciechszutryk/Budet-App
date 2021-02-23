@@ -1,14 +1,19 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {StyledList} from './BudgetTransactionsStyles'
-import {useTranslation} from "react-i18next";
 import SortTransactions from "./SortTransactions";
 
-const BudgetTransactions = ({transactions, categories, activeCategories}) => {
-    const {t} = useTranslation();
+const BudgetTransactions = ({transactions, categories, activeCategories, budgetCategories}) => {
     const filteredBySelectedCategory = (() => {
+        const activeTransactions = [];
         if (activeCategories.length === 0) return transactions
-        return transactions.filter(
+        else if (activeCategories.includes('Other')) {
+            const otherTransactions = transactions.filter(
+                transaction => !budgetCategories.find(budgetCategory => budgetCategory.id === transaction.categoryId)
+            );
+            activeTransactions.push(...otherTransactions)
+        }
+        const categoriesTransactions = transactions.filter(
             transaction => {
                 try {
                     const transactionParentCategory = categories.find(category => transaction.categoryId === category.id).parentCategory.name;
@@ -18,6 +23,8 @@ const BudgetTransactions = ({transactions, categories, activeCategories}) => {
                 }
             }
         );
+        activeTransactions.push(...categoriesTransactions)
+        return activeTransactions;
     })();
 
     return (
@@ -30,6 +37,7 @@ const BudgetTransactions = ({transactions, categories, activeCategories}) => {
 const mapStateToProps = state => ({
     transactions: state.budget.budget.transactions,
     activeCategories: state.budget.activeCategories,
+    budgetCategories: state.budget.categories,
     categories: state.common.categories
 });
 

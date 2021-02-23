@@ -9,13 +9,29 @@ import 'styled-components/macro'
 import MoneyStatistics from "./MoneyStatistics";
 import {setCurrency} from "utilities/functions";
 import {addActiveCategory, removeActiveCategory} from 'data/actions/budgetActions'
+import {useTranslation} from "react-i18next";
 
 const BudgetCategories = ({budgetCategories, allCategories, budget, activeCategories, addActiveCategory, removeActiveCategory}) => {
-    const groupedCategories = groupBy(
-        budgetCategories,
+
+    const {t} = useTranslation();
+
+    const groupedCategories = groupBy(budgetCategories,
             budgetCategory => allCategories.find(
                 category => budgetCategory.categoryId === category.id).parentCategory.name
     );
+
+    let budgetMoneySpent = 0;
+    budget.transactions.forEach(transaction => budgetMoneySpent+=transaction.amount);
+    const availableBudgetMoney = budget.totalAmount;
+    const moneyLeft = availableBudgetMoney-budgetMoneySpent;
+    const isMoneyLeft = moneyLeft>0;
+
+    const amountToSpendOnCategories = budgetCategories.reduce((acc, budgetCategory) => (acc + budgetCategory.budget), 0);
+    const otherTransactions = budget.transactions.filter(
+        transaction => !budgetCategories.find(budgetCategory => budgetCategory.id === transaction.categoryId)
+    );
+    const otherExpenses = otherTransactions.reduce((acc,transaction) => acc + transaction.amount, 0);
+    const leftToSpendOnOther = budget.totalAmount - amountToSpendOnCategories;
 
     const categoriesList = Object.entries(groupedCategories).map(category => ({
         id: category[0],
@@ -43,11 +59,26 @@ const BudgetCategories = ({budgetCategories, allCategories, budget, activeCatego
         )}),
     }));
 
-    let budgetMoneySpent = 0;
-    budget.transactions.forEach(transaction => budgetMoneySpent+=transaction.amount);
-    const availableBudgetMoney = budget.totalAmount;
-    const moneyLeft = availableBudgetMoney-budgetMoneySpent;
-    const isMoneyLeft = moneyLeft>0;
+    categoriesList.push({
+        id: 'Other',
+        Trigger: ({onClick}) => (
+            <ParentCategory
+                name={t('Other')}
+                onClick={() => {
+                    onClick('Other');
+                    activeCategories.includes('Other') ? removeActiveCategory('Other') : addActiveCategory('Other');
+                }}
+                categoriesInside={{}}
+                transactions={otherTransactions}
+                other={[(leftToSpendOnOther-otherExpenses).toFixed(2), setCurrency(leftToSpendOnOther.toFixed(2)), leftToSpendOnOther>0]}
+            />
+        ),
+        children: (<ChildrenCategory
+            key={'Other'}
+            name={t('Money spent on other or non-budgeted categories')}
+            other={true}
+        />)
+    });
 
     return (
         <div>
@@ -83,6 +114,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
     addActiveCategory,
     removeActiveCategory
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(BudgetCategories);
