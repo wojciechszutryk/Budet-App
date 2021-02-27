@@ -8,7 +8,9 @@ import {useTranslation} from "react-i18next";
 import LanguageSwitcher from "../LanguageSwitcher";
 
 const Navigation = ({pages= []}) => {
+
     const {t} = useTranslation();
+
     const list = pages.map(page => (
         <li key={page.name}>
             <NavLink exact activeClassName="selected" to={page.link}>{t(page.name)}</NavLink >

@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react';
-import {InlineButton, NormalButton, ButtonWrapper} from'./ButtonStyles'
+import {InlineButton, NormalButton, TransactionButton} from'./ButtonStyles'
 
 const Button = ({buttonType, children, ...props}) => {
 
@@ -7,17 +7,21 @@ const Button = ({buttonType, children, ...props}) => {
         switch (buttonType){
             case 'inline':
                 return InlineButton;
-            default:
+            case 'normal':
                 return NormalButton;
+            case 'sort':
+                return NormalButton;
+            case 'transaction':
+                return TransactionButton;
+            default:
+                return InlineButton;
         }
     },[buttonType]);
 
     return (
-        useMemo(() => (<ButtonWrapper>
-            <CustomButton {...props}>
-                {children}
-            </CustomButton>
-        </ButtonWrapper>),[children, props])
+        <CustomButton {...props}>
+            {children}
+        </CustomButton>
     );
 };
 

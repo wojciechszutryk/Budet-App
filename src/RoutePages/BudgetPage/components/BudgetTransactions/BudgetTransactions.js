@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {connect} from 'react-redux';
 import {StyledList} from './BudgetTransactionsStyles'
 import SortTransactions from "./SortTransactions";
 
 const BudgetTransactions = ({transactions, categories, activeCategories, budgetCategories}) => {
-    const filteredBySelectedCategory = (() => {
+    const filteredBySelectedCategory = useMemo(() => {
         const activeTransactions = [];
         if (activeCategories.length === 0) return transactions
         else if (activeCategories.includes('Other')) {
@@ -25,7 +25,7 @@ const BudgetTransactions = ({transactions, categories, activeCategories, budgetC
         );
         activeTransactions.push(...categoriesTransactions)
         return activeTransactions;
-    })();
+    },[activeCategories, budgetCategories, categories, transactions]);
 
     return (
         <StyledList>

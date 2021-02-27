@@ -11,6 +11,9 @@ const GlobalStyles = createGlobalStyle`
         padding: ${({theme}) => theme.spacing.s}px ${({theme}) => theme.spacing.normal}px;
         list-style: none;
     }
+    a{
+      text-decoration: none;
+    }
 `;
 
 export default GlobalStyles;

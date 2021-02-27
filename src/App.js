@@ -1,12 +1,12 @@
 import GlobalStyles from 'indexStyle';
 import {ThemeProvider} from 'styled-components';
-import theme from 'utilities/theme'
+import theme from 'utilities/theme';
 
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
-import {BudgetPage} from "./RoutePages"
-import {Loading, Navigation, Wrapper} from 'components'
+import {BudgetPage} from "./RoutePages";
+import {Loading, Navigation, Wrapper} from 'components';
 
 function App() {
     return (

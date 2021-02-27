@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {connect} from 'react-redux'
 import {groupBy} from 'lodash';
 import {SwitchList} from 'components';
@@ -15,10 +15,10 @@ const BudgetCategories = ({budgetCategories, allCategories, budget, activeCatego
 
     const {t} = useTranslation();
 
-    const groupedCategories = groupBy(budgetCategories,
+    const groupedCategories = useMemo(() => groupBy(budgetCategories,
             budgetCategory => allCategories.find(
                 category => budgetCategory.categoryId === category.id).parentCategory.name
-    );
+    ), [allCategories,budgetCategories]);
 
     let budgetMoneySpent = 0;
     budget.transactions.forEach(transaction => budgetMoneySpent+=transaction.amount);
@@ -27,10 +27,12 @@ const BudgetCategories = ({budgetCategories, allCategories, budget, activeCatego
     const isMoneyLeft = moneyLeft>0;
 
     const amountToSpendOnCategories = budgetCategories.reduce((acc, budgetCategory) => (acc + budgetCategory.budget), 0);
-    const otherTransactions = budget.transactions.filter(
+    const otherTransactions = useMemo(() => budget.transactions.filter(
         transaction => !budgetCategories.find(budgetCategory => budgetCategory.id === transaction.categoryId)
-    );
-    const otherExpenses = otherTransactions.reduce((acc,transaction) => acc + transaction.amount, 0);
+    ), [budget.transactions, budgetCategories]);
+    const otherExpenses = useMemo(() => 
+        otherTransactions.reduce((acc,transaction) => acc + transaction.amount, 0),
+    [otherTransactions]);
     const leftToSpendOnOther = budget.totalAmount - amountToSpendOnCategories;
 
     const categoriesList = Object.entries(groupedCategories).map(category => ({
@@ -57,9 +59,9 @@ const BudgetCategories = ({budgetCategories, allCategories, budget, activeCatego
                 transactions={budget.transactions.filter(transaction => transaction.categoryId === budgetCategory.id)}
             />
         )}),
-    }));
+    }))
 
-    categoriesList.push({
+    useMemo(() =>categoriesList.push({
         id: 'Other',
         Trigger: ({onClick}) => (
             <ParentCategory
@@ -78,7 +80,7 @@ const BudgetCategories = ({budgetCategories, allCategories, budget, activeCatego
             name={t('Money spent on other or non-budgeted categories')}
             other={true}
         />)
-    });
+    }), [activeCategories, addActiveCategory, categoriesList, leftToSpendOnOther, otherExpenses, otherTransactions, removeActiveCategory, t]);
 
     return (
         <div>

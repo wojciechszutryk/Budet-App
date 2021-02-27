@@ -1,13 +1,15 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {ListItem} from "./components";
 import {useTranslation} from "react-i18next";
 import {useState} from "react";
 import {setCurrency, setDate} from "utilities/functions";
 import {connect} from "react-redux";
 import {StyledOrderBar} from "./BudgetTransactionsStyles";
-import {NormalButton} from "components/Button/ButtonStyles";
+import {SortButton} from "components/Button/ButtonStyles";
 import {useEffect} from "react";
 import {useCallback} from "react";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faSortAmountUp, faEllipsisV} from "@fortawesome/free-solid-svg-icons";
 
 const SortTransactions = ({allTransactions, transactions, categories}) => {
     const {t} = useTranslation();
@@ -39,7 +41,7 @@ const SortTransactions = ({allTransactions, transactions, categories}) => {
 
     let searchTransaction = transactions.filter(transaction => transaction.description.toLowerCase().includes(inputText.toLowerCase()))
 
-    const orderAndSearchTransaction = sortOrder => {
+    const orderAndSearchTransaction = useMemo(() =>sortOrder => {
         switch (sortOrder){
             case 'date':
                 const sortedByDateTransactions = searchTransaction.sort(function(a, b){
@@ -49,9 +51,11 @@ const SortTransactions = ({allTransactions, transactions, categories}) => {
                 });
                 if (order === 'date_asc') {
                     setOrder('date_desc');
+                    document.getElementById("date").style.transform = "scaleY(-1)";
                     return sortedByDateTransactions.reverse();
                 }
                 setOrder('date_asc');
+                document.getElementById("date").style.transform = "scaleY(1)";
                 return sortedByDateTransactions;
 
             case 'amount':
@@ -62,9 +66,11 @@ const SortTransactions = ({allTransactions, transactions, categories}) => {
                 });
                 if (order === 'amount_asc') {
                     setOrder('amount_desc');
+                    document.getElementById("amount").style.transform = "scaleY(-1)";
                     return sortedByAmountTransactions.reverse();
                 }
                 setOrder('amount_asc');
+                document.getElementById("amount").style.transform = "scaleY(1)";
                 return sortedByAmountTransactions;
             case 'category':
                 const sortedByCategoryTransactions = searchTransaction.sort(function(a, b){
@@ -74,31 +80,36 @@ const SortTransactions = ({allTransactions, transactions, categories}) => {
                 });
                 if (order === 'category_desc') {
                     setOrder('category_asc');
+                    document.getElementById("category").style.transform = "scaleY(-1)";
+                    console.log('rotate')
                     return sortedByCategoryTransactions.reverse();
                 }
                 setOrder('category_desc');
+                document.getElementById("category").style.transform = "scaleY(1)";
                 return sortedByCategoryTransactions;
             case 'description':
                 const sortedByDescriptionTransactions = searchTransaction.sort(function(a, b){
-                    if (a.description > b.description) return -1;
-                    if (a.description < b.description) return 1;
+                    if (a.description > b.description) return 1;
+                    if (a.description < b.description) return -1;
                     return 0;
                 });
                 if (order === 'description_desc') {
                     setOrder('description_asc');
+                    document.getElementById("description").style.transform = "scaleY(1)";
                     return sortedByDescriptionTransactions.reverse();
                 }
                 setOrder('description_desc');
+                document.getElementById("description").style.transform = "scaleY(-1)";
                 return sortedByDescriptionTransactions;
             default:
                 setOrder('');
                 return searchTransaction;
         }
-    }
+    }, [order, searchTransaction]);
 
-    const handleOrderOnClick = orderToSet => {
+    const handleOrderOnClick = useMemo(() =>orderToSet => {
         setListToRender(makeListFromTransaction(orderAndSearchTransaction(orderToSet)));
-    }
+    }, [makeListFromTransaction, orderAndSearchTransaction]);
 
     const handleSearchOnChange = e => {
         setOrder('');
@@ -121,10 +132,22 @@ const SortTransactions = ({allTransactions, transactions, categories}) => {
                 <button onClick={handleShowAllTransactions}>{t('Show All Transactions')}</button>
             </div>
             <StyledOrderBar>
-                <NormalButton onClick={() => handleOrderOnClick('description')}>{t('description')}</NormalButton>
-                <NormalButton onClick={() => handleOrderOnClick('amount')}>{t('amount')}</NormalButton>
-                <NormalButton onClick={() => handleOrderOnClick('date')}>{t('date')}</NormalButton>
-                <NormalButton onClick={() => handleOrderOnClick('category')}>{t('category')}</NormalButton>
+                <SortButton onClick={() => handleOrderOnClick('description')}>
+                    {t('description')}
+                    <span style={{display: 'inline-block'}} id='description'>{order.includes('description') ? <FontAwesomeIcon icon={faSortAmountUp} /> : <FontAwesomeIcon icon={faEllipsisV} />}</span>
+                </SortButton>
+                <SortButton onClick={() => handleOrderOnClick('amount')}>
+                    {t('amount')}
+                    <span style={{display: 'inline-block'}} id='amount'>{order.includes('amount') ? <FontAwesomeIcon icon={faSortAmountUp} /> : <FontAwesomeIcon icon={faEllipsisV} />}</span>
+                </SortButton>
+                <SortButton onClick={() => handleOrderOnClick('date')}>
+                    {t('date')}
+                    <span style={{display: 'inline-block'}} id='date'>{order.includes('date') ? <FontAwesomeIcon icon={faSortAmountUp} /> : <FontAwesomeIcon icon={faEllipsisV} />}</span>
+                </SortButton>
+                <SortButton onClick={() => handleOrderOnClick('category')}>
+                    {t('category')}
+                    <span style={{display: 'inline-block'}} id='category'>{order.includes('category') ? <FontAwesomeIcon icon={faSortAmountUp} /> : <FontAwesomeIcon icon={faEllipsisV} />}</span>
+                </SortButton>
             </StyledOrderBar>
             {listToRender}
         </>

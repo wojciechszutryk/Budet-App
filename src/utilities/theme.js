@@ -16,7 +16,7 @@ const styles = {
             dark: 'rgb(204, 0, 0)'
         },
         green: {
-            normal: 'rgb(51, 204, 51)',
+            normal: 'rgb(133, 187, 101)',
             dark: 'rgb(0, 153, 51)'
         },
         blue: {
