@@ -14,6 +14,13 @@ const GlobalStyles = createGlobalStyle`
     a{
       text-decoration: none;
     }
+    a.selected button::after{
+      left: 0;
+      color: ${({theme}) => theme.colors.black.normal};
+    }
+    a.selected button{
+      color: ${({theme}) => theme.colors.black.normal};
+    }
 `;
 
 export default GlobalStyles;

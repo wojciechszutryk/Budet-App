@@ -6,7 +6,8 @@ const styles = {
         gray: {
             light: 'rgb(230,230,230)',
             normal: 'rgb(166, 166, 166)',
-            dark: 'rgb(89, 89, 89)'
+            normalDark: 'rgb(100, 100, 100)',
+            dark: 'rgb(89, 89, 89)',
         },
         black: {
             normal: 'rgb(10,10,10)',

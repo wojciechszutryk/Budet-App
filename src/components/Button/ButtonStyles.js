@@ -14,7 +14,7 @@ export const NormalButton = styled(ParentButton)`
 
 export const SortButton = styled(ParentButton)`
     position: relative;
-    padding: 3px 5px;
+    padding: 3px ${({theme}) => theme.spacing.xs}px;
     margin: 0 3px;
     font-size: 1em;
     border: 1px solid ${({theme}) => theme.colors.black.normal};
@@ -67,11 +67,12 @@ export const SortButton = styled(ParentButton)`
 `;
 
 export const InlineButton = styled(ParentButton)`
-    color: ${({theme}) => theme.colors.black.normal};
+    color: ${({theme}) => theme.colors.gray.normalDark};
     font-weight: 700;
     z-index: 2;
     position: relative;
-    padding: 5px 10px;
+    padding: ${({theme}) => theme.spacing.xs}px ${({theme}) => theme.spacing.sm}px;
+    margin: 0 ${({theme}) => theme.spacing.xs}px;
     font-size: 1em;
     border-style: none;
     background-color: #fff;
@@ -85,7 +86,7 @@ export const InlineButton = styled(ParentButton)`
         bottom: 0;
         left: -100%;
         background-color: #000;
-        transition: 1s cubic-bezier(0, 1.8, 1, 1);
+        transition: .3s cubic-bezier(0.61, 0.01, 0.87, 1.01);
     }
     
     &:hover::after{
@@ -96,7 +97,7 @@ export const InlineButton = styled(ParentButton)`
 export const TransactionButton = styled(ParentButton)`
     display: inline-block;
     position: relative;
-    padding: 5px 10px;
+    padding: ${({theme}) => theme.spacing.xs}px ${({theme}) => theme.spacing.sm}px;
     border: 2px solid ${({theme}) => theme.colors.black.normal};
     background-color: transparent;
     text-align: center;

@@ -5,12 +5,15 @@ import {Wrapper, Content, CloseIcon} from './ModalStyles'
 
 const Modal = ({children}) => {
     const history = useHistory();
-    console.log(history)
+    const handleClose = (event) => {
+        event.stopPropagation();
+        history.goBack();
+    }
     return createPortal(
-        <Wrapper>
-            <Content>
+        <Wrapper onClick={handleClose}>
+            <Content onClick={event => event.stopPropagation()}>
                 <CloseIcon
-                    onClick={history.goBack}
+                    onClick={handleClose}
                 >
                     &times;
                 </CloseIcon>

@@ -81,7 +81,6 @@ const SortTransactions = ({allTransactions, transactions, categories}) => {
                 if (order === 'category_desc') {
                     setOrder('category_asc');
                     document.getElementById("category").style.transform = "scaleY(-1)";
-                    console.log('rotate')
                     return sortedByCategoryTransactions.reverse();
                 }
                 setOrder('category_desc');

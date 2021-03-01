@@ -3,9 +3,9 @@ import {NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types';
 
 import {Container, List, NavigationWrapper} from './NavigationStyles'
-import './index.css'
 import {useTranslation} from "react-i18next";
 import LanguageSwitcher from "../LanguageSwitcher";
+import {InlineButton} from "../Button/ButtonStyles";
 
 const Navigation = ({pages= []}) => {
 
@@ -13,7 +13,11 @@ const Navigation = ({pages= []}) => {
 
     const list = pages.map(page => (
         <li key={page.name}>
-            <NavLink exact activeClassName="selected" to={page.link}>{t(page.name)}</NavLink >
+            <NavLink exact activeClassName="selected" to={page.link}>
+                <InlineButton>
+                    {t(page.name)}
+                </InlineButton>
+            </NavLink >
         </li>
     ))
 
