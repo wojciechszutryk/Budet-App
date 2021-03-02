@@ -1,6 +1,5 @@
 import React, {useMemo} from 'react';
 import {connect} from 'react-redux';
-import {StyledList} from './BudgetTransactionsStyles'
 import SortTransactions from "./SortTransactions";
 
 const BudgetTransactions = ({transactions, categories, activeCategories, budgetCategories}) => {
@@ -28,9 +27,7 @@ const BudgetTransactions = ({transactions, categories, activeCategories, budgetC
     },[activeCategories, budgetCategories, categories, transactions]);
 
     return (
-        <StyledList>
-            <SortTransactions allTransactions={transactions} transactions={filteredBySelectedCategory}/>
-        </StyledList>
+        <SortTransactions allTransactions={transactions} transactions={filteredBySelectedCategory}/>
     );
 };
 

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const StyledList = styled.ul`
-  margin-top: ${({theme})=> theme.spacing.xs}px;
+  margin-bottom: ${({theme})=> theme.spacing.xs}px;
 `;
 
 export const StyledListItem = styled.li`
@@ -41,4 +41,17 @@ export const StyledOrderBar = styled.div`
   > *:nth-child(4){
     flex:2;
   }
-`
+`;
+
+export const OperationGrid = styled.div`
+  display: flex;
+  > *:nth-child(1){
+    flex:3;
+  }
+  > *:nth-child(2){
+    flex:4;
+  }
+  > *:nth-child(3){
+    flex:3;
+  }
+`;

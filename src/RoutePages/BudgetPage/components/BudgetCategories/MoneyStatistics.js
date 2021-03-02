@@ -1,18 +1,18 @@
 import React from 'react';
-import {Money, MoneyLeft} from "./BudgetCategoriesStyles";
+import {Money, MoneyLeft, MoneyWrapper} from "./BudgetCategoriesStyles";
 
-const MyComponent = ({moneyLeft, allMoney, isMoneyLeft}) => {
+const MoneyStatistics = ({moneyLeft, allMoney, isMoneyLeft}) => {
     return (
-        <div>
+        <MoneyWrapper>
             <MoneyLeft money={isMoneyLeft}>
                 {moneyLeft}
             </MoneyLeft>
-            /
+            <span style={{color: 'black'}}> / </span>
             <Money>
                 {allMoney}
             </Money>
-        </div>
+        </MoneyWrapper>
     );
 };
 
-export default MyComponent;
+export default MoneyStatistics;

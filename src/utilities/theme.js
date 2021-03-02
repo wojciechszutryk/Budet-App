@@ -25,6 +25,10 @@ const styles = {
             normal: 'rgb(0, 153, 255)',
             dark: 'rgb(0, 51, 204)'
         },
+        purple: {
+            normal: 'rgb(153, 50, 204)',
+            dark: 'rgb(72, 61, 139)'
+        },
         yellow: {
             normal: 'rgb(255, 255, 0)'
         },

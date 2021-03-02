@@ -15,19 +15,19 @@ function App() {
           <Router>
               <Navigation pages={[
                       {
-                          name: 'Start',
-                          link:'/'
+                          name: 'Budget',
+                          link:'/budget'
                       },
                       {
-                          name:'Budget',
-                          link:'/budget'
+                          name:'Transactions',
+                          link:'/transactions'
                       },
                   ]}
               />
               <Wrapper>
                   <Switch>
                       <Route path='/' exact>Start Page</Route>
-                      <Route path='/budget'><BudgetPage/></Route>
+                      <Route path='/transactions'><BudgetPage/></Route>
                   </Switch>
               </Wrapper>
           </Router>

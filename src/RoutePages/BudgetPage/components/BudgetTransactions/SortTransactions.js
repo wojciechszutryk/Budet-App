@@ -4,12 +4,15 @@ import {useTranslation} from "react-i18next";
 import {useState} from "react";
 import {setCurrency, setDate} from "utilities/functions";
 import {connect} from "react-redux";
-import {StyledOrderBar} from "./BudgetTransactionsStyles";
-import {SortButton} from "components/Button/ButtonStyles";
+import {OperationGrid, StyledList, StyledOrderBar, TransactionsWrapper} from "./BudgetTransactionsStyles";
+import {SortButton, TransactionButton} from "components/Button/ButtonStyles";
 import {useEffect} from "react";
 import {useCallback} from "react";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faSortAmountUp, faEllipsisV} from "@fortawesome/free-solid-svg-icons";
+import {Link} from "react-router-dom";
+import {Button} from "components";
+import {Grid} from "../../BudgetPageStyles";
 
 const SortTransactions = ({allTransactions, transactions, categories}) => {
     const {t} = useTranslation();
@@ -126,10 +129,13 @@ const SortTransactions = ({allTransactions, transactions, categories}) => {
 
     return (
         <>
-            <div>
+            <OperationGrid>
+                <Link  to='budget/transactions/new'>
+                    <Button buttonType='transaction'>Add new transaction</Button>
+                </Link>
                 <input type="text" onChange={handleSearchOnChange} placeholder={t('Search transaction')}/>
-                <button onClick={handleShowAllTransactions}>{t('Show All Transactions')}</button>
-            </div>
+                <TransactionButton onClick={handleShowAllTransactions}>{t('Show All Transactions')}</TransactionButton>
+            </OperationGrid>
             <StyledOrderBar>
                 <SortButton onClick={() => handleOrderOnClick('description')}>
                     {t('description')}
@@ -148,7 +154,9 @@ const SortTransactions = ({allTransactions, transactions, categories}) => {
                     <span style={{display: 'inline-block'}} id='category'>{order.includes('category') ? <FontAwesomeIcon icon={faSortAmountUp} /> : <FontAwesomeIcon icon={faEllipsisV} />}</span>
                 </SortButton>
             </StyledOrderBar>
-            {listToRender}
+            <StyledList>
+                {listToRender}
+            </StyledList>
         </>
     );
 };

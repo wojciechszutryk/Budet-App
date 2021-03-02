@@ -10,5 +10,10 @@ export const Grid = styled.div`
   section:nth-child(2){
     position: relative;
     flex: 8;
+    margin: 0 ${({theme})=> theme.spacing.xs}px;
   }
+`;
+
+export const addTransitionWrapper = styled.div`
+        
 `;

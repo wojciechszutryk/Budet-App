@@ -73,6 +73,7 @@ export const InlineButton = styled(ParentButton)`
     position: relative;
     padding: ${({theme}) => theme.spacing.xs}px ${({theme}) => theme.spacing.sm}px;
     margin: 0 ${({theme}) => theme.spacing.xs}px;
+    border-radius: ${({theme}) => theme.spacing.xs}px;
     font-size: 1em;
     border-style: none;
     background-color: #fff;
@@ -95,10 +96,11 @@ export const InlineButton = styled(ParentButton)`
 `;
 
 export const TransactionButton = styled(ParentButton)`
-    display: inline-block;
     position: relative;
+    width: 100%;
+    height: 100%;
     padding: ${({theme}) => theme.spacing.xs}px ${({theme}) => theme.spacing.sm}px;
-    border: 2px solid ${({theme}) => theme.colors.black.normal};
+    border: 1px solid ${({theme}) => theme.colors.black.normal};
     background-color: transparent;
     text-align: center;
     cursor: pointer;
@@ -108,7 +110,7 @@ export const TransactionButton = styled(ParentButton)`
     font-family: sans-serif;
     text-transform: uppercase;
     letter-spacing: .3px;
-    font-weight: 700;
+    font-weight: 600;
     z-index: 3;
   
     &:hover{
@@ -148,5 +150,9 @@ export const TransactionButton = styled(ParentButton)`
     &:hover:after{
         height: 50%;
         width: 100%;
+    }
+
+    &:nth-child(3)::before, &:nth-child(3)::after{
+      background-color: ${({theme}) => theme.colors.purple.dark};
     }
 `;

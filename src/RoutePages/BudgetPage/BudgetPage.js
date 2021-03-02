@@ -26,14 +26,7 @@ const BudgetPage = ({budgetState, commonState, fetchBudget, fetchBudgetCategorie
                     {finishedLoading ? <BudgetCategories/> : <Loading/>}
                 </section>
                 <section>
-                    {finishedLoading ?
-                        <>
-                            <Link  to='budget/transactions/new'>
-                                <Button buttonType='transaction'>Add new transaction</Button>
-                            </Link>
-                            <BudgetTransactions/>
-                        </>
-                        : <Loading/>}
+                    {finishedLoading ? <BudgetTransactions/> : <Loading/>}
                 </section>
             </Grid>
 
