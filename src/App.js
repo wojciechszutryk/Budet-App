@@ -5,7 +5,7 @@ import theme from 'utilities/theme';
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
-import {BudgetPage} from "./RoutePages";
+import {BudgetPage, TransactionsPage} from "./RoutePages";
 import {Loading, Navigation, Wrapper} from 'components';
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
               <Navigation pages={[
                       {
                           name: 'Budget',
-                          link:'/budget'
+                          link:'/'
                       },
                       {
                           name:'Transactions',
@@ -26,8 +26,8 @@ function App() {
               />
               <Wrapper>
                   <Switch>
-                      <Route path='/' exact>Start Page</Route>
-                      <Route path='/transactions'><BudgetPage/></Route>
+                      <Route path='/' exact><BudgetPage/></Route>
+                      <Route path='/transactions'><TransactionsPage/></Route>
                   </Switch>
               </Wrapper>
           </Router>

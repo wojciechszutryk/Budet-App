@@ -4,7 +4,7 @@ import {useTranslation} from "react-i18next";
 import {useState} from "react";
 import {setCurrency, setDate} from "utilities/functions";
 import {connect} from "react-redux";
-import {OperationGrid, StyledList, StyledOrderBar, TransactionsWrapper} from "./BudgetTransactionsStyles";
+import {OperationGrid, StyledList, StyledOrderBar} from "./BudgetTransactionsStyles";
 import {SortButton, TransactionButton} from "components/Button/ButtonStyles";
 import {useEffect} from "react";
 import {useCallback} from "react";
@@ -12,7 +12,6 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faSortAmountUp, faEllipsisV} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import {Button} from "components";
-import {Grid} from "../../BudgetPageStyles";
 
 const SortTransactions = ({allTransactions, transactions, categories}) => {
     const {t} = useTranslation();
@@ -130,7 +129,7 @@ const SortTransactions = ({allTransactions, transactions, categories}) => {
     return (
         <>
             <OperationGrid>
-                <Link  to='budget/transactions/new'>
+                <Link  to='transactions/new'>
                     <Button buttonType='transaction'>Add new transaction</Button>
                 </Link>
                 <input type="text" onChange={handleSearchOnChange} placeholder={t('Search transaction')}/>

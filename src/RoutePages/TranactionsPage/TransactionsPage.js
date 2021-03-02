@@ -1,13 +1,14 @@
-import {Grid} from './BudgetPageStyles.js'
+import {Grid} from './TransactionsPageStyles.js'
 import React, {useEffect, useMemo} from 'react';
 import {connect} from 'react-redux';
 import {fetchBudget, fetchBudgetCategories} from "data/actions/budgetActions";
 import {fetchAllCategories} from "data/actions/commonActions";
-import {Loading,} from "components";
-import {BudgetCategories} from "../components/BudgetCategories";
-import {CategoriesWheel} from "./components/CategoriesWheel";
+import {Loading, Modal,} from "components";
+import {BudgetCategories} from ".././components/BudgetCategories";
+import {BudgetTransactions} from "./components/BudgetTransactions";
+import {Link, Route, Switch} from "react-router-dom";
 
-const BudgetPage = ({budgetState, commonState, fetchBudget, fetchBudgetCategories, fetchAllCategories}) => {
+const TransactionsPage = ({budgetState, commonState, fetchBudget, fetchBudgetCategories, fetchAllCategories}) => {
     useEffect(()=>{
         fetchBudget(1);
         fetchBudgetCategories(1);
@@ -25,20 +26,26 @@ const BudgetPage = ({budgetState, commonState, fetchBudget, fetchBudgetCategorie
                     {finishedLoading ? <BudgetCategories/> : <Loading/>}
                 </section>
                 <section>
-                    {finishedLoading ? <CategoriesWheel/> : <Loading/>}
+                    {finishedLoading ? <BudgetTransactions/> : <Loading/>}
                 </section>
             </Grid>
+
+            <Switch>
+                <Route path='/transactions/new' exact>
+                    <Modal>Content</Modal>
+                </Route>
+            </Switch>
         </>
 
     );
 };
 
-const ConnectedBudgetPage = connect(state => ({
+const ConnectedTransactionsPage = connect(state => ({
     budget: state.budget.budget,
     budgetState: state.budget.loading,
     commonState: state.common.loading,
 }),
     {fetchBudget, fetchBudgetCategories, fetchAllCategories}
-)(BudgetPage);
+)(TransactionsPage);
 
-export default ConnectedBudgetPage;
+export default ConnectedTransactionsPage;
