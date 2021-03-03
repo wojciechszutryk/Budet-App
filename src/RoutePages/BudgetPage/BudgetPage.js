@@ -5,7 +5,7 @@ import {fetchBudget, fetchBudgetCategories} from "data/actions/budgetActions";
 import {fetchAllCategories} from "data/actions/commonActions";
 import {Loading,} from "components";
 import {BudgetCategories} from "../components/BudgetCategories";
-import {CategoriesWheel} from "./components/CategoriesWheel";
+import {Charts} from "./components/Charts";
 
 const BudgetPage = ({budgetState, commonState, fetchBudget, fetchBudgetCategories, fetchAllCategories}) => {
     useEffect(()=>{
@@ -25,11 +25,10 @@ const BudgetPage = ({budgetState, commonState, fetchBudget, fetchBudgetCategorie
                     {finishedLoading ? <BudgetCategories/> : <Loading/>}
                 </section>
                 <section>
-                    {finishedLoading ? <CategoriesWheel/> : <Loading/>}
+                    {finishedLoading ? <Charts/> : <Loading/>}
                 </section>
             </Grid>
         </>
-
     );
 };
 
