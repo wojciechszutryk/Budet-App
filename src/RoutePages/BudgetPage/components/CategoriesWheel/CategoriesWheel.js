@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Pie} from 'react-chartjs-2';
+import {Doughnut} from 'react-chartjs-2';
 
 class CategoriesWheel extends Component{
     constructor(props){
@@ -17,20 +17,22 @@ class CategoriesWheel extends Component{
     }
 
     render(){
+        console.log(this.props.chartData)
         return (
             <div className="chart">
-                <Pie
-                    data={this.state.chartData}
+                <Doughnut
+                    data={this.props.chartData}
                     options={{
                         title:{
                             display:this.props.displayTitle,
-                            text:'Largest Cities In '+this.props.location,
+                            text:this.props.text,
                             fontSize:25
                         },
                         legend:{
                             display:this.props.displayLegend,
                             position:this.props.legendPosition
-                        }
+                        },
+                        cutoutPercentage: 30,
                     }}
                 />
             </div>
