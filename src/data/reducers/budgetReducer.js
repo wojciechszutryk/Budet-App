@@ -7,7 +7,8 @@ import {
     BUDGET_CATEGORIES_SUCCESS,
     BUDGET_CATEGORIES_REQUEST,
     BUDGET_ACTIVE_CATEGORIES_ADD,
-    BUDGET_ACTIVE_CATEGORIES_REMOVE
+    BUDGET_ACTIVE_CATEGORIES_REMOVE,
+    BUDGET_ACTIVE_CATEGORIES_CLEAN
 } from 'data/constants'
 
 const startBudget = {
@@ -87,6 +88,12 @@ const budget = (state= startBudget, action) => {
             return{
                 ...state,
                 activeCategories: newActiveCategories
+            }
+
+        case BUDGET_ACTIVE_CATEGORIES_CLEAN:
+            return{
+                ...state,
+                activeCategories: []
             }
 
         default:

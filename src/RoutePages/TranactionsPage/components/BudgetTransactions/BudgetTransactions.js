@@ -1,8 +1,14 @@
 import React, {useMemo} from 'react';
 import {connect} from 'react-redux';
 import SortTransactions from "./SortTransactions";
+import {useEffect} from "react";
+import {cleanActiveCategories} from "data/actions/budgetActions";
 
-const BudgetTransactions = ({transactions, categories, activeCategories, budgetCategories}) => {
+const BudgetTransactions = ({transactions, categories, activeCategories, budgetCategories, cleanActiveCategories}) => {
+    useEffect(()=>{
+        cleanActiveCategories();
+    },[cleanActiveCategories]);
+
     const filteredBySelectedCategory = useMemo(() => {
         const activeTransactions = [];
         if (activeCategories.length === 0) return transactions
@@ -38,4 +44,8 @@ const mapStateToProps = state => ({
     categories: state.common.categories
 });
 
-export default connect(mapStateToProps)(BudgetTransactions);
+const mapDispatchToProps = {
+    cleanActiveCategories
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BudgetTransactions);

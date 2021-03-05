@@ -1,10 +1,15 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, useEffect} from 'react';
 import {CategoriesWheel} from "../CategoriesWheel";
 import {connect} from "react-redux";
 import {groupBy} from "lodash";
 import {colorChange} from "utilities/functions";
+import {Bar} from "react-chartjs-2";
+import {cleanActiveCategories} from "data/actions/budgetActions";
 
-const Charts = ({allCategories, activeCategories, budgetCategories, budget}) => {
+const Charts = ({allCategories, activeCategories, budgetCategories, budget, cleanActiveCategories}) => {
+    useEffect(()=>{
+        cleanActiveCategories();
+    },[cleanActiveCategories]);
 
     const groupedCategories = useMemo(() => (groupBy(budgetCategories,
         budgetCategory => allCategories.find(
@@ -13,7 +18,7 @@ const Charts = ({allCategories, activeCategories, budgetCategories, budget}) => 
 
     const colors = [];
 
-    const parentCategories = Object.entries(groupedCategories).map(category => {
+    const BudgetCategories = Object.entries(groupedCategories).map(category => {
         const color = Math.floor(Math.random()*16777215).toString(16);
         if (activeCategories.includes(category[0])) {
             for (let i = 0; i < category[1].length; i++) colors.push(colorChange('#'+(color),-i*(category[1].length)*10));
@@ -22,28 +27,69 @@ const Charts = ({allCategories, activeCategories, budgetCategories, budget}) => 
         colors.push('#'+color);
         return category[0];
     }).flat();
-    parentCategories.push("Other");
+    BudgetCategories.push("Other");
 
     colors.push('#'+Math.floor(Math.random()*16777215).toString(16));
-    const moneyInParentCategory = Object.entries(groupedCategories).map(category => {
+    const moneyBudgetedOnCategory = Object.entries(groupedCategories).map(category => {
         if (activeCategories.includes(category[0])) return category[1].map(budgetCategory => budgetCategory.budget)
         return category[1].reduce((acc, budgetCategory) => acc + budgetCategory.budget, 0);
     }).flat();
-    moneyInParentCategory.push(budget.totalAmount - moneyInParentCategory.reduce((acc, cat) => acc + cat, 0));
-    console.log(colors)
+    moneyBudgetedOnCategory.push(budget.totalAmount - moneyBudgetedOnCategory.reduce((acc, cat) => acc + cat, 0));
 
-    const chartData = {
-        labels: parentCategories,
+    const moneySpentOnCategory = Object.entries(groupedCategories).map(category => {
+        if (activeCategories.includes(category[0])) {
+            return category[1].map(budgetCategory => budget.transactions.filter(transaction => transaction.categoryId === budgetCategory.id))
+                .map(trans => trans.reduce((acc,transaction) => acc + transaction.amount, 0));
+        }
+        return budget.transactions.filter(transaction => category[1].find(budgetCategory => budgetCategory.id === transaction.categoryId)
+        ).reduce((acc,transaction) => acc + transaction.amount, 0)
+    }).flat();
+
+    const otherExpenses = useMemo(() => budget.transactions.filter(
+        transaction => !budgetCategories.find(budgetCategory => budgetCategory.id === transaction.categoryId)
+    ).reduce((acc,transaction) => acc + transaction.amount, 0), [budget.transactions, budgetCategories]);
+    moneySpentOnCategory.push(otherExpenses);
+
+    const budgetData = {
+        labels: BudgetCategories,
         datasets:[{
-            label:'Money',
-            data:moneyInParentCategory,
+            label:'Budget money',
+            data:moneyBudgetedOnCategory,
             backgroundColor:colors,
         },]
-    }
+    };
     return (
-        <div>
-            <CategoriesWheel chartData={chartData} text="Budget Plan" legendPosition="bottom"/>
-        </div>
+        <>
+            <CategoriesWheel chartData={budgetData} text="Budget Plan" legendPosition="bottom"/>
+            <Bar
+                data={{
+                    labels: BudgetCategories,
+                    datasets:[
+                        {
+                            label: "Money spent on category",
+                            backgroundColor: "#111",
+                            data: moneySpentOnCategory
+                        },
+                        {
+                            label: "Available category Founds",
+                            backgroundColor: "#666",
+                            data: moneyBudgetedOnCategory
+                        },
+                    ],
+                }}
+                options={{
+                    title:{
+                        text:"Budget Plan",
+                        fontSize:25
+                    },
+                    legend:{
+                        display:true,
+                        position:'bottom'
+                    }
+                }}
+            />
+        </>
+
     );
 };
 
@@ -54,4 +100,8 @@ const mapStateToProps = state => ({
     allCategories: state.common.categories
 });
 
-export default connect(mapStateToProps)(Charts);
+const mapDispatchToProps = {
+    cleanActiveCategories
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Charts);

@@ -17,7 +17,6 @@ class CategoriesWheel extends Component{
     }
 
     render(){
-        console.log(this.props.chartData)
         return (
             <div className="chart">
                 <Doughnut

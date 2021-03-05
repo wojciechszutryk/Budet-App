@@ -59,7 +59,7 @@ const BudgetCategories = ({budgetCategories, allCategories, budget, activeCatego
                 transactions={budget.transactions.filter(transaction => transaction.categoryId === budgetCategory.id)}
             />
         )}),
-    }))
+    }));
 
     useMemo(() =>categoriesList.push({
         id: 'Other',
