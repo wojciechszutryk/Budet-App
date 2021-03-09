@@ -6,9 +6,10 @@ import {fetchAllCategories} from "data/actions/commonActions";
 import {Loading, Modal,} from "components";
 import {BudgetCategories} from ".././components/BudgetCategories";
 import {BudgetTransactions} from "./components/BudgetTransactions";
-import {Link, Route, Switch} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
+import TransactionForm from "./components/TransactionForm";
 
-const TransactionsPage = ({budgetState, commonState, fetchBudget, fetchBudgetCategories, fetchAllCategories}) => {
+const TransactionsPage = ({budgetState, commonState, allCategories, fetchBudget, fetchBudgetCategories, fetchAllCategories}) => {
     useEffect(()=>{
         fetchBudget(1);
         fetchBudgetCategories(1);
@@ -18,6 +19,11 @@ const TransactionsPage = ({budgetState, commonState, fetchBudget, fetchBudgetCat
     const finishedLoading = useMemo(
         () => !!commonState &&  !!budgetState && !Object.keys(commonState).length && !Object.keys(budgetState).length ,
         [commonState, budgetState]);
+
+    const handleSubmitForm = (values) => {
+        console.log('ok')
+        console.log(values);
+    }
 
     return (
         <>
@@ -32,7 +38,9 @@ const TransactionsPage = ({budgetState, commonState, fetchBudget, fetchBudgetCat
 
             <Switch>
                 <Route path='/transactions/new' exact>
-                    <Modal>Content</Modal>
+                    <Modal>
+                        <TransactionForm categories={allCategories} onSubmit={handleSubmitForm}/>
+                    </Modal>
                 </Route>
             </Switch>
         </>
@@ -44,6 +52,7 @@ const ConnectedTransactionsPage = connect(state => ({
     budget: state.budget.budget,
     budgetState: state.budget.loading,
     commonState: state.common.loading,
+    allCategories: state.common.categories,
 }),
     {fetchBudget, fetchBudgetCategories, fetchAllCategories}
 )(TransactionsPage);
