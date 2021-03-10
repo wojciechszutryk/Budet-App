@@ -21,7 +21,7 @@ const SortTransactions = ({allTransactions, transactions, categories}) => {
             const category = (categories.find(category => category.id === transaction.categoryId) || {}).name || t('Other');
             return (
                 <ListItem
-                    key={transaction.date + transaction.description}
+                    key={transaction.date + transaction.description + (Math.random()*1000)}
                     date={setDate(transaction.date)}
                     amount={setCurrency(transaction.amount)}
                     category={category}
@@ -90,8 +90,8 @@ const SortTransactions = ({allTransactions, transactions, categories}) => {
                 return sortedByCategoryTransactions;
             case 'description':
                 const sortedByDescriptionTransactions = searchTransaction.sort(function(a, b){
-                    if (a.description > b.description) return 1;
-                    if (a.description < b.description) return -1;
+                    if (a.description.toLowerCase() > b.description.toLowerCase()) return 1;
+                    if (a.description.toLowerCase() < b.description.toLowerCase()) return -1;
                     return 0;
                 });
                 if (order === 'description_desc') {

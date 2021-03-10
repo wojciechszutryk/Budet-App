@@ -224,6 +224,14 @@
       "date": "2020-02-20",
       "budgetId": "1",
       "id": "jHBfyjy"
+    },
+    {
+      "categoryId": 0,
+      "date": "2021-03-10",
+      "amount": 0.05,
+      "description": "123",
+      "budgetId": "1",
+      "id": "NaogtCf"
     }
   ]
 }

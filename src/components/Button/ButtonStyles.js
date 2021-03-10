@@ -42,15 +42,15 @@ export const SortButton = styled(ParentButton)`
     }
   
     &:nth-of-type(1)::before{
-        background-color: ${({theme}) => theme.colors.red.normal};
+        background-color: ${({theme}) => theme.colors.orange.normal};
     }
 
     &:nth-of-type(2)::before{
-        background-color: ${({theme}) => theme.colors.orange.dark};
+        background-color: ${({theme}) => theme.colors.green.dark};
     }
     
     &:nth-of-type(4)::before{
-        background-color: ${({theme}) => theme.colors.green.dark};
+        background-color: ${({theme}) => theme.colors.red.normal};
     }
   
     &:hover::before{
@@ -155,4 +155,53 @@ export const TransactionButton = styled(ParentButton)`
     &:nth-child(3)::before, &:nth-child(3)::after{
       background-color: ${({theme}) => theme.colors.purple.dark};
     }
+`;
+
+export const SubmitButton = styled(ParentButton)`
+    display: inline;
+    margin-top: ${({theme}) => theme.spacing.l}px;
+    padding: ${({theme}) => theme.spacing.xs}px ${({theme}) => theme.spacing.normal}px;
+    border: none;
+    line-height: 1.25;
+    background-color: ${({theme}) => theme.colors.orange.dark};
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    position: relative;
+    transition: background-color .6s ease;
+    overflow: hidden;
+    &:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        top: 50%;
+        left: 50%;
+        transform-style: flat;
+        transform: translate3d(-50%,-50%,0);
+        background: rgba(255,2555,255,.1);
+        border-radius: 100%;
+        transition: width .3s ease, height .3s ease;
+    }
+    &:focus,
+        &:hover {
+            background: ${({theme}) => theme.colors.orange.normal};
+    }
+    &:active {
+        &:after {
+                width: 200px;
+                height: 200px;
+            }
+    }
+`;
+
+export const ResetButton = styled(SubmitButton)`
+    background-color: ${({theme}) => theme.colors.gray.dark};
+      &:focus,
+          &:hover {
+            background: ${({theme}) => theme.colors.gray.normalDark};
+      }
+
 `;

@@ -46,12 +46,15 @@ export const StyledOrderBar = styled.div`
 export const OperationGrid = styled.div`
   display: flex;
   > *:nth-child(1){
+    display: block;
     flex:3;
   }
   > *:nth-child(2){
+    display: block;
     flex:4;
   }
   > *:nth-child(3){
+    display: block;
     flex:3;
   }
 `;

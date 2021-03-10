@@ -33,8 +33,8 @@ const styles = {
             normal: 'rgb(255, 255, 0)'
         },
         orange: {
-            normal: 'rgb(255, 204, 0)',
-            dark: 'rgb(255, 153, 0)'
+            normal: 'rgb(235, 93, 64)',
+            dark: 'rgb(252, 110, 81)'
         }
 
     },

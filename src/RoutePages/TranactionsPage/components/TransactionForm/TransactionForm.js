@@ -1,12 +1,17 @@
 import React, {useMemo} from 'react'
 import {Form, Field} from 'react-final-form'
 import {groupBy} from 'lodash';
-
-const required = value => (value ? undefined : 'Required');
+import {FormField, FormGroup, FormSelect, Label, Message} from "components/Input/InputStyles";
+import {Button} from "components";
+import {useTranslation} from "react-i18next";
 
 const TransactionForm = ({categories, onSubmit = () => {}}) => {
-    const groupedCategories = groupBy(categories, 'parentCategory.name');
-    groupedCategories["Other"] = [{id:0, name:"Other"}];
+    const {t} = useTranslation();
+
+    const required = value => (value ? undefined : t('Required'));
+
+    const groupByCategories = groupBy(categories, 'parentCategory.name');
+    const groupedCategories = Object.assign({"Other": [{id:0, name:"Other"}]}, groupByCategories);
 
     const categoriesToSelect = useMemo(() => Object.entries(groupedCategories).map(category => (
         <optgroup key={category[0]} label={category[0]}>
@@ -18,62 +23,60 @@ const TransactionForm = ({categories, onSubmit = () => {}}) => {
 
     return(
         <>
-            <h1>{'Add Transaction'}</h1>
+            <h1>{t('Add Transaction')}</h1>
             <Form
                 onSubmit={onSubmit}
+                initialValues={{ categoryId: 0, date: new Date().toJSON().slice(0,10)}}
                 render={({ handleSubmit, form, submitting, pristine, values }) => (
                     <form onSubmit={handleSubmit}>
                         <Field name="description" validate={required}>
                             {({ input, meta }) => (
-                                <div>
-                                    <label>Description</label>
-                                    <input {...input} type="text" placeholder="Description" />
-                                    {meta.error && meta.touched && <span>{meta.error}</span>}
-                                </div>
+                                <FormGroup>
+                                    <FormField {...input} type="text" placeholder="Description"/>
+                                    <Label>{t('description')}</Label>
+                                    {meta.error && meta.touched && <Message>{meta.error}</Message>}
+                                </FormGroup>
                             )}
                         </Field>
                         <Field name="amount" validate={required} parse={value => parseFloat(value,10)}>
                             {({ input, meta }) => (
-                                <div>
-                                    <label>Amount</label>
-                                    <input {...input} type="number" step={0.01} placeholder="Amount" />
-                                    {meta.error && meta.touched && <span>{meta.error}</span>}
-                                </div>
+                                <FormGroup>
+                                    <FormField {...input} type="number" step={0.01} placeholder="Amount" min={0.01}/>
+                                    <Label>{t('amount')}</Label>
+                                    {meta.error && meta.touched && <Message>{meta.error}</Message>}
+                                </FormGroup>
                             )}
                         </Field>
-                        <Field name="category" validate={required}>
+                        <Field name="categoryId">
                             {({ input, meta }) => (
-                                <div>
-                                    <label>category</label>
-                                    <select {...input}>
+                                <FormGroup>
+                                    <Label>{t('category')}</Label>
+                                    <FormSelect {...input}>
                                         {categoriesToSelect}
-                                    </select>
-                                    {meta.error && meta.touched && <span>{meta.error}</span>}
-                                </div>
+                                    </FormSelect>
+                                </FormGroup>
                             )}
                         </Field>
                         <Field name="date" validate={required}>
                             {({ input, meta }) => (
-                                <div>
-                                    <label>Description</label>
-                                    <input {...input} type="date"/>
-                                    {meta.error && meta.touched && <span>{meta.error}</span>}
-                                </div>
+                                <FormGroup>
+                                    <FormField {...input} type="date"/>
+                                    <Label>{t('date')}</Label>
+                                </FormGroup>
                             )}
                         </Field>
                         <div className="buttons">
-                            <button type="submit" disabled={submitting}>
-                                Submit
-                            </button>
-                            <button
+                            <Button buttonType="submit" type="submit" disabled={submitting || pristine}>
+                                {t('Submit')}
+                            </Button>
+                            <Button
+                                buttonType="reset"
                                 type="button"
                                 onClick={form.reset}
-                                disabled={submitting || pristine}
                             >
                                 Reset
-                            </button>
+                            </Button>
                         </div>
-                        <pre>{JSON.stringify(values, 0, 2)}</pre>
                     </form>
                 )}
             />

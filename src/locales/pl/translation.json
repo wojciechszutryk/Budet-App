@@ -8,5 +8,8 @@
   "description": "Opis",
   "Show All Transactions": "Pokaż wszystkie transakcje",
   "Search transaction": "Szukaj transakcji",
-  "Money spent on other or non-budgeted categories": "Środki przeznaczone na inne lub niezabudżetowane kategorie"
+  "Money spent on other or non-budgeted categories": "Środki przeznaczone na inne lub niezabudżetowane kategorie",
+  "Add Transaction": "Nowa Transakcja",
+  "Submit": "Dodaj",
+  "Required": "Wymagane"
 }

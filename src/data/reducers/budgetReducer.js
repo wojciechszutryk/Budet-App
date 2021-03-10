@@ -8,7 +8,9 @@ import {
     BUDGET_CATEGORIES_REQUEST,
     BUDGET_ACTIVE_CATEGORIES_ADD,
     BUDGET_ACTIVE_CATEGORIES_REMOVE,
-    BUDGET_ACTIVE_CATEGORIES_CLEAN
+    BUDGET_ACTIVE_CATEGORIES_CLEAN,
+    BUDGET_TRANSACTION_ADD_REQUEST,
+    BUDGET_TRANSACTION_ADD_SUCCESS
 } from 'data/constants'
 
 const startBudget = {
@@ -94,6 +96,30 @@ const budget = (state= startBudget, action) => {
             return{
                 ...state,
                 activeCategories: []
+            }
+
+        case BUDGET_TRANSACTION_ADD_REQUEST:
+            return {
+                ...state,
+                loading: {
+                    ...state.loading,
+                    [action.type]: LOADING_STATES.LOADING,
+                }
+            }
+
+        case BUDGET_TRANSACTION_ADD_SUCCESS:
+            console.log(action.payload)
+            delete newLoading.BUDGET_TRANSACTION_ADD_REQUEST;
+            return{
+                ...state,
+                budget: {
+                    ...state.budget,
+                    transactions: [
+                        action.payload,
+                        ...state.budget.transactions,
+                    ]
+                },
+                loading: newLoading,
             }
 
         default:

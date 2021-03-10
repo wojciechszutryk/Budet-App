@@ -1,7 +1,7 @@
 import {Grid} from './TransactionsPageStyles.js'
 import React, {useEffect, useMemo} from 'react';
 import {connect} from 'react-redux';
-import {fetchBudget, fetchBudgetCategories} from "data/actions/budgetActions";
+import {fetchBudget, fetchBudgetCategories, addTransition} from "data/actions/budgetActions";
 import {fetchAllCategories} from "data/actions/commonActions";
 import {Loading, Modal,} from "components";
 import {BudgetCategories} from ".././components/BudgetCategories";
@@ -9,7 +9,7 @@ import {BudgetTransactions} from "./components/BudgetTransactions";
 import {Route, Switch} from "react-router-dom";
 import TransactionForm from "./components/TransactionForm";
 
-const TransactionsPage = ({budgetState, commonState, allCategories, fetchBudget, fetchBudgetCategories, fetchAllCategories}) => {
+const TransactionsPage = ({budgetState, budget, commonState, allCategories, fetchBudget, fetchBudgetCategories, fetchAllCategories, addTransition}) => {
     useEffect(()=>{
         fetchBudget(1);
         fetchBudgetCategories(1);
@@ -21,9 +21,11 @@ const TransactionsPage = ({budgetState, commonState, allCategories, fetchBudget,
         [commonState, budgetState]);
 
     const handleSubmitForm = (values) => {
-        console.log('ok')
-        console.log(values);
-    }
+        addTransition({
+            budgetId: budget.id,
+            data: values
+        });
+    };
 
     return (
         <>
@@ -48,13 +50,19 @@ const TransactionsPage = ({budgetState, commonState, allCategories, fetchBudget,
     );
 };
 
-const ConnectedTransactionsPage = connect(state => ({
+const ConnectedTransactionsPage = connect(
+state => ({
     budget: state.budget.budget,
     budgetState: state.budget.loading,
     commonState: state.common.loading,
     allCategories: state.common.categories,
 }),
-    {fetchBudget, fetchBudgetCategories, fetchAllCategories}
+    {
+        fetchBudget,
+        fetchBudgetCategories,
+        fetchAllCategories,
+        addTransition
+    }
 )(TransactionsPage);
 
 export default ConnectedTransactionsPage;
