@@ -1,5 +1,6 @@
 {
-  "name": "app",
+  "name": "Budet-App",
+  "homepage": "https://wojciechszutryk.github.io/Budet-App/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,6 +14,7 @@
     "chart.js": "^2.9.4",
     "dotenv": "^8.2.0",
     "final-form": "^4.20.2",
+    "gh-pages": "^3.1.0",
     "i18next": "^19.8.6",
     "i18next-browser-languagedetector": "^6.0.1",
     "json-server": "^0.16.3",
@@ -35,7 +37,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start:db": "json-server --watch db.json --port 3005"
+    "start:db": "json-server --watch db.json --port 3005",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

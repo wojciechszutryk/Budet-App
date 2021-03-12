@@ -4,12 +4,12 @@ import {useTranslation} from "react-i18next";
 import {useState} from "react";
 import {setCurrency, setDate} from "utilities/functions";
 import {connect} from "react-redux";
-import {OperationGrid, StyledList, StyledOrderBar} from "./BudgetTransactionsStyles";
+import {OperationGrid,  StyledList, StyledOrderBar} from "./BudgetTransactionsStyles";
 import {SortButton, TransactionButton} from "components/Button/ButtonStyles";
 import {useEffect} from "react";
 import {useCallback} from "react";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faSortAmountUp, faEllipsisV} from "@fortawesome/free-solid-svg-icons";
+import {faSortAmountUp, faEllipsisV, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import {Button} from "components";
 
@@ -26,6 +26,7 @@ const SortTransactions = ({allTransactions, transactions, categories}) => {
                     amount={setCurrency(transaction.amount)}
                     category={category}
                     description={transaction.description}
+                    id={transaction.id}
                 />
             );
         })
@@ -152,6 +153,7 @@ const SortTransactions = ({allTransactions, transactions, categories}) => {
                     {t('category')}
                     <span style={{display: 'inline-block'}} id='category'>{order.includes('category') ? <FontAwesomeIcon icon={faSortAmountUp} /> : <FontAwesomeIcon icon={faEllipsisV} />}</span>
                 </SortButton>
+                <button disabled><FontAwesomeIcon icon={faTrashAlt} /></button>
             </StyledOrderBar>
             <StyledList>
                 {listToRender}

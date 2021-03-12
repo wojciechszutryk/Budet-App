@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react';
-import {InlineButton, NormalButton, ResetButton, SubmitButton, TransactionButton} from './ButtonStyles'
+import {DeleteButton, InlineButton, NormalButton, ResetButton, SubmitButton, TransactionButton} from './ButtonStyles'
 
 const Button = ({buttonType, children, ...props}) => {
 
@@ -15,6 +15,8 @@ const Button = ({buttonType, children, ...props}) => {
                 return SubmitButton;
             case 'reset':
                 return ResetButton;
+            case 'delete':
+                return DeleteButton;
             default:
                 return InlineButton;
         }

@@ -191,9 +191,9 @@ export const SubmitButton = styled(ParentButton)`
     }
     &:active {
         &:after {
-                width: 200px;
-                height: 200px;
-            }
+            width: 200px;
+            height: 200px;
+        }
     }
 `;
 
@@ -203,5 +203,28 @@ export const ResetButton = styled(SubmitButton)`
           &:hover {
             background: ${({theme}) => theme.colors.gray.normalDark};
       }
+`;
+
+export const DeleteButton = styled(SubmitButton)`
+    display: flex;
+    justify-content: center;
+    height: 20px;
+    margin: 0;
+    padding: 2px;
+    background-color: ${({theme}) => theme.colors.gray.light};
+    transition: transform .1s linear;
+      & svg path {
+        transition: transform .2s linear;
+      }
+    &:hover{
+      & svg path {
+        transform-origin: center;
+        transform: rotate(360deg);
+      }
+    }
+    &:focus,
+      &:hover {
+        background: ${({theme}) => theme.colors.red.dark};
+    }
 
 `;

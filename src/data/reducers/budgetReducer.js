@@ -10,7 +10,9 @@ import {
     BUDGET_ACTIVE_CATEGORIES_REMOVE,
     BUDGET_ACTIVE_CATEGORIES_CLEAN,
     BUDGET_TRANSACTION_ADD_REQUEST,
-    BUDGET_TRANSACTION_ADD_SUCCESS
+    BUDGET_TRANSACTION_ADD_SUCCESS,
+    BUDGET_TRANSACTION_REMOVE_REQUEST,
+    BUDGET_TRANSACTION_REMOVE_SUCCESS
 } from 'data/constants'
 
 const startBudget = {
@@ -23,6 +25,7 @@ const startBudget = {
 const budget = (state= startBudget, action) => {
     const newLoading = {...state.loading};
     const newActiveCategories = [...state.activeCategories];
+    const newTransactions = state.budget.transactions;
     switch (action.type) {
         case BUDGET_REQUEST:
             return {
@@ -108,7 +111,6 @@ const budget = (state= startBudget, action) => {
             }
 
         case BUDGET_TRANSACTION_ADD_SUCCESS:
-            console.log(action.payload)
             delete newLoading.BUDGET_TRANSACTION_ADD_REQUEST;
             return{
                 ...state,
@@ -118,6 +120,28 @@ const budget = (state= startBudget, action) => {
                         action.payload,
                         ...state.budget.transactions,
                     ]
+                },
+                loading: newLoading,
+            }
+
+        case BUDGET_TRANSACTION_REMOVE_REQUEST:
+            return {
+                ...state,
+                loading: {
+                    ...state.loading,
+                    [action.type]: LOADING_STATES.LOADING,
+                }
+            }
+
+        case BUDGET_TRANSACTION_REMOVE_SUCCESS:
+            const transactionIndex = newTransactions.find(transaction => transaction.id === action.payload);
+            newTransactions.splice(transactionIndex, 1);
+            delete newLoading.BUDGET_TRANSACTION_REMOVE_REQUEST;
+            return{
+                ...state,
+                budget: {
+                    ...state.budget,
+                    transactions: newTransactions
                 },
                 loading: newLoading,
             }

@@ -13,7 +13,3 @@ export const Grid = styled.div`
     margin: 0 ${({theme})=> theme.spacing.xs}px;
   }
 `;
-
-export const addTransitionWrapper = styled.div`
-        
-`;

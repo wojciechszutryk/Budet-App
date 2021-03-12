@@ -13,3 +13,10 @@ export const addTransition = ({budgetId, data}) => {
         headers: {'Content-type': 'application/json'}
     });
 };
+
+export const removeTransition = (id) => {
+    console.log({id})
+    return fetch(`${process.env.REACT_APP_API_URL}/transactions/${id}`,{
+        method: 'DELETE'
+    });
+};

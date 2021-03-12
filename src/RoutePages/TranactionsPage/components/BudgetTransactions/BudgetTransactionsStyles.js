@@ -10,16 +10,19 @@ export const StyledListItem = styled.li`
   border: 1px solid ${({theme}) => theme.colors.gray.dark};
   padding: ${({theme})=> theme.spacing.xs}px;
   > *:nth-child(1){
-    flex:4;
+    flex:6;
   }
   > *:nth-child(2){
-    flex:2;
+    flex:3;
   }
   > *:nth-child(3){
-    flex:2;
+    flex:3;
   }
   > *:nth-child(4){
-    flex:2;
+    flex:3;
+  }
+  > *:nth-child(5){
+    flex:0.9;
   }
 `
 
@@ -30,16 +33,19 @@ export const StyledOrderBar = styled.div`
   background-color: ${({theme}) => theme.colors.gray.light};
   padding: ${({theme})=> theme.spacing.xs}px;
   > *:nth-child(1){
-    flex:4;
+    flex:6;
   }
   > *:nth-child(2){
-    flex:2;
+    flex:3;
   }
   > *:nth-child(3){
-    flex:2;
+    flex:3;
   }
   > *:nth-child(4){
-    flex:2;
+    flex:3;
+  }
+  > *:nth-child(5){
+    flex:1;
   }
 `;
 

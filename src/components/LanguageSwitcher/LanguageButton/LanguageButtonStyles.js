@@ -16,17 +16,17 @@ const HoverLine = styled.div`
   top: -30px;
   bottom: 0;
   z-index: 1;
-  background-image: url("./images/PL.png");
+  background-image: url("https://cdn.glitch.com/3f14db12-a1c8-462c-b3ae-ad21206e72ee%2FPL.png?v=1615554383679");
   background-position: center;
   background-size: cover;
 `;
 
 const HoverLineDE = styled(HoverLine)`
-  background-image: url("./images/GE.png");
+  background-image: url("https://cdn.glitch.com/3f14db12-a1c8-462c-b3ae-ad21206e72ee%2FGE.png?v=1615554383771");
 `;
 
 const HoverLineEN = styled(HoverLine)`
-  background-image: url("./images/EN.png");
+  background-image: url("https://cdn.glitch.com/3f14db12-a1c8-462c-b3ae-ad21206e72ee%2FEN.png?v=1615554383806");
 `;
 
 export const Button = styled.button`
