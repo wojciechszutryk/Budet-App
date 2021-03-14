@@ -134,10 +134,10 @@ const budget = (state= startBudget, action) => {
             }
 
         case BUDGET_TRANSACTION_REMOVE_SUCCESS:
-            const transactionIndex = newTransactions.find(transaction => transaction.id === action.payload);
-            newTransactions.splice(transactionIndex, 1);
+            const transactionIndex = newTransactions.find(transaction => transaction.id === action.payload.id);
             delete newLoading.BUDGET_TRANSACTION_REMOVE_REQUEST;
-            return{
+            newTransactions.splice(transactionIndex, 1);
+            return {
                 ...state,
                 budget: {
                     ...state.budget,

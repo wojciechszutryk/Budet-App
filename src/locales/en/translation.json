@@ -11,5 +11,7 @@
   "Money spent on other or non-budgeted categories": "Money spent on other or non-budgeted categories",
   "Add Transaction": "New Transaction",
   "Submit": "Submit",
-  "Required": "Required"
+  "Required": "Required",
+  "Succeeded in adding Transaction": "Succeeded in adding transaction.",
+  "Succeeded in removing Transaction": "Succeeded in removing transaction."
 }

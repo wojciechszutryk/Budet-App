@@ -11,12 +11,11 @@ export const addTransition = ({budgetId, data}) => {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {'Content-type': 'application/json'}
-    });
+    })
 };
 
-export const removeTransition = (id) => {
-    console.log({id})
-    return fetch(`${process.env.REACT_APP_API_URL}/transactions/${id}`,{
-        method: 'DELETE'
-    });
+export const removeTransition = (budgetId,id) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/budgets/${budgetId}/transactions/${id}`,{
+        method: 'DELETE',
+    })
 };

@@ -104,5 +104,58 @@
       "totalAmount": 2400
     }
   ],
-  "transactions": []
+  "transactions": [
+    {
+      "categoryId": 0,
+      "date": "2021-03-14",
+      "description": "12",
+      "amount": 12,
+      "budgetId": "1",
+      "id": 1
+    },
+    {
+      "categoryId": 0,
+      "date": "2021-03-14",
+      "description": "12",
+      "amount": 12,
+      "budgetId": "1",
+      "id": 2
+    },
+    {
+      "categoryId": 0,
+      "date": "2021-03-14",
+      "description": "12",
+      "amount": 12,
+      "budgetId": "1",
+      "id": 3
+    },
+    {
+      "categoryId": 0,
+      "date": "2021-03-14",
+      "description": "12",
+      "amount": 12,
+      "budgetId": "1",
+      "id": 4
+    },
+    {
+      "categoryId": 0,
+      "date": "2021-03-14",
+      "description": "12",
+      "amount": 12,
+      "budgetId": "1",
+      "id": 5
+    }
+  ],
+  "test": [
+    {
+      "id": "2",
+      "name": "April",
+      "totalAmount": 2400
+    },
+    {
+      "id": "7",
+      "name": "April",
+      "totalAmount": 2400
+    }
+  ]
 }

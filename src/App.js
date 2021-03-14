@@ -1,14 +1,17 @@
 import GlobalStyles from 'indexStyle';
 import {ThemeProvider} from 'styled-components';
 import theme from 'utilities/theme';
+import 'react-toastify/dist/ReactToastify.css';
 
 import React from 'react';
+import { toast } from 'react-toastify';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 import {BudgetPage, TransactionsPage} from "./RoutePages";
 import {Loading, Navigation, Wrapper} from 'components';
 
 function App() {
+    toast.configure();
     return (
         <>
           <GlobalStyles/>

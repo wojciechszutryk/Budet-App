@@ -33,7 +33,6 @@ const BudgetPage = ({budgetState, commonState, fetchBudget, fetchBudgetCategorie
 };
 
 const ConnectedBudgetPage = connect(state => ({
-    budget: state.budget.budget,
     budgetState: state.budget.loading,
     commonState: state.common.loading,
 }),

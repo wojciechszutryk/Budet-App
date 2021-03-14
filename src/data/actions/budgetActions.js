@@ -4,13 +4,13 @@ import {
     BUDGET_ACTIVE_CATEGORIES_CLEAN,
     BUDGET_ACTIVE_CATEGORIES_REMOVE,
     BUDGET_CATEGORIES,
-    BUDGET_TRANSACTION_ADD, BUDGET_TRANSACTION_REMOVE, BUDGET_TRANSACTION_REMOVE_SUCCESS
+    BUDGET_TRANSACTION_ADD,
+    BUDGET_TRANSACTION_REMOVE
 } from 'data/constants';
 import API from 'data/fetch';
 
 export const fetchBudget = id => {
     const promise = API.budget.fetchBudgetFromAPI(id);
-
    return {
         type: BUDGET,
         promise
@@ -29,15 +29,17 @@ export const addTransition = ({budgetId, data}) => {
     const promise = API.budget.addTransition({budgetId, data});
     return {
         type: BUDGET_TRANSACTION_ADD,
-        promise
+        promise,
+        message: "Succeeded in adding Transaction"
     };
 };
 
-export const removeTransaction = id => {
-    const promise = API.budget.removeTransition(id);
+export const removeTransaction = (budgetId, id) => {
+    const promise = API.budget.removeTransition(budgetId, id);
     return{
         type: BUDGET_TRANSACTION_REMOVE,
-        promise
+        promise,
+        message: "Succeeded in removing Transaction"
     }
 };
 

@@ -22,6 +22,14 @@ const GlobalStyles = createGlobalStyle`
     a.selected button{
       color: ${({theme}) => theme.colors.black.normal};
     }
+
+    .Toastify__toast--info{
+      background: ${({theme}) => theme.colors.gray.dark};
+      color: ${({theme}) => theme.colors.white.normal};
+    }
+    .Toastify__progress-bar--dark {
+      background: ${({theme}) => theme.colors.white.normal};
+    }
 `;
 
 export default GlobalStyles;
