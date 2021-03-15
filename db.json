@@ -50,7 +50,7 @@
     },
     {
       "id": "7",
-      "name": "Courses",
+      "name": "Udemy course",
       "parentCategoryId": "4"
     },
     {
@@ -95,6 +95,12 @@
       "budget": 80,
       "categoryId": "6",
       "budgetId": "1"
+    },
+    {
+      "id": "6",
+      "budget": 80,
+      "categoryId": "6",
+      "budgetId": "2"
     }
   ],
   "budgets": [
@@ -102,60 +108,197 @@
       "id": "1",
       "name": "April",
       "totalAmount": 2400
+    },
+    {
+      "id": "2",
+      "name": "May",
+      "totalAmount": 3000
     }
   ],
   "transactions": [
     {
-      "categoryId": 0,
-      "date": "2021-03-14",
-      "description": "12",
-      "amount": 12,
-      "budgetId": "1",
-      "id": 1
+      "id": "1",
+      "description": "Internet provider",
+      "amount": 120.47,
+      "categoryId": "1",
+      "date": "2019-12-15T20:39:41.768Z",
+      "budgetId": "1"
     },
-    {
-      "categoryId": 0,
-      "date": "2021-03-14",
-      "description": "12",
-      "amount": 12,
-      "budgetId": "1",
-      "id": 2
-    },
-    {
-      "categoryId": 0,
-      "date": "2021-03-14",
-      "description": "12",
-      "amount": 12,
-      "budgetId": "1",
-      "id": 3
-    },
-    {
-      "categoryId": 0,
-      "date": "2021-03-14",
-      "description": "12",
-      "amount": 12,
-      "budgetId": "1",
-      "id": 4
-    },
-    {
-      "categoryId": 0,
-      "date": "2021-03-14",
-      "description": "12",
-      "amount": 12,
-      "budgetId": "1",
-      "id": 5
-    }
-  ],
-  "test": [
     {
       "id": "2",
-      "name": "April",
-      "totalAmount": 2400
+      "description": "Mobile network provider",
+      "amount": 39.99,
+      "categoryId": "2",
+      "date": "2019-12-10T13:33:21.768Z",
+      "budgetId": "1"
     },
     {
-      "id": "7",
-      "name": "April",
-      "totalAmount": 2400
+      "id": "3",
+      "description": "Weekly shoping",
+      "amount": 23.88,
+      "categoryId": "6",
+      "date": "2019-12-17T15:41:01.768Z",
+      "budgetId": "1"
+    },
+    {
+      "id": "4",
+      "description": "Weekly shoping #2",
+      "amount": 12.48,
+      "categoryId": "6",
+      "date": "2019-12-17T12:41:01.768Z",
+      "budgetId": "1"
+    },
+    {
+      "id": "5",
+      "description": "Dinner in a restaurant",
+      "amount": 35.68,
+      "categoryId": "null",
+      "date": "2019-12-22T15:33:11.768Z",
+      "budgetId": "1"
+    },
+    {
+      "id": "5",
+      "description": "Grocery shopping #1",
+      "amount": 12.38,
+      "categoryId": "5",
+      "date": "2019-12-18T13:38:41.768Z",
+      "budgetId": "1"
+    },
+    {
+      "description": "Default Agile Workflow",
+      "amount": 123,
+      "categoryId": "7",
+      "date": "2020-02-13",
+      "budgetId": "1",
+      "id": "p1tYW2Q"
+    },
+    {
+      "description": "Nowa transakcja",
+      "amount": 10.5,
+      "categoryId": "3",
+      "date": "2020-02-19",
+      "budgetId": "1",
+      "id": "aqq7G-0"
+    },
+    {
+      "description": "Nowa transakcja1",
+      "amount": 10.5,
+      "categoryId": "3",
+      "date": "2020-02-19",
+      "budgetId": "1",
+      "id": "GNERO_K"
+    },
+    {
+      "description": "Nowa transakcja2",
+      "amount": 10.5,
+      "categoryId": "3",
+      "date": "2020-02-19",
+      "budgetId": "1",
+      "id": "M9B9puJ"
+    },
+    {
+      "description": "Nowa transakcja3",
+      "amount": 10.5,
+      "categoryId": "3",
+      "date": "2020-02-19",
+      "budgetId": "1",
+      "id": "gsP5R-B"
+    },
+    {
+      "description": "Nowa transakcja5",
+      "amount": 10.5,
+      "categoryId": "2",
+      "date": "2020-02-19",
+      "budgetId": "1",
+      "id": "EXvZu7Z"
+    },
+    {
+      "description": "Nowa transakcja5",
+      "amount": 10.5,
+      "categoryId": "3",
+      "date": "2020-02-20",
+      "budgetId": "1",
+      "id": "nd_u-b5"
+    },
+    {
+      "description": "Nowa transakcja6",
+      "amount": 10.5,
+      "categoryId": "3",
+      "date": "2020-02-20",
+      "budgetId": "1",
+      "id": "KBQrPmU"
+    },
+    {
+      "description": "Nowa transakcja7",
+      "amount": 10.6,
+      "categoryId": "3",
+      "date": "2020-02-20",
+      "budgetId": "1",
+      "id": "jHBfyjy"
+    },
+    {
+      "categoryId": 0,
+      "date": "2021-03-15",
+      "description": "123",
+      "amount": 21,
+      "budgetId": "2",
+      "id": "1PI8u0L"
+    },
+    {
+      "categoryId": 0,
+      "date": "2021-03-15",
+      "description": "123",
+      "amount": 21,
+      "budgetId": "2",
+      "id": "so6JzbK"
+    },
+    {
+      "categoryId": 0,
+      "date": "2021-03-15",
+      "description": "123",
+      "amount": 21,
+      "budgetId": "2",
+      "id": "I1sc9m-"
+    },
+    {
+      "categoryId": 0,
+      "date": "2021-03-15",
+      "description": "123",
+      "amount": 21,
+      "budgetId": "2",
+      "id": "v1-zrf9"
+    },
+    {
+      "categoryId": "1",
+      "date": "2021-03-15",
+      "description": "123",
+      "amount": 213,
+      "budgetId": "2",
+      "id": "WYCmNI8"
+    },
+    {
+      "categoryId": "1",
+      "date": "2021-03-15",
+      "description": "123",
+      "amount": 213,
+      "budgetId": "2",
+      "id": "rA0Ecv6"
+    },
+    {
+      "categoryId": "1",
+      "date": "2021-03-15",
+      "description": "123",
+      "amount": 213,
+      "budgetId": "2",
+      "id": "Bb8Gqe_"
+    },
+    {
+      "categoryId": "1",
+      "date": "2021-03-15",
+      "description": "123",
+      "amount": 213,
+      "budgetId": "2",
+      "id": "6TZ6WI2"
     }
   ]
 }

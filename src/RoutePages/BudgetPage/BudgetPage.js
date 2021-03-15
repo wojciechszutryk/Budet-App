@@ -1,5 +1,5 @@
 import {Grid} from './BudgetPageStyles.js'
-import React, {useEffect, useMemo} from 'react';
+import React, {useEffect, useState, useMemo} from 'react';
 import {connect} from 'react-redux';
 import {fetchBudget, fetchBudgetCategories} from "data/actions/budgetActions";
 import {fetchAllCategories} from "data/actions/commonActions";
@@ -8,11 +8,12 @@ import {BudgetCategories} from "../components/BudgetCategories";
 import {Charts} from "./components/Charts";
 
 const BudgetPage = ({budgetState, commonState, fetchBudget, fetchBudgetCategories, fetchAllCategories}) => {
+    const [budgetId, startBudgetId] = useState(1);
     useEffect(()=>{
-        fetchBudget(1);
-        fetchBudgetCategories(1);
+        fetchBudget(budgetId);
+        fetchBudgetCategories(budgetId);
         fetchAllCategories();
-    },[fetchBudget, fetchBudgetCategories, fetchAllCategories]);
+    },[fetchBudget, fetchBudgetCategories, fetchAllCategories, budgetId]);
 
     const finishedLoading = useMemo(
         () => !!commonState &&  !!budgetState && !Object.keys(commonState).length && !Object.keys(budgetState).length ,

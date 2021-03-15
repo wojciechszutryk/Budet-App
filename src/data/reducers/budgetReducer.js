@@ -3,6 +3,9 @@ import {
     BUDGET_REQUEST,
     BUDGET_SUCCESS,
     BUDGET_FAILURE,
+    BUDGET_ADD_REQUEST,
+    BUDGET_ADD_SUCCESS,
+    BUDGET_ADD_FAILURE,
     BUDGET_CATEGORIES_FAILURE,
     BUDGET_CATEGORIES_SUCCESS,
     BUDGET_CATEGORIES_REQUEST,
@@ -45,6 +48,37 @@ const budget = (state= startBudget, action) => {
             }
 
         case BUDGET_FAILURE:
+            delete newLoading.BUDGET_REQUEST;
+            return{
+                ...state,
+                budget: {},
+                loading: newLoading,
+            }
+
+        case BUDGET_ADD_REQUEST:
+            return {
+                ...state,
+                loading: {
+                    ...state.loading,
+                    [action.type]: LOADING_STATES.LOADING,
+                }
+            }
+
+        case BUDGET_ADD_SUCCESS:
+            delete newLoading.BUDGET_TRANSACTION_ADD_REQUEST;
+            return{
+                ...state,
+                budget: {
+                    ...state.budget,
+                    transactions: [
+                        action.payload,
+                        ...state.budget.transactions,
+                    ]
+                },
+                loading: newLoading,
+            }
+
+        case BUDGET_ADD_FAILURE:
             delete newLoading.BUDGET_REQUEST;
             return{
                 ...state,

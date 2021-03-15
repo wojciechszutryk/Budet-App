@@ -14,6 +14,14 @@ export const addTransition = ({budgetId, data}) => {
     })
 };
 
+export const addBudget = ({data}) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/budgets`,{
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {'Content-type': 'application/json'}
+    })
+};
+
 export const removeTransition = (budgetId,id) => {
     return fetch(`${process.env.REACT_APP_API_URL}/budgets/${budgetId}/transactions/${id}`,{
         method: 'DELETE',

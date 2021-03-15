@@ -12,7 +12,7 @@ import {addActiveCategory, removeActiveCategory} from 'data/actions/budgetAction
 import {useTranslation} from "react-i18next";
 
 const BudgetCategories = ({budgetCategories, allCategories, budget, activeCategories, addActiveCategory, removeActiveCategory}) => {
-
+    console.log(budget);
     const {t} = useTranslation();
 
     const groupedCategories = useMemo(() => groupBy(budgetCategories,
