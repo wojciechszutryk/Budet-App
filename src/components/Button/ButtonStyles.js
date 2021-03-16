@@ -226,5 +226,23 @@ export const DeleteButton = styled(SubmitButton)`
       &:hover {
         background: ${({theme}) => theme.colors.red.dark};
     }
+`;
 
+export const AddBudgetButton = styled(TransactionButton)`
+    margin-top: ${({theme}) => theme.spacing.xs}px;
+    border-radius: ${({theme}) => theme.spacing.normal}px;
+    height: 40px;
+    &::before{
+      background-color: ${({theme}) => theme.colors.purple.dark};
+      border-bottom-left-radius: ${({theme}) => theme.spacing.normal}px;
+      border-bottom-right-radius: ${({theme}) => theme.spacing.normal}px;
+    }
+    &:after{
+      background-color: ${({theme}) => theme.colors.purple.dark};
+      border-top-left-radius: ${({theme}) => theme.spacing.normal}px;
+      border-top-right-radius: ${({theme}) => theme.spacing.normal}px;
+    }
+    &:hover{
+      border-color: ${({theme}) => theme.colors.white.normal};
+    }
 `;

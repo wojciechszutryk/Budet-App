@@ -299,6 +299,30 @@
       "amount": 213,
       "budgetId": "2",
       "id": "6TZ6WI2"
+    },
+    {
+      "categoryId": "2",
+      "date": "2021-03-15",
+      "description": "123",
+      "amount": 12,
+      "budgetId": "1",
+      "id": "7kVBA92"
+    },
+    {
+      "categoryId": 0,
+      "date": "2021-03-16",
+      "description": "123",
+      "amount": 213,
+      "budgetId": "1",
+      "id": "4P_6-ao"
+    },
+    {
+      "categoryId": 0,
+      "date": "2021-03-16",
+      "description": "123",
+      "amount": 21,
+      "budgetId": "1",
+      "id": "pJs3hy_"
     }
   ]
 }

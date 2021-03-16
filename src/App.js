@@ -19,7 +19,7 @@ function App() {
               <Navigation pages={[
                       {
                           name: 'Budget',
-                          link:'/'
+                          link:'/budget'
                       },
                       {
                           name:'Transactions',
@@ -29,7 +29,7 @@ function App() {
               />
               <Wrapper>
                   <Switch>
-                      <Route path='/' exact><BudgetPage/></Route>
+                      <Route path='/budget'><BudgetPage/></Route>
                       <Route path='/transactions'><TransactionsPage/></Route>
                   </Switch>
               </Wrapper>

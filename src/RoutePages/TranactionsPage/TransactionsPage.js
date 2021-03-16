@@ -21,6 +21,7 @@ const TransactionsPage = ({budgetState, budget, commonState, allCategories, fetc
         [commonState, budgetState]);
 
     const handleSubmitForm = (values) => {
+        console.log(values)
         addTransition({
             budgetId: budget.id,
             data: values
