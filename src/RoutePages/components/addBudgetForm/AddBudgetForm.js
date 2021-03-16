@@ -10,11 +10,15 @@ const AddBudgetForm = ({categories, onSubmit}) => {
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [budgetFounds, setBudgetFounds] = useState(0);
     const [budgetName, setBudgetName] = useState('');
+    const [FoundsError, setFoundsError] = useState(true);
+    const [NameError, setNameError] = useState(true);
 
     const handleNameChange = (event) => {
+        if (event.target.value) setNameError(false)
         setBudgetName(event.target.value);
     }
     const handleFoundsChange = (event) => {
+        if (event.target.value) setFoundsError(false)
         setBudgetFounds(event.target.value);
     }
 
@@ -26,11 +30,15 @@ const AddBudgetForm = ({categories, onSubmit}) => {
     }
 
     const handleSubmit = () => {
-        onSubmit({
-            name: budgetName,
-            categories: selectedCategories,
-            totalAmount: budgetFounds
-        })
+        if (budgetName==='') setNameError(true);
+        if (budgetFounds<=0) setFoundsError(true);
+        if (!NameError && !FoundsError){
+            onSubmit({
+                name: budgetName,
+                categories: selectedCategories,
+                totalAmount: budgetFounds
+            })
+        }
     }
 
     const categoriesToSelect = useMemo(() => Object.entries(categories).map(category => (
@@ -48,7 +56,7 @@ const AddBudgetForm = ({categories, onSubmit}) => {
                         onChange={handleNameChange}
                     />
                     <Label>{t('name')}</Label>
-                    {/*{meta.error && meta.touched && <Message>{meta.error}</Message>}*/}
+                    {NameError ? <Message>{t('Required')}</Message> : null}
                 </FormGroup>
 
                 <FormGroup>
@@ -60,20 +68,23 @@ const AddBudgetForm = ({categories, onSubmit}) => {
                         onChange={handleFoundsChange}
                     />
                     <Label>{t('amount')}</Label>
-                    {/*{meta.error && meta.touched && <Message>{meta.error}</Message>}*/}
+                    {FoundsError ? <Message>{t('Required')}</Message> : null}
                 </FormGroup>
 
-                <Select
-                    onChange={setSelectedCategories}
-                    placeholder={t('category')}
-                    closeMenuOnSelect={false}
-                    isMulti
-                    options={categoriesToSelect}
-                />
+                <FormGroup>
+                    <Select
+                        onChange={setSelectedCategories}
+                        placeholder={t('category')}
+                        closeMenuOnSelect={false}
+                        isMulti
+                        options={categoriesToSelect}
+                    />
+                </FormGroup>
 
-                <div>
+                <FormGroup>
                     <Link  to='/budget/categories'>
                         <Button
+                            disabled={NameError || FoundsError}
                             buttonType='submit'
                             type='submit'
                             onClick={handleSubmit}
@@ -86,7 +97,7 @@ const AddBudgetForm = ({categories, onSubmit}) => {
                     >
                         Reset
                     </Button>
-                </div>
+                </FormGroup>
             </form>
         </>
     );

@@ -15,8 +15,9 @@ const AddBudgetForm = ({categories, name, totalAmount}) => {
     }
 
     const handleFoundsChange = (id, e) => {
-        setBudgetCategoriesFounds({id: e.target.value});
-        console.log(e.target.value)
+        const categoryFounds = {}
+        categoryFounds[id]=parseInt(e.target.value);
+        setBudgetCategoriesFounds({...budgetCategoriesFounds, ...categoryFounds});
     }
     console.log(budgetCategoriesFounds)
 
@@ -24,12 +25,14 @@ const AddBudgetForm = ({categories, name, totalAmount}) => {
     //
     // }
 
-    const categoriesFoundsList = categories.map(category => (
-        <FormGroup key={category.value}>
-            <FormField type="number" onChange={(e)=> handleFoundsChange(category.id,e)}/>
-            <Label>{category.label}</Label>
-        </FormGroup>
-    ));
+    const categoriesFoundsList = categories.map(category => {
+        return(
+            <FormGroup key={category.value}>
+                <FormField type="number" onChange={(e) => handleFoundsChange(category.value, e)}/>
+                <Label>{category.label}</Label>
+            </FormGroup>
+        )
+    });
 
     return(
         <>
@@ -46,7 +49,7 @@ const AddBudgetForm = ({categories, name, totalAmount}) => {
                 </div>
                 <div>
                     <Link  to='/budget/categories'>
-                        <Button buttonType='submit'>Next</Button>
+                        <Button buttonType='submit'>{t('Submit')}</Button>
                     </Link>
                     <Button
                         buttonType="reset"
