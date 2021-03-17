@@ -13,5 +13,7 @@
   "Submit": "Dodaj",
   "Required": "Wymagane",
   "Succeeded in adding Transaction": "Dodawanie zakończone sukcesem.",
-  "Succeeded in removing Transaction": "Usuwanie zakończone sukcesem."
+  "Succeeded in removing Transaction": "Usuwanie zakończone sukcesem.",
+  "Budget Amount": "Całkowity fundusz",
+  "Founds": "Fundusze"
 }

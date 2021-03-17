@@ -13,5 +13,7 @@
   "Submit": "Submit",
   "Required": "Required",
   "Succeeded in adding Transaction": "Succeeded in adding transaction.",
-  "Succeeded in removing Transaction": "Succeeded in removing transaction."
+  "Succeeded in removing Transaction": "Succeeded in removing transaction.",
+  "Budget Amount": "Total Amount",
+  "Founds": "Founds"
 }

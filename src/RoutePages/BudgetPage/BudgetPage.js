@@ -26,7 +26,12 @@ const BudgetPage = ({budgetState, commonState, fetchBudget, fetchBudgetCategorie
 
     const handleNextAddBudgetForm = (values) => {
         setNewBudgetData(values)
-        console.log(values)
+        // console.log(values)
+    };
+
+    const handleSubmitAddBudgetForm = (values) => {
+        setNewBudgetData(values)
+        // console.log(values)
     };
 
     return (
@@ -59,6 +64,7 @@ const BudgetPage = ({budgetState, commonState, fetchBudget, fetchBudgetCategorie
                             name={newBudgetData['name']}
                             totalAmount={newBudgetData['totalAmount']}
                             categories={newBudgetData['categories']}
+                            onSubmit={handleSubmitAddBudgetForm}
                         />
                     </Modal>
                 </Route>
@@ -70,7 +76,7 @@ const BudgetPage = ({budgetState, commonState, fetchBudget, fetchBudgetCategorie
 const ConnectedBudgetPage = connect(state => ({
     budgetState: state.budget.loading,
     commonState: state.common.loading,
-    allCategories: state.common.categories
+    allCategories: state.common.categories,
 }),
     {fetchBudget, fetchBudgetCategories, fetchAllCategories}
 )(BudgetPage);

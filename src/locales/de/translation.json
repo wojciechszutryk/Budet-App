@@ -13,5 +13,7 @@
   "Submit": "Hinzufügen",
   "Required": "Erforderlich",
   "Succeeded in adding Transaction": "Erfolg beim Hinzufügen der Transaktion.",
-  "Succeeded in removing Transaction": "Erfolgreiches Entfernen der Transaktion."
+  "Succeeded in removing Transaction": "Erfolgreiches Entfernen der Transaktion.",
+  "Budget Amount": "Gesamtsumme",
+  "Founds": "Gründet"
 }
