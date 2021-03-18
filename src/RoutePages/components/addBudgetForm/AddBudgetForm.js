@@ -88,7 +88,7 @@ const AddBudgetForm = ({categories, onSubmit}) => {
                             buttonType='submit'
                             type='submit'
                             onClick={handleSubmit}
-                        >Next</Button>
+                        >{t('Next')}</Button>
                     </Link>
                     <Button
                         buttonType="reset"

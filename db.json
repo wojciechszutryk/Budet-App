@@ -97,10 +97,22 @@
       "budgetId": "1"
     },
     {
-      "id": "6",
-      "budget": 80,
       "categoryId": "6",
-      "budgetId": "2"
+      "budget": 445,
+      "budgetId": 14,
+      "id": "9"
+    },
+    {
+      "categoryId": "7",
+      "budget": 232,
+      "budgetId": 14,
+      "id": "7"
+    },
+    {
+      "categoryId": "8",
+      "budget": 23,
+      "budgetId": 14,
+      "id": "8"
     }
   ],
   "budgets": [
@@ -110,9 +122,9 @@
       "totalAmount": 2400
     },
     {
-      "id": "2",
-      "name": "May",
-      "totalAmount": 3000
+      "name": "Wojciech Szutryk",
+      "totalAmount": 2312,
+      "id": 14
     }
   ],
   "transactions": [
@@ -237,92 +249,41 @@
       "id": "jHBfyjy"
     },
     {
-      "categoryId": 0,
-      "date": "2021-03-15",
-      "description": "123",
-      "amount": 21,
-      "budgetId": "2",
-      "id": "1PI8u0L"
-    },
-    {
-      "categoryId": 0,
-      "date": "2021-03-15",
-      "description": "123",
-      "amount": 21,
-      "budgetId": "2",
-      "id": "so6JzbK"
-    },
-    {
-      "categoryId": 0,
-      "date": "2021-03-15",
-      "description": "123",
-      "amount": 21,
-      "budgetId": "2",
-      "id": "I1sc9m-"
-    },
-    {
-      "categoryId": 0,
-      "date": "2021-03-15",
-      "description": "123",
-      "amount": 21,
-      "budgetId": "2",
-      "id": "v1-zrf9"
-    },
-    {
       "categoryId": "1",
-      "date": "2021-03-15",
-      "description": "123",
-      "amount": 213,
-      "budgetId": "2",
-      "id": "WYCmNI8"
-    },
-    {
-      "categoryId": "1",
-      "date": "2021-03-15",
-      "description": "123",
-      "amount": 213,
-      "budgetId": "2",
-      "id": "rA0Ecv6"
-    },
-    {
-      "categoryId": "1",
-      "date": "2021-03-15",
-      "description": "123",
-      "amount": 213,
-      "budgetId": "2",
-      "id": "Bb8Gqe_"
-    },
-    {
-      "categoryId": "1",
-      "date": "2021-03-15",
-      "description": "123",
-      "amount": 213,
-      "budgetId": "2",
-      "id": "6TZ6WI2"
-    },
-    {
-      "categoryId": "2",
-      "date": "2021-03-15",
-      "description": "123",
-      "amount": 12,
+      "date": "2021-03-18",
+      "description": "321",
+      "amount": 232,
       "budgetId": "1",
-      "id": "7kVBA92"
+      "id": "yy7aFcv"
+    },
+    {
+      "categoryId": "1",
+      "date": "2021-03-18",
+      "description": "123",
+      "amount": 23,
+      "id": "Q5UtPpE"
+    },
+    {
+      "categoryId": "1",
+      "date": "2021-03-18",
+      "description": "213",
+      "amount": 23,
+      "id": "cVP8qhn"
     },
     {
       "categoryId": 0,
-      "date": "2021-03-16",
-      "description": "123",
-      "amount": 213,
-      "budgetId": "1",
-      "id": "4P_6-ao"
+      "date": "2021-03-18",
+      "description": "2323",
+      "amount": 23,
+      "id": "J4Y8TNk"
     },
     {
-      "categoryId": 0,
-      "date": "2021-03-16",
+      "categoryId": "1",
+      "date": "2021-03-18",
       "description": "123",
-      "amount": 21,
-      "budgetId": "1",
-      "id": "pJs3hy_"
+      "amount": 23,
+      "budgetId": "14",
+      "id": "hQ4vRzU"
     }
   ]
 }

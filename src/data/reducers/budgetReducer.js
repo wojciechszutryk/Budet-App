@@ -15,7 +15,10 @@ import {
     BUDGET_TRANSACTION_ADD_REQUEST,
     BUDGET_TRANSACTION_ADD_SUCCESS,
     BUDGET_TRANSACTION_REMOVE_REQUEST,
-    BUDGET_TRANSACTION_REMOVE_SUCCESS
+    BUDGET_TRANSACTION_REMOVE_SUCCESS,
+    BUDGET_CATEGORIES_ADD_REQUEST,
+    BUDGET_CATEGORIES_ADD_SUCCESS,
+    BUDGET_CATEGORIES_ADD_FAILURE
 } from 'data/constants'
 
 const startBudget = {
@@ -83,6 +86,36 @@ const budget = (state= startBudget, action) => {
             return{
                 ...state,
                 budget: {},
+                loading: newLoading,
+            }
+
+        case BUDGET_CATEGORIES_ADD_REQUEST:
+            return {
+                ...state,
+                loading: {
+                    ...state.loading,
+                    [action.type]: LOADING_STATES.LOADING,
+                }
+            }
+
+        case BUDGET_CATEGORIES_ADD_SUCCESS:
+            delete newLoading.BUDGET_CATEGORIES_ADD_REQUEST;
+            return{
+                ...state,
+                budget: {
+                    ...state.budget,
+                    categories: [
+                        action.payload,
+                        ...state.budget.categories,
+                    ]
+                },
+                loading: newLoading,
+            }
+
+        case BUDGET_CATEGORIES_ADD_FAILURE:
+            delete newLoading.BUDGET_CATEGORIES_ADD_REQUEST;
+            return{
+                ...state,
                 loading: newLoading,
             }
 

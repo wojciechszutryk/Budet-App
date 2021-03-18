@@ -1,5 +1,5 @@
 import {Grid} from './TransactionsPageStyles.js'
-import React, {useEffect, useMemo} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {connect} from 'react-redux';
 import {fetchBudget, fetchBudgetCategories, addTransition} from "data/actions/budgetActions";
 import {fetchAllCategories} from "data/actions/commonActions";
@@ -9,21 +9,21 @@ import {BudgetTransactions} from "./components/BudgetTransactions";
 import {Route, Switch} from "react-router-dom";
 import TransactionForm from "./components/TransactionForm";
 
-const TransactionsPage = ({budgetState, budget, commonState, allCategories, fetchBudget, fetchBudgetCategories, fetchAllCategories, addTransition}) => {
+const TransactionsPage = ({budgetState, commonState, allCategories, fetchBudget, fetchBudgetCategories, fetchAllCategories, addTransition}) => {
+    const [budgetId, setBudgetId] = useState(14);
     useEffect(()=>{
-        fetchBudget(1);
-        fetchBudgetCategories(1);
+        fetchBudget(budgetId);
+        fetchBudgetCategories(budgetId);
         fetchAllCategories();
-    },[fetchBudget, fetchBudgetCategories, fetchAllCategories]);
+    },[fetchBudget, fetchBudgetCategories, fetchAllCategories, budgetId]);
 
     const finishedLoading = useMemo(
         () => !!commonState &&  !!budgetState && !Object.keys(commonState).length && !Object.keys(budgetState).length ,
         [commonState, budgetState]);
 
     const handleSubmitForm = (values) => {
-        console.log(values)
         addTransition({
-            budgetId: budget.id,
+            budgetId,
             data: values
         });
     };

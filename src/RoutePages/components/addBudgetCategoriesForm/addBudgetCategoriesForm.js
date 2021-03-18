@@ -2,8 +2,9 @@ import React, {useState, useMemo} from 'react'
 import {FormField, FormGroup, Label, Message} from "components/Input/InputStyles";
 import {Button} from "components";
 import {useTranslation} from "react-i18next";
-import {BudgetAmount, BudgetName} from "./addBudgetCategoriesFormStyles";
+import {BudgetAmount, BudgetName, OtherMoney} from "./addBudgetCategoriesFormStyles";
 import {setCurrency} from "utilities/functions";
+import {Link} from "react-router-dom";
 
 const AddBudgetCategoriesForm = ({name, totalAmount, categories, onSubmit}) => {
     const [budgetCategoriesFounds, setBudgetCategoriesFounds] = useState({});
@@ -30,9 +31,6 @@ const AddBudgetCategoriesForm = ({name, totalAmount, categories, onSubmit}) => {
         if (categories.length === 0) setBudgetOvervaluedError(false);
     },[budgetCategoriesFounds, categories.length, totalAmount])
 
-    console.log(budgetOvervaluedError)
-
-
     const resetForm = () => {
         document.getElementById("budgetCategoriesForm").reset();
         setOtherCategoriesFounds(totalAmount);
@@ -45,18 +43,10 @@ const AddBudgetCategoriesForm = ({name, totalAmount, categories, onSubmit}) => {
     }
 
     const handleSubmit = () => {
-        // let i =0;
-        const budgetCategories = {};
-        // = budgetCategoriesFounds.map(category => (
-        //     {
-        //         "id": i++,
-        //         "budget": category[]
-        //     }
-        // ))
         onSubmit({
             name,
             totalAmount,
-            budgetCategories,
+            categories: budgetCategoriesFounds,
         });
     }
 
@@ -82,21 +72,23 @@ const AddBudgetCategoriesForm = ({name, totalAmount, categories, onSubmit}) => {
                 <div>
                     {categoriesFoundsList}
                 </div>
-                <div>
+                <OtherMoney>
                     <span>{t('Other')} </span>:
                     {otherCategoriesFounds > 0 ?
                         <BudgetAmount>{setCurrency(otherCategoriesFounds)}</BudgetAmount>
                         : <BudgetName>{setCurrency(otherCategoriesFounds)}</BudgetName>}
-                </div>
+                </OtherMoney>
                 <div>
-                    <Button
-                        buttonType='submit'
-                        type='submit'
-                        disabled={budgetOvervaluedError}
-                        onClick={handleSubmit}
-                    >
-                        {t('Submit')}
-                    </Button>
+                    <Link  to='/budget'>
+                        <Button
+                            buttonType='submit'
+                            type='submit'
+                            disabled={budgetOvervaluedError}
+                            onClick={handleSubmit}
+                        >
+                            {t('Submit')}
+                        </Button>
+                    </Link>
                     <Button
                         buttonType="reset"
                         type="button"

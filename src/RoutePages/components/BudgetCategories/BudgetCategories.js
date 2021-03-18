@@ -50,7 +50,7 @@ const BudgetCategories = ({budgetCategories, allCategories, budget, activeCatego
             />
         ),
         children: category[1].map(budgetCategory => {
-            const name = allCategories.find(cat => budgetCategory.id === cat.id).name;
+            const name = allCategories.find(cat => budgetCategory.categoryId === cat.id).name;
             return (<ChildrenCategory
                 key={name}
                 name={name}

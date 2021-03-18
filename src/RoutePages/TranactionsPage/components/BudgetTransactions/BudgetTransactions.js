@@ -8,6 +8,7 @@ const BudgetTransactions = ({transactions, categories, activeCategories, budgetC
     useEffect(()=>{
         cleanActiveCategories();
     },[cleanActiveCategories]);
+    console.log(transactions)
 
     const filteredBySelectedCategory = useMemo(() => {
         const activeTransactions = [];

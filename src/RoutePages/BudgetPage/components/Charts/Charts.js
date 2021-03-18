@@ -23,7 +23,7 @@ const Charts = ({allCategories, activeCategories, budgetCategories, budget, clea
         const color = Math.floor(Math.random()*16777215).toString(16);
         if (activeCategories.includes(category[0])) {
             for (let i = 0; i < category[1].length; i++) colors.push(colorChange('#'+(color),-i*(category[1].length)*10));
-            return category[1].map(budgetCategory => allCategories.find(cat => budgetCategory.id === cat.id).name);
+            return category[1].map(budgetCategory => allCategories.find(cat => budgetCategory.categoryId === cat.id).name);
         }
         colors.push('#'+color);
         return category[0];
