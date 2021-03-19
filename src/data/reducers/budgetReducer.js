@@ -68,7 +68,7 @@ const budget = (state= startBudget, action) => {
             }
 
         case BUDGET_ADD_SUCCESS:
-            delete newLoading.BUDGET_TRANSACTION_ADD_REQUEST;
+            delete newLoading.BUDGET_ADD_REQUEST;
             return{
                 ...state,
                 budget: {
@@ -82,7 +82,7 @@ const budget = (state= startBudget, action) => {
             }
 
         case BUDGET_ADD_FAILURE:
-            delete newLoading.BUDGET_REQUEST;
+            delete newLoading.BUDGET_ADD_REQUEST;
             return{
                 ...state,
                 budget: {},

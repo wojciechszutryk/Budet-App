@@ -11,7 +11,7 @@ import AddBudgetForm from "../components/addBudgetForm";
 import AddBudgetCategoriesForm from "../components/addBudgetCategoriesForm";
 
 const BudgetPage = ({budgetState, commonState, fetchBudget, fetchBudgetCategories, fetchAllCategories, fetchAllBudgets, allCategories, allBudgets, addBudget, addBudgetCategory}) => {
-    const [budgetId, setBudgetId] = useState(14);
+    const [budgetId, setBudgetId] = useState(3);
     const [newBudgetData, setNewBudgetData] = useState({});
 
     useEffect(()=>{
@@ -31,20 +31,24 @@ const BudgetPage = ({budgetState, commonState, fetchBudget, fetchBudgetCategorie
     };
 
     const handleSubmitAddBudgetForm = (values) => {
-        const newBudgetId = allBudgets.length+1;
+        const newBudgetId = (allBudgets.length+1).toString();
         const name = values['name'];
         const totalAmount = parseInt(values['totalAmount']);
         const categories = values['categories'];
         const budgetData = {name, totalAmount, id:newBudgetId};
-        setNewBudgetData(values);
-        addBudget(budgetData);
         Object.keys(categories).forEach(function eachKey(key) {
             const categoryObject = {};
             categoryObject['categoryId'] = key;
             categoryObject['budget'] = categories[key];
             categoryObject['budgetId'] = newBudgetId;
+            console.log(categoryObject);
             addBudgetCategory(categoryObject);
+            fetchBudget(budgetId);
+            fetchBudgetCategories(budgetId);
+            fetchAllCategories();
+            fetchAllBudgets();
         });
+        addBudget(budgetData);
     }
 
         // console.log(values)

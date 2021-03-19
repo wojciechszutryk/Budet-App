@@ -5,11 +5,11 @@ const MoneyStatistics = ({moneyLeft, allMoney, isMoneyLeft}) => {
     return (
         <MoneyWrapper>
             <MoneyLeft money={isMoneyLeft}>
-                {moneyLeft}
+                {moneyLeft.toString()}
             </MoneyLeft>
             <span style={{color: 'black'}}> / </span>
             <Money>
-                {allMoney}
+                {allMoney.toString()}
             </Money>
         </MoneyWrapper>
     );

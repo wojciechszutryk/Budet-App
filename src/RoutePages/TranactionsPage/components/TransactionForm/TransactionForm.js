@@ -26,7 +26,7 @@ const TransactionForm = ({categories, onSubmit = () => {}}) => {
             <h1>{t('Add Transaction')}</h1>
             <Form
                 onSubmit={onSubmit}
-                initialValues={{ categoryId: 0, date: new Date().toJSON().slice(0,10)}}
+                initialValues={{ categoryId: "0", date: new Date().toJSON().slice(0,10)}}
                 render={({ handleSubmit, form, submitting, pristine, values }) => (
                     <form onSubmit={handleSubmit}>
                         <Field name="description" validate={required}>

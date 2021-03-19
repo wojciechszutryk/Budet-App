@@ -10,7 +10,7 @@ import {Route, Switch} from "react-router-dom";
 import TransactionForm from "./components/TransactionForm";
 
 const TransactionsPage = ({budgetState, commonState, allCategories, fetchBudget, fetchBudgetCategories, fetchAllCategories, addTransition}) => {
-    const [budgetId, setBudgetId] = useState(14);
+    const [budgetId, setBudgetId] = useState(3);
     useEffect(()=>{
         fetchBudget(budgetId);
         fetchBudgetCategories(budgetId);
@@ -23,7 +23,7 @@ const TransactionsPage = ({budgetState, commonState, allCategories, fetchBudget,
 
     const handleSubmitForm = (values) => {
         addTransition({
-            budgetId,
+            budgetId: budgetId.toString(),
             data: values
         });
     };
@@ -47,7 +47,6 @@ const TransactionsPage = ({budgetState, commonState, allCategories, fetchBudget,
                 </Route>
             </Switch>
         </>
-
     );
 };
 

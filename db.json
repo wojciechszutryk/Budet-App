@@ -97,22 +97,40 @@
       "budgetId": "1"
     },
     {
+      "categoryId": "1",
+      "budget": 1,
+      "budgetId": "2",
+      "id": "g-uuxuV"
+    },
+    {
+      "categoryId": "2",
+      "budget": 1,
+      "budgetId": "2",
+      "id": "nsX7G8g"
+    },
+    {
+      "categoryId": "3",
+      "budget": 1,
+      "budgetId": "2",
+      "id": "02qwN27"
+    },
+    {
+      "categoryId": "2",
+      "budget": 332,
+      "budgetId": "3",
+      "id": "-6Q8PGK"
+    },
+    {
+      "categoryId": "3",
+      "budget": 222,
+      "budgetId": "3",
+      "id": "542MqxT"
+    },
+    {
       "categoryId": "6",
-      "budget": 445,
-      "budgetId": 14,
-      "id": "9"
-    },
-    {
-      "categoryId": "7",
-      "budget": 232,
-      "budgetId": 14,
-      "id": "7"
-    },
-    {
-      "categoryId": "8",
-      "budget": 23,
-      "budgetId": 14,
-      "id": "8"
+      "budget": 444,
+      "budgetId": "3",
+      "id": "HQJLtFf"
     }
   ],
   "budgets": [
@@ -122,9 +140,14 @@
       "totalAmount": 2400
     },
     {
+      "name": "3",
+      "totalAmount": 3,
+      "id": "2"
+    },
+    {
       "name": "Wojciech Szutryk",
-      "totalAmount": 2312,
-      "id": 14
+      "totalAmount": 2323,
+      "id": "3"
     }
   ],
   "transactions": [
@@ -164,7 +187,7 @@
       "id": "5",
       "description": "Dinner in a restaurant",
       "amount": 35.68,
-      "categoryId": "null",
+      "categoryId": "0",
       "date": "2019-12-22T15:33:11.768Z",
       "budgetId": "1"
     },
@@ -179,7 +202,7 @@
     {
       "description": "Default Agile Workflow",
       "amount": 123,
-      "categoryId": "7",
+      "categoryId": "0",
       "date": "2020-02-13",
       "budgetId": "1",
       "id": "p1tYW2Q"
@@ -249,41 +272,68 @@
       "id": "jHBfyjy"
     },
     {
-      "categoryId": "1",
-      "date": "2021-03-18",
-      "description": "321",
-      "amount": 232,
-      "budgetId": "1",
-      "id": "yy7aFcv"
-    },
-    {
-      "categoryId": "1",
-      "date": "2021-03-18",
+      "categoryId": "0",
+      "date": "2021-03-19",
       "description": "123",
-      "amount": 23,
-      "id": "Q5UtPpE"
+      "amount": 3,
+      "budgetId": "2",
+      "id": "Dg8cs8c"
     },
     {
       "categoryId": "1",
-      "date": "2021-03-18",
+      "date": "2021-03-19",
+      "description": "123",
+      "amount": 2,
+      "budgetId": "2",
+      "id": "MdacMvs"
+    },
+    {
+      "categoryId": "0",
+      "date": "2021-03-19",
+      "description": "123",
+      "amount": 3,
+      "budgetId": "2",
+      "id": "3iUmYAM"
+    },
+    {
+      "categoryId": "2",
+      "date": "2021-03-19",
+      "description": "123",
+      "amount": 3,
+      "budgetId": "2",
+      "id": "M7J3lx6"
+    },
+    {
+      "categoryId": "1",
+      "date": "2021-03-19",
       "description": "213",
-      "amount": 23,
-      "id": "cVP8qhn"
+      "amount": 223,
+      "budgetId": "3",
+      "id": "WreGlxI"
     },
     {
-      "categoryId": 0,
-      "date": "2021-03-18",
-      "description": "2323",
+      "categoryId": "2",
+      "date": "2021-03-19",
+      "description": "mobile",
       "amount": 23,
-      "id": "J4Y8TNk"
+      "budgetId": "3",
+      "id": "EbUyakI"
     },
     {
-      "categoryId": "1",
-      "date": "2021-03-18",
+      "categoryId": "3",
+      "date": "2021-03-19",
       "description": "123",
-      "amount": 23,
-      "budgetId": "14",
-      "id": "hQ4vRzU"
+      "amount": 233,
+      "budgetId": "3",
+      "id": "4uhk4sI"
+    },
+    {
+      "categoryId": "6",
+      "date": "2021-03-19",
+      "description": "shop",
+      "amount": 322,
+      "budgetId": "3",
+      "id": "kIacWIN"
     }
   ]
 }

@@ -20,21 +20,25 @@ const BudgetCategories = ({budgetCategories, allCategories, budget, activeCatego
     ), [allCategories,budgetCategories]);
 
     let budgetMoneySpent = 0;
-    budget.transactions.forEach(transaction => budgetMoneySpent+=transaction.amount);
+    budget.transactions.forEach(transaction => {
+        if(transaction.amount) return budgetMoneySpent+=transaction.amount;
+    });
+    
     const availableBudgetMoney = budget.totalAmount;
     const moneyLeft = availableBudgetMoney-budgetMoneySpent;
     const isMoneyLeft = moneyLeft>0;
 
     const amountToSpendOnCategories = budgetCategories.reduce((acc, budgetCategory) => (acc + budgetCategory.budget), 0);
     const otherTransactions = useMemo(() => budget.transactions.filter(
-        transaction => !budgetCategories.find(budgetCategory => budgetCategory.id === transaction.categoryId)
-    ), [budget.transactions, budgetCategories]);
+        transaction => {
+            if (transaction.amount) return transaction.categoryId === '0';
+        }), [budget.transactions]);
     const otherExpenses = useMemo(() => 
         otherTransactions.reduce((acc,transaction) => acc + transaction.amount, 0),
     [otherTransactions]);
     const leftToSpendOnOther = budget.totalAmount - amountToSpendOnCategories;
 
-    const categoriesList = Object.entries(groupedCategories).map(category => ({
+    const categoriesList = useMemo(() => Object.entries(groupedCategories).map(category => ({
         id: category[0],
         Trigger: ({onClick}) => (
             <ParentCategory
@@ -44,9 +48,9 @@ const BudgetCategories = ({budgetCategories, allCategories, budget, activeCatego
                     activeCategories.includes(category[0]) ? removeActiveCategory(category[0]) : addActiveCategory(category[0]);
                 }}
                 categoriesInside={category[1]}
-                transactions={budget.transactions.filter(transaction => category[1].find(
-                    cat => transaction.categoryId === cat.categoryId
-                ))}
+                transactions={budget.transactions.filter(transaction =>
+                    category[1].find(cat => transaction.categoryId === cat.categoryId)
+                )}
             />
         ),
         children: category[1].map(budgetCategory => {
@@ -55,10 +59,12 @@ const BudgetCategories = ({budgetCategories, allCategories, budget, activeCatego
                 key={name}
                 name={name}
                 budget={budgetCategory.budget}
-                transactions={budget.transactions.filter(transaction => transaction.categoryId === budgetCategory.id)}
+                transactions={budget.transactions.filter(transaction => {
+                    return transaction.categoryId === budgetCategory.categoryId
+                })}
             />
         )}),
-    }));
+    })),[activeCategories, addActiveCategory, allCategories, budget.transactions, groupedCategories, removeActiveCategory]);
 
     useMemo(() =>categoriesList.push({
         id: 'Other',

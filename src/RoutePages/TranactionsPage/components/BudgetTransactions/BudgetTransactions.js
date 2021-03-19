@@ -1,21 +1,20 @@
-import React, {useMemo} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {connect} from 'react-redux';
 import SortTransactions from "./SortTransactions";
-import {useEffect} from "react";
 import {cleanActiveCategories} from "data/actions/budgetActions";
 
 const BudgetTransactions = ({transactions, categories, activeCategories, budgetCategories, cleanActiveCategories}) => {
     useEffect(()=>{
         cleanActiveCategories();
     },[cleanActiveCategories]);
-    console.log(transactions)
 
     const filteredBySelectedCategory = useMemo(() => {
         const activeTransactions = [];
         if (activeCategories.length === 0) return transactions
         else if (activeCategories.includes('Other')) {
             const otherTransactions = transactions.filter(
-                transaction => !budgetCategories.find(budgetCategory => budgetCategory.id === transaction.categoryId)
+                // transaction => !budgetCategories.find(budgetCategory => budgetCategory.id === transaction.categoryId)
+                transaction => transaction.categoryId === "0"
             );
             activeTransactions.push(...otherTransactions)
         }
@@ -29,9 +28,14 @@ const BudgetTransactions = ({transactions, categories, activeCategories, budgetC
                 }
             }
         );
-        activeTransactions.push(...categoriesTransactions)
-        return activeTransactions;
-    },[activeCategories, budgetCategories, categories, transactions]);
+        activeTransactions.push(...categoriesTransactions);
+        const seen = new Set();
+        return activeTransactions.filter(el => {
+            const duplicate = seen.has(el.id);
+            seen.add(el.id);
+            return !duplicate;
+        });
+    },[activeCategories, categories, transactions]);
 
     return (
         <SortTransactions allTransactions={transactions} transactions={filteredBySelectedCategory}/>

@@ -39,15 +39,15 @@ const Charts = ({allCategories, activeCategories, budgetCategories, budget, clea
 
     const moneySpentOnCategory = Object.entries(groupedCategories).map(category => {
         if (activeCategories.includes(category[0])) {
-            return category[1].map(budgetCategory => budget.transactions.filter(transaction => transaction.categoryId === budgetCategory.id))
+            return category[1].map(budgetCategory => budget.transactions.filter(transaction => transaction.categoryId === budgetCategory.categoryId))
                 .map(trans => trans.reduce((acc,transaction) => acc + transaction.amount, 0));
         }
-        return budget.transactions.filter(transaction => category[1].find(budgetCategory => budgetCategory.id === transaction.categoryId)
+        return budget.transactions.filter(transaction => category[1].find(budgetCategory => budgetCategory.categoryId === transaction.categoryId)
         ).reduce((acc,transaction) => acc + transaction.amount, 0)
     }).flat();
 
     const otherExpenses = useMemo(() => budget.transactions.filter(
-        transaction => !budgetCategories.find(budgetCategory => budgetCategory.id === transaction.categoryId)
+        transaction => !budgetCategories.find(budgetCategory => budgetCategory.categoryId === transaction.categoryId)
     ).reduce((acc,transaction) => acc + transaction.amount, 0), [budget.transactions, budgetCategories]);
     moneySpentOnCategory.push(otherExpenses);
 
