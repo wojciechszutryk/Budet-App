@@ -334,6 +334,30 @@
       "amount": 322,
       "budgetId": "3",
       "id": "kIacWIN"
+    },
+    {
+      "categoryId": "0",
+      "date": "2021-03-20",
+      "description": "12",
+      "amount": 2332,
+      "budgetId": "3",
+      "id": "xSSy6d7"
+    },
+    {
+      "categoryId": "3",
+      "date": "2021-03-20",
+      "description": "400",
+      "amount": 400,
+      "budgetId": "3",
+      "id": "Dl-rXdi"
+    },
+    {
+      "categoryId": "1",
+      "date": "2021-03-20",
+      "description": "wojtek",
+      "amount": 213,
+      "budgetId": "3",
+      "id": "AsrCuQQ"
     }
   ]
 }

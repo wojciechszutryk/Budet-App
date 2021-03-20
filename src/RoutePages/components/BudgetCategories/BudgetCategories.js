@@ -38,7 +38,7 @@ const BudgetCategories = ({budgetCategories, allCategories, budget, activeCatego
     [otherTransactions]);
     const leftToSpendOnOther = budget.totalAmount - amountToSpendOnCategories;
 
-    const categoriesList = useMemo(() => Object.entries(groupedCategories).map(category => ({
+    const categoriesList = Object.entries(groupedCategories).map(category => ({
         id: category[0],
         Trigger: ({onClick}) => (
             <ParentCategory
@@ -64,7 +64,7 @@ const BudgetCategories = ({budgetCategories, allCategories, budget, activeCatego
                 })}
             />
         )}),
-    })),[activeCategories, addActiveCategory, allCategories, budget.transactions, groupedCategories, removeActiveCategory]);
+    }),[activeCategories, addActiveCategory, allCategories, budget.transactions, groupedCategories, removeActiveCategory]);
 
     useMemo(() =>categoriesList.push({
         id: 'Other',
@@ -77,7 +77,7 @@ const BudgetCategories = ({budgetCategories, allCategories, budget, activeCatego
                 }}
                 categoriesInside={{}}
                 transactions={otherTransactions}
-                other={[(leftToSpendOnOther-otherExpenses).toFixed(2), setCurrency(leftToSpendOnOther.toFixed(2)), leftToSpendOnOther>0]}
+                other={[(leftToSpendOnOther-otherExpenses).toFixed(2), setCurrency(leftToSpendOnOther.toFixed(2)), parseInt(leftToSpendOnOther-otherExpenses)>0]}
             />
         ),
         children: (<ChildrenCategory

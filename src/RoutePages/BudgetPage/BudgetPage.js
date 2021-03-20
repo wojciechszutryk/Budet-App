@@ -9,6 +9,7 @@ import {Charts} from "./components/Charts";
 import {Link, Route, Switch} from "react-router-dom";
 import AddBudgetForm from "../components/addBudgetForm";
 import AddBudgetCategoriesForm from "../components/addBudgetCategoriesForm";
+import SetBudget from "../components/SetBudget";
 
 const BudgetPage = ({budgetState, commonState, fetchBudget, fetchBudgetCategories, fetchAllCategories, fetchAllBudgets, allCategories, allBudgets, addBudget, addBudgetCategory}) => {
     const [budgetId, setBudgetId] = useState(3);
@@ -27,7 +28,10 @@ const BudgetPage = ({budgetState, commonState, fetchBudget, fetchBudgetCategorie
 
     const handleNextAddBudgetForm = (values) => {
         setNewBudgetData(values)
-        // console.log(values)
+    };
+
+    const setCurrentBudget = id => {
+        setBudgetId(id);
     };
 
     const handleSubmitAddBudgetForm = (values) => {
@@ -59,6 +63,7 @@ const BudgetPage = ({budgetState, commonState, fetchBudget, fetchBudgetCategorie
                 <section>
                     {finishedLoading ?
                         <>
+                            <SetBudget allBudgets={allBudgets} onClick={setCurrentBudget}/>
                             <BudgetCategories/>
                             <Link  to='/budget/new'>
                                 <Button buttonType='addBudget'>Add new budget</Button>
