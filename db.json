@@ -131,6 +131,54 @@
       "budget": 444,
       "budgetId": "3",
       "id": "HQJLtFf"
+    },
+    {
+      "categoryId": "1",
+      "budget": 222,
+      "budgetId": "4",
+      "id": "eIET598"
+    },
+    {
+      "categoryId": "2",
+      "budget": 333,
+      "budgetId": "4",
+      "id": "2NjJdbL"
+    },
+    {
+      "categoryId": "6",
+      "budget": 555,
+      "budgetId": "4",
+      "id": "ekRbyjx"
+    },
+    {
+      "categoryId": "7",
+      "budget": 666,
+      "budgetId": "4",
+      "id": "xC2od-X"
+    },
+    {
+      "categoryId": "8",
+      "budget": 1000,
+      "budgetId": "4",
+      "id": "BSKHBB8"
+    },
+    {
+      "categoryId": "4",
+      "budget": 111,
+      "budgetId": "4",
+      "id": "avNW_3p"
+    },
+    {
+      "categoryId": "5",
+      "budget": 444,
+      "budgetId": "4",
+      "id": "F48b3Vc"
+    },
+    {
+      "categoryId": "3",
+      "budget": 333,
+      "budgetId": "4",
+      "id": "i46vsq-"
     }
   ],
   "budgets": [
@@ -148,6 +196,11 @@
       "name": "Wojciech Szutryk",
       "totalAmount": 2323,
       "id": "3"
+    },
+    {
+      "name": "Małgorzata Szutryk",
+      "totalAmount": 4000,
+      "id": "4"
     }
   ],
   "transactions": [

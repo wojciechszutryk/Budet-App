@@ -53,9 +53,7 @@ const BudgetPage = ({budgetState, commonState, fetchBudget, fetchBudgetCategorie
             fetchAllBudgets();
         });
         addBudget(budgetData);
-    }
-
-        // console.log(values)
+    };
 
     return (
         <>
@@ -63,7 +61,7 @@ const BudgetPage = ({budgetState, commonState, fetchBudget, fetchBudgetCategorie
                 <section>
                     {finishedLoading ?
                         <>
-                            <SetBudget allBudgets={allBudgets} onClick={setCurrentBudget}/>
+                            <SetBudget allBudgets={allBudgets} onClick={setCurrentBudget} id={budgetId}/>
                             <BudgetCategories/>
                             <Link  to='/budget/new'>
                                 <Button buttonType='addBudget'>Add new budget</Button>

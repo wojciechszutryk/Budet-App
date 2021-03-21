@@ -1,12 +1,11 @@
 import React from 'react';
-import {StyledChildrenCategory} from "../BudgetCategories/BudgetCategoriesStyles";
+import {StyledChildrenBudget} from "./SetBudgetStyles";
 
 const ChildrenBudget = ({name, id, onClick}) => {
-
     return (
-        <StyledChildrenCategory onClick={() => onClick(id)}>
+        <StyledChildrenBudget onClick={() => onClick(id)}>
             <span>{name}</span>
-        </StyledChildrenCategory>
+        </StyledChildrenBudget>
     );
 };
 

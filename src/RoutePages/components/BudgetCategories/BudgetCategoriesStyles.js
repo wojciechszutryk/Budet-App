@@ -17,8 +17,10 @@ const StyledCategory = styled.div`
 
 export const StyledBudgetMoney = styled(StyledCategory)`
   padding: ${({theme}) => theme.spacing.sm}px;
-  border-radius: ${({theme}) => theme.spacing.l}px;
+  border-bottom-left-radius: ${({theme}) => theme.spacing.l}px;
+  border-bottom-right-radius: ${({theme}) => theme.spacing.l}px;
   border: 2px solid  ${({theme}) => theme.colors.gray.dark};
+  border-top: 1px solid  ${({theme}) => theme.colors.gray.dark};
   background-color: ${({theme}) => theme.colors.white.normal};
   color: ${({theme}) => theme.colors.black.normal};
   & div{
