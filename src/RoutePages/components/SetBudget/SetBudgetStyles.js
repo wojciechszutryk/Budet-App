@@ -33,6 +33,7 @@ export const StyledParentBudget = styled(StyledCategory)`
 `;
 
 export const StyledChildrenBudget = styled(StyledCategory)`
+  display: flex;
   padding: ${({theme}) => theme.spacing.xs}px;
   background-color: ${({theme}) => theme.colors.gray.light};
   color: ${({theme}) => theme.colors.black.normal};
@@ -42,5 +43,16 @@ export const StyledChildrenBudget = styled(StyledCategory)`
     cursor: pointer;
     color: ${({theme}) => theme.colors.black.normal};
     background-color: ${({theme}) => theme.colors.white.normal};
+  }
+  &.disabled{
+    cursor: default;
+    color: ${({theme}) => theme.colors.black.normal};
+    background-color: ${({theme}) => theme.colors.white.normal};
+  }
+  &.disabled span{
+    font-weight: 600;
+  }
+  & span:first-child{
+    flex-grow: 1;
   }
 `;

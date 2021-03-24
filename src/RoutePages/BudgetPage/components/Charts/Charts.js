@@ -5,7 +5,6 @@ import {groupBy} from "lodash";
 import {colorChange} from "utilities/functions";
 import {Bar} from "react-chartjs-2";
 import {cleanActiveCategories} from "data/actions/budgetActions";
-import theme from "utilities/theme";
 
 const Charts = ({allCategories, activeCategories, budgetCategories, budget, cleanActiveCategories}) => {
     useEffect(()=>{
@@ -68,7 +67,7 @@ const Charts = ({allCategories, activeCategories, budgetCategories, budget, clea
                     datasets:[
                         {
                             label: "Money spent on category",
-                            backgroundColor: theme.colors.gray.dark,
+                            backgroundColor: 'rgb(89, 89, 89)',
                             data: moneySpentOnCategory
                         },
                         {

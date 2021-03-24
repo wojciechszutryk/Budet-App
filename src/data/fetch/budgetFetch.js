@@ -23,7 +23,6 @@ export const addBudget = (data) => {
 };
 
 export const addBudgetCategory = (data) => {
-    console.log(data);
     return fetch(`${process.env.REACT_APP_API_URL}/budgetCategories`,{
         method: 'POST',
         body: JSON.stringify(data),
@@ -31,8 +30,10 @@ export const addBudgetCategory = (data) => {
     });
 };
 
-export const removeTransition = (budgetId,id) => {
-    return fetch(`${process.env.REACT_APP_API_URL}/budgets/${budgetId}/transactions/${id}`,{
+
+export const removeTransition = (id) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/transactions/${id}`,{
         method: 'DELETE',
+        headers: {'Content-type': 'application/json'}
     });
 };

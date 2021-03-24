@@ -14,10 +14,10 @@ import {useTranslation} from "react-i18next";
 const BudgetCategories = ({budgetCategories, allCategories, budget, activeCategories, addActiveCategory, removeActiveCategory}) => {
     const {t} = useTranslation();
 
-    const groupedCategories = useMemo(() => groupBy(budgetCategories,
-            budgetCategory => allCategories.find(
-                category => budgetCategory.categoryId === category.id).parentCategory.name
-    ), [allCategories,budgetCategories]);
+    const groupedCategories = groupBy(budgetCategories,
+    budgetCategory => allCategories.find(
+        category => budgetCategory.categoryId === category.id).parentCategory.name
+    );
 
     let budgetMoneySpent = 0;
     budget.transactions.forEach(transaction => {

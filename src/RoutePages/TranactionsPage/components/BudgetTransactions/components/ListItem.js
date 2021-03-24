@@ -8,7 +8,7 @@ import {removeTransaction} from "data/actions/budgetActions";
 
 const ListItem = ({amount, category, date, description,id, removeTransaction, budget}) => {
     const handleRemoveTransaction = () => {
-        removeTransaction(budget.id, id);
+        removeTransaction(id);
     }
     return (
         <StyledListItem>
@@ -16,7 +16,7 @@ const ListItem = ({amount, category, date, description,id, removeTransaction, bu
             <span>{amount}</span>
             <span>{date}</span>
             <span>{category}</span>
-            <DeleteButton onClick={handleRemoveTransaction}><FontAwesomeIcon icon={faTrashAlt} /></DeleteButton>
+            <DeleteButton onClick={() => handleRemoveTransaction(id)}><FontAwesomeIcon icon={faTrashAlt} /></DeleteButton>
         </StyledListItem>
     );
 };

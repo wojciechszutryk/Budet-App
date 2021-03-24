@@ -1,16 +1,17 @@
 import GlobalStyles from 'indexStyle';
 import {ThemeProvider} from 'styled-components';
-import theme from 'utilities/theme';
+import {lightStyles, darkStyles} from 'utilities/theme';
 import 'react-toastify/dist/ReactToastify.css';
 
-import React from 'react';
-import { toast } from 'react-toastify';
+import React, {useState} from 'react';
+import {toast} from 'react-toastify';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 import {BudgetPage, TransactionsPage} from "./RoutePages";
 import {Loading, Navigation, Wrapper} from 'components';
 
 function App() {
+    const [theme, setTheme] = useState(lightStyles);
     toast.configure();
     return (
         <>
@@ -26,6 +27,8 @@ function App() {
                           link:'/transactions'
                       },
                   ]}
+                          theme = {theme}
+                          themeSet = {theme===lightStyles ? setTheme(darkStyles) : setTheme}
               />
               <Wrapper>
                   <Switch>
@@ -40,7 +43,7 @@ function App() {
 
 function RootApp(){
     return(
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={lightStyles}>
             <React.Suspense fallback={<Loading/>}>
                 <App/>
             </React.Suspense>

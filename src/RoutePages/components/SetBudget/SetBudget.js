@@ -3,8 +3,9 @@ import ParentBudget from "./ParentBudget";
 import ChildrenBudget from "./ChildrenBudget";
 import {SwitchList} from "components";
 import {useTranslation} from "react-i18next";
+import {connect} from "react-redux";
 
-const SetBudget = ({allBudgets, onClick, id}) => {
+const SetBudget = ({allBudgets, setCurrentBudget, handleRemoveBudget, activeBudget}) => {
     const {t} = useTranslation();
     const categoriesList = {
         id: 'allBudgets',
@@ -19,12 +20,14 @@ const SetBudget = ({allBudgets, onClick, id}) => {
         ),
         children: Object.entries(allBudgets).map(budget => {
             const name = budget[1].name;
+            const isActive = activeBudget.toString() === budget[1].id;
             return (<ChildrenBudget
-                    onClick={id === budget[1].id ? ()=>{} : onClick}
                     key={name+budget[1].totalAmount}
+                    setCurrentBudget={setCurrentBudget}
+                    disabled={isActive}
                     id={budget[1].id}
                     name={name}
-                    budget={budget[1].totalAmount}
+                    handleRemoveBudget={handleRemoveBudget}
                 />
             )}),
     };
@@ -38,4 +41,6 @@ const SetBudget = ({allBudgets, onClick, id}) => {
     );
 };
 
-export default SetBudget;
+const connectedSetBudget = connect(state => ({activeBudget: state.common.activeBudget}))(SetBudget);
+
+export default connectedSetBudget;

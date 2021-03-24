@@ -8,6 +8,9 @@ const GlobalStyles = createGlobalStyle`
         box-sizing: border-box;
         font-family: 'Roboto', sans-serif;
     }
+    body {
+      background-color: ${({theme}) => theme.colors.background.normal};
+    }
     ul{
         padding: ${({theme}) => theme.spacing.s}px ${({theme}) => theme.spacing.normal}px;
         list-style: none;

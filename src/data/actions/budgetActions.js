@@ -1,9 +1,10 @@
 import {
+    ACTIVE_BUDGET_SET,
     BUDGET,
     BUDGET_ACTIVE_CATEGORIES_ADD,
     BUDGET_ACTIVE_CATEGORIES_CLEAN,
     BUDGET_ACTIVE_CATEGORIES_REMOVE, BUDGET_ADD,
-    BUDGET_CATEGORIES, BUDGET_CATEGORIES_ADD,
+    BUDGET_CATEGORIES, BUDGET_CATEGORIES_ADD, BUDGET_REMOVE,
     BUDGET_TRANSACTION_ADD,
     BUDGET_TRANSACTION_REMOVE
 } from 'data/constants';
@@ -52,8 +53,8 @@ export const addTransition = ({budgetId, data}) => {
     };
 };
 
-export const removeTransaction = (budgetId, id) => {
-    const promise = API.budget.removeTransition(budgetId, id);
+export const removeTransaction = (id) => {
+    const promise = API.budget.removeTransition(id);
     return{
         type: BUDGET_TRANSACTION_REMOVE,
         promise,
