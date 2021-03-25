@@ -12,7 +12,7 @@ import {
     ALL_TRANSACTIONS_REQUEST,
     ALL_TRANSACTIONS_SUCCESS,
     ALL_TRANSACTIONS_FAILURE,
-    ACTIVE_BUDGET_SET, ACTIVE_BUDGET_GET
+    ACTIVE_BUDGET_SET,
 } from 'data/constants'
 
 const startCommon = {

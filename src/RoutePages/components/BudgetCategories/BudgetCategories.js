@@ -29,9 +29,9 @@ const BudgetCategories = ({budgetCategories, allCategories, budget, activeCatego
     const isMoneyLeft = moneyLeft>0;
 
     const amountToSpendOnCategories = budgetCategories.reduce((acc, budgetCategory) => (acc + budgetCategory.budget), 0);
-    const otherTransactions = useMemo(() => budget.transactions.filter(
-        transaction => {
+    const otherTransactions = useMemo(() => budget.transactions.filter(transaction => {
             if (transaction.amount) return transaction.categoryId === '0';
+            else return null;
         }), [budget.transactions]);
     const otherExpenses = useMemo(() => 
         otherTransactions.reduce((acc,transaction) => acc + transaction.amount, 0),

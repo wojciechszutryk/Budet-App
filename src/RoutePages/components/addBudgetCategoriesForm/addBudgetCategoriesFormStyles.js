@@ -6,7 +6,7 @@ export const BudgetName = styled.span`
 `;
 export const BudgetAmount = styled.span`
   font-weight: 600;
-  color: ${({theme}) => theme.colors.black.normal};;
+  color: black;
 `;
 export const OtherMoney = styled.div`
   color: red;

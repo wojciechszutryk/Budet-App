@@ -1,5 +1,5 @@
 import {Grid} from './TransactionsPageStyles.js'
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {connect} from 'react-redux';
 import {fetchBudget, fetchBudgetCategories, addTransition} from "data/actions/budgetActions";
 import {activeBudgetSet, fetchAllBudgets, fetchAllCategories} from "data/actions/commonActions";

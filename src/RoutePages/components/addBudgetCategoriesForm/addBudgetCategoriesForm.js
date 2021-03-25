@@ -1,5 +1,5 @@
 import React, {useState, useMemo} from 'react'
-import {FormField, FormGroup, Label, Message} from "components/Input/InputStyles";
+import {FormField, FormGroup, Label} from "components/Input/InputStyles";
 import {Button} from "components";
 import {useTranslation} from "react-i18next";
 import {BudgetAmount, BudgetName, OtherMoney} from "./addBudgetCategoriesFormStyles";

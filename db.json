@@ -179,6 +179,18 @@
       "budget": 21,
       "budgetId": "3",
       "id": "Enj2ETA"
+    },
+    {
+      "categoryId": "1",
+      "budget": 213,
+      "budgetId": "4",
+      "id": "S0PAEU9"
+    },
+    {
+      "categoryId": "2",
+      "budget": 11,
+      "budgetId": "4",
+      "id": "1I-KxaT"
     }
   ],
   "budgets": [
@@ -196,6 +208,11 @@
       "name": "Wojciech Szutryk",
       "totalAmount": 213,
       "id": "3"
+    },
+    {
+      "name": "121221",
+      "totalAmount": 321,
+      "id": "4"
     }
   ],
   "transactions": [
