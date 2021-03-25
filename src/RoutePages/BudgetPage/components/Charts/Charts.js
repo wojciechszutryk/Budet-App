@@ -80,11 +80,12 @@ const Charts = ({allCategories, activeCategories, budgetCategories, budget, clea
                 options={{
                     title:{
                         text:"Budget Plan",
-                        fontSize:25
+                        fontColor: 'blue',
+                        fontSize:25,
                     },
                     legend:{
                         display:true,
-                        position:'bottom'
+                        position:'bottom',
                     }
                 }}
             />

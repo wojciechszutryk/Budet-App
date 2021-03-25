@@ -155,6 +155,30 @@
       "budget": 80,
       "categoryId": "6",
       "budgetId": "1"
+    },
+    {
+      "categoryId": "1",
+      "budget": 22,
+      "budgetId": "3",
+      "id": "-htK51I"
+    },
+    {
+      "categoryId": "2",
+      "budget": 32,
+      "budgetId": "3",
+      "id": "6As-WKK"
+    },
+    {
+      "categoryId": "3",
+      "budget": 21,
+      "budgetId": "3",
+      "id": "hO8HVEM"
+    },
+    {
+      "categoryId": "3",
+      "budget": 21,
+      "budgetId": "3",
+      "id": "Enj2ETA"
     }
   ],
   "budgets": [
@@ -167,6 +191,11 @@
       "name": "Małgorzata Szutryk",
       "totalAmount": 2132,
       "id": "2"
+    },
+    {
+      "name": "Wojciech Szutryk",
+      "totalAmount": 213,
+      "id": "3"
     }
   ],
   "transactions": [

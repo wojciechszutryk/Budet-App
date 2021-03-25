@@ -4,7 +4,7 @@ import {
     DeleteButton,
     InlineButton,
     NormalButton,
-    ResetButton,
+    ResetButton, SetDarkButton, SetLightButton,
     SubmitButton,
     TransactionButton
 } from './ButtonStyles'
@@ -27,6 +27,10 @@ const Button = ({buttonType, children, ...props}) => {
                 return DeleteButton;
             case 'addBudget':
                 return AddBudgetButton;
+            case 'setDark':
+                return SetDarkButton;
+            case 'setLight':
+                return SetLightButton;
             default:
                 return InlineButton;
         }

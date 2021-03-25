@@ -12,6 +12,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faSortAmountUp, faEllipsisV, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import {Button} from "components";
+import {SearchTransaction} from "components/Input/InputStyles";
 
 const SortTransactions = ({allTransactions, transactions, categories}) => {
     const {t} = useTranslation();
@@ -133,7 +134,7 @@ const SortTransactions = ({allTransactions, transactions, categories}) => {
                 <Link  to='transactions/new'>
                     <Button buttonType='transaction'>Add new transaction</Button>
                 </Link>
-                <input type="text" onChange={handleSearchOnChange} placeholder={t('Search transaction')}/>
+                <SearchTransaction type="text" onChange={handleSearchOnChange} placeholder={t('Search transaction')}/>
                 <TransactionButton onClick={handleShowAllTransactions}>{t('Show All Transactions')}</TransactionButton>
             </OperationGrid>
             <StyledOrderBar>

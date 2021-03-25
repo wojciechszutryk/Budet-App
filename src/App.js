@@ -11,10 +11,10 @@ import {BudgetPage, TransactionsPage} from "./RoutePages";
 import {Loading, Navigation, Wrapper} from 'components';
 
 function App() {
-    const [theme, setTheme] = useState(lightStyles);
+    const [theme, setTheme] = useState(darkStyles);
     toast.configure();
     return (
-        <>
+        <ThemeProvider theme={theme}>
           <GlobalStyles/>
           <Router>
               <Navigation pages={[
@@ -27,8 +27,8 @@ function App() {
                           link:'/transactions'
                       },
                   ]}
-                          theme = {theme}
-                          themeSet = {theme===lightStyles ? setTheme(darkStyles) : setTheme}
+                  theme = {theme.name}
+                  themeSet = {theme === lightStyles ? () => setTheme(darkStyles) : () => setTheme(lightStyles)}
               />
               <Wrapper>
                   <Switch>
@@ -37,17 +37,17 @@ function App() {
                   </Switch>
               </Wrapper>
           </Router>
-        </>
+        </ThemeProvider>
     );
 }
 
 function RootApp(){
     return(
-        <ThemeProvider theme={lightStyles}>
+
             <React.Suspense fallback={<Loading/>}>
                 <App/>
             </React.Suspense>
-        </ThemeProvider>
+
     )
 }
 

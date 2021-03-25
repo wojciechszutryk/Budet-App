@@ -16,5 +16,9 @@ export const List = styled.ul`
 
 export const NavigationWrapper = styled(Wrapper)`
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+  
+    & ul{
+      margin-right: auto;
+    }
 `;

@@ -21,7 +21,7 @@ export const StyledBudgetMoney = styled(StyledCategory)`
   border-bottom-right-radius: ${({theme}) => theme.spacing.l}px;
   border: 2px solid  ${({theme}) => theme.colors.gray.dark};
   border-top: 1px solid  ${({theme}) => theme.colors.gray.dark};
-  background-color: ${({theme}) => theme.colors.white.normal};
+  background-color: ${({theme}) => theme.colors.gray.white};
   color: ${({theme}) => theme.colors.black.normal};
   & div{
     border-radius: ${({theme}) => theme.spacing.sm}px;
@@ -49,7 +49,7 @@ export const StyledParentCategory = styled(StyledCategory)`
   }
   &:hover{
     color: ${({theme}) => theme.colors.black.normal};
-    background-color: ${({theme}) => theme.colors.white.normal};
+    background-color: ${({theme}) => theme.colors.gray.white};
   }
 `;
 
@@ -72,7 +72,7 @@ export const StyledChildrenCategory = styled(StyledCategory)`
 `;
 
 export const MoneyWrapper = styled.div`
-  background-color: white;
+  background-color: ${({theme}) =>  theme.colors.gray.white};
   padding: ${({theme}) => theme.spacing.xs}px;
 `;
 

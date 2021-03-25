@@ -28,7 +28,7 @@ export const StyledParentBudget = styled(StyledCategory)`
   transition: .1s;
   &:hover{
     color: ${({theme}) => theme.colors.black.normal};
-    background-color: ${({theme}) => theme.colors.white.normal};
+    background-color: ${({theme}) => theme.colors.gray.white};
   }
 `;
 
@@ -47,7 +47,7 @@ export const StyledChildrenBudget = styled(StyledCategory)`
   &.disabled{
     cursor: default;
     color: ${({theme}) => theme.colors.black.normal};
-    background-color: ${({theme}) => theme.colors.white.normal};
+    background-color: ${({theme}) => theme.colors.gray.white};
   }
   &.disabled span{
     font-weight: 600;

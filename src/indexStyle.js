@@ -9,7 +9,7 @@ const GlobalStyles = createGlobalStyle`
         font-family: 'Roboto', sans-serif;
     }
     body {
-      background-color: ${({theme}) => theme.colors.background.normal};
+        background-color: ${({theme}) => theme.colors.background.normal};
     }
     ul{
         padding: ${({theme}) => theme.spacing.s}px ${({theme}) => theme.spacing.normal}px;
@@ -20,10 +20,10 @@ const GlobalStyles = createGlobalStyle`
     }
     a.selected button::after{
       left: 0;
-      color: ${({theme}) => theme.colors.black.normal};
+      color: black;
     }
     a.selected button{
-      color: ${({theme}) => theme.colors.black.normal};
+      color: black;
     }
 
     .Toastify__toast--info{

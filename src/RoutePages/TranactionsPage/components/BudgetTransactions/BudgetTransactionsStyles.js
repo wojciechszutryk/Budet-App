@@ -8,6 +8,8 @@ export const StyledListItem = styled.li`
   display: flex;
   justify-content: space-between;
   border: 1px solid ${({theme}) => theme.colors.gray.dark};
+  background-color: ${({theme}) => theme.colors.gray.light};
+  color: ${({theme}) => theme.colors.black.normal};
   padding: ${({theme})=> theme.spacing.xs}px;
   > *:nth-child(1){
     flex:6;
@@ -23,6 +25,9 @@ export const StyledListItem = styled.li`
   }
   > *:nth-child(5){
     flex:0.9;
+  }
+  &:nth-child(odd){
+    background-color: ${({theme}) => theme.colors.gray.white};
   }
 `
 

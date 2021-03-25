@@ -1,11 +1,13 @@
 export const lightStyles = {
+    name: 'lightTheme',
     colors: {
         white: {
             normal: 'rgb(250,250,250)'
         },
         gray: {
-            white: 'rgb(230,230,230)',
-            light: 'rgb(230,230,230)',
+            white: 'rgb(240,240,240)',
+            light: 'rgb(220,220,220)',
+            normalLight: 'rgb(200,200,200)',
             normal: 'rgb(166, 166, 166)',
             normalDark: 'rgb(100, 100, 100)',
             dark: 'rgb(89, 89, 89)',
@@ -55,16 +57,18 @@ export const lightStyles = {
 };
 
 export const darkStyles = {
+    name: 'darkTheme',
     colors: {
         white: {
             normal: 'rgb(10,10,10)',
         },
         gray: {
-            white: 'rgb(10,10,10)',
+            white: 'rgb(60,60,60)',
             light: 'rgb(89, 89, 89)',
-            normal: 'rgb(136, 136, 136)',
-            normalDark: 'rgb(90, 90, 90)',
-            dark: 'rgb(230,230,230)',
+            normalLight: 'rgb(100, 100, 100)',
+            normal: 'rgb(166, 166, 166)',
+            normalDark: 'rgb(200,200,200)',
+            dark: 'rgb(220,220,220)',
         },
         black: {
             normal: 'rgb(250,250,250)'
@@ -74,27 +78,27 @@ export const darkStyles = {
             dark: 'rgb(204, 0, 0)'
         },
         green: {
-            normal: 'rgb(133, 187, 101)',
-            dark: 'rgb(0, 153, 51)'
+            normal: 'rgb(0, 153, 51)',
+            dark: 'rgb(133, 187, 101)'
         },
         blue: {
-            light: 'rgb(0, 204, 255)',
-            normal: 'rgb(0, 153, 255)',
+            light: 'rgb(0, 153, 255)',
+            normal: 'rgb(0, 204, 255)',
             dark: 'rgb(0, 51, 204)'
         },
         purple: {
-            normal: 'rgb(153, 50, 204)',
-            dark: 'rgb(72, 61, 139)'
+            normal: 'rgb(72, 61, 139)',
+            dark: 'rgb(173, 70, 224)'
         },
         yellow: {
             normal: 'rgb(255, 255, 0)'
         },
         orange: {
-            normal: 'rgb(235, 93, 64)',
-            dark: 'rgb(252, 110, 81)'
+            normal: 'rgb(252, 110, 81)',
+            dark: 'rgb(235, 93, 64)'
         },
         background: {
-            normal: 'rgb(50,50,50)',
+            normal: 'rgb(30,35,35)',
         }
     },
     spacing: {
