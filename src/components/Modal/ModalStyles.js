@@ -19,7 +19,7 @@ export const Content = styled.div`
   margin: auto;
   border-radius: 10px;
   width: 300px;
-  height: 370px;
+  min-height: 370px;
   box-shadow: ${({theme}) => `0 5px 10px 2px ${theme.colors.gray.dark}`};
   -webkit-box-shadow: ${({theme}) => `0 5px 10px 2px ${theme.colors.gray.dark}`};
   -ms-box-shadow: ${({theme}) => `0 5px 10px 2px ${theme.colors.gray.dark}`};

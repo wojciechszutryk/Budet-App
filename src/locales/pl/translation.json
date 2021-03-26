@@ -17,5 +17,7 @@
   "Budget Amount": "Całkowity fundusz",
   "Founds": "Fundusze",
   "Next": "Dalej",
-  "Set Budget": "Budżety"
+  "Set Budget": "Budżety",
+  "Succeeded in exporting file to .xlsx": "Eksport do pliku .xlsx zakończony pomyślnie",
+  "Export transactions to xlsx": "Eksportuj pliki do .xlsx"
 }

@@ -3,20 +3,21 @@ import React, {useEffect, useMemo} from 'react';
 import {connect} from 'react-redux';
 import {fetchBudget, fetchBudgetCategories, addTransition} from "data/actions/budgetActions";
 import {activeBudgetSet, fetchAllBudgets, fetchAllCategories} from "data/actions/commonActions";
-import {Loading, Modal,} from "components";
+import {Button, Loading, Modal,} from "components";
 import {BudgetCategories} from ".././components/BudgetCategories";
 import {BudgetTransactions} from "./components/BudgetTransactions";
-import {Route, Switch} from "react-router-dom";
+import { Route, Switch} from "react-router-dom";
 import TransactionForm from "./components/TransactionForm";
 import SetBudget from "../components/SetBudget";
 import {removeBudget} from "data/fetch/commonFetch";
 import {toast} from "react-toastify";
 import i18next from "i18next";
+import ExportTransactions from "./components/ExportTransacions";
 
 const TransactionsPage = ({budgetState, commonState,
                           allCategories, allBudgets,
                           fetchBudget, fetchBudgetCategories, fetchAllBudgets, fetchAllCategories,
-                          addTransition, removeBudget, activeBudget, activeBudgetSet}) => {
+                          budget, addTransition, removeBudget, activeBudget, activeBudgetSet}) => {
     useEffect(()=>{
         fetchBudget(activeBudget);
         fetchBudgetCategories(activeBudget);
@@ -71,6 +72,10 @@ const TransactionsPage = ({budgetState, commonState,
                                 handleRemoveBudget={handleRemoveBudget}
                             />
                             <BudgetCategories/>
+                            <ExportTransactions
+                                transactions={budget.transactions}
+                                name={budget.name}
+                            />
                         </>
                         :
                         <Loading/>}

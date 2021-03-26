@@ -17,5 +17,7 @@
   "Budget Amount": "Total Amount",
   "Founds": "Founds",
   "Next": "Next",
-  "Set Budget": "Budgets"
+  "Set Budget": "Budgets",
+  "Succeeded in exporting file to .xlsx": "Succeeded in exporting file to .xlsx",
+  "Export transactions to xlsx": "Export transactions to .xlsx"
 }

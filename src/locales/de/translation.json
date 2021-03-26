@@ -17,5 +17,7 @@
   "Budget Amount": "Gesamtsumme",
   "Founds": "Gründet",
   "Next": "Nächster",
-  "Set Budget": "Budgets"
+  "Set Budget": "Budgets",
+  "Succeeded in exporting file to .xlsx": "Export in XLSX-Datei abgeschlossen",
+  "Export transactions to xlsx": "Exportieren Sie Transaktionen nach .xlsx"
 }
