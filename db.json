@@ -179,42 +179,6 @@
       "budget": 21,
       "budgetId": "3",
       "id": "Enj2ETA"
-    },
-    {
-      "categoryId": "1",
-      "budget": 213,
-      "budgetId": "4",
-      "id": "S0PAEU9"
-    },
-    {
-      "categoryId": "2",
-      "budget": 11,
-      "budgetId": "4",
-      "id": "1I-KxaT"
-    },
-    {
-      "categoryId": "1",
-      "budget": 123,
-      "budgetId": "5",
-      "id": "6QJzZ7P"
-    },
-    {
-      "categoryId": "2",
-      "budget": 213,
-      "budgetId": "5",
-      "id": "ayAhx0H"
-    },
-    {
-      "categoryId": "3",
-      "budget": 123,
-      "budgetId": "5",
-      "id": "BYuTMPm"
-    },
-    {
-      "categoryId": "4",
-      "budget": 213,
-      "budgetId": "5",
-      "id": "mi8zVUT"
     }
   ],
   "budgets": [
@@ -232,16 +196,6 @@
       "name": "Wojciech Szutryk",
       "totalAmount": 213,
       "id": "3"
-    },
-    {
-      "name": "121221",
-      "totalAmount": 321,
-      "id": "4"
-    },
-    {
-      "name": "Mati",
-      "totalAmount": 1231,
-      "id": "5"
     }
   ],
   "transactions": [

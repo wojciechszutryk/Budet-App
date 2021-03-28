@@ -6,13 +6,15 @@ import {activeBudgetSet, fetchAllBudgets, fetchAllCategories} from "data/actions
 import {Button, Loading, Modal,} from "components";
 import {BudgetCategories} from ".././components/BudgetCategories";
 import {BudgetTransactions} from "./components/BudgetTransactions";
-import { Route, Switch} from "react-router-dom";
+import {Link, Route, Switch} from "react-router-dom";
 import TransactionForm from "./components/TransactionForm";
 import SetBudget from "../components/SetBudget";
 import {removeBudget} from "data/fetch/commonFetch";
 import {toast} from "react-toastify";
 import i18next from "i18next";
-import ExportTransactions from "./components/ExportTransacions";
+import ExportTransactions from "./components/ExportTransactions";
+import {OperationGrid} from "./components/BudgetTransactions/BudgetTransactionsStyles";
+import ImportTransactions from "./components/ImportTransactions";
 
 const TransactionsPage = ({budgetState, commonState,
                           allCategories, allBudgets,
@@ -76,6 +78,9 @@ const TransactionsPage = ({budgetState, commonState,
                                 transactions={budget.transactions}
                                 name={budget.name}
                             />
+                            <Link  to='transactions/import'>
+                                <Button buttonType='addBudget'>{('Import transactions from xlsx')}</Button>
+                            </Link>
                         </>
                         :
                         <Loading/>}
@@ -89,6 +94,14 @@ const TransactionsPage = ({budgetState, commonState,
                 <Route path='/transactions/new' exact>
                     <Modal>
                         <TransactionForm categories={allCategories} onSubmit={handleSubmitForm}/>
+                    </Modal>
+                </Route>
+                <Route path='/transactions/import' exact>
+                    <Modal>
+                        <ImportTransactions
+                            transactions={budget.transactions}
+                            name={budget.name}
+                        />
                     </Modal>
                 </Route>
             </Switch>
