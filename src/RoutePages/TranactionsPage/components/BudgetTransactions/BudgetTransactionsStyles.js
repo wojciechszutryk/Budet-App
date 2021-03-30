@@ -29,6 +29,37 @@ export const StyledListItem = styled.li`
   &:nth-child(odd){
     background-color: ${({theme}) => theme.colors.gray.white};
   }
+  @media only screen and (max-width: 768px) {
+    flex-wrap: wrap;
+    justify-content: start;
+  }
+
+  @media only screen and (max-width: 600px) {
+    > *:nth-child(1){
+      order: 1;
+      flex-grow: 0;
+      flex-basis: 65%;
+    }
+    > *:nth-child(2){
+      order: 2;
+      flex-grow: 0;
+      flex-basis: 25%;
+    }
+    > *:nth-child(3){
+      order: 5;
+      flex-grow: 0;
+      flex-basis: 25%;
+    }
+    > *:nth-child(4){
+      order: 4;
+      flex-grow: 0;
+      flex-basis: 65%;
+    }
+    > *:nth-child(5){
+      order: 3;
+      flex-basis: 10%;
+    }
+  }
 `
 
 export const StyledOrderBar = styled.div`
@@ -52,6 +83,40 @@ export const StyledOrderBar = styled.div`
   > *:nth-child(5){
     flex:1;
   }
+  
+  @media only screen and (max-width: 768px) {
+    flex-wrap: wrap;
+    justify-content: start;
+  }
+
+  @media only screen and (max-width: 600px) {
+    flex-wrap: wrap;
+    justify-content: start;
+    > *:nth-child(1){
+      order: 1;
+      flex: 6;
+      flex-basis: 40%;
+      margin-bottom: ${({theme})=> theme.spacing.xs}px;
+    }
+    > *:nth-child(2){
+      order: 2;
+      flex: 6;
+      flex-basis: 40%;
+      margin-bottom: ${({theme})=> theme.spacing.xs}px;
+    }
+    > *:nth-child(3){
+      order: 4;
+      flex: 6;
+      flex-basis: 40%;
+    }
+    > *:nth-child(4){
+      order: 3;
+      flex: 6;
+      flex-basis: 40%;
+    }
+    > *:nth-child(5){
+      display: none;
+    }
 `;
 
 export const OperationGrid = styled.div`

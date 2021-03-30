@@ -12,4 +12,7 @@ export const Grid = styled.div`
     flex: 7;
     margin: 0 ${({theme})=> theme.spacing.xs}px;
   }
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
