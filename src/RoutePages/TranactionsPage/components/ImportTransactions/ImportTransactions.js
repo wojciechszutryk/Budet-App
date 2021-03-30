@@ -1,8 +1,8 @@
 import React from "react";
 import XLSX from "xlsx";
-import DropFile from "./DropFile";
-import InputWrapper from "./InputWrapper";
-import OutputTable from "./OutputTable";
+import DropFile from "./components/DropFile";
+import InputWrapper from "./components/InputWrapper";
+import OutputTable from "./components/OutputTable";
 import {make_cols} from "./utilities";
 import {useState} from "react";
 
@@ -35,7 +35,7 @@ const ImportTransactions = () => {
             </div>
             <div className="row">
                 <div className="col-xs-12">
-                    <OutputTable data={data} cols={cols} />
+                    <OutputTable data={data} cols={cols}/>
                 </div>
             </div>
         </DropFile>

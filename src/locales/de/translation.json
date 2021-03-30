@@ -18,6 +18,14 @@
   "Founds": "Gründet",
   "Next": "Nächster",
   "Set Budget": "Budgets",
-  "Succeeded in exporting file to .xlsx": "Export in XLSX-Datei abgeschlossen",
-  "Export transactions to xlsx": "Exportieren Sie Transaktionen nach .xlsx"
+  "Export transactions to xlsx": "Export Transaktionen",
+  "Select file with available file extension.\nPreferred format .xlsx\nFile should contain columns in order": "Wählen Sie eine Datei mit der verfügbaren Format aus. Bevorzugtes Format .xlsx. Die Datei sollte der Reihe nach Spalten enthalten",
+  "Import from file": "Aus Datei importieren",
+  "Description | Amount | Date | Category" : "Beschreibung | Betrag | Datum | Kategorie",
+  "(first 7)": "(erste 7)",
+  "Successfully read ": "Erfolgreich gelesen ",
+  "add": "addieren Sie",
+  "transactions": "Transaktionen",
+  "Attach correct file": "Hängen Sie die richtige Datei an",
+  "Import transactions from file": "Importieren Transaktionen"
 }

@@ -19,5 +19,13 @@
   "Next": "Next",
   "Set Budget": "Budgets",
   "Succeeded in exporting file to .xlsx": "Succeeded in exporting file to .xlsx",
-  "Export transactions to xlsx": "Export transactions to .xlsx"
+  "Export transactions to xlsx": "Export transactions to .xlsx",
+  "Import from file" : "Import from file",
+  "Description | Amount | Date | Category" : "Description | Amount | Date | Category",
+  "(first 7)": "(first 7)",
+  "Successfully read ": "Successfully read ",
+  "add": "add",
+  "transactions": "transactions",
+  "Attach correct file": "Attach correct file",
+  "Import transactions from file": "Import transactions from file"
 }

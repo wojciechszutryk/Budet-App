@@ -13,13 +13,16 @@ import {removeBudget} from "data/fetch/commonFetch";
 import {toast} from "react-toastify";
 import i18next from "i18next";
 import ExportTransactions from "./components/ExportTransactions";
-import {OperationGrid} from "./components/BudgetTransactions/BudgetTransactionsStyles";
 import ImportTransactions from "./components/ImportTransactions";
+import {useTranslation} from "react-i18next";
 
 const TransactionsPage = ({budgetState, commonState,
                           allCategories, allBudgets,
                           fetchBudget, fetchBudgetCategories, fetchAllBudgets, fetchAllCategories,
                           budget, addTransition, removeBudget, activeBudget, activeBudgetSet}) => {
+
+    const {t} = useTranslation();
+
     useEffect(()=>{
         fetchBudget(activeBudget);
         fetchBudgetCategories(activeBudget);
@@ -31,7 +34,8 @@ const TransactionsPage = ({budgetState, commonState,
         () => !!commonState &&  !!budgetState && !Object.keys(commonState).length && !Object.keys(budgetState).length ,
         [commonState, budgetState]);
 
-    const handleSubmitForm = (values) => {
+    const handleSubmitAddTransactionForm = (values) => {
+        console.log(values)
         addTransition({
             budgetId: activeBudget.toString(),
             data: values
@@ -79,7 +83,7 @@ const TransactionsPage = ({budgetState, commonState,
                                 name={budget.name}
                             />
                             <Link  to='transactions/import'>
-                                <Button buttonType='addBudget'>{('Import transactions from xlsx')}</Button>
+                                <Button buttonType='addBudget'>{t('Import transactions from file')}</Button>
                             </Link>
                         </>
                         :
@@ -93,15 +97,12 @@ const TransactionsPage = ({budgetState, commonState,
             <Switch>
                 <Route path='/transactions/new' exact>
                     <Modal>
-                        <TransactionForm categories={allCategories} onSubmit={handleSubmitForm}/>
+                        <TransactionForm categories={allCategories} onSubmit={handleSubmitAddTransactionForm}/>
                     </Modal>
                 </Route>
                 <Route path='/transactions/import' exact>
                     <Modal>
-                        <ImportTransactions
-                            transactions={budget.transactions}
-                            name={budget.name}
-                        />
+                        <ImportTransactions/>
                     </Modal>
                 </Route>
             </Switch>

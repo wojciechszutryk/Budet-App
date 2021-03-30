@@ -19,5 +19,17 @@
   "Next": "Dalej",
   "Set Budget": "Budżety",
   "Succeeded in exporting file to .xlsx": "Eksport do pliku .xlsx zakończony pomyślnie",
-  "Export transactions to xlsx": "Eksportuj pliki do .xlsx"
+  "Export transactions to xlsx": "Eksportuj transakcje",
+  "Select file with available file extension.": "Wybierz plik z jednym z dostępnych rozszerzeń.",
+  "Preferred format .xlsx": "Sugerowany format .xlsx",
+  "File should contain columns in order": "Plik powinien zawierać kolumny w kolejności",
+  "Import from file": "Importuj z pliku",
+  "Description | Amount | Date | Category": "Opis | Kwota | Data | Kategoria",
+  "Select file with available file extension.\nPreferred format .xlsx\nFile should contain columns in order": "Wybierz plik z jednym z dostępnych rozszerzeń. Sugerowany format .xlsx. Plik powinien zawierać kolumny w kolejności",
+  "(first 7)": "(pierwsze 7)",
+  "Successfully read ": "Znaleziono ",
+  "add": "dodaj",
+  "transactions": "transakcji",
+  "Attach correct file": "Dodaj poprawny plik",
+  "Import transactions from file": "Importuj Transakcje"
 }
