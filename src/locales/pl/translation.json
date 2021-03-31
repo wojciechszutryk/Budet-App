@@ -31,5 +31,9 @@
   "add": "dodaj",
   "transactions": "transakcji",
   "Attach correct file": "Dodaj poprawny plik",
-  "Import transactions from file": "Importuj Transakcje"
+  "Import transactions from file": "Importuj Transakcje",
+  "Budget Plan": "Plan Budżetu",
+  "Budget Money": "Finanse",
+  "Money spent on category": "Fundusze przeznaczone na kategorie",
+  "Available category Founds": "Dostępne fundusze w kategorii"
 }

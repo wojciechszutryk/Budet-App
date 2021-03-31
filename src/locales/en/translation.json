@@ -27,5 +27,9 @@
   "add": "add",
   "transactions": "transactions",
   "Attach correct file": "Attach correct file",
-  "Import transactions from file": "Import transactions from file"
+  "Import transactions from file": "Import transactions from file",
+  "Budget Plan": "Budget Plan",
+  "Budget Money": "Finances",
+  "Money spent on category": "Money spent on category",
+  "Available category Founds": "Available category Founds"
 }

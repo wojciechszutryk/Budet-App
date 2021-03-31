@@ -3,10 +3,13 @@ import {CategoriesWheel} from "../CategoriesWheel";
 import {connect} from "react-redux";
 import {groupBy} from "lodash";
 import {colorChange} from "utilities/functions";
-import {Bar} from "react-chartjs-2";
 import {cleanActiveCategories} from "data/actions/budgetActions";
+import {MoneyBar} from "../MoneyBar";
+import {useTranslation} from "react-i18next";
 
-const Charts = ({allCategories, activeCategories, budgetCategories, budget, cleanActiveCategories}) => {
+const Charts = ({allCategories, activeCategories, budgetCategories, budget, cleanActiveCategories, lightTheme}) => {
+    const {t} = useTranslation();
+
     useEffect(()=>{
         cleanActiveCategories();
     },[cleanActiveCategories]);
@@ -60,37 +63,20 @@ const Charts = ({allCategories, activeCategories, budgetCategories, budget, clea
     };
     return (
         <>
-            <CategoriesWheel chartData={budgetData} text="Budget Plan" legendPosition="bottom"/>
-            <Bar
-                data={{
-                    labels: BudgetCategories,
-                    datasets:[
-                        {
-                            label: "Money spent on category",
-                            backgroundColor: 'rgb(89, 89, 89)',
-                            data: moneySpentOnCategory
-                        },
-                        {
-                            label: "Available category Founds",
-                            backgroundColor: colors,
-                            data: moneyBudgetedOnCategory
-                        },
-                    ],
-                }}
-                options={{
-                    title:{
-                        text:"Budget Plan",
-                        fontColor: 'blue',
-                        fontSize:25,
-                    },
-                    legend:{
-                        display:true,
-                        position:'bottom',
-                    }
-                }}
+            <CategoriesWheel
+                chartData={budgetData}
+                text={t("Budget Plan")}
+                lightTheme={lightTheme}
+            />
+            <MoneyBar
+                colors={colors}
+                text={t("Budget Money")}
+                moneySpentOnCategory={moneySpentOnCategory}
+                moneyBudgetedOnCategory={moneyBudgetedOnCategory}
+                BudgetCategories={BudgetCategories}
+                lightTheme={lightTheme}
             />
         </>
-
     );
 };
 
@@ -98,7 +84,8 @@ const mapStateToProps = state => ({
     budget: state.budget.budget,
     activeCategories: state.budget.activeCategories,
     budgetCategories: state.budget.categories,
-    allCategories: state.common.categories
+    allCategories: state.common.categories,
+    lightTheme: state.common.lightTheme
 });
 
 const mapDispatchToProps = {

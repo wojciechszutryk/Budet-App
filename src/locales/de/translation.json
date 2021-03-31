@@ -27,5 +27,10 @@
   "add": "addieren Sie",
   "transactions": "Transaktionen",
   "Attach correct file": "Hängen Sie die richtige Datei an",
-  "Import transactions from file": "Importieren Transaktionen"
+  "Import transactions from file": "Importieren Transaktionen",
+  "Budget Plan": "Budgetplan",
+  "Budget Money": "Finanzen",
+  "Money spent on category": "Geld für Kategorie ausgegeben",
+  "Available category Founds": "Verfügbare Kategorie gefunden"
+
 }

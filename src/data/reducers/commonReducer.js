@@ -12,7 +12,7 @@ import {
     ALL_TRANSACTIONS_REQUEST,
     ALL_TRANSACTIONS_SUCCESS,
     ALL_TRANSACTIONS_FAILURE,
-    ACTIVE_BUDGET_SET,
+    ACTIVE_BUDGET_SET, THEME_TOGGLE,
 } from 'data/constants'
 
 const startCommon = {
@@ -20,7 +20,8 @@ const startCommon = {
     activeBudget: 1,
     categories: [],
     transactions: [],
-    budgets: []
+    budgets: [],
+    lightTheme: false,
 }
 
 const common = (state= startCommon, action) => {
@@ -133,6 +134,12 @@ const common = (state= startCommon, action) => {
             return {
                 ...state,
                 activeBudget: action.payload,
+            }
+
+        case THEME_TOGGLE:
+            return {
+                ...state,
+                lightTheme: !state.lightTheme,
             }
 
         default:
