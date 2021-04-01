@@ -17,6 +17,58 @@ export const NavList = styled.div`
 `;
 
 export const Toggler = styled.button`
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 16px;
+    background-color: ${({theme}) => theme.colors.gray.light} !important;
+    border: 2px solid ${({theme}) => theme.colors.gray.normalDark} !important;
+    border-radius: 7px;
+    transition: .2s;
+
+    & *{
+      display: none;
+    }
+    
+    &:active, &:focus {
+      outline: 0;
+    }
+    
+    &:before, &:after {
+        content: "";
+        display: block;
+        width: 22px;
+        height: 2px;
+        border-radius: 1px;
+        margin: 5px 0;
+        transition: all 0.2s;
+        background: ${({theme}) => theme.colors.gray.dark};
+    }
+
+    &:before {
+        transform: rotate(45deg);
+        transform-origin: 27% 50%;
+    }
+
+    &:after {
+        transform: rotate(-45deg);
+        transform-origin: 27% 50%;
+    }
+
+    &.collapsed{
+        background-color: ${({theme}) => theme.colors.gray.white} !important;
+        padding-left: 12px;
+    }
+    
+    &.collapsed:before{
+        transform: rotate(0);
+    }
+    
+    &.collapsed:after{
+        transform: rotate(0);
+    }
+`;
+
+export const Togglera = styled.button`
   width: 30px;
   height: 30px;
   border: none;

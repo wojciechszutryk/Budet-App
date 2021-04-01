@@ -2,7 +2,7 @@ import React from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faSun, faMoon, faCloud} from "@fortawesome/free-solid-svg-icons";
 import {NavLink } from 'react-router-dom'
-import {NavList, NavigationContainer, NavigationWrapper} from './NavigationStyles'
+import {NavList, NavigationContainer, NavigationWrapper, Toggler} from './NavigationStyles'
 import {useTranslation} from "react-i18next";
 import LanguageSwitcher from "../LanguageSwitcher";
 import {InlineButton, SetDarkButton, SetLightButton} from "../Button/ButtonStyles";
@@ -31,11 +31,11 @@ const Navigation = ({pages= [], theme, themeSet, themeToggle}) => {
         <NavigationWrapper>
             <NavigationContainer>
                 <Navbar collapseOnSelect expand="sm">
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
+                    <Navbar.Toggle as={Toggler} variant="link" eventKey="0" aria-controls="responsive-navbar-nav"/>
                     <NavList>
                         {list}
                     </NavList>
-                    <Navbar.Collapse id="responsive-navbar-nav">
+                    <Navbar.Collapse id="responsive-navbar-nav" eventKey="0">
                         <Nav className="ml-auto">
                             <NavList>
                                 <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
