@@ -5,10 +5,12 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import React, {useState} from 'react';
 import {toast} from 'react-toastify';
+
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 import {BudgetPage, TransactionsPage} from "./RoutePages";
 import {Loading, Navigation, Wrapper} from 'components';
+import {QueryClient, QueryClientProvider} from "react-query";
 
 function App() {
     const [theme, setTheme] = useState(darkStyles);
@@ -41,13 +43,21 @@ function App() {
     );
 }
 
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            suspense: true,
+        },
+    },
+})
+
 function RootApp(){
     return(
-
+        <QueryClientProvider client={queryClient}>
             <React.Suspense fallback={<Loading/>}>
                 <App/>
             </React.Suspense>
-
+        </QueryClientProvider>
     )
 }
 
