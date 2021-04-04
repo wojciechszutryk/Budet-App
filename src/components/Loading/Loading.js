@@ -31,7 +31,7 @@ const Content = styled.div`
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  background: ${({theme}) => theme.colors.gray.dark};
+  background: gray;
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 `;
 const Root = styled.div`

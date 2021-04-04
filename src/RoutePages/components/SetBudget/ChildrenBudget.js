@@ -5,7 +5,6 @@ import {faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {DeleteButton} from "components/Button/ButtonStyles";
 
 const ChildrenBudget = ({name, id, setCurrentBudget, disabled, handleRemoveBudget}) => {
-
     return (
         <StyledChildrenBudget className={disabled ? 'disabled' : null}>
             <span onClick={disabled ? ()=>{} : () => setCurrentBudget(id)}>

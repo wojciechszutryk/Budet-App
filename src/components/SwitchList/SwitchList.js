@@ -1,31 +1,31 @@
 import React, {useState} from 'react';
 import ListItem from "./ListItem";
+import {connect} from "react-redux";
 
-const SwitchList = ({categories}) => {
-    const [activeCategories, setActiveCategories] = useState([]);
+const SwitchList = ({categories, activeCategories}) => {
+    const [activeCategoriesState, setActiveCategoriesState] = useState(activeCategories);
 
     const handleOnClick = (id) => {
-        if (activeCategories.includes(id)) {
-            const index = activeCategories.indexOf(id);
-            const copy = [...activeCategories];
+        if (activeCategoriesState.includes(id)){
+            const index = activeCategoriesState.indexOf(id);
+            const copy = [...activeCategoriesState];
             copy.splice(index, 1);
-            setActiveCategories(copy);
+            setActiveCategoriesState(copy);
         }
         else {
-            const copy = [...activeCategories];
-            setActiveCategories([...copy, id]);
+            const copy = [...activeCategoriesState];
+            setActiveCategoriesState([...copy, id]);
         }
     }
 
     const categoriesList = categories.map(category =>
         <ListItem
-            key={category.id}
+            key={category.id+category.name+Math.random()*100}
             category={category}
             handleOnClick={() => handleOnClick(category.id)}
-            isActive={activeCategories.includes(category.id)}
+            isActive={activeCategoriesState.includes(category.id)}
         />
     );
-
     return (
         <>
             {categoriesList}
@@ -33,4 +33,8 @@ const SwitchList = ({categories}) => {
     );
 };
 
-export default SwitchList;
+const mapStateToProps = state => ({
+    activeCategories: state.budget.activeCategories,
+});
+
+export default connect(mapStateToProps)(SwitchList);

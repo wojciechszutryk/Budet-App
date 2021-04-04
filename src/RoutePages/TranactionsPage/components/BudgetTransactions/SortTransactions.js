@@ -3,7 +3,6 @@ import {ListItem} from "./components";
 import {useTranslation} from "react-i18next";
 import {useState} from "react";
 import {setCurrency, setDate} from "utilities/functions";
-import {connect} from "react-redux";
 import {OperationGrid,  StyledList, StyledOrderBar} from "./BudgetTransactionsStyles";
 import {SortButton, TransactionButton} from "components/Button/ButtonStyles";
 import {useEffect} from "react";
@@ -163,8 +162,4 @@ const SortTransactions = ({allTransactions, transactions, categories}) => {
     );
 };
 
-const mapStateToProps = state => ({
-    categories: state.common.categories,
-});
-
-export default connect(mapStateToProps)(SortTransactions);
+export default SortTransactions;

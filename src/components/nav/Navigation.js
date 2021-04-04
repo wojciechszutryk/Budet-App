@@ -31,11 +31,11 @@ const Navigation = ({pages= [], theme, themeSet, themeToggle}) => {
         <NavigationWrapper>
             <NavigationContainer>
                 <Navbar collapseOnSelect expand="sm">
-                    <Navbar.Toggle as={Toggler} variant="link" eventKey="0" aria-controls="responsive-navbar-nav"/>
+                    <Navbar.Toggle as={Toggler} variant="link" aria-controls="responsive-navbar-nav"/>
                     <NavList>
                         {list}
                     </NavList>
-                    <Navbar.Collapse id="responsive-navbar-nav" eventKey="0">
+                    <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="ml-auto">
                             <NavList>
                                 <NavDropdown title="Dropdown" id="collasible-nav-dropdown">

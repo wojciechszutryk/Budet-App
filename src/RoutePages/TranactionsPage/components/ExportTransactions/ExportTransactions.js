@@ -3,10 +3,11 @@ import XLSX from 'xlsx';
 import {Button} from "components";
 import {saveAs} from 'file-saver';
 import {useTranslation} from "react-i18next";
-import {connect} from "react-redux";
 import {setDate} from "utilities/functions";
 import {toast} from "react-toastify";
 import i18next from "i18next";
+import {useQuery} from "react-query";
+import API from "data/fetch";
 
 function s2ab(s) {
     const buf = new ArrayBuffer(s.length);
@@ -22,7 +23,8 @@ wb.Props = {
 };
 wb.SheetNames.push("Transactions");
 
-const ExportTransactions = ({transactions, name, allCategories}) => {
+const ExportTransactions = ({transactions=[], name}) => {
+    const {data:allCategories} = useQuery('allCategories', API.common.fetchAllCategoriesFromAPI);
     const {t} = useTranslation();
 
     const listFromTransaction = transactions.map(transaction => {
@@ -53,6 +55,4 @@ const ExportTransactions = ({transactions, name, allCategories}) => {
     )
 };
 
-const ConnectedExportTransactions = connect(state => ({allCategories: state.common.categories,}))(ExportTransactions);
-
-export default ConnectedExportTransactions;
+export default ExportTransactions;

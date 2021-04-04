@@ -1,5 +1,5 @@
 import {Grid} from './BudgetPageStyles.js'
-import React, {useEffect, useState, useMemo} from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import {
     fetchBudget,
@@ -9,7 +9,7 @@ import {
     removeTransaction
 } from "data/actions/budgetActions";
 import {fetchAllBudgets, fetchAllCategories, removeBudget, activeBudgetSet} from "data/actions/commonActions";
-import {Button, Loading, Modal,} from "components";
+import {Button, Modal, SuspenseErrorBoundary,} from "components";
 import {BudgetCategories} from "../components/BudgetCategories";
 import {Charts} from "./components/Charts";
 import {Link, Route, Switch} from "react-router-dom";
@@ -18,34 +18,41 @@ import AddBudgetCategoriesForm from "../components/addBudgetCategoriesForm";
 import SetBudget from "../components/SetBudget";
 import {toast} from "react-toastify";
 import i18next from "i18next";
+import {useMutation, useQuery, useQueryClient} from "react-query";
+import API from "data/fetch";
 
-const BudgetPage = ({budgetState, commonState, activeBudget,
-                        fetchBudget, fetchBudgetCategories, fetchAllCategories, fetchAllBudgets,
-                        allCategories, allBudgets,
-                        addBudget, addBudgetCategory, removeBudget, activeBudgetSet}) => {
+const BudgetPage = ({activeBudget, addBudget, addBudgetCategory, removeBudget, activeBudgetSet}) => {
+
+    const queryClient = useQueryClient();
     const [newBudgetData, setNewBudgetData] = useState({});
+    const {data:allBudgets} = useQuery('allBudgets', API.common.fetchAllBudgetsFromAPI);
+    const {data:allCategories} = useQuery('allCategories', API.common.fetchAllCategoriesFromAPI);
+    const {data:budgetCategories} = useQuery(['budgetCategories',{id: activeBudget}], () => API.budget.fetchBudgetCategoriesFromAPI({id: activeBudget}));
+    const {data:budget} = useQuery(['budget',{id: activeBudget}], () => API.budget.fetchBudgetFromAPI({id: activeBudget}));
 
-    useEffect(()=>{
-        fetchBudget(activeBudget);
-        fetchBudgetCategories(activeBudget);
-        fetchAllCategories();
-        fetchAllBudgets();
-    },[fetchBudget, fetchBudgetCategories, fetchAllCategories, fetchAllBudgets, activeBudget]);
-
-    const finishedLoading = useMemo(
-        () => !!commonState &&  !!budgetState && !Object.keys(commonState).length && !Object.keys(budgetState).length ,
-        [commonState, budgetState]);
+    const addBudgetCategoryMutation = useMutation(addBudgetCategory, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('budgetCategories')
+        },
+    });
+    const addBudgetMutation = useMutation(addBudget, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('budget')
+            queryClient.invalidateQueries('allBudgets')
+        },
+    });
+    const removeBudgetMutation = useMutation(removeBudget, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('allBudgets');
+        },
+    })
 
     const handleNextAddBudgetForm = (values) => {
         setNewBudgetData(values)
     };
 
-    const setCurrentBudget = id => {
-        activeBudgetSet(id);
-    };
-
     const handleSubmitAddBudgetForm = (values) => {
-        const newBudgetId = (allBudgets.length+1).toString();
+        const newBudgetId = allBudgets[allBudgets.length-1] ? (allBudgets.length+1).toString() : (allBudgets.length).toString() ;
         const name = values['name'];
         const totalAmount = parseInt(values['totalAmount']);
         const categories = values['categories'];
@@ -55,21 +62,16 @@ const BudgetPage = ({budgetState, commonState, activeBudget,
             categoryObject['categoryId'] = key;
             categoryObject['budget'] = categories[key];
             categoryObject['budgetId'] = newBudgetId;
-            addBudgetCategory(categoryObject);
-            fetchBudget(activeBudget);
-            fetchBudgetCategories(activeBudget);
-            fetchAllCategories();
-            fetchAllBudgets();
+            addBudgetCategoryMutation.mutate(categoryObject);
         });
-        addBudget(budgetData);
-        fetchAllBudgets();
+        addBudgetMutation.mutate(budgetData);
+        activeBudgetSet(newBudgetId);
     };
 
     const handleRemoveBudget = (id) => {
-        if (id === activeBudget.toString()) {
-            removeBudget(id);
-            activeBudgetSet(allBudgets[1].id);
-            window.location.reload(true);
+        if (id === activeBudget.toString() && allBudgets.length > 0) {
+            removeBudgetMutation.mutate(id);
+            activeBudgetSet(allBudgets[0].id);
         }
         else {
             toast.info(i18next.t("Set Budget Active before deleting"), {
@@ -89,22 +91,30 @@ const BudgetPage = ({budgetState, commonState, activeBudget,
         <>
             <Grid>
                 <section>
-                    {finishedLoading ?
-                        <>
-                            <SetBudget
-                                allBudgets={allBudgets}
-                                setCurrentBudget={setCurrentBudget}
-                                handleRemoveBudget={handleRemoveBudget}
-                            />
-                            <BudgetCategories/>
-                            <Link  to='/budget/new'>
-                                <Button buttonType='addBudget'>Add new budget</Button>
-                            </Link>
-                        </>
-                        : <Loading/>}
+                    <SuspenseErrorBoundary>
+                        <SetBudget
+                            allBudgets={allBudgets}
+                            setCurrentBudget={activeBudgetSet}
+                            handleRemoveBudget={handleRemoveBudget}
+                            activeBudget={activeBudget}
+                        />
+                        <BudgetCategories
+                            allCategories={allCategories}
+                            budgetCategories={budgetCategories}
+                        />
+                        <Link  to='/budget/new'>
+                            <Button buttonType='addBudget'>Add new budget</Button>
+                        </Link>
+                    </SuspenseErrorBoundary>
                 </section>
                 <section>
-                    {finishedLoading ? <Charts/> : <Loading/>}
+                    <SuspenseErrorBoundary>
+                        <Charts
+                            budget={budget}
+                            allCategories={allCategories}
+                            budgetCategories={budgetCategories}
+                        />
+                    </SuspenseErrorBoundary>
                 </section>
             </Grid>
 

@@ -199,10 +199,10 @@ export const SubmitButton = styled(ParentButton)`
 `;
 
 export const ResetButton = styled(SubmitButton)`
-    background-color: ${({theme}) => theme.colors.gray.dark};
+    background-color: rgb(89, 89, 89);
       &:focus,
           &:hover {
-            background: ${({theme}) => theme.colors.gray.normalDark};
+            background-color: rgb(100, 100, 100);
       }
 `;
 

@@ -95,42 +95,6 @@
       "budget": 80,
       "categoryId": "6",
       "budgetId": "1"
-    },
-    {
-      "categoryId": "1",
-      "budget": 22,
-      "budgetId": "3",
-      "id": "-htK51I"
-    },
-    {
-      "categoryId": "2",
-      "budget": 32,
-      "budgetId": "3",
-      "id": "6As-WKK"
-    },
-    {
-      "categoryId": "3",
-      "budget": 21,
-      "budgetId": "3",
-      "id": "hO8HVEM"
-    },
-    {
-      "categoryId": "3",
-      "budget": 21,
-      "budgetId": "3",
-      "id": "Enj2ETA"
-    },
-    {
-      "categoryId": "4",
-      "budget": 1000,
-      "budgetId": "4",
-      "id": "B6YDVGT"
-    },
-    {
-      "categoryId": "8",
-      "budget": 1000,
-      "budgetId": "4",
-      "id": "NP8376F"
     }
   ],
   "budgets": [
@@ -141,12 +105,12 @@
     },
     {
       "name": "Wojciech Szutryk",
-      "totalAmount": 213,
-      "id": "3"
+      "totalAmount": 6,
+      "id": "2"
     },
     {
-      "name": "mati",
-      "totalAmount": 3000,
+      "name": "Małgorzata Szutryk",
+      "totalAmount": 32,
       "id": "4"
     }
   ],
@@ -200,180 +164,12 @@
       "id": "p1tYW2Q"
     },
     {
-      "description": "Nowa transakcja",
-      "amount": 10.5,
-      "categoryId": "3",
-      "date": "2020-02-19",
-      "budgetId": "1",
-      "id": "aqq7G-0"
-    },
-    {
-      "description": "Nowa transakcja1",
-      "amount": 10.5,
-      "categoryId": "3",
-      "date": "2020-02-19",
-      "budgetId": "1",
-      "id": "GNERO_K"
-    },
-    {
-      "description": "Nowa transakcja2",
-      "amount": 10.5,
-      "categoryId": "3",
-      "date": "2020-02-19",
-      "budgetId": "1",
-      "id": "M9B9puJ"
-    },
-    {
       "description": "Nowa transakcja3",
       "amount": 10.5,
       "categoryId": "3",
       "date": "2020-02-19",
       "budgetId": "1",
       "id": "gsP5R-B"
-    },
-    {
-      "description": "Nowa transakcja5",
-      "amount": 10.5,
-      "categoryId": "2",
-      "date": "2020-02-19",
-      "budgetId": "1",
-      "id": "EXvZu7Z"
-    },
-    {
-      "description": "Nowa transakcja5",
-      "amount": 10.5,
-      "categoryId": "3",
-      "date": "2020-02-20",
-      "budgetId": "1",
-      "id": "nd_u-b5"
-    },
-    {
-      "description": "Nowa transakcja6",
-      "amount": 10.5,
-      "categoryId": "3",
-      "date": "2020-02-20",
-      "budgetId": "1",
-      "id": "KBQrPmU"
-    },
-    {
-      "categoryId": "0",
-      "data": "15.12.2019",
-      "description": "Internet provider",
-      "amount": 120.47,
-      "budgetId": "4",
-      "id": "LJKRxV3"
-    },
-    {
-      "categoryId": "0",
-      "data": "17.12.2019",
-      "description": "Weekly shoping",
-      "amount": 23.88,
-      "budgetId": "4",
-      "id": "UwFkOdj"
-    },
-    {
-      "categoryId": "0",
-      "data": "17.12.2019",
-      "description": "Weekly shoping #2",
-      "amount": 12.48,
-      "budgetId": "4",
-      "id": "dXRmcA-"
-    },
-    {
-      "categoryId": "0",
-      "data": "18.12.2019",
-      "description": "Grocery shopping #1",
-      "amount": 12.38,
-      "budgetId": "4",
-      "id": "06PAC8J"
-    },
-    {
-      "categoryId": "0",
-      "data": "13.02.2020",
-      "description": "Default Agile Workflow",
-      "amount": 123,
-      "budgetId": "4",
-      "id": "5WT6wKJ"
-    },
-    {
-      "categoryId": "0",
-      "data": "19.02.2020",
-      "description": "Nowa transakcja",
-      "amount": 10.5,
-      "budgetId": "4",
-      "id": "LezuWb-"
-    },
-    {
-      "categoryId": "0",
-      "data": "19.02.2020",
-      "description": "Nowa transakcja1",
-      "amount": 10.5,
-      "budgetId": "4",
-      "id": "5jr1AXJ"
-    },
-    {
-      "categoryId": "0",
-      "data": "19.02.2020",
-      "description": "Nowa transakcja2",
-      "amount": 10.5,
-      "budgetId": "4",
-      "id": "a5Y3cWD"
-    },
-    {
-      "categoryId": "0",
-      "data": "19.02.2020",
-      "description": "Nowa transakcja3",
-      "amount": 10.5,
-      "budgetId": "4",
-      "id": "0XB7ksU"
-    },
-    {
-      "categoryId": "0",
-      "data": "19.02.2020",
-      "description": "Nowa transakcja5",
-      "amount": 10.5,
-      "budgetId": "4",
-      "id": "GIn2e8e"
-    },
-    {
-      "categoryId": "0",
-      "data": "20.02.2020",
-      "description": "Nowa transakcja5",
-      "amount": 10.5,
-      "budgetId": "4",
-      "id": "vITFpGq"
-    },
-    {
-      "categoryId": "0",
-      "data": "20.02.2020",
-      "description": "Nowa transakcja6",
-      "amount": 10.5,
-      "budgetId": "4",
-      "id": "TbEWrGr"
-    },
-    {
-      "categoryId": "0",
-      "data": "10.12.2019",
-      "description": "Mobile network provider",
-      "amount": 39.99,
-      "budgetId": "4",
-      "id": "PxXFGVj"
-    },
-    {
-      "categoryId": "0",
-      "data": "10.12.2019",
-      "description": "Mobile network provider",
-      "amount": 39.99,
-      "budgetId": "4",
-      "id": "J14yN77"
-    },
-    {
-      "categoryId": "0",
-      "data": "20.02.2020",
-      "description": "Nowa transakcja6",
-      "amount": 10.5,
-      "budgetId": "4",
-      "id": "Orv56kk"
     }
   ]
 }

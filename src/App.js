@@ -9,8 +9,9 @@ import {toast} from 'react-toastify';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 import {BudgetPage, TransactionsPage} from "./RoutePages";
-import {Loading, Navigation, Wrapper} from 'components';
+import {Navigation, SuspenseErrorBoundary, Wrapper} from 'components';
 import {QueryClient, QueryClientProvider} from "react-query";
+
 
 function App() {
     const [theme, setTheme] = useState(darkStyles);
@@ -32,12 +33,14 @@ function App() {
                   theme = {theme.name}
                   themeSet = {theme === lightStyles ? () => setTheme(darkStyles) : () => setTheme(lightStyles)}
               />
-              <Wrapper>
-                  <Switch>
-                      <Route path='/budget'><BudgetPage/></Route>
-                      <Route path='/transactions'><TransactionsPage/></Route>
-                  </Switch>
-              </Wrapper>
+              <SuspenseErrorBoundary>
+                  <Wrapper>
+                      <Switch>
+                          <Route path='/budget'><BudgetPage/></Route>
+                          <Route path='/transactions'><TransactionsPage/></Route>
+                      </Switch>
+                  </Wrapper>
+              </SuspenseErrorBoundary>
           </Router>
         </ThemeProvider>
     );
@@ -54,9 +57,7 @@ const queryClient = new QueryClient({
 function RootApp(){
     return(
         <QueryClientProvider client={queryClient}>
-            <React.Suspense fallback={<Loading/>}>
-                <App/>
-            </React.Suspense>
+            <App/>
         </QueryClientProvider>
     )
 }

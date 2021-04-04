@@ -3,7 +3,7 @@ import {
     ALL_BUDGETS,
     ALL_CATEGORIES,
     ALL_TRANSACTIONS,
-    BUDGET_REMOVE, THEME_GET, THEME_TOGGLE
+    BUDGET_REMOVE, THEME_TOGGLE
 } from 'data/constants';
 import API from 'data/fetch';
 

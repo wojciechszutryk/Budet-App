@@ -5,10 +5,17 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {DeleteButton} from "components/Button/ButtonStyles";
 import {connect} from "react-redux";
 import {removeTransaction} from "data/actions/budgetActions";
+import {useMutation, useQueryClient} from "react-query";
 
-const ListItem = ({amount, category, date, description,id, removeTransaction, budget}) => {
+const ListItem = ({amount, category, date, description,id, removeTransaction}) => {
+    const queryClient = useQueryClient();
+    const removeTransactionMutation = useMutation(removeTransaction, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('budget');
+        },
+    })
     const handleRemoveTransaction = () => {
-        removeTransaction(id);
+        removeTransactionMutation.mutate(id);
     }
     return (
         <StyledListItem>
@@ -21,13 +28,6 @@ const ListItem = ({amount, category, date, description,id, removeTransaction, bu
     );
 };
 
-const ConnectedListItem = connect(
-    state => ({
-        budget: state.budget.budget,
-    }),
-    {
-        removeTransaction
-    }
-)(ListItem);
+const ConnectedListItem = connect(null, {removeTransaction})(ListItem);
 
 export default ConnectedListItem;

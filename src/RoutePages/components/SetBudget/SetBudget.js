@@ -3,7 +3,6 @@ import ParentBudget from "./ParentBudget";
 import ChildrenBudget from "./ChildrenBudget";
 import {SwitchList} from "components";
 import {useTranslation} from "react-i18next";
-import {connect} from "react-redux";
 
 const SetBudget = ({allBudgets, setCurrentBudget, handleRemoveBudget, activeBudget}) => {
     const {t} = useTranslation();
@@ -41,6 +40,4 @@ const SetBudget = ({allBudgets, setCurrentBudget, handleRemoveBudget, activeBudg
     );
 };
 
-const connectedSetBudget = connect(state => ({activeBudget: state.common.activeBudget}))(SetBudget);
-
-export default connectedSetBudget;
+export default SetBudget;

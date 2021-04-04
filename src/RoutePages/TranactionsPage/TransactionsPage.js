@@ -1,9 +1,9 @@
 import {Grid} from './TransactionsPageStyles.js'
-import React, {useEffect, useMemo} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import {fetchBudget, fetchBudgetCategories, addTransition} from "data/actions/budgetActions";
 import {activeBudgetSet, fetchAllBudgets, fetchAllCategories} from "data/actions/commonActions";
-import {Button, Loading, Modal,} from "components";
+import {Button, Modal, SuspenseErrorBoundary,} from "components";
 import {BudgetCategories} from ".././components/BudgetCategories";
 import {BudgetTransactions} from "./components/BudgetTransactions";
 import {Link, Route, Switch} from "react-router-dom";
@@ -15,42 +15,42 @@ import i18next from "i18next";
 import ExportTransactions from "./components/ExportTransactions";
 import ImportTransactions from "./components/ImportTransactions";
 import {useTranslation} from "react-i18next";
+import {useMutation, useQuery, useQueryClient} from "react-query";
+import API from "data/fetch";
 
-const TransactionsPage = ({budgetState, commonState,
-                          allCategories, allBudgets,
-                          fetchBudget, fetchBudgetCategories, fetchAllBudgets, fetchAllCategories,
-                          budget, addTransition, removeBudget, activeBudget, activeBudgetSet}) => {
+const TransactionsPage = ({addTransition, removeBudget, activeBudget, activeBudgetSet}) => {
 
+    const queryClient = useQueryClient();
     const {t} = useTranslation();
+    const {data:allBudgets} = useQuery('allBudgets', API.common.fetchAllBudgetsFromAPI);
+    const {data:allCategories} = useQuery('allCategories', API.common.fetchAllCategoriesFromAPI);
+    const {data:budgetCategories} = useQuery(['budgetCategories',{id: activeBudget}], () => API.budget.fetchBudgetCategoriesFromAPI({id: activeBudget}));
+    const {data:budget} = useQuery(['budget',{id: activeBudget}], () => API.budget.fetchBudgetFromAPI({id: activeBudget}));
 
-    useEffect(()=>{
-        fetchBudget(activeBudget);
-        fetchBudgetCategories(activeBudget);
-        fetchAllCategories();
-        fetchAllBudgets();
-    },[fetchBudget, fetchBudgetCategories, fetchAllCategories, activeBudget, fetchAllBudgets]);
+    const addTransitionMutation = useMutation(addTransition, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('budget')
+        },
+    })
 
-    const finishedLoading = useMemo(
-        () => !!commonState &&  !!budgetState && !Object.keys(commonState).length && !Object.keys(budgetState).length ,
-        [commonState, budgetState]);
+    const removeBudgetMutation = useMutation(removeBudget, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('allBudgets');
+        },
+    })
 
     const handleSubmitAddTransactionForm = (values) => {
-        console.log(values)
-        addTransition({
+        addTransitionMutation.mutate({
             budgetId: activeBudget.toString(),
             data: values
         });
     };
 
-    const setCurrentBudget = id => {
-        activeBudgetSet(id);
-    };
-
     const handleRemoveBudget = (id) => {
         if (id === activeBudget.toString()) {
-            removeBudget(id);
-            activeBudgetSet(allBudgets[1].id);
-            window.location.reload(true);
+            removeBudgetMutation.mutate(id);
+            activeBudgetSet(allBudgets[0].id);
+            window.location.reload();
         }
         else {
             toast.info(i18next.t("Set Budget Active before deleting"), {
@@ -70,27 +70,30 @@ const TransactionsPage = ({budgetState, commonState,
         <>
             <Grid>
                 <section>
-                    {finishedLoading ?
-                        <>
-                            <SetBudget
-                                allBudgets={allBudgets}
-                                setCurrentBudget={setCurrentBudget}
-                                handleRemoveBudget={handleRemoveBudget}
-                            />
-                            <BudgetCategories/>
-                            <ExportTransactions
-                                transactions={budget.transactions}
-                                name={budget.name}
-                            />
-                            <Link  to='transactions/import'>
-                                <Button buttonType='addBudget'>{t('Import transactions from file')}</Button>
-                            </Link>
-                        </>
-                        :
-                        <Loading/>}
+                    <SuspenseErrorBoundary>
+                        <SetBudget
+                            allBudgets={allBudgets}
+                            setCurrentBudget={activeBudgetSet}
+                            handleRemoveBudget={handleRemoveBudget}
+                            activeBudget={activeBudget}
+                        />
+                        <BudgetCategories
+                            allCategories={allCategories}
+                            budgetCategories={budgetCategories}
+                        />
+                        <ExportTransactions
+                            transactions={budget.transactions}
+                            name={budget.name}
+                        />
+                        <Link  to='transactions/import'>
+                            <Button buttonType='addBudget'>{t('Import transactions from file')}</Button>
+                        </Link>
+                    </SuspenseErrorBoundary>
                 </section>
                 <section>
-                    {finishedLoading ? <BudgetTransactions/> : <Loading/>}
+                    <SuspenseErrorBoundary>
+                        <BudgetTransactions allCategories={allCategories} budget={budget}/>
+                    </SuspenseErrorBoundary>
                 </section>
             </Grid>
 

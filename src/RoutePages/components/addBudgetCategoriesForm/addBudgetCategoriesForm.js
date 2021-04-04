@@ -28,8 +28,8 @@ const AddBudgetCategoriesForm = ({name, totalAmount, categories, onSubmit}) => {
             }
         }
         setOtherCategoriesFounds(totalAmount-totalCurrentCategoriesFounds);
-        if (categories.length === 0) setBudgetOvervaluedError(false);
-    },[budgetCategoriesFounds, categories.length, totalAmount])
+        if (!categories || categories.length === 0) setBudgetOvervaluedError(false);
+    },[budgetCategoriesFounds, categories, totalAmount])
 
     const resetForm = () => {
         document.getElementById("budgetCategoriesForm").reset();

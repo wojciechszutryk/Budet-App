@@ -1,9 +1,11 @@
-export const fetchBudgetFromAPI = (id) => {
-    return fetch(`${process.env.REACT_APP_API_URL}/budgets/${id}/?_embed=transactions`);
+export const fetchBudgetFromAPI = async({id}) => {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/budgets/${id}/?_embed=transactions`);
+    return await response.json();
 };
 
-export const fetchBudgetCategoriesFromAPI = (id) => {
-    return fetch(`${process.env.REACT_APP_API_URL}/budgets/${id}/budgetCategories`);
+export const fetchBudgetCategoriesFromAPI = async({id}) => {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/budgets/${id}/budgetCategories`);
+    return await response.json();
 };
 
 export const addTransition = ({budgetId, data}) => {

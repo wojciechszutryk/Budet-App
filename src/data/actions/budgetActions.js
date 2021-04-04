@@ -9,8 +9,8 @@ import {
 } from 'data/constants';
 import API from 'data/fetch';
 
-export const fetchBudget = id => {
-    const promise = API.budget.fetchBudgetFromAPI(id);
+export const fetchBudget = (id) => {
+    const promise = API.budget.fetchBudgetFromAPI({id});
    return {
         type: BUDGET,
         promise

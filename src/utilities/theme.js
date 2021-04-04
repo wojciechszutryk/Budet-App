@@ -41,7 +41,7 @@ export const lightStyles = {
         },
         background: {
             normal: 'rgb(250,250,250)',
-        }
+        },
     },
     spacing: {
         xs: 5,
@@ -99,7 +99,7 @@ export const darkStyles = {
         },
         background: {
             normal: 'rgb(30,35,35)',
-        }
+        },
     },
     spacing: {
         xs: 5,

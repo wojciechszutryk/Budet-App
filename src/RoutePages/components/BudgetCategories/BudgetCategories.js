@@ -10,9 +10,12 @@ import MoneyStatistics from "./MoneyStatistics";
 import {setCurrency} from "utilities/functions";
 import {addActiveCategory, removeActiveCategory} from 'data/actions/budgetActions'
 import {useTranslation} from "react-i18next";
+import {useQuery} from "react-query";
+import API from "../../../data/fetch";
 
-const BudgetCategories = ({budgetCategories, allCategories, budget, activeCategories, addActiveCategory, removeActiveCategory}) => {
+const BudgetCategories = ({addActiveCategory,activeBudget,activeCategories, removeActiveCategory, allCategories, budgetCategories}) => {
     const {t} = useTranslation();
+    const {data:budget} = useQuery(['budget',{id: activeBudget}], () => API.budget.fetchBudgetFromAPI({id: activeBudget}));
 
     const groupedCategories = groupBy(budgetCategories,
     budgetCategory => allCategories.find(
@@ -56,7 +59,7 @@ const BudgetCategories = ({budgetCategories, allCategories, budget, activeCatego
         children: category[1].map(budgetCategory => {
             const name = allCategories.find(cat => budgetCategory.categoryId === cat.id).name;
             return (<ChildrenCategory
-                key={name}
+                key={name+budgetCategory.budget+Math.random()}
                 name={name}
                 budget={budgetCategory.budget}
                 transactions={budget.transactions.filter(transaction => {
@@ -86,7 +89,6 @@ const BudgetCategories = ({budgetCategories, allCategories, budget, activeCatego
             other={true}
         />)
     }), [activeCategories, addActiveCategory, categoriesList, leftToSpendOnOther, otherExpenses, otherTransactions, removeActiveCategory, t]);
-
     return (
         <div>
             <div
@@ -112,10 +114,8 @@ const BudgetCategories = ({budgetCategories, allCategories, budget, activeCatego
 };
 
 const mapStateToProps = state => ({
-    budget: state.budget.budget,
-    activeCategories: state.budget.activeCategories,
-    budgetCategories: state.budget.categories,
-    allCategories: state.common.categories,
+    activeBudget: state.common.activeBudget,
+    activeCategories: state.budget.activeCategories
 });
 
 const mapDispatchToProps = {

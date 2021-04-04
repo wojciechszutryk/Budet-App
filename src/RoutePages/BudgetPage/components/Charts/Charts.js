@@ -1,18 +1,14 @@
-import React, {useMemo, useEffect} from 'react';
+import React, {useMemo} from 'react';
 import {CategoriesWheel} from "../CategoriesWheel";
 import {connect} from "react-redux";
 import {groupBy} from "lodash";
 import {colorChange} from "utilities/functions";
-import {cleanActiveCategories} from "data/actions/budgetActions";
 import {MoneyBar} from "../MoneyBar";
 import {useTranslation} from "react-i18next";
 
-const Charts = ({allCategories, activeCategories, budgetCategories, budget, cleanActiveCategories, lightTheme}) => {
+const Charts = ({activeCategories, lightTheme,
+                    budget, allCategories, budgetCategories}) => {
     const {t} = useTranslation();
-
-    useEffect(()=>{
-        cleanActiveCategories();
-    },[cleanActiveCategories]);
 
     const groupedCategories = useMemo(() => (groupBy(budgetCategories,
         budgetCategory => allCategories.find(
@@ -81,15 +77,8 @@ const Charts = ({allCategories, activeCategories, budgetCategories, budget, clea
 };
 
 const mapStateToProps = state => ({
-    budget: state.budget.budget,
     activeCategories: state.budget.activeCategories,
-    budgetCategories: state.budget.categories,
-    allCategories: state.common.categories,
-    lightTheme: state.common.lightTheme
+    lightTheme: state.common.lightTheme,
 });
 
-const mapDispatchToProps = {
-    cleanActiveCategories
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Charts);
+export default connect(mapStateToProps)(Charts);
