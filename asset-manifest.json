@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.js": "/Budet-App/static/js/main.1b64fead.chunk.js",
+    "main.js.map": "/Budet-App/static/js/main.1b64fead.chunk.js.map",
+    "runtime-main.js": "/Budet-App/static/js/runtime-main.f134641e.js",
+    "runtime-main.js.map": "/Budet-App/static/js/runtime-main.f134641e.js.map",
+    "static/css/2.94b695ff.chunk.css": "/Budet-App/static/css/2.94b695ff.chunk.css",
+    "static/js/2.b295e397.chunk.js": "/Budet-App/static/js/2.b295e397.chunk.js",
+    "static/js/2.b295e397.chunk.js.map": "/Budet-App/static/js/2.b295e397.chunk.js.map",
+    "static/js/3.1fa6017f.chunk.js": "/Budet-App/static/js/3.1fa6017f.chunk.js",
+    "static/js/3.1fa6017f.chunk.js.map": "/Budet-App/static/js/3.1fa6017f.chunk.js.map",
+    "index.html": "/Budet-App/index.html",
+    "static/css/2.94b695ff.chunk.css.map": "/Budet-App/static/css/2.94b695ff.chunk.css.map",
+    "static/js/2.b295e397.chunk.js.LICENSE.txt": "/Budet-App/static/js/2.b295e397.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f134641e.js",
+    "static/css/2.94b695ff.chunk.css",
+    "static/js/2.b295e397.chunk.js",
+    "static/js/main.1b64fead.chunk.js"
+  ]
+}
