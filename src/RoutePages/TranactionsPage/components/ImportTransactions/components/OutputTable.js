@@ -1,11 +1,14 @@
 import React, {useMemo} from "react";
-import {StyledImportedTransactionsList, StyledImportedTransactionsNumber} from "../ImportTransactionsStyles";
+import {
+    StyledImportedTransactionsList,
+    StyledImportedTransactionsNumber,
+    StyledRead
+} from "../ImportTransactionsStyles";
 import {SubmitButton} from "components/Button/ButtonStyles";
 import {useTranslation} from "react-i18next";
 import {connect} from "react-redux";
 import {addTransition} from "data/actions/budgetActions";
 import {useMutation, useQueryClient} from "react-query";
-import {setDate} from "../../../../../utilities/functions";
 
 const OutputTable = ({data, addTransition, budgetCategories, allCategories, activeBudget}) => {
     const {t} = useTranslation();
@@ -48,7 +51,7 @@ const OutputTable = ({data, addTransition, budgetCategories, allCategories, acti
         return(
             <li key={transaction[1].id + transaction[1].description + transaction[1].amount*Math.random()}>{transaction[1].description}</li>
         )
-    })
+    });
 
     const correctTransactionsToShow = rowsNumber > 7 ? transactionDescriptions.slice(0,7) : transactionDescriptions;
 
@@ -69,13 +72,13 @@ const OutputTable = ({data, addTransition, budgetCategories, allCategories, acti
 
     return (
         <div>
-            <span>
+            <StyledRead>
                 {t(`Successfully read `)}
                 <StyledImportedTransactionsNumber>
                     {rowsNumber}
                 </StyledImportedTransactionsNumber>
                 {` ${t('transactions')}${rowsNumber > 7 ? ` ${t("(first 7)")}:` : ':'}`}
-            </span>
+            </StyledRead>
             <StyledImportedTransactionsList>
                 {correctTransactionsToShow}
             </StyledImportedTransactionsList>

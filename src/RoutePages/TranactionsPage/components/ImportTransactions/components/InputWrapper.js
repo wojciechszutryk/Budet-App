@@ -1,6 +1,6 @@
 import React from "react";
 import {SheetJSFT} from "../utilities";
-import {StyledInfo, StyledInputTransactionFile} from "../ImportTransactionsStyles";
+import {StyledInfo, StyledInputTransactionFile, StyledLabel} from "../ImportTransactionsStyles";
 import {useTranslation} from "react-i18next";
 
 const InputWrapper = (props) => {
@@ -12,6 +12,7 @@ const InputWrapper = (props) => {
     return (
         <form className="form-inline">
             <div className="form-group">
+                <StyledLabel htmlFor="file">{t('Import from file')}</StyledLabel>
                 <StyledInfo>
                     INFO
                     <div>
@@ -19,10 +20,8 @@ const InputWrapper = (props) => {
                         <p>{t('Description | Amount | Date | Category')}</p>
                     </div>
                 </StyledInfo>
-                <label htmlFor="file">{t('Import from file')}</label>
                 <StyledInputTransactionFile
                     type="file"
-                    className="form-control"
                     id="file"
                     accept={SheetJSFT}
                     onChange={handleChange}

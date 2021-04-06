@@ -5,7 +5,7 @@ const MoneyStatistics = ({moneyLeft, allMoney, isMoneyLeft}) => {
     return (
         <MoneyWrapper>
             <MoneyLeft money={isMoneyLeft}>
-                {moneyLeft.toString()}
+                {(parseInt(moneyLeft).toFixed(2)).toString()}
             </MoneyLeft>
             <span style={{color: 'black'}}> / </span>
             <Money>
