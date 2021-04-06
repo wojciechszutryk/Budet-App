@@ -3,6 +3,7 @@ export const setCurrency = (money) => {
 }
 
 export const setDate = (date) => {
+    // console.log(date)
     if(!date) return new Intl.DateTimeFormat('pl').format(new Date(Date.now()))
     return new Intl.DateTimeFormat('pl').format(new Date(date))
 }

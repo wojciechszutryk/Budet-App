@@ -22,7 +22,6 @@ import {useMutation, useQuery, useQueryClient} from "react-query";
 import API from "data/fetch";
 
 const BudgetPage = ({activeBudget, addBudget, addBudgetCategory, removeBudget, activeBudgetSet}) => {
-
     const queryClient = useQueryClient();
     const [newBudgetData, setNewBudgetData] = useState({});
     const {data:allBudgets} = useQuery('allBudgets', API.common.fetchAllBudgetsFromAPI);
@@ -52,7 +51,9 @@ const BudgetPage = ({activeBudget, addBudget, addBudgetCategory, removeBudget, a
     };
 
     const handleSubmitAddBudgetForm = (values) => {
-        const newBudgetId = allBudgets[allBudgets.length-1] ? (allBudgets.length+1).toString() : (allBudgets.length).toString() ;
+        const newBudgetId = allBudgets.length > parseInt(allBudgets[allBudgets.length-1].id)
+            ? (allBudgets.length).toString()
+            :  (parseInt(allBudgets[allBudgets.length-1].id)+1).toString();
         const name = values['name'];
         const totalAmount = parseInt(values['totalAmount']);
         const categories = values['categories'];
@@ -69,7 +70,19 @@ const BudgetPage = ({activeBudget, addBudget, addBudgetCategory, removeBudget, a
     };
 
     const handleRemoveBudget = (id) => {
-        if (id === activeBudget.toString() && allBudgets.length > 0) {
+        if (allBudgets.length<2){
+            toast.info(i18next.t("You must have at least one budget."), {
+                position: "bottom-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                button: false,
+                progress: undefined,
+            });
+        }
+        else if (id === activeBudget.toString() && allBudgets.length > 0) {
             removeBudgetMutation.mutate(id);
             activeBudgetSet(allBudgets[0].id);
         }

@@ -32,10 +32,9 @@ export const addBudgetCategory = (data) => {
     });
 };
 
-
-export const removeTransition = (id) => {
-    return fetch(`${process.env.REACT_APP_API_URL}/transactions/${id}`,{
+export const removeTransition = async(id) => {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/transactions/${id}`,{
         method: 'DELETE',
-        headers: {'Content-type': 'application/json'}
     });
+    return await response.json();
 };

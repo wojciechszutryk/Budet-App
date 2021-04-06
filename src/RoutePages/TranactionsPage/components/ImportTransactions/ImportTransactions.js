@@ -6,7 +6,7 @@ import OutputTable from "./components/OutputTable";
 import {make_cols} from "./utilities";
 import {useState} from "react";
 
-const ImportTransactions = () => {
+const ImportTransactions = ({budgetCategories, allCategories}) => {
     const [data, setData] = useState([]);
     const [cols, setCols] = useState([]);
 
@@ -35,7 +35,7 @@ const ImportTransactions = () => {
             </div>
             <div className="row">
                 <div className="col-xs-12">
-                    <OutputTable data={data} cols={cols}/>
+                    <OutputTable budgetCategories={budgetCategories} allCategories={allCategories} data={data} cols={cols}/>
                 </div>
             </div>
         </DropFile>

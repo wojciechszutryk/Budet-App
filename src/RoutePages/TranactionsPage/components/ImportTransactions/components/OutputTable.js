@@ -4,9 +4,12 @@ import {SubmitButton} from "components/Button/ButtonStyles";
 import {useTranslation} from "react-i18next";
 import {connect} from "react-redux";
 import {addTransition} from "data/actions/budgetActions";
+import {useMutation, useQueryClient} from "react-query";
+import {setDate} from "../../../../../utilities/functions";
 
 const OutputTable = ({data, addTransition, budgetCategories, allCategories, activeBudget}) => {
     const {t} = useTranslation();
+    const queryClient = useQueryClient();
 
     const budgetCategoriesWithNames = budgetCategories.map(budgetCategory => (
         {...budgetCategory, ...allCategories.find(category => budgetCategory.categoryId === category.id)}
@@ -23,9 +26,14 @@ const OutputTable = ({data, addTransition, budgetCategories, allCategories, acti
                 let categoryId = budgetCategoriesWithNames.find(category => category.name === transaction[amountIndex+2]);
                 if (!categoryId) categoryId = 0;
                 else categoryId = categoryId.categoryId;
+                const date = transaction[amountIndex+1].substring(0,10).replaceAll('.','-').split('-')
+                const year = date.find(val => val.length === 4);
+                const day = date.find(val => val.length === 2);
+                const month = date.reverse().find(val => val.length === 2);
+                const newDate = year + '-' + month + '-' + day;
                 return {
                     categoryId: categoryId.toString(),
-                    data: transaction[amountIndex+1].substring(0,10),
+                    date: newDate,
                     description: transaction[amountIndex-1].toString(),
                     amount: transaction[amountIndex]
                 }
@@ -44,10 +52,15 @@ const OutputTable = ({data, addTransition, budgetCategories, allCategories, acti
 
     const correctTransactionsToShow = rowsNumber > 7 ? transactionDescriptions.slice(0,7) : transactionDescriptions;
 
+    const addTransitionMutation = useMutation(addTransition, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('budget')
+        },
+    })
+
     const handleCheckAndSubmit = () => {
-        console.log(transactions);
         transactions.forEach(transaction =>
-            addTransition({
+            addTransitionMutation.mutate({
                 budgetId: activeBudget.toString(),
                 data: transaction
             })
@@ -78,8 +91,6 @@ const OutputTable = ({data, addTransition, budgetCategories, allCategories, acti
 
 const ConnectedOutputTable = connect(state => ({
     activeBudget: state.common.activeBudget,
-    budgetCategories: state.budget.categories,
-    allCategories: state.common.categories,
 }),
     {addTransition})(OutputTable);
 

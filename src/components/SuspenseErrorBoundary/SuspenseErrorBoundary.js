@@ -1,7 +1,6 @@
 import React from 'react';
 import Loading from "../Loading";
 import ErrorPage from "./ErrorPage";
-import {refetchAllQueries} from "react-query"
 
 class SuspenseErrorBoundary extends React.Component {
     constructor(props) {
@@ -10,8 +9,7 @@ class SuspenseErrorBoundary extends React.Component {
     }
 
     tryAgain = async() => {
-        await refetchAllQueries({includeInactive: true});
-        this.setState({hasError: false});
+        window.location.reload();
     }
 
     static getDerivedStateFromError(error) {

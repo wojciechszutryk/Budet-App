@@ -29,7 +29,8 @@ const TransactionsPage = ({addTransition, removeBudget, activeBudget, activeBudg
 
     const addTransitionMutation = useMutation(addTransition, {
         onSuccess: () => {
-            queryClient.invalidateQueries('budget')
+            queryClient.invalidateQueries('budget');
+            queryClient.invalidateQueries('budgetCategories');
         },
     })
 
@@ -47,7 +48,19 @@ const TransactionsPage = ({addTransition, removeBudget, activeBudget, activeBudg
     };
 
     const handleRemoveBudget = (id) => {
-        if (id === activeBudget.toString()) {
+        if (allBudgets.length<2){
+            toast.info(i18next.t("You must have at least one budget."), {
+                position: "bottom-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                button: false,
+                progress: undefined,
+            });
+        }
+        else if (id === activeBudget.toString() && allBudgets.length > 0) {
             removeBudgetMutation.mutate(id);
             activeBudgetSet(allBudgets[0].id);
             window.location.reload();
@@ -105,7 +118,7 @@ const TransactionsPage = ({addTransition, removeBudget, activeBudget, activeBudg
                 </Route>
                 <Route path='/transactions/import' exact>
                     <Modal>
-                        <ImportTransactions/>
+                        <ImportTransactions budgetCategories={budgetCategories} allCategories={allCategories}/>
                     </Modal>
                 </Route>
             </Switch>
@@ -115,18 +128,9 @@ const TransactionsPage = ({addTransition, removeBudget, activeBudget, activeBudg
 
 const ConnectedTransactionsPage = connect(
 state => ({
-    budget: state.budget.budget,
-    budgetState: state.budget.loading,
-    commonState: state.common.loading,
-    allCategories: state.common.categories,
-    allBudgets: state.common.budgets,
     activeBudget: state.common.activeBudget
 }),
     {
-        fetchBudget,
-        fetchBudgetCategories,
-        fetchAllCategories,
-        fetchAllBudgets,
         addTransition,
         activeBudgetSet,
         removeBudget
