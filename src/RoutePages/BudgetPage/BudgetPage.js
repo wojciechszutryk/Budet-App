@@ -1,14 +1,7 @@
 import {Grid} from './BudgetPageStyles.js'
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {
-    fetchBudget,
-    fetchBudgetCategories,
-    addBudget,
-    addBudgetCategory,
-    removeTransaction
-} from "data/actions/budgetActions";
-import {fetchAllBudgets, fetchAllCategories, removeBudget, activeBudgetSet} from "data/actions/commonActions";
+import {activeBudgetSet} from "data/actions/commonActions";
 import {Button, Modal, SuspenseErrorBoundary,} from "components";
 import {BudgetCategories} from "../components/BudgetCategories";
 import {Charts} from "./components/Charts";
@@ -21,7 +14,7 @@ import i18next from "i18next";
 import {useMutation, useQuery, useQueryClient} from "react-query";
 import API from "data/fetch";
 
-const BudgetPage = ({activeBudget, addBudget, addBudgetCategory, removeBudget, activeBudgetSet}) => {
+const BudgetPage = ({activeBudget, activeBudgetSet}) => {
     const queryClient = useQueryClient();
     const [newBudgetData, setNewBudgetData] = useState({});
     const {data:allBudgets} = useQuery('allBudgets', API.common.fetchAllBudgetsFromAPI);
@@ -29,18 +22,18 @@ const BudgetPage = ({activeBudget, addBudget, addBudgetCategory, removeBudget, a
     const {data:budgetCategories} = useQuery(['budgetCategories',{id: activeBudget}], () => API.budget.fetchBudgetCategoriesFromAPI({id: activeBudget}));
     const {data:budget} = useQuery(['budget',{id: activeBudget}], () => API.budget.fetchBudgetFromAPI({id: activeBudget}));
 
-    const addBudgetCategoryMutation = useMutation(addBudgetCategory, {
+    const addBudgetCategoryMutation = useMutation(API.budget.addBudgetCategory, {
         onSuccess: () => {
             queryClient.invalidateQueries('budgetCategories')
         },
     });
-    const addBudgetMutation = useMutation(addBudget, {
+    const addBudgetMutation = useMutation(API.budget.addBudget, {
         onSuccess: () => {
             queryClient.invalidateQueries('budget')
             queryClient.invalidateQueries('allBudgets')
         },
     });
-    const removeBudgetMutation = useMutation(removeBudget, {
+    const removeBudgetMutation = useMutation(API.common.removeBudget, {
         onSuccess: () => {
             queryClient.invalidateQueries('allBudgets');
         },
@@ -153,23 +146,10 @@ const BudgetPage = ({activeBudget, addBudget, addBudgetCategory, removeBudget, a
 };
 
 const ConnectedBudgetPage = connect(state => ({
-    budgetState: state.budget.loading,
-    budget: state.budget.budget,
-    commonState: state.common.loading,
-    allCategories: state.common.categories,
-    allBudgets: state.common.budgets,
     activeBudget: state.common.activeBudget
 }),
 {
-    fetchBudget,
-    fetchBudgetCategories,
-    fetchAllCategories,
-    fetchAllBudgets,
     activeBudgetSet,
-    addBudget,
-    removeBudget,
-    removeTransaction,
-    addBudgetCategory
 }
 )(BudgetPage);
 

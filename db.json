@@ -176,6 +176,16 @@
       "name": "Małgorzata Szutryk",
       "totalAmount": 2222,
       "id": "5"
+    },
+    {
+      "name": "121221",
+      "totalAmount": 22,
+      "id": "6"
+    },
+    {
+      "name": "Wojciech Szutryk",
+      "totalAmount": 22,
+      "id": "7"
     }
   ],
   "transactions": [
@@ -226,6 +236,30 @@
       "date": "2020-02-13",
       "budgetId": "1",
       "id": "p1tYW2Q"
+    },
+    {
+      "categoryId": "1",
+      "date": "2019-12-15",
+      "description": "Internet provider",
+      "amount": 120.47,
+      "budgetId": "1",
+      "id": "xDhW38f"
+    },
+    {
+      "categoryId": "2",
+      "date": "2019-12-10",
+      "description": "Mobile network provider",
+      "amount": 39.99,
+      "budgetId": "1",
+      "id": "rLnPnU4"
+    },
+    {
+      "categoryId": "1",
+      "date": "2019-12-15",
+      "description": "Internet provider",
+      "amount": 120.47,
+      "budgetId": "5",
+      "id": "nf4EBzH"
     }
   ]
 }

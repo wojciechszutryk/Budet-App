@@ -11,7 +11,7 @@ import {setCurrency} from "utilities/functions";
 import {addActiveCategory, removeActiveCategory} from 'data/actions/budgetActions'
 import {useTranslation} from "react-i18next";
 import {useQuery} from "react-query";
-import API from "../../../data/fetch";
+import API from "data/fetch";
 
 const BudgetCategories = ({addActiveCategory,activeBudget,activeCategories, removeActiveCategory, allCategories, budgetCategories}) => {
     const {t} = useTranslation();

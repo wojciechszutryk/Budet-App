@@ -1,3 +1,6 @@
+import {toast} from "react-toastify";
+import i18next from "i18next";
+
 export const setCurrency = (money) => {
     return new Intl.NumberFormat('pl',{style: 'currency', currency: 'PLN'}).format(Number(money))
 }
@@ -27,3 +30,16 @@ export const colorChange = (color, percent) => {
 
     return "#"+RR+GG+BB;
 }
+
+const informationNotification = (message) =>{
+    toast.info(i18next.t(message), {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        button: false,
+        progress: undefined,
+    });
+};

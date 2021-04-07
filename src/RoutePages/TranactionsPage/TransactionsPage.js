@@ -1,15 +1,13 @@
 import {Grid} from './TransactionsPageStyles.js'
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchBudget, fetchBudgetCategories, addTransition} from "data/actions/budgetActions";
-import {activeBudgetSet, fetchAllBudgets, fetchAllCategories} from "data/actions/commonActions";
+import {activeBudgetSet,} from "data/actions/commonActions";
 import {Button, Modal, SuspenseErrorBoundary,} from "components";
 import {BudgetCategories} from ".././components/BudgetCategories";
 import {BudgetTransactions} from "./components/BudgetTransactions";
 import {Link, Route, Switch} from "react-router-dom";
 import TransactionForm from "./components/TransactionForm";
 import SetBudget from "../components/SetBudget";
-import {removeBudget} from "data/fetch/commonFetch";
 import {toast} from "react-toastify";
 import i18next from "i18next";
 import ExportTransactions from "./components/ExportTransactions";
@@ -18,7 +16,7 @@ import {useTranslation} from "react-i18next";
 import {useMutation, useQuery, useQueryClient} from "react-query";
 import API from "data/fetch";
 
-const TransactionsPage = ({addTransition, removeBudget, activeBudget, activeBudgetSet}) => {
+const TransactionsPage = ({activeBudget, activeBudgetSet}) => {
 
     const queryClient = useQueryClient();
     const {t} = useTranslation();
@@ -27,14 +25,14 @@ const TransactionsPage = ({addTransition, removeBudget, activeBudget, activeBudg
     const {data:budgetCategories} = useQuery(['budgetCategories',{id: activeBudget}], () => API.budget.fetchBudgetCategoriesFromAPI({id: activeBudget}));
     const {data:budget} = useQuery(['budget',{id: activeBudget}], () => API.budget.fetchBudgetFromAPI({id: activeBudget}));
 
-    const addTransitionMutation = useMutation(addTransition, {
+    const addTransitionMutation = useMutation(API.budget.addTransition, {
         onSuccess: () => {
-            queryClient.invalidateQueries('budget');
-            queryClient.invalidateQueries('budgetCategories');
+            queryClient.invalidateQueries('budget').then(r => JSON.stringify(r));
+            queryClient.invalidateQueries('budgetCategories').then(r => JSON.stringify(r));
         },
     })
 
-    const removeBudgetMutation = useMutation(removeBudget, {
+    const removeBudgetMutation = useMutation(API.common.removeBudget, {
         onSuccess: () => {
             queryClient.invalidateQueries('allBudgets');
         },
@@ -131,9 +129,7 @@ state => ({
     activeBudget: state.common.activeBudget
 }),
     {
-        addTransition,
         activeBudgetSet,
-        removeBudget
     }
 )(TransactionsPage);
 
