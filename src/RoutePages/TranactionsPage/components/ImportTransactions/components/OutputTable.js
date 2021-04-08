@@ -9,6 +9,7 @@ import {useTranslation} from "react-i18next";
 import {connect} from "react-redux";
 import {addTransition} from "data/actions/budgetActions";
 import {useMutation, useQueryClient} from "react-query";
+import {informationNotification} from "utilities/functions";
 
 const OutputTable = ({data, addTransition, budgetCategories, allCategories, activeBudget}) => {
     const {t} = useTranslation();
@@ -68,6 +69,7 @@ const OutputTable = ({data, addTransition, budgetCategories, allCategories, acti
                 data: transaction
             })
         )
+        informationNotification("Succeeded in adding Transactions");
     };
 
     return (

@@ -15,6 +15,7 @@ import ImportTransactions from "./components/ImportTransactions";
 import {useTranslation} from "react-i18next";
 import {useMutation, useQuery, useQueryClient} from "react-query";
 import API from "data/fetch";
+import {informationNotification} from "../../utilities/functions";
 
 const TransactionsPage = ({activeBudget, activeBudgetSet}) => {
 
@@ -43,6 +44,8 @@ const TransactionsPage = ({activeBudget, activeBudgetSet}) => {
             budgetId: activeBudget.toString(),
             data: values
         });
+        informationNotification("Succeeded in adding Transaction");
+
     };
 
     const handleRemoveBudget = (id) => {

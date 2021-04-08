@@ -6,6 +6,7 @@ import {DeleteButton} from "components/Button/ButtonStyles";
 import {connect} from "react-redux";
 import {removeTransaction} from "data/actions/budgetActions";
 import {useMutation, useQueryClient} from "react-query";
+import {informationNotification} from "../../../../../utilities/functions";
 
 const ListItem = ({amount, category, date, description,id, removeTransaction}) => {
     const queryClient = useQueryClient();
@@ -16,6 +17,7 @@ const ListItem = ({amount, category, date, description,id, removeTransaction}) =
     })
     const handleRemoveTransaction = () => {
         removeTransactionMutation.mutate(id);
+        informationNotification("Succeeded in removing Transaction");
     }
     return (
         <StyledListItem>

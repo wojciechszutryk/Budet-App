@@ -6,7 +6,6 @@ export const setCurrency = (money) => {
 }
 
 export const setDate = (date) => {
-    // console.log(date)
     if(!date) return new Intl.DateTimeFormat('pl').format(new Date(Date.now()))
     return new Intl.DateTimeFormat('pl').format(new Date(date))
 }
@@ -31,7 +30,7 @@ export const colorChange = (color, percent) => {
     return "#"+RR+GG+BB;
 }
 
-const informationNotification = (message) =>{
+export const informationNotification = (message) =>{
     toast.info(i18next.t(message), {
         position: "bottom-right",
         autoClose: 2000,

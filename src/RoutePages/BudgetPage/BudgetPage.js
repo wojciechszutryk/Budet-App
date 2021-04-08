@@ -13,6 +13,7 @@ import {toast} from "react-toastify";
 import i18next from "i18next";
 import {useMutation, useQuery, useQueryClient} from "react-query";
 import API from "data/fetch";
+import {informationNotification} from "utilities/functions";
 
 const BudgetPage = ({activeBudget, activeBudgetSet}) => {
     const queryClient = useQueryClient();
@@ -60,37 +61,17 @@ const BudgetPage = ({activeBudget, activeBudgetSet}) => {
         });
         addBudgetMutation.mutate(budgetData);
         activeBudgetSet(newBudgetId);
+        informationNotification("Succeeded in adding Budget");
     };
 
     const handleRemoveBudget = (id) => {
-        if (allBudgets.length<2){
-            toast.info(i18next.t("You must have at least one budget."), {
-                position: "bottom-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                button: false,
-                progress: undefined,
-            });
-        }
+        if (allBudgets.length<2) informationNotification("You must have at least one budget.");
         else if (id === activeBudget.toString() && allBudgets.length > 0) {
             removeBudgetMutation.mutate(id);
             activeBudgetSet(allBudgets[0].id);
+            informationNotification("Succeeded in removing Budget");
         }
-        else {
-            toast.info(i18next.t("Set Budget Active before deleting"), {
-                position: "bottom-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                button: false,
-                progress: undefined,
-            });
-        }
+        else informationNotification("Set Budget Active before deleting");
     };
 
     return (

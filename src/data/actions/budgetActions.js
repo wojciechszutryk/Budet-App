@@ -3,7 +3,7 @@ import {
     BUDGET_ACTIVE_CATEGORIES_ADD,
     BUDGET_ACTIVE_CATEGORIES_CLEAN,
     BUDGET_ACTIVE_CATEGORIES_REMOVE, BUDGET_ADD,
-    BUDGET_CATEGORIES, BUDGET_CATEGORIES_ADD,
+    BUDGET_CATEGORIES,
     BUDGET_TRANSACTION_ADD,
     BUDGET_TRANSACTION_REMOVE
 } from 'data/constants';
@@ -31,15 +31,6 @@ export const addBudget = (data) => {
         type: BUDGET_ADD,
         promise,
         message: "Succeeded in adding Budget"
-    };
-};
-
-export const addBudgetCategory = (data) => {
-    const promise = API.budget.addBudgetCategory(data);
-    return {
-        type: BUDGET_CATEGORIES_ADD,
-        promise,
-        message: "Succeeded in adding BudgetCategory"
     };
 };
 
