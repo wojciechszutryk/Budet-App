@@ -7,7 +7,6 @@ import {
 import {SubmitButton} from "components/Button/ButtonStyles";
 import {useTranslation} from "react-i18next";
 import {connect} from "react-redux";
-import {addTransition} from "data/actions/budgetActions";
 import {useMutation, useQueryClient} from "react-query";
 import {informationNotification} from "utilities/functions";
 
@@ -94,9 +93,6 @@ const OutputTable = ({data, addTransition, budgetCategories, allCategories, acti
     );
 };
 
-const ConnectedOutputTable = connect(state => ({
-    activeBudget: state.common.activeBudget,
-}),
-    {addTransition})(OutputTable);
+const ConnectedOutputTable = connect(state => ({activeBudget: state.common.activeBudget,}))(OutputTable);
 
 export default ConnectedOutputTable;

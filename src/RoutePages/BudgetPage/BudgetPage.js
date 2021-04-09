@@ -6,14 +6,12 @@ import {Button, Modal, SuspenseErrorBoundary,} from "components";
 import {BudgetCategories} from "../components/BudgetCategories";
 import {Charts} from "./components/Charts";
 import {Link, Route, Switch} from "react-router-dom";
-import AddBudgetForm from "../components/addBudgetForm";
-import AddBudgetCategoriesForm from "../components/addBudgetCategoriesForm";
 import SetBudget from "../components/SetBudget";
-import {toast} from "react-toastify";
-import i18next from "i18next";
 import {useMutation, useQuery, useQueryClient} from "react-query";
 import API from "data/fetch";
 import {informationNotification} from "utilities/functions";
+const AddBudgetForm = React.lazy(() => import('../components/addBudgetForm'));
+const AddBudgetCategoriesForm = React.lazy(() => import('../components/addBudgetCategoriesForm'));
 
 const BudgetPage = ({activeBudget, activeBudgetSet}) => {
     const queryClient = useQueryClient();
@@ -60,7 +58,6 @@ const BudgetPage = ({activeBudget, activeBudgetSet}) => {
             addBudgetCategoryMutation.mutate(categoryObject);
         });
         addBudgetMutation.mutate(budgetData);
-        activeBudgetSet(newBudgetId);
         informationNotification("Succeeded in adding Budget");
     };
 

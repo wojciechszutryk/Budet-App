@@ -6,16 +6,14 @@ import {Button, Modal, SuspenseErrorBoundary,} from "components";
 import {BudgetCategories} from ".././components/BudgetCategories";
 import {BudgetTransactions} from "./components/BudgetTransactions";
 import {Link, Route, Switch} from "react-router-dom";
-import TransactionForm from "./components/TransactionForm";
 import SetBudget from "../components/SetBudget";
-import {toast} from "react-toastify";
-import i18next from "i18next";
-import ExportTransactions from "./components/ExportTransactions";
-import ImportTransactions from "./components/ImportTransactions";
 import {useTranslation} from "react-i18next";
 import {useMutation, useQuery, useQueryClient} from "react-query";
 import API from "data/fetch";
-import {informationNotification} from "../../utilities/functions";
+import {informationNotification} from "utilities/functions";
+const TransactionForm = React.lazy(() => import('./components/TransactionForm'));
+const ExportTransactions = React.lazy(() => import('./components/ExportTransactions'));
+const ImportTransactions = React.lazy(() => import('./components/ImportTransactions'));
 
 const TransactionsPage = ({activeBudget, activeBudgetSet}) => {
 
@@ -49,35 +47,13 @@ const TransactionsPage = ({activeBudget, activeBudgetSet}) => {
     };
 
     const handleRemoveBudget = (id) => {
-        if (allBudgets.length<2){
-            toast.info(i18next.t("You must have at least one budget."), {
-                position: "bottom-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                button: false,
-                progress: undefined,
-            });
-        }
+        if (allBudgets.length<2) informationNotification("You must have at least one budget.");
         else if (id === activeBudget.toString() && allBudgets.length > 0) {
             removeBudgetMutation.mutate(id);
             activeBudgetSet(allBudgets[0].id);
-            window.location.reload();
+            informationNotification("Succeeded in removing Budget");
         }
-        else {
-            toast.info(i18next.t("Set Budget Active before deleting"), {
-                position: "bottom-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                button: false,
-                progress: undefined,
-            });
-        }
+        else informationNotification("Set Budget Active before deleting");
     };
 
     return (

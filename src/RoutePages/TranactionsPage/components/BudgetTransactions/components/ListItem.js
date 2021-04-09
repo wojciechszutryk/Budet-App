@@ -3,10 +3,8 @@ import {StyledListItem} from "../BudgetTransactionsStyles";
 import {faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {DeleteButton} from "components/Button/ButtonStyles";
-import {connect} from "react-redux";
-import {removeTransaction} from "data/actions/budgetActions";
 import {useMutation, useQueryClient} from "react-query";
-import {informationNotification} from "../../../../../utilities/functions";
+import {informationNotification} from "utilities/functions";
 
 const ListItem = ({amount, category, date, description,id, removeTransaction}) => {
     const queryClient = useQueryClient();
@@ -30,6 +28,4 @@ const ListItem = ({amount, category, date, description,id, removeTransaction}) =
     );
 };
 
-const ConnectedListItem = connect(null, {removeTransaction})(ListItem);
-
-export default ConnectedListItem;
+export default ListItem;
