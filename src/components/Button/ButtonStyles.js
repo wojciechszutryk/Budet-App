@@ -16,7 +16,6 @@ export const SortButton = styled(ParentButton)`
     position: relative;
     padding: 3px ${({theme}) => theme.spacing.xs}px;
     margin: 0 3px;
-    font-size: 1em;
     border: 1px solid ${({theme}) => theme.colors.black.normal};
     background-color: transparent;
     overflow: hidden;
@@ -24,7 +23,9 @@ export const SortButton = styled(ParentButton)`
     transition: .25s .05s linear;
     text-align: left;
     z-index: 1;
-
+    font-family: 'Verdana', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
     &::before{
         content: "";
         position: absolute;
@@ -68,17 +69,16 @@ export const SortButton = styled(ParentButton)`
 
 export const InlineButton = styled(ParentButton)`
     color: rgb(100, 100, 100);
-    font-weight: 700;
     z-index: 2;
     position: relative;
     padding: ${({theme}) => theme.spacing.xs}px ${({theme}) => theme.spacing.sm}px;
     margin: 0 ${({theme}) => theme.spacing.xs}px;
     border-radius: ${({theme}) => theme.spacing.xs}px;
-    font-size: 1em;
     border-style: none;
     background-color: #fff;
     overflow: hidden;
-    
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
     &::after{
         content: "";
         position: absolute;
@@ -96,66 +96,65 @@ export const InlineButton = styled(ParentButton)`
 `;
 
 export const TransactionButton = styled(ParentButton)`
-    position: relative;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: ${({theme}) => theme.spacing.xs}px ${({theme}) => theme.spacing.sm}px;
+  border: 1px solid ${({theme}) => theme.colors.black.normal};
+  color: ${({theme}) => theme.colors.black.normal};
+  background-color: ${({theme}) => theme.colors.gray.white};
+  text-align: center;
+  cursor: pointer;
+  transition: .1s .1s;
+  text-decoration: none;
+  font-size: .7em;
+  text-transform: uppercase;
+  letter-spacing: .3px;
+  font-weight: 600;
+  z-index: 3;
+  font-family: 'Trebuchet MS', sans-serif;
+  &:hover {
+    color: ${({theme}) => theme.colors.white.normal};
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 0;
+    height: 0;
+    background-color: ${({theme}) => theme.colors.green.normal};
+    line-height: 100%;
+    transition: width .15s linear, height .25s .17s;
+    z-index: -1;
+  }
+
+  &:hover::before {
     width: 100%;
-    height: 100%;
-    padding: ${({theme}) => theme.spacing.xs}px ${({theme}) => theme.spacing.sm}px;
-    border: 1px solid ${({theme}) => theme.colors.black.normal};
-    color: ${({theme}) => theme.colors.black.normal};
-    background-color: ${({theme}) => theme.colors.gray.white};
-    text-align: center;
-    cursor: pointer;
-    transition: .1s .1s;
-    text-decoration: none;
-    font-size: .7em;
-    font-family: sans-serif;
-    text-transform: uppercase;
-    letter-spacing: .3px;
-    font-weight: 600;
-    z-index: 3;
-  
-    &:hover{
-        color: ${({theme}) => theme.colors.white.normal};
-    }
-    
-    &::before{
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 0;
-        width: 0;
-        height: 0;
-        background-color: ${({theme}) => theme.colors.green.normal};
-        line-height: 100%;
-        transition: width .15s linear, height .25s .17s;
-        z-index: -1;
-    }
-  
-    &:hover::before{
-        width: 100%;
-        height: 50%;
-    }
+    height: 50%;
+  }
 
-    &:after{
-        content: "";
-        position: absolute;
-        bottom: 50%;
-        left: 0;
-        width: 0;
-        height: 0;
-        background-color: ${({theme}) => theme.colors.green.normal};
-        transition: width .15s linear, height .25s .17s;
-        z-index: -1;
-    }
-  
-    &:hover:after{
-        height: 50%;
-        width: 100%;
-    }
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: 50%;
+    left: 0;
+    width: 0;
+    height: 0;
+    background-color: ${({theme}) => theme.colors.green.normal};
+    transition: width .15s linear, height .25s .17s;
+    z-index: -1;
+  }
 
-    &:nth-child(3)::before, &:nth-child(3)::after{
-        background-color: ${({theme}) => theme.colors.purple.dark};
-    }
+  &:hover:after {
+    height: 50%;
+    width: 100%;
+  }
+
+  &:nth-child(3)::before, &:nth-child(3)::after {
+    background-color: ${({theme}) => theme.colors.purple.dark};
+  }
 `;
 
 export const SubmitButton = styled(ParentButton)`
@@ -233,6 +232,9 @@ export const AddBudgetButton = styled(TransactionButton)`
     margin-top: ${({theme}) => theme.spacing.xs}px;
     border-radius: ${({theme}) => theme.spacing.normal}px;
     height: 40px;
+    font-family: 'Times New Roman', sans-serif;
+    font-weight: 500;
+    font-size: .8rem;
     &::before{
       background-color: ${({theme}) => theme.colors.purple.dark};
       border-bottom-left-radius: ${({theme}) => theme.spacing.normal}px;

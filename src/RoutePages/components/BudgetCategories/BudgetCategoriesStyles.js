@@ -82,6 +82,7 @@ export const Money = styled.span`
 `;
 
 export const MoneyLeft = styled.span`
-  font-style: italic;
   color: ${({theme, money}) => money ? theme.colors.green.dark : theme.colors.red.normal};
+  font-family: 'Arial', sans-serif;
+  font-weight: 900;
 `;

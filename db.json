@@ -145,22 +145,6 @@
       "budgetId": "1"
     },
     {
-      "id": "4",
-      "description": "Weekly shoping #2",
-      "amount": 12.48,
-      "categoryId": "6",
-      "date": "2019-12-17T12:41:01.768Z",
-      "budgetId": "1"
-    },
-    {
-      "id": "5",
-      "description": "Grocery shopping #1",
-      "amount": 12.38,
-      "categoryId": "5",
-      "date": "2019-12-18T13:38:41.768Z",
-      "budgetId": "1"
-    },
-    {
       "description": "Default Agile Workflow",
       "amount": 123,
       "categoryId": "7",
@@ -215,14 +199,6 @@
       "amount": 12.38,
       "budgetId": "1",
       "id": "iVIH-VT"
-    },
-    {
-      "categoryId": "6",
-      "date": "2019-12-17",
-      "description": "Weekly shoping #2",
-      "amount": 12.48,
-      "budgetId": "1",
-      "id": "2E3TKvh"
     }
   ]
 }

@@ -5,10 +5,11 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {DeleteButton} from "components/Button/ButtonStyles";
 import {useMutation, useQueryClient} from "react-query";
 import {informationNotification} from "utilities/functions";
+import API from "data/fetch";
 
-const ListItem = ({amount, category, date, description,id, removeTransaction}) => {
+const ListItem = ({amount, category, date, description, id}) => {
     const queryClient = useQueryClient();
-    const removeTransactionMutation = useMutation(removeTransaction, {
+    const removeTransactionMutation = useMutation(API.budget.removeTransition, {
         onSuccess: () => {
             queryClient.invalidateQueries('budget');
         },

@@ -30,6 +30,7 @@ const HoverLineEN = styled(HoverLine)`
 `;
 
 export const Button = styled.button`
+  font-family: "Brush Script MT",sans-serif;
   position: relative;
   width: 30px;
   height: 30px;

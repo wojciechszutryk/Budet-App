@@ -23,26 +23,23 @@ const BudgetPage = ({activeBudget, activeBudgetSet}) => {
 
     const addBudgetCategoryMutation = useMutation(API.budget.addBudgetCategory, {
         onSuccess: () => {
-            queryClient.invalidateQueries('budgetCategories')
+            queryClient.invalidateQueries('budgetCategories');
         },
     });
     const addBudgetMutation = useMutation(API.budget.addBudget, {
         onSuccess: () => {
-            queryClient.invalidateQueries('budget')
-            queryClient.invalidateQueries('allBudgets')
+            queryClient.invalidateQueries('budget');
+            queryClient.invalidateQueries('allBudgets');
         },
     });
     const removeBudgetMutation = useMutation(API.common.removeBudget, {
         onSuccess: () => {
             queryClient.invalidateQueries('allBudgets');
         },
-    })
-
-    const handleNextAddBudgetForm = (values) => {
-        setNewBudgetData(values)
-    };
+    });
 
     const handleSubmitAddBudgetForm = (values) => {
+        console.log(values)
         const newBudgetId = allBudgets.length > parseInt(allBudgets[allBudgets.length-1].id)
             ? (allBudgets.length).toString()
             :  (parseInt(allBudgets[allBudgets.length-1].id)+1).toString();
@@ -105,7 +102,7 @@ const BudgetPage = ({activeBudget, activeBudgetSet}) => {
             <Switch>
                 <Route path='/budget/new' exact>
                     <Modal>
-                        <AddBudgetForm categories={allCategories} onSubmit={handleNextAddBudgetForm}/>
+                        <AddBudgetForm categories={allCategories} onSubmit={setNewBudgetData}/>
                     </Modal>
                 </Route>
                 <Route path='/budget/categories' exact>

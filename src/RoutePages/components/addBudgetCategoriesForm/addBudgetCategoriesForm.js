@@ -4,13 +4,19 @@ import {Button} from "components";
 import {useTranslation} from "react-i18next";
 import {BudgetAmount, BudgetName, OtherMoney} from "./addBudgetCategoriesFormStyles";
 import {setCurrency} from "utilities/functions";
-import {Link} from "react-router-dom";
+import {Link, useHistory } from "react-router-dom";
 
-const AddBudgetCategoriesForm = ({name, totalAmount, categories, onSubmit}) => {
+const AddBudgetCategoriesForm = ({name, totalAmount, categories=[], onSubmit}) => {
     const [budgetCategoriesFounds, setBudgetCategoriesFounds] = useState({});
     const [budgetOvervaluedError, setBudgetOvervaluedError] = useState(true);
     const [otherCategoriesFounds, setOtherCategoriesFounds] = useState(totalAmount);
+    const [redirect, setRedirect] = useState(false);
     const {t} = useTranslation();
+    let history = useHistory();
+
+    useMemo(() =>{
+        if (!name || !totalAmount) setRedirect(true);
+    },[name, totalAmount]);
 
     useMemo(() => {
         let totalCurrentCategoriesFounds = 0;
@@ -21,7 +27,7 @@ const AddBudgetCategoriesForm = ({name, totalAmount, categories, onSubmit}) => {
         Object.entries(budgetCategoriesFounds).forEach(category => {
             if (!category[1] || category[1] === 0) setBudgetOvervaluedError(true);
         });
-        const inputs = document.querySelector('form').getElementsByTagName('input');
+        const inputs = document.querySelectorAll('input');
         for (let i = 0; i < inputs.length; i++) {
             if(inputs[i].value === ""){
                 setBudgetOvervaluedError(true);
@@ -31,16 +37,21 @@ const AddBudgetCategoriesForm = ({name, totalAmount, categories, onSubmit}) => {
         if (!categories || categories.length === 0) setBudgetOvervaluedError(false);
     },[budgetCategoriesFounds, categories, totalAmount])
 
+    const handleError = () => {
+        history.push('/budget');
+        window.location.reload();
+    }
+
     const resetForm = () => {
         document.getElementById("budgetCategoriesForm").reset();
         setOtherCategoriesFounds(totalAmount);
-    }
+    };
 
     const handleFoundsChange = (id, e) => {
         const categoryFounds = {}
         categoryFounds[id]=parseInt(e.target.value);
         setBudgetCategoriesFounds({...budgetCategoriesFounds, ...categoryFounds});
-    }
+    };
 
     const handleSubmit = () => {
         onSubmit({
@@ -48,7 +59,7 @@ const AddBudgetCategoriesForm = ({name, totalAmount, categories, onSubmit}) => {
             totalAmount,
             categories: budgetCategoriesFounds,
         });
-    }
+    };
 
     const categoriesFoundsList = categories.map(category => {
         return(
@@ -60,6 +71,7 @@ const AddBudgetCategoriesForm = ({name, totalAmount, categories, onSubmit}) => {
     });
 
     return(
+        redirect ? handleError() :
         <>
             <BudgetName>{name}</BudgetName>
             <span> {t('Founds')}</span>
@@ -79,7 +91,7 @@ const AddBudgetCategoriesForm = ({name, totalAmount, categories, onSubmit}) => {
                         : <BudgetName>{setCurrency(otherCategoriesFounds)}</BudgetName>}
                 </OtherMoney>
                 <div>
-                    <Link  to='/budget'>
+                    <Link to='/budget'>
                         <Button
                             buttonType='submit'
                             type='submit'
