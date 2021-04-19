@@ -1,10 +1,9 @@
 import React from 'react';
+import SadMac from "components/SadMac";
 
 const HomePage = () => {
     return (
-        <>
-            aaaaaaaaaa
-        </>
+        <SadMac sad={false}/>
     );
 };
 
