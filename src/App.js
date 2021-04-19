@@ -8,10 +8,9 @@ import {toast} from 'react-toastify';
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
-import {BudgetPage, TransactionsPage} from "./RoutePages";
+import {BudgetPage, TransactionsPage, HomePage} from "./RoutePages";
 import {Navigation, SuspenseErrorBoundary, Wrapper} from 'components';
 import {QueryClient, QueryClientProvider} from "react-query";
-
 
 function App() {
     const [theme, setTheme] = useState(darkStyles);
@@ -36,6 +35,7 @@ function App() {
               <SuspenseErrorBoundary>
                   <Wrapper>
                       <Switch>
+                          <Route path='/' exact><HomePage/></Route>
                           <Route path='/budget'><BudgetPage/></Route>
                           <Route path='/transactions'><TransactionsPage/></Route>
                       </Switch>

@@ -6,199 +6,365 @@
     },
     {
       "id": "2",
-      "name": "Bills and utilities"
+      "name": "Bills and taxes"
     },
     {
-      "id": "4",
+      "id": "3",
       "name": "Education"
     },
     {
-      "id": "5",
+      "id": "4",
       "name": "Entertainment"
+    },
+    {
+      "id": "5",
+      "name": "Transport"
     }
   ],
   "categories": [
     {
       "id": "1",
-      "name": "Internet",
-      "parentCategoryId": "2"
+      "name": "Food",
+      "parentCategoryId": "1"
     },
     {
       "id": "2",
-      "name": "Mobile phone",
-      "parentCategoryId": "2"
+      "name": "Electronics",
+      "parentCategoryId": "1"
     },
     {
       "id": "3",
-      "name": "Rent",
-      "parentCategoryId": "2"
-    },
-    {
-      "id": "4",
-      "name": "Alcohol",
-      "parentCategoryId": "1"
-    },
-    {
-      "id": "5",
-      "name": "Grocery",
-      "parentCategoryId": "1"
-    },
-    {
-      "id": "6",
       "name": "Chemistry",
       "parentCategoryId": "1"
     },
     {
+      "id": "4",
+      "name": "Taxes",
+      "parentCategoryId": "2"
+    },
+    {
+      "id": "5",
+      "name": "Telecommunication",
+      "parentCategoryId": "2"
+    },
+    {
+      "id": "6",
+      "name": "Rent",
+      "parentCategoryId": "2"
+    },
+    {
       "id": "7",
-      "name": "Udemy course",
-      "parentCategoryId": "4"
+      "name": "Bills",
+      "parentCategoryId": "2"
     },
     {
       "id": "8",
+      "name": "Studies",
+      "parentCategoryId": "3"
+    },
+    {
+      "id": "9",
+      "name": "Online course",
+      "parentCategoryId": "3"
+    },
+    {
+      "id": "10",
+      "name": "Food orders",
+      "parentCategoryId": "4"
+    },
+    {
+      "id": "11",
       "name": "Restaurants and pubs",
+      "parentCategoryId": "4"
+    },
+    {
+      "id": "12",
+      "name": "Games and films",
+      "parentCategoryId": "4"
+    },
+    {
+      "id": "13",
+      "name": "Outdoor",
+      "parentCategoryId": "4"
+    },
+    {
+      "id": "13",
+      "name": "Rest and holidays",
+      "parentCategoryId": "4"
+    },
+    {
+      "id": "14",
+      "name": "Car",
+      "parentCategoryId": "5"
+    },
+    {
+      "id": "15",
+      "name": "Tickets",
       "parentCategoryId": "5"
     }
   ],
   "budgetCategories": [
     {
-      "id": "1",
-      "budget": 120.47,
-      "categoryId": "1",
-      "budgetId": "1"
+      "categoryId": "7",
+      "budget": 500,
+      "budgetId": "1",
+      "id": "4k2Mi4E"
     },
     {
-      "id": "2",
-      "budget": 39.99,
-      "categoryId": "2",
-      "budgetId": "1"
-    },
-    {
-      "id": "3",
-      "budget": 723,
-      "categoryId": "3",
-      "budgetId": "1"
-    },
-    {
-      "id": "4",
-      "budget": 30,
       "categoryId": "4",
-      "budgetId": "1"
+      "budget": 500,
+      "budgetId": "1",
+      "id": "crfSabS"
     },
     {
-      "id": "5",
-      "budget": 450,
-      "categoryId": "5",
-      "budgetId": "1"
-    },
-    {
-      "id": "6",
-      "budget": 80,
       "categoryId": "6",
-      "budgetId": "1"
+      "budget": 600,
+      "budgetId": "1",
+      "id": "VD93Xer"
     },
     {
       "categoryId": "1",
-      "budget": 2,
-      "id": "XALvaOZ"
+      "budget": 300,
+      "budgetId": "1",
+      "id": "mXoTm0Z"
     },
     {
-      "categoryId": "2",
-      "budget": 2,
-      "id": "qPG_DEW"
+      "categoryId": "3",
+      "budget": 100,
+      "budgetId": "1",
+      "id": "u3LqU6_"
+    },
+    {
+      "categoryId": "8",
+      "budget": 300,
+      "budgetId": "1",
+      "id": "IzNGRTB"
+    },
+    {
+      "categoryId": "10",
+      "budget": 200,
+      "budgetId": "1",
+      "id": "Jf9ZcNz"
+    },
+    {
+      "categoryId": "12",
+      "budget": 200,
+      "budgetId": "1",
+      "id": "AJ6RmpK"
+    },
+    {
+      "categoryId": "1",
+      "budget": 433,
+      "budgetId": "2",
+      "id": "BahZ2gn"
+    },
+    {
+      "categoryId": "3",
+      "budget": 722,
+      "budgetId": "2",
+      "id": "elcOKq6"
+    },
+    {
+      "categoryId": "4",
+      "budget": 343,
+      "budgetId": "2",
+      "id": "iBEyCBL"
+    },
+    {
+      "categoryId": "6",
+      "budget": 223,
+      "budgetId": "2",
+      "id": "vmgri38"
     }
   ],
   "budgets": [
     {
-      "id": "1",
-      "name": "April",
-      "totalAmount": 2400
+      "name": "May",
+      "totalAmount": 3100,
+      "id": "1"
     },
     {
       "name": "Wojciech Szutryk",
-      "totalAmount": 2,
-      "id": "4"
+      "totalAmount": 2222,
+      "id": "2"
     }
   ],
   "transactions": [
     {
-      "id": "1",
-      "description": "Internet provider",
-      "amount": 120.47,
-      "categoryId": "1",
-      "date": "2019-12-15T20:39:41.768Z",
-      "budgetId": "1"
+      "categoryId": "8",
+      "date": "2021-04-01",
+      "description": "Books",
+      "amount": 176.23,
+      "budgetId": "1",
+      "id": 12
     },
     {
-      "id": "2",
-      "description": "Mobile network provider",
-      "amount": 39.99,
-      "categoryId": "2",
-      "date": "2019-12-10T13:33:21.768Z",
-      "budgetId": "1"
+      "categoryId": "12",
+      "date": "2021-04-03",
+      "description": "Cinema with frends",
+      "amount": 36,
+      "budgetId": "1",
+      "id": 13
     },
     {
-      "id": "3",
-      "description": "Weekly shoping",
-      "amount": 23.88,
-      "categoryId": "6",
-      "date": "2019-12-17T15:41:01.768Z",
-      "budgetId": "1"
-    },
-    {
-      "description": "Default Agile Workflow",
-      "amount": 123,
       "categoryId": "7",
-      "date": "2020-02-13",
+      "description": "Enegry",
+      "amount": 210.3,
+      "date": "2021-01-13",
       "budgetId": "1",
-      "id": "p1tYW2Q"
+      "id": 1
+    },
+    {
+      "categoryId": "7",
+      "description": "Water",
+      "amount": 90.3,
+      "date": "2021-01-13",
+      "budgetId": "1",
+      "id": 2
+    },
+    {
+      "categoryId": "7",
+      "description": "Heat",
+      "amount": 120.3,
+      "date": "2021-01-02",
+      "budgetId": "1",
+      "id": 4
+    },
+    {
+      "categoryId": "4",
+      "date": "2021-04-20",
+      "description": "ZUS",
+      "amount": 300,
+      "budgetId": "1",
+      "id": 5
+    },
+    {
+      "categoryId": "6",
+      "date": "2021-04-24",
+      "description": "Flat",
+      "amount": 597.3,
+      "budgetId": "1",
+      "id": 7
+    },
+    {
+      "categoryId": "4",
+      "date": "2021-04-24",
+      "description": "ZUS 3",
+      "amount": 5.79,
+      "budgetId": "1",
+      "id": 8
     },
     {
       "categoryId": "1",
-      "date": "2019-12-15",
-      "description": "Internet provider",
-      "amount": 120.47,
+      "date": "2021-04-25",
+      "description": "Shopping",
+      "amount": 160.8,
       "budgetId": "1",
-      "id": "xDhW38f"
+      "id": 9
     },
     {
-      "categoryId": "2",
-      "date": "2019-12-10",
-      "description": "Mobile network provider",
-      "amount": 39.99,
+      "categoryId": "3",
+      "date": "2021-04-22",
+      "description": "Detergents",
+      "amount": 87.5,
       "budgetId": "1",
-      "id": "rLnPnU4"
+      "id": 10
+    },
+    {
+      "categoryId": "3",
+      "date": "2021-04-22",
+      "description": "Chemistry Shopping",
+      "amount": 162.78,
+      "budgetId": "1",
+      "id": 11
+    },
+    {
+      "categoryId": "13",
+      "date": "2021-04-03",
+      "description": "Opera",
+      "amount": 110,
+      "budgetId": "1",
+      "id": 14
+    },
+    {
+      "categoryId": "13",
+      "date": "2021-04-10",
+      "description": "Theater",
+      "amount": 20,
+      "budgetId": "1",
+      "id": 15
+    },
+    {
+      "categoryId": "12",
+      "date": "2021-04-20",
+      "description": "New PC game",
+      "amount": 169,
+      "budgetId": "1",
+      "id": 16
     },
     {
       "categoryId": "1",
-      "date": "2019-12-15",
-      "description": "Internet provider",
-      "amount": 120.47,
-      "budgetId": "1",
-      "id": "vcsouGy"
+      "date": "2021-04-13",
+      "description": "1",
+      "amount": 1,
+      "budgetId": "2",
+      "id": 17
     },
     {
-      "categoryId": "2",
-      "date": "2019-12-10",
-      "description": "Mobile network provider",
-      "amount": 39.99,
-      "budgetId": "1",
-      "id": "pJrpsN3"
+      "categoryId": "1",
+      "date": "2021-04-13",
+      "description": "2",
+      "amount": 222,
+      "budgetId": "2",
+      "id": 18
     },
     {
-      "categoryId": "2",
-      "date": "2019-12-10",
-      "description": "Mobile network provider",
-      "amount": 39.99,
-      "budgetId": "1",
-      "id": "NnSL6hS"
+      "categoryId": "1",
+      "date": "2021-04-13",
+      "description": "3",
+      "amount": 233,
+      "budgetId": "2",
+      "id": 19
     },
     {
-      "categoryId": "5",
-      "date": "2019-12-18",
-      "description": "Grocery shopping #1",
-      "amount": 12.38,
-      "budgetId": "1",
-      "id": "iVIH-VT"
+      "categoryId": "3",
+      "date": "2021-04-13",
+      "description": "4",
+      "amount": 22,
+      "budgetId": "2",
+      "id": 20
+    },
+    {
+      "categoryId": "3",
+      "date": "2021-04-13",
+      "description": "4",
+      "amount": 343,
+      "budgetId": "2",
+      "id": 22
+    },
+    {
+      "categoryId": "3",
+      "date": "2021-04-13",
+      "description": "4",
+      "amount": 35,
+      "budgetId": "2",
+      "id": 23
+    },
+    {
+      "categoryId": "6",
+      "date": "2021-04-13",
+      "description": "56",
+      "amount": 32,
+      "budgetId": "2",
+      "id": 25
+    },
+    {
+      "categoryId": "7",
+      "date": "2021-04-13",
+      "description": "56",
+      "amount": 33,
+      "budgetId": "2",
+      "id": 26
     }
   ]
 }
