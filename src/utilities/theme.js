@@ -42,7 +42,12 @@ export const lightStyles = {
         background: {
             normal: 'rgb(250,250,250)',
         },
+        sadMac: {
+            eyes: 'rgba(177, 3, 4,0.9)',
+            background: 'rgb(170,170,170)',
+        }
     },
+
     spacing: {
         xs: 5,
         sm: 10,
@@ -50,10 +55,6 @@ export const lightStyles = {
         l: 17,
         xl: 20,
     },
-    images: {
-        pl: './images/PL.png',
-        de: ''
-    }
 };
 
 export const darkStyles = {
@@ -100,6 +101,10 @@ export const darkStyles = {
         background: {
             normal: 'rgb(30,35,35)',
         },
+        sadMac: {
+            eyes: 'rgb(235, 93, 64)',
+            background: 'rgb(250,250,250)',
+        }
     },
     spacing: {
         xs: 5,
@@ -108,8 +113,4 @@ export const darkStyles = {
         l: 17,
         xl: 20,
     },
-    images: {
-        pl: './images/PL.png',
-        de: ''
-    }
 }

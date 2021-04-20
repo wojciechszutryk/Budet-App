@@ -33,5 +33,19 @@
   "Budget Money": "Finances",
   "Money spent on category": "Money spent on category",
   "Available category Founds": "Available category Founds",
-  "You must have at least one budget.": "You must have at least one budget."
+  "You must have at least one budget.": "You must have at least one budget.",
+  "Budget App": "Budget App",
+  "Features": "Features",
+  "adding and removing custom budget with categories": "adding and removing custom budget with categories",
+  "switching languages at any time": "switching languages at any time",
+  "switching between budget at any time": "switching between budget at any time",
+  "data visualization on interactive graphs": "data visualization on interactive graphs",
+  "adding and removing transactions": "adding and removing transactions",
+  "sorting transaction with four available criteria": "sorting transaction with four available criteria",
+  "searching in all transactions": "searching in all transactions",
+  "grouping transactions in categories": "grouping transactions in categories",
+  "importing transactions from file": "importing transactions from file",
+  "exporting transactions to file": "exporting transactions to file",
+  "switching themes between light and dark": "switching themes between light and dark",
+  "website will look well at any device": "website will look well at any device"
 }

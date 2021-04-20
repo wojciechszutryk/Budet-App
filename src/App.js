@@ -35,7 +35,7 @@ function App() {
               <SuspenseErrorBoundary>
                   <Wrapper>
                       <Switch>
-                          <Route path='/' exact><HomePage/></Route>
+                          <Route path='/' exact><HomePage reload={theme}/></Route>
                           <Route path='/budget'><BudgetPage/></Route>
                           <Route path='/transactions'><TransactionsPage/></Route>
                       </Switch>

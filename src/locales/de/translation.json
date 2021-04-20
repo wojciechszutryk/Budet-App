@@ -33,6 +33,19 @@
   "Budget Money": "Finanzen",
   "Money spent on category": "Geld für Kategorie ausgegeben",
   "Available category Founds": "Verfügbare Kategorie gefunden",
-  "You must have at least one budget.": "Sie müssen mindestens ein Budget haben."
-
+  "You must have at least one budget.": "Sie müssen mindestens ein Budget haben.",
+  "Budget App": "Budget App",
+  "Features": "Eigenschaften",
+  "adding and removing custom budget with categories": "Hinzufügen und Entfernen von benutzerdefiniertem Budget mit Kategorien",
+  "switching languages at any time": "jederzeit die Sprache wechseln",
+  "switching between budget at any time": "jederzeit zwischen Budget wechseln",
+  "data visualization on interactive graphs": "Datenvisualisierung auf interaktiven Grafiken",
+  "adding and removing transactions": "Hinzufügen und Entfernen von Transaktionen",
+  "sorting transaction with four available criteria": "Sortierungstransaktion mit vier verfügbaren Kriterien",
+  "searching in all transactions": "\nSuche in allen Transaktionen",
+  "grouping transactions in categories": "Gruppieren von Transaktionen in Kategorien",
+  "importing transactions from file": "Importieren von Transaktionen aus einer Datei",
+  "exporting transactions to file": "Exportieren von Transaktionen in eine Datei",
+  "switching themes between light and dark": "Themen zwischen hell und dunkel wechseln",
+  "website will look well at any device": "Website wird auf jedem Gerät gut aussehen"
 }
