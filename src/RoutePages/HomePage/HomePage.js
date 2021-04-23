@@ -26,6 +26,7 @@ const HomePage = ({reload}) => {
         t('importing transactions from file'),
         t('switching themes between light and dark'),
         t('website will look well at any device'),
+        t('showing notification'),
     ];
 
 

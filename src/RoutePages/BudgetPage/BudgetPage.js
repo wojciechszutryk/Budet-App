@@ -10,14 +10,19 @@ import SetBudget from "../components/SetBudget";
 import {useMutation, useQuery, useQueryClient} from "react-query";
 import API from "data/fetch";
 import {informationNotification} from "utilities/functions";
+import {useTranslation} from "react-i18next";
 const AddBudgetForm = React.lazy(() => import('../components/addBudgetForm'));
 const AddBudgetCategoriesForm = React.lazy(() => import('../components/addBudgetCategoriesForm'));
+const EditCategoriesForm = React.lazy(() => import('../components/editCategoriesForm'));
 
 const BudgetPage = ({activeBudget, activeBudgetSet}) => {
+    const {t} = useTranslation();
     const queryClient = useQueryClient();
     const [newBudgetData, setNewBudgetData] = useState({});
     const {data:allBudgets} = useQuery('allBudgets', API.common.fetchAllBudgetsFromAPI);
     const {data:allCategories} = useQuery('allCategories', API.common.fetchAllCategoriesFromAPI);
+    const {data:parentCategories} = useQuery('parentCategories', API.common.fetchParentCategoriesFromAPI);
+    const {data:childrenCategories} = useQuery('childrenCategories', API.common.fetchChildrenCategoriesFromAPI);
     const {data:budgetCategories} = useQuery(['budgetCategories',{id: activeBudget}], () => API.budget.fetchBudgetCategoriesFromAPI({id: activeBudget}));
     const {data:budget} = useQuery(['budget',{id: activeBudget}], () => API.budget.fetchBudgetFromAPI({id: activeBudget}));
 
@@ -84,7 +89,10 @@ const BudgetPage = ({activeBudget, activeBudgetSet}) => {
                             budgetCategories={budgetCategories}
                         />
                         <Link  to='/budget/new'>
-                            <Button buttonType='addBudget'>Add new budget</Button>
+                            <Button buttonType='addBudget'>{t("Add new budget")}</Button>
+                        </Link>
+                        <Link  to='/budget/categories/edit'>
+                            <Button buttonType='addBudget'>{t("Menage categories")}</Button>
                         </Link>
                     </SuspenseErrorBoundary>
                 </section>
@@ -111,6 +119,16 @@ const BudgetPage = ({activeBudget, activeBudgetSet}) => {
                             name={newBudgetData['name']}
                             totalAmount={newBudgetData['totalAmount']}
                             categories={newBudgetData['categories']}
+                            onSubmit={handleSubmitAddBudgetForm}
+                        />
+                    </Modal>
+                </Route>
+                <Route path='/budget/categories/edit' exact>
+                    <Modal>
+                        <EditCategoriesForm
+                            parentCategories={parentCategories}
+                            childrenCategories={childrenCategories}
+                            allCategories={allCategories}
                             onSubmit={handleSubmitAddBudgetForm}
                         />
                     </Modal>

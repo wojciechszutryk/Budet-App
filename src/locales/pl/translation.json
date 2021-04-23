@@ -51,5 +51,8 @@
   "importing transactions from file": "import transakcji z pliku",
   "exporting transactions to file": "export transakcji do pliku",
   "switching themes between light and dark": "wybór wyglądu strony pomiędzy jasnym a ciemnym",
-  "website will look well at any device": "strona będzie zawsze wyglądała dobrze na każdym urządzeniu"
+  "website will look well at any device": "strona będzie zawsze wyglądała dobrze na każdym urządzeniu",
+  "showing notification": "pokazywanie powiadomień",
+  "Menage categories": "Zarządzanie kategoriami",
+  "Add new budget": "Dodawanie budżetu"
 }
