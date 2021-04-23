@@ -30,9 +30,7 @@ const HomePage = ({reload}) => {
     ];
 
 
-    const featuresList = features.map((feature,index) => {
-        console.log((delay + index * 10).toString())
-        return(
+    const featuresList = features.map((feature,index) => (
         <StyledFeatureItem
             key={index}
             data-aos="fade-left"
@@ -43,8 +41,7 @@ const HomePage = ({reload}) => {
         >
             {feature}
         </StyledFeatureItem>
-    )
-    });
+    ));
 
     return (
         <Grid>

@@ -2,7 +2,7 @@ import React, {useState, useMemo} from 'react'
 import {Button} from "components";
 import {useTranslation} from "react-i18next";
 import {Link, useHistory } from "react-router-dom";
-import {CategoriesHeader} from "./editCategoriesFormStyles";
+import {CategoriesHeader, StyledParent} from "./editCategoriesFormStyles";
 import {groupBy} from "lodash";
 
 const EditCategoriesForm = ({childrenCategories, parentCategories, allCategories, onSubmit}) => {
@@ -15,7 +15,12 @@ const EditCategoriesForm = ({childrenCategories, parentCategories, allCategories
             parentCategory => parentCategory.id === childrenCategory.parentCategoryId).name
     ));
 
-    console.log(groupedCategories)
+    const groupedCategoriesList = groupedCategories.map(parentCategory => {
+        const [parentName, children] =parentCategory;
+        return (
+            <StyledParent key={parentName+Math.random()*100}>{parentName}</StyledParent>
+        )
+    })
 
     useMemo(() =>{
         if (!childrenCategories || !parentCategories) setRedirect(true);
@@ -43,6 +48,7 @@ const EditCategoriesForm = ({childrenCategories, parentCategories, allCategories
         redirect ? handleError() :
         <>
             <CategoriesHeader>{t("categories").toUpperCase()}</CategoriesHeader>
+            {groupedCategoriesList}
             <form id="editCategoriesForm">
                 <div>
                     <Link to='/budget'>
