@@ -2,23 +2,66 @@ import React, {useState, useMemo} from 'react'
 import {Button} from "components";
 import {useTranslation} from "react-i18next";
 import {Link, useHistory } from "react-router-dom";
-import {CategoriesHeader, StyledParent} from "./editCategoriesFormStyles";
+import {
+    CategoriesHeader,
+    StyledCategoryBox,
+    StyledChild,
+    StyledChildrenCategoriesBox,
+    StyledParent
+} from "./editCategoriesFormStyles";
 import {groupBy} from "lodash";
+import {faTrashAlt} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-const EditCategoriesForm = ({childrenCategories, parentCategories, allCategories, onSubmit}) => {
+const EditCategoriesForm = ({childrenCategories, parentCategories, onSubmit}) => {
     const {t} = useTranslation();
     const [redirect, setRedirect] = useState(false);
+    const [parentCat, setParentCat] = useState(parentCategories);
+    const [childrenCat, setChildrenCat] = useState(childrenCategories);
     let history = useHistory();
 
-    const groupedCategories = Object.entries(groupBy(childrenCategories,
-        childrenCategory => parentCategories.find(
+    const removeChild = (id, parentCategoryId) => {
+        const childrenCopy = [...childrenCat];
+        const index = childrenCopy.indexOf(childrenCopy.find(child => child.id === id && child.parentCategoryId === parentCategoryId));
+        childrenCopy.splice(index,1)
+        setChildrenCat(childrenCopy)
+    }
+
+    const removeParent = (parentName) => {
+        const childrenCopy = [...childrenCat];
+        const parentCopy = [...parentCat];
+        const parentIndex = parentCopy.indexOf(parentCopy.find(parent => parent.name === parentName));
+        setChildrenCat(childrenCopy.filter(child => (
+            child.parentCategoryId !== parentCopy[parentIndex].id
+        )))
+        parentCopy.splice(parentIndex,1);
+        setParentCat(parentCopy);
+    }
+
+    const groupedCategories = Object.entries(groupBy(childrenCat,
+        childrenCategory => parentCat.find(
             parentCategory => parentCategory.id === childrenCategory.parentCategoryId).name
     ));
 
     const groupedCategoriesList = groupedCategories.map(parentCategory => {
-        const [parentName, children] =parentCategory;
+        const [parentName, children] = parentCategory;
+        const childrenCategories = children.map(child => (
+            <StyledChild key={child.name+Math.random()*100}>
+                {child.name}
+                <Button buttonType={'delete'} onClick={() => removeChild(child.id, child.parentCategoryId)}><FontAwesomeIcon icon={faTrashAlt}/></Button>
+            </StyledChild>
+        ))
         return (
-            <StyledParent key={parentName+Math.random()*100}>{parentName}</StyledParent>
+            <StyledCategoryBox key={parentName+Math.random()*100}>
+                <StyledParent key={parentName+Math.random()*100}>
+                    {parentName}
+                    <Button buttonType={'delete'} onClick={() => removeParent(parentName)}><FontAwesomeIcon icon={faTrashAlt} /></Button>
+                </StyledParent>
+                <StyledChildrenCategoriesBox>
+                    {childrenCategories}
+                    <StyledChild><span>+</span><input type="text" placeholder={t('Add new')}/></StyledChild>
+                </StyledChildrenCategoriesBox>
+            </StyledCategoryBox>
         )
     })
 
@@ -49,25 +92,6 @@ const EditCategoriesForm = ({childrenCategories, parentCategories, allCategories
         <>
             <CategoriesHeader>{t("categories").toUpperCase()}</CategoriesHeader>
             {groupedCategoriesList}
-            {groupedCategoriesList}
-            {groupedCategoriesList}
-            {groupedCategoriesList}
-            {groupedCategoriesList}
-            {groupedCategoriesList}
-            {groupedCategoriesList}
-            {groupedCategoriesList}
-            {groupedCategoriesList}
-            {groupedCategoriesList}
-            {groupedCategoriesList}
-            {groupedCategoriesList}
-            {groupedCategoriesList}
-            {groupedCategoriesList}
-            {groupedCategoriesList}
-            {groupedCategoriesList}
-            {groupedCategoriesList}
-            {groupedCategoriesList}
-            {groupedCategoriesList}
-            {groupedCategoriesList}
             <form id="editCategoriesForm">
                 <div>
                     <Link to='/budget'>
@@ -77,7 +101,7 @@ const EditCategoriesForm = ({childrenCategories, parentCategories, allCategories
                             // disabled={budgetOvervaluedError}
                             onClick={handleSubmit}
                         >
-                            {t('Submit')}
+                            {t('Save')}
                         </Button>
                     </Link>
                     <Button
