@@ -49,6 +49,25 @@ const EditCategoriesForm = ({childrenCategories, parentCategories, allCategories
         <>
             <CategoriesHeader>{t("categories").toUpperCase()}</CategoriesHeader>
             {groupedCategoriesList}
+            {groupedCategoriesList}
+            {groupedCategoriesList}
+            {groupedCategoriesList}
+            {groupedCategoriesList}
+            {groupedCategoriesList}
+            {groupedCategoriesList}
+            {groupedCategoriesList}
+            {groupedCategoriesList}
+            {groupedCategoriesList}
+            {groupedCategoriesList}
+            {groupedCategoriesList}
+            {groupedCategoriesList}
+            {groupedCategoriesList}
+            {groupedCategoriesList}
+            {groupedCategoriesList}
+            {groupedCategoriesList}
+            {groupedCategoriesList}
+            {groupedCategoriesList}
+            {groupedCategoriesList}
             <form id="editCategoriesForm">
                 <div>
                     <Link to='/budget'>
