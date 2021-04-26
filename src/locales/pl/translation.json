@@ -55,5 +55,9 @@
   "showing notification": "pokazywanie powiadomień",
   "Menage categories": "Zarządzanie kategoriami",
   "Add new budget": "Dodawanie budżetu",
-  "Save": "Zapisz"
+  "Save": "Zapisz",
+  "Add new": "Dodaj nową",
+  "Insert category name": "Wpisz nazwę kategori",
+  "Category exists": "Kategoria istnieje",
+  "New parent Category": "Nowa kategoria"
 }

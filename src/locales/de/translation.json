@@ -51,5 +51,9 @@
   "showing notification": "Benachrichtigung anzeigen",
   "Add new budget": "Neues Budget hinzufügen",
   "category management": "Kategorienverwaltung",
-  "Save": "Speich"
+  "Save": "Speich",
+  "Add new": "neu definieren",
+  "Insert category name": "Kategorienamen einfügen",
+  "Category exists": "Kategorie existiert",
+  "New parent Category": "Neue Kategorie"
 }

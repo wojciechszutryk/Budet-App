@@ -51,5 +51,9 @@
   "showing notification": "showing notification",
   "Add new budget": "Add new budget",
   "category management": "Category management",
-  "Save": "Save"
+  "Save": "Save",
+  "Add new": "Add new",
+  "Insert category name": "Insert category name",
+  "Category exists": "Category exists",
+  "New parent Category": "New parent Category"
 }
