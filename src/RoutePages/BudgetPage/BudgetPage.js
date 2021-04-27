@@ -42,6 +42,37 @@ const BudgetPage = ({activeBudget, activeBudgetSet}) => {
             queryClient.invalidateQueries('allBudgets');
         },
     });
+    const addParentCategoryMutation = useMutation(API.common.addParentCategory, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('allCategories');
+            queryClient.invalidateQueries('childrenCategories');
+            queryClient.invalidateQueries('parentCategories');
+            //more
+        },
+    });
+    const addChildrenCategoryMutation = useMutation(API.common.addCategory, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('allCategories');
+            queryClient.invalidateQueries('childrenCategories');
+            queryClient.invalidateQueries('parentCategories');
+        },
+    });
+    const removeParentCategoryMutation = useMutation(API.common.removeParentCategory, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('allCategories');
+            queryClient.invalidateQueries('childrenCategories');
+            queryClient.invalidateQueries('parentCategories');
+            //more
+        },
+    });
+    const removeChildrenCategoryMutation = useMutation(API.common.removeCategory, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('allCategories');
+            queryClient.invalidateQueries('childrenCategories');
+            queryClient.invalidateQueries('parentCategories');
+            //more
+        },
+    });
 
     const handleSubmitAddBudgetForm = (values) => {
         console.log(values)
@@ -61,6 +92,15 @@ const BudgetPage = ({activeBudget, activeBudgetSet}) => {
         });
         addBudgetMutation.mutate(budgetData);
         informationNotification("Succeeded in adding Budget");
+    };
+
+    const handleChangeCategories = (addedChildren, removedChildren, addedParents, removedParents) => {
+        if (removedChildren.length > 0) removedChildren.forEach(child => removeChildrenCategoryMutation.mutate(child.id));
+        if (addedChildren.length > 0) addedChildren.forEach(child => addChildrenCategoryMutation.mutate(child));
+        if (removedParents.length > 0) removedParents.forEach(parent => removeParentCategoryMutation.mutate(parent.id));
+        if (addedParents.length > 0) addedParents.forEach(parent => addParentCategoryMutation.mutate(parent));
+        //add budgetCatwgories remove
+        informationNotification("Categories changed successfully");
     };
 
     const handleRemoveBudget = (id) => {
@@ -128,8 +168,7 @@ const BudgetPage = ({activeBudget, activeBudgetSet}) => {
                         <EditCategoriesForm
                             parentCategories={parentCategories}
                             childrenCategories={childrenCategories}
-                            allCategories={allCategories}
-                            onSubmit={handleSubmitAddBudgetForm}
+                            onSubmit={handleChangeCategories}
                         />
                     </Modal>
                 </Route>

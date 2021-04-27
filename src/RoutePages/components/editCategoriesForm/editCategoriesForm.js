@@ -1,7 +1,7 @@
-import React, {useState, useMemo} from 'react'
+import React, {useState, useMemo, useCallback} from 'react'
 import {Button} from "components";
 import {useTranslation} from "react-i18next";
-import {Link, useHistory } from "react-router-dom";
+import {Link} from "react-router-dom";
 import {
     CategoriesHeader,
     StyledCategoryBox,
@@ -15,36 +15,35 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const EditCategoriesForm = ({childrenCategories, parentCategories, onSubmit}) => {
     const {t} = useTranslation();
-    const [redirect, setRedirect] = useState(false);
     const [parentCat, setParentCat] = useState(parentCategories);
     const [childrenCat, setChildrenCat] = useState(childrenCategories);
-    let history = useHistory();
 
-    const handleInputEmpty = (input, message) => {
+    const handleInputEmpty = useCallback((input, message) => {
         input.placeholder = t(message);
         input.classList.add('red');
         setTimeout(() => {
             input.placeholder = t('Add new');
             input.classList.remove('red');
         },3000);
-    };
+    },[t]);
 
-    const addChild = (parentName) => {
+    const addChild = useCallback((parentName) => {
         const parentCategoryId = parentCat.find(parent => parent.name === parentName).id;
         const input = document.getElementById(parentName);
         if (!input.value || !parentCategoryId) handleInputEmpty(input, 'Insert category name');
         else {
+            const id = (childrenCat.length+1) > (parseInt(childrenCat.slice(-1)[0].id)+1) ? (childrenCat.length+1).toString() : (parseInt(childrenCat.slice(-1)[0].id)+1).toString();
             const newChildCat = {
                 //backend
-                id: childrenCat.length.toString(),
+                id,
                 parentCategoryId,
                 name: input.value
             }
             setChildrenCat([...childrenCat, newChildCat]);
         }
-    };
+    },[childrenCat, handleInputEmpty, parentCat]);
 
-    const addParent = () => {
+    const addParent =  useCallback(() => {
         const input = document.getElementById('newParent');
         if (!input.value) handleInputEmpty(input, 'Insert category name');
         else if(parentCat.find(cat => cat.name === input.value)) {
@@ -52,23 +51,24 @@ const EditCategoriesForm = ({childrenCategories, parentCategories, onSubmit}) =>
             handleInputEmpty(input, 'Category exists');
         }
         else {
+            const id = (parentCat.length+1) > (parseInt(parentCat.slice(-1)[0].id)+1) ? (parentCat.length+1).toString() : (parseInt(parentCat.slice(-1)[0].id)+1).toString();
             const newParentCat = {
                 //backend
-                id: (parentCat.length+1).toString(),
+                id,
                 name: input.value
             }
             setParentCat([...parentCat, newParentCat]);
         }
-    };
+    },[handleInputEmpty, parentCat]);
 
-    const removeChild = (id, parentCategoryId) => {
+    const removeChild = useCallback((id, parentCategoryId) => {
         const childrenCopy = [...childrenCat];
         const index = childrenCopy.indexOf(childrenCopy.find(child => child.id === id && child.parentCategoryId === parentCategoryId));
         childrenCopy.splice(index,1)
         setChildrenCat(childrenCopy)
-    };
+    },[childrenCat]);
 
-    const removeParent = (parentName) => {
+    const removeParent = useCallback((parentName) => {
         const childrenCopy = [...childrenCat];
         const parentCopy = [...parentCat];
         const parentIndex = parentCopy.indexOf(parentCopy.find(parent => parent.name === parentName));
@@ -77,18 +77,17 @@ const EditCategoriesForm = ({childrenCategories, parentCategories, onSubmit}) =>
         )))
         parentCopy.splice(parentIndex,1);
         setParentCat(parentCopy);
-    };
+    },[childrenCat, parentCat]);
 
-    const groupedCategories = Object.entries(groupBy(childrenCat,
+    const groupedCategories = useMemo(()=> Object.entries(groupBy(childrenCat,
         childrenCategory => parentCat.find(
             parentCategory => parentCategory.id === childrenCategory.parentCategoryId).name
-    ));
-
+    )),[childrenCat, parentCat]);
+    
     const nonEmptyParents = groupedCategories.map(category => category[0]);
     const allParents = parentCat.map(category => category.name);
     const emptyParents = allParents.filter(parent => !nonEmptyParents.includes(parent));
     const emptyParentsObjects = parentCat.filter(parent => emptyParents.includes(parent.name));
-
     const emptyParentsList = emptyParentsObjects.map(parent => (
         <StyledCategoryBox key={parent.name+Math.random()*100}>
             <StyledParent>
@@ -103,10 +102,8 @@ const EditCategoriesForm = ({childrenCategories, parentCategories, onSubmit}) =>
             </StyledChildrenCategoriesBox>
         </StyledCategoryBox>
     ));
-
-    console.log(emptyParentsList)
-
-    const groupedCategoriesList = groupedCategories.map(parentCategory => {
+    
+    const groupedCategoriesList = useMemo(() => groupedCategories.map(parentCategory => {
         const [parentName, children] = parentCategory;
         const childrenCategories = children.map(child => (
             <StyledChild key={child.name+Math.random()*100}>
@@ -129,32 +126,22 @@ const EditCategoriesForm = ({childrenCategories, parentCategories, onSubmit}) =>
                 </StyledChildrenCategoriesBox>
             </StyledCategoryBox>
         )
-    })
+    }),[addChild, groupedCategories, removeChild, removeParent, t]);
 
-    useMemo(() =>{
-        if (!childrenCategories || !parentCategories) setRedirect(true);
-    },[childrenCategories, parentCategories]);
-
-    const handleError = () => {
-        history.push('/budget');
-        window.location.reload();
-    }
-
-    const resetForm = () => {
+    const resetForm = useCallback(()=> () => {
         setChildrenCat(childrenCategories);
         setParentCat(parentCategories);
-    };
+    },[childrenCategories, parentCategories]);
 
     const handleSubmit = () => {
-        onSubmit({
-            // name,
-            // totalAmount,
-            // categories: budgetCategoriesFounds,
-        });
+        const addedChildren = childrenCat.filter(child => !childrenCategories.includes(child));
+        const removedChildren = childrenCategories.filter(child => !childrenCat.includes(child));
+        const addedParents = parentCat.filter(parent => !parentCategories.includes(parent));
+        const removedParents = parentCategories.filter(parent => !parentCat.includes(parent));
+        onSubmit(addedChildren, removedChildren, addedParents, removedParents);
     };
 
     return(
-        redirect ? handleError() :
         <>
             <CategoriesHeader>{t("categories").toUpperCase()}</CategoriesHeader>
             {groupedCategoriesList}
@@ -163,27 +150,24 @@ const EditCategoriesForm = ({childrenCategories, parentCategories, onSubmit}) =>
                 <button onClick={addParent}><FontAwesomeIcon icon={faPlus}/></button>
                 <input type="text" id='newParent' placeholder={t("New parent Category")}/>
             </StyledParent>
-            <form id="editCategoriesForm">
-                <div>
-                    <Link to='/budget'>
-                        <Button
-                            buttonType='submit'
-                            type='submit'
-                            // disabled={budgetOvervaluedError}
-                            onClick={handleSubmit}
-                        >
-                            {t('Save')}
-                        </Button>
-                    </Link>
+            <div>
+                <Link to='/budget'>
                     <Button
-                        buttonType="reset"
-                        type="button"
-                        onClick={resetForm}
+                        buttonType='submit'
+                        type='submit'
+                        onClick={handleSubmit}
                     >
-                        Reset
+                        {t('Save')}
                     </Button>
-                </div>
-            </form>
+                </Link>
+                <Button
+                    buttonType="reset"
+                    type="button"
+                    onClick={resetForm}
+                >
+                    Reset
+                </Button>
+            </div>
         </>
     );
 };

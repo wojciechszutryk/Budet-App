@@ -59,5 +59,6 @@
   "Add new": "Dodaj nową",
   "Insert category name": "Wpisz nazwę kategori",
   "Category exists": "Kategoria istnieje",
-  "New parent Category": "Nowa kategoria"
+  "New parent Category": "Nowa kategoria",
+  "Categories changed successfully": "Zmiana kategori zakończona skucesem"
 }

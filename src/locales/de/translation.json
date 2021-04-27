@@ -42,7 +42,7 @@
   "data visualization on interactive graphs": "Datenvisualisierung auf interaktiven Grafiken",
   "adding and removing transactions": "Hinzufügen und Entfernen von Transaktionen",
   "sorting transaction with four available criteria": "Sortierungstransaktion mit vier verfügbaren Kriterien",
-  "searching in all transactions": "\nSuche in allen Transaktionen",
+  "searching in all transactions": "Suche in allen Transaktionen",
   "grouping transactions in categories": "Gruppieren von Transaktionen in Kategorien",
   "importing transactions from file": "Importieren von Transaktionen aus einer Datei",
   "exporting transactions to file": "Exportieren von Transaktionen in eine Datei",
@@ -55,5 +55,6 @@
   "Add new": "neu definieren",
   "Insert category name": "Kategorienamen einfügen",
   "Category exists": "Kategorie existiert",
-  "New parent Category": "Neue Kategorie"
+  "New parent Category": "Neue Kategorie",
+  "Categories changed successfully": "Kategorien erfolgreich geändert"
 }
