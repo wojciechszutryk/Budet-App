@@ -42,3 +42,10 @@ export const addBudgetCategory = async(data) => {
     return await response.json()
 };
 
+export const removeBudgetCategory = async(id) => {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/budgetCategories/${id}`,{
+        method: 'DELETE',
+    })
+    return await response.json()
+};
+

@@ -60,5 +60,8 @@
   "Insert category name": "Wpisz nazwę kategori",
   "Category exists": "Kategoria istnieje",
   "New parent Category": "Nowa kategoria",
-  "Categories changed successfully": "Zmiana kategori zakończona skucesem"
+  "Categories changed successfully": "Zmiana kategori zakończona skucesem",
+  "You willing to remove budgeted categories": "Chcesz usunąć kategorie objęte budżetem",
+  "That will cause removing all transactions with connected to these categories.": "Spowoduje to usunięcie wszystkich transakcji związanych z tymi kategoriami.",
+  "Do you want to continue?": "Czy chcesz kontynuować?"
 }

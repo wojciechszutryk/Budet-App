@@ -23,11 +23,6 @@
   ],
   "categories": [
     {
-      "id": "1",
-      "name": "Food",
-      "parentCategoryId": "1"
-    },
-    {
       "id": "2",
       "name": "Electronics",
       "parentCategoryId": "1"
@@ -36,11 +31,6 @@
       "id": "3",
       "name": "Chemistry",
       "parentCategoryId": "1"
-    },
-    {
-      "id": "4",
-      "name": "Taxes",
-      "parentCategoryId": "2"
     },
     {
       "id": "5",
@@ -101,6 +91,11 @@
       "id": "16",
       "name": "Tickets",
       "parentCategoryId": "5"
+    },
+    {
+      "id": "17",
+      "parentCategoryId": "4",
+      "name": "asd"
     }
   ],
   "budgetCategories": [
@@ -111,22 +106,10 @@
       "id": "4k2Mi4E"
     },
     {
-      "categoryId": "4",
-      "budget": 500,
-      "budgetId": "1",
-      "id": "crfSabS"
-    },
-    {
       "categoryId": "6",
       "budget": 600,
       "budgetId": "1",
       "id": "VD93Xer"
-    },
-    {
-      "categoryId": "1",
-      "budget": 300,
-      "budgetId": "1",
-      "id": "mXoTm0Z"
     },
     {
       "categoryId": "3",
@@ -153,22 +136,10 @@
       "id": "AJ6RmpK"
     },
     {
-      "categoryId": "1",
-      "budget": 433,
-      "budgetId": "2",
-      "id": "BahZ2gn"
-    },
-    {
       "categoryId": "3",
       "budget": 722,
       "budgetId": "2",
       "id": "elcOKq6"
-    },
-    {
-      "categoryId": "4",
-      "budget": 343,
-      "budgetId": "2",
-      "id": "iBEyCBL"
     },
     {
       "categoryId": "6",
@@ -231,36 +202,12 @@
       "id": 4
     },
     {
-      "categoryId": "4",
-      "date": "2021-04-20",
-      "description": "ZUS",
-      "amount": 300,
-      "budgetId": "1",
-      "id": 5
-    },
-    {
       "categoryId": "6",
       "date": "2021-04-24",
       "description": "Flat",
       "amount": 597.3,
       "budgetId": "1",
       "id": 7
-    },
-    {
-      "categoryId": "4",
-      "date": "2021-04-24",
-      "description": "ZUS 3",
-      "amount": 5.79,
-      "budgetId": "1",
-      "id": 8
-    },
-    {
-      "categoryId": "1",
-      "date": "2021-04-25",
-      "description": "Shopping",
-      "amount": 160.8,
-      "budgetId": "1",
-      "id": 9
     },
     {
       "categoryId": "3",
@@ -301,30 +248,6 @@
       "amount": 169,
       "budgetId": "1",
       "id": 16
-    },
-    {
-      "categoryId": "1",
-      "date": "2021-04-13",
-      "description": "1",
-      "amount": 1,
-      "budgetId": "2",
-      "id": 17
-    },
-    {
-      "categoryId": "1",
-      "date": "2021-04-13",
-      "description": "2",
-      "amount": 222,
-      "budgetId": "2",
-      "id": 18
-    },
-    {
-      "categoryId": "1",
-      "date": "2021-04-13",
-      "description": "3",
-      "amount": 233,
-      "budgetId": "2",
-      "id": 19
     },
     {
       "categoryId": "3",

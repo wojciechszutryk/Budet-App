@@ -51,10 +51,14 @@
   "showing notification": "showing notification",
   "Add new budget": "Add new budget",
   "category management": "Category management",
+  "Menage categories": "Menage categories",
   "Save": "Save",
   "Add new": "Add new",
   "Insert category name": "Insert category name",
   "Category exists": "Category exists",
   "New parent Category": "New parent Category",
-  "Categories changed successfully": "Categories changed successfully"
+  "Categories changed successfully": "Categories changed successfully",
+  "You willing to remove budgeted categories": "You willing to remove budgeted categories",
+  "That will cause removing all transactions with connected to these categories.": "That will cause removing all transactions with connected to these categories.",
+  "Do you want to continue?": "Do you want to continue?"
 }

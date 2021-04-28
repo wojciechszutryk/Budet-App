@@ -1,7 +1,7 @@
 import React, {useState, useMemo, useCallback} from 'react'
 import {Button} from "components";
 import {useTranslation} from "react-i18next";
-import {Link} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {
     CategoriesHeader,
     StyledCategoryBox,
@@ -12,11 +12,17 @@ import {
 import {groupBy} from "lodash";
 import {faTrashAlt, faPlus} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {useQuery} from "react-query";
+import API from "data/fetch";
+import AlertRemovingCategories from "./alertRemovingCategories";
 
-const EditCategoriesForm = ({childrenCategories, parentCategories, onSubmit}) => {
+const EditCategoriesForm = ({parentCategories, childrenCategories, onSubmit}) => {
+    const {data:allBudgetCategories} = useQuery('allBudgetCategories', API.common.fetchAllBudgetCategoriesFromAPI);
     const {t} = useTranslation();
+    let history = useHistory();
     const [parentCat, setParentCat] = useState(parentCategories);
     const [childrenCat, setChildrenCat] = useState(childrenCategories);
+    const [existingCategoriesRemoval, setExistingCategoriesRemoval] = useState({});
 
     const handleInputEmpty = useCallback((input, message) => {
         input.placeholder = t(message);
@@ -133,15 +139,41 @@ const EditCategoriesForm = ({childrenCategories, parentCategories, onSubmit}) =>
         setParentCat(parentCategories);
     },[childrenCategories, parentCategories]);
 
-    const handleSubmit = () => {
+    const handleSubmit = (e,approved) => {
+        console.log(approved)
         const addedChildren = childrenCat.filter(child => !childrenCategories.includes(child));
         const removedChildren = childrenCategories.filter(child => !childrenCat.includes(child));
         const addedParents = parentCat.filter(parent => !parentCategories.includes(parent));
         const removedParents = parentCategories.filter(parent => !parentCat.includes(parent));
-        onSubmit(addedChildren, removedChildren, addedParents, removedParents);
+        const allBudgetCategoriesIndexes = allBudgetCategories.map(category => category.categoryId);
+        const childrenRemovedFromBudgetedCategories = removedChildren.filter(child => (
+            allBudgetCategoriesIndexes.includes(child.id)
+        ));
+        if (!approved && childrenRemovedFromBudgetedCategories.length > 0){
+            setExistingCategoriesRemoval(childrenRemovedFromBudgetedCategories);
+            return;
+        }
+        onSubmit(addedChildren,removedChildren,addedParents,removedParents);
+        history.push("/budget");
     };
 
+    const deletingAlertResponse = (response) => {
+        if (response) {
+            handleSubmit(true,true);
+        }
+        else{
+            setExistingCategoriesRemoval([]);
+            setChildrenCat(childrenCategories);
+            setParentCat(parentCategories);
+        }
+    }
+
     return(
+        existingCategoriesRemoval.length > 0 ?
+            <AlertRemovingCategories
+                removedChildren={existingCategoriesRemoval}
+                deletingAlertResponse={deletingAlertResponse}
+            /> :
         <>
             <CategoriesHeader>{t("categories").toUpperCase()}</CategoriesHeader>
             {groupedCategoriesList}
@@ -151,15 +183,13 @@ const EditCategoriesForm = ({childrenCategories, parentCategories, onSubmit}) =>
                 <input type="text" id='newParent' placeholder={t("New parent Category")}/>
             </StyledParent>
             <div>
-                <Link to='/budget'>
-                    <Button
-                        buttonType='submit'
-                        type='submit'
-                        onClick={handleSubmit}
-                    >
-                        {t('Save')}
-                    </Button>
-                </Link>
+                <Button
+                    buttonType='submit'
+                    type='submit'
+                    onClick={handleSubmit}
+                >
+                    {t('Save')}
+                </Button>
                 <Button
                     buttonType="reset"
                     type="button"

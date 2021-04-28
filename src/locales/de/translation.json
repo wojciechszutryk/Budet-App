@@ -51,10 +51,14 @@
   "showing notification": "Benachrichtigung anzeigen",
   "Add new budget": "Neues Budget hinzufügen",
   "category management": "Kategorienverwaltung",
+  "Menage categories": "Kategorienverwaltung",
   "Save": "Speich",
   "Add new": "neu definieren",
   "Insert category name": "Kategorienamen einfügen",
   "Category exists": "Kategorie existiert",
   "New parent Category": "Neue Kategorie",
-  "Categories changed successfully": "Kategorien erfolgreich geändert"
+  "Categories changed successfully": "Kategorien wurden erfolgreich geändert",
+  "You willing to remove budgeted categories": "Sie sind bereit, budgetierte Kategorien zu entfernen",
+  "That will cause removing all transactions with connected to these categories.": "Dadurch werden alle Transaktionen entfernt, die mit diesen Kategorien verbunden sind.",
+  "Do you want to continue?": "Möchtest du fortfahren?"
 }
