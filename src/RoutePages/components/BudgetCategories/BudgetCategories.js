@@ -13,14 +13,16 @@ import {useTranslation} from "react-i18next";
 import {useQuery} from "react-query";
 import API from "data/fetch";
 
-const BudgetCategories = ({addActiveCategory,activeBudget,activeCategories, removeActiveCategory, allCategories, budgetCategories}) => {
+const BudgetCategories = ({addActiveCategory, activeBudget, activeCategories, removeActiveCategory, allCategories, budgetCategories, parentCategories}) => {
     const {t} = useTranslation();
-    const {data:budget} = useQuery(['budget',{id: activeBudget}], () => API.budget.fetchBudgetFromAPI({id: activeBudget}));
+    const {data:budget} = useQuery(['budgetTransactions',{id: activeBudget}], () => API.budget.fetchBudgetTransactionsFromAPI({id: activeBudget}));
 
-    const groupedCategories = groupBy(budgetCategories,
-    budgetCategory => allCategories.find(
-        category => budgetCategory.categoryId === category.id).parentCategory.name
-    );
+    const groupedCategories = useMemo(() => (groupBy(budgetCategories.budgetCategories,
+        budgetCategory => {
+            const parentCategoryId = allCategories.find(category => budgetCategory.categoryId === category.id);
+            if (parentCategoryId) return parentCategories.find(category => category.id === parentCategoryId.parentCategoryId).name;
+        }
+    )), [allCategories, budgetCategories.budgetCategories, parentCategories]);
 
     let budgetMoneySpent = 0;
     budget.transactions.forEach(transaction => {
@@ -31,7 +33,7 @@ const BudgetCategories = ({addActiveCategory,activeBudget,activeCategories, remo
     const moneyLeft = availableBudgetMoney-budgetMoneySpent;
     const isMoneyLeft = moneyLeft>0;
 
-    const amountToSpendOnCategories = budgetCategories.reduce((acc, budgetCategory) => (acc + budgetCategory.budget), 0);
+    const amountToSpendOnCategories = budgetCategories.budgetCategories.reduce((acc, budgetCategory) => (acc + budgetCategory.budget), 0);
     const otherTransactions = useMemo(() => budget.transactions.filter(transaction => {
             if (transaction.amount) return transaction.categoryId === '0';
             else return null;

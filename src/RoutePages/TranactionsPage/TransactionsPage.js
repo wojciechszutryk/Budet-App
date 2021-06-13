@@ -22,7 +22,8 @@ const TransactionsPage = ({activeBudget, activeBudgetSet}) => {
     const {data:allBudgets} = useQuery('allBudgets', API.common.fetchAllBudgetsFromAPI);
     const {data:allCategories} = useQuery('allCategories', API.common.fetchAllCategoriesFromAPI);
     const {data:budgetCategories} = useQuery(['budgetCategories',{id: activeBudget}], () => API.budget.fetchBudgetCategoriesFromAPI({id: activeBudget}));
-    const {data:budget} = useQuery(['budget',{id: activeBudget}], () => API.budget.fetchBudgetFromAPI({id: activeBudget}));
+    const {data:parentCategories} = useQuery('parentCategories', API.common.fetchParentCategoriesFromAPI);
+    const {data:budget} = useQuery(['budgetTransactions',{id: activeBudget}], () => API.budget.fetchBudgetTransactionsFromAPI({id: activeBudget}));
 
     const addTransitionMutation = useMutation(API.budget.addTransition, {
         onSuccess: () => {
@@ -70,6 +71,7 @@ const TransactionsPage = ({activeBudget, activeBudgetSet}) => {
                         <BudgetCategories
                             allCategories={allCategories}
                             budgetCategories={budgetCategories}
+                            parentCategories={parentCategories}
                         />
                         <ExportTransactions
                             transactions={budget.transactions}
@@ -82,7 +84,7 @@ const TransactionsPage = ({activeBudget, activeBudgetSet}) => {
                 </section>
                 <section>
                     <SuspenseErrorBoundary>
-                        <BudgetTransactions allCategories={allCategories} budget={budget}/>
+                        <BudgetTransactions allCategories={allCategories} budget={budget} parentCategories={parentCategories}/>
                     </SuspenseErrorBoundary>
                 </section>
             </Grid>

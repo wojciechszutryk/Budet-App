@@ -24,7 +24,7 @@ const BudgetPage = ({activeBudget, activeBudgetSet}) => {
     const {data:parentCategories} = useQuery('parentCategories', API.common.fetchParentCategoriesFromAPI);
     const {data:childrenCategories} = useQuery('childrenCategories', API.common.fetchChildrenCategoriesFromAPI);
     const {data:budgetCategories} = useQuery(['budgetCategories',{id: activeBudget}], () => API.budget.fetchBudgetCategoriesFromAPI({id: activeBudget}));
-    const {data:budget} = useQuery(['budget',{id: activeBudget}], () => API.budget.fetchBudgetFromAPI({id: activeBudget}));
+    const {data:budgetTransactions} = useQuery(['budgetTransactions',{id: activeBudget}], () => API.budget.fetchBudgetTransactionsFromAPI({id: activeBudget}));
 
     const addBudgetCategoryMutation = useMutation(API.budget.addBudgetCategory, {
         onSuccess: () => {
@@ -47,7 +47,6 @@ const BudgetPage = ({activeBudget, activeBudgetSet}) => {
             queryClient.invalidateQueries('allCategories');
             queryClient.invalidateQueries('childrenCategories');
             queryClient.invalidateQueries('parentCategories');
-            //more
         },
     });
     const addChildrenCategoryMutation = useMutation(API.common.addCategory, {
@@ -62,7 +61,6 @@ const BudgetPage = ({activeBudget, activeBudgetSet}) => {
             queryClient.invalidateQueries('allCategories');
             queryClient.invalidateQueries('childrenCategories');
             queryClient.invalidateQueries('parentCategories');
-            //more
         },
     });
     const removeChildrenCategoryMutation = useMutation(API.common.removeCategory, {
@@ -70,27 +68,27 @@ const BudgetPage = ({activeBudget, activeBudgetSet}) => {
             queryClient.invalidateQueries('allCategories');
             queryClient.invalidateQueries('childrenCategories');
             queryClient.invalidateQueries('parentCategories');
-            //more
         },
     });
 
-    const handleSubmitAddBudgetForm = (values) => {
-        console.log(values)
-        const newBudgetId = allBudgets.length > parseInt(allBudgets[allBudgets.length-1].id)
-            ? (allBudgets.length).toString()
-            :  (parseInt(allBudgets[allBudgets.length-1].id)+1).toString();
+    const handleSubmitAddBudgetForm = async (values) => {
+        // const newBudgetId = allBudgets.length > parseInt(allBudgets[allBudgets.length-1].id)
+        //     ? (allBudgets.length).toString()
+        //     :  (parseInt(allBudgets[allBudgets.length-1].id)+1).toString();
+        //
+        // ///
         const name = values['name'];
         const totalAmount = parseInt(values['totalAmount']);
         const categories = values['categories'];
-        const budgetData = {name, totalAmount, id:newBudgetId};
-        Object.keys(categories).forEach(function eachKey(key) {
+        const budgetData = {name, totalAmount};
+        const data = await API.budget.addBudget(budgetData);
+        await Object.keys(categories).forEach(function eachKey(key) {
             const categoryObject = {};
             categoryObject['categoryId'] = key;
             categoryObject['budget'] = categories[key];
-            categoryObject['budgetId'] = newBudgetId;
+            categoryObject['budgetId'] = data.createdBudget.id;
             addBudgetCategoryMutation.mutate(categoryObject);
         });
-        addBudgetMutation.mutate(budgetData);
         informationNotification("Succeeded in adding Budget");
     };
 
@@ -99,7 +97,6 @@ const BudgetPage = ({activeBudget, activeBudgetSet}) => {
         if (addedChildren.length > 0) addedChildren.forEach(child => addChildrenCategoryMutation.mutate(child));
         if (removedParents.length > 0) removedParents.forEach(parent => removeParentCategoryMutation.mutate(parent.id));
         if (addedParents.length > 0) addedParents.forEach(parent => addParentCategoryMutation.mutate(parent));
-        //add budgetCatwgories remove
         informationNotification("Categories changed successfully");
     };
 
@@ -127,6 +124,7 @@ const BudgetPage = ({activeBudget, activeBudgetSet}) => {
                         <BudgetCategories
                             allCategories={allCategories}
                             budgetCategories={budgetCategories}
+                            parentCategories={parentCategories}
                         />
                         <Link  to='/budget/new'>
                             <Button buttonType='addBudget'>{t("Add new budget")}</Button>
@@ -139,7 +137,8 @@ const BudgetPage = ({activeBudget, activeBudgetSet}) => {
                 <section>
                     <SuspenseErrorBoundary>
                         <Charts
-                            budget={budget}
+                            budget={budgetTransactions}
+                            parentCategories={parentCategories}
                             allCategories={allCategories}
                             budgetCategories={budgetCategories}
                         />

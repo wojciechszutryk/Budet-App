@@ -7,13 +7,15 @@ import {MoneyBar} from "../MoneyBar";
 import {useTranslation} from "react-i18next";
 
 const Charts = ({activeCategories, lightTheme,
-                    budget, allCategories, budgetCategories}) => {
+                    budget, allCategories, budgetCategories, parentCategories}) => {
     const {t} = useTranslation();
 
-    const groupedCategories = useMemo(() => (groupBy(budgetCategories,
-        budgetCategory => allCategories.find(
-            category => budgetCategory.categoryId === category.id).parentCategory.name
-    )), [allCategories,budgetCategories]);
+    const groupedCategories = useMemo(() => (groupBy(budgetCategories.budgetCategories,
+        budgetCategory => {
+            const parentCategoryId = allCategories.find(category => budgetCategory.categoryId === category.id).parentCategoryId;
+            return parentCategories.find(category => category.id === parentCategoryId).name;
+        }
+    )), [allCategories, budgetCategories.budgetCategories, parentCategories]);
 
     const colors = [];
 
@@ -45,7 +47,7 @@ const Charts = ({activeCategories, lightTheme,
     }).flat();
 
     const otherExpenses = useMemo(() => budget.transactions.filter(
-        transaction => !budgetCategories.find(budgetCategory => budgetCategory.categoryId === transaction.categoryId)
+        transaction => !budgetCategories.budgetCategories.find(budgetCategory => budgetCategory.categoryId === transaction.categoryId)
     ).reduce((acc,transaction) => acc + transaction.amount, 0), [budget.transactions, budgetCategories]);
     moneySpentOnCategory.push(otherExpenses);
 

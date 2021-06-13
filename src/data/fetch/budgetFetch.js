@@ -3,6 +3,11 @@ export const fetchBudgetFromAPI = async({id}) => {
     return await response.json()
 };
 
+export const fetchBudgetTransactionsFromAPI = async({id}) => {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/budgets/${id}/transactions`);
+    return await response.json()
+};
+
 export const fetchBudgetCategoriesFromAPI = async({id}) => {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/budgets/${id}/budgetCategories`);
     return await response.json()
@@ -29,7 +34,7 @@ export const addBudget = async(data) => {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {'Content-type': 'application/json'}
-    });
+    })
     return await response.json();
 };
 

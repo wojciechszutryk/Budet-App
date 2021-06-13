@@ -2,7 +2,7 @@ import React, {useMemo} from 'react';
 import {connect} from 'react-redux';
 import SortTransactions from "./SortTransactions";
 
-const BudgetTransactions = ({activeCategories, budget, allCategories}) => {
+const BudgetTransactions = ({activeCategories, budget, allCategories, parentCategories}) => {
     const filteredBySelectedCategory = useMemo(() => {
         const activeTransactions = [];
         if (activeCategories.length === 0) return budget.transactions
@@ -16,8 +16,9 @@ const BudgetTransactions = ({activeCategories, budget, allCategories}) => {
         const categoriesTransactions = budget.transactions.filter(
             transaction => {
                 try {
-                    const transactionParentCategory = allCategories.find(category => transaction.categoryId === category.id).parentCategory.name;
-                    return activeCategories.includes(transactionParentCategory);
+                    const transactionParentCategoryId = allCategories.find(category => transaction.categoryId === category.id).parentCategoryId;
+                    const parentCategoryName = parentCategories.find(category => category.id === transactionParentCategoryId).name;
+                    return activeCategories.includes(parentCategoryName);
                 } catch (err) {
                     return false
                 }
@@ -31,6 +32,8 @@ const BudgetTransactions = ({activeCategories, budget, allCategories}) => {
             return !duplicate;
         });
     },[activeCategories, allCategories, budget.transactions]);
+
+    console.log(filteredBySelectedCategory)
 
     return (
         <SortTransactions allTransactions={budget.transactions} categories={allCategories} transactions={filteredBySelectedCategory}/>
