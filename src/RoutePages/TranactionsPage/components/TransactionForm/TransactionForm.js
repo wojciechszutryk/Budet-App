@@ -5,21 +5,29 @@ import {FormField, FormGroup, FormSelect, Label, Message} from "components/Input
 import {Button} from "components";
 import {useTranslation} from "react-i18next";
 
-const TransactionForm = ({categories, onSubmit = () => {}}) => {
+const TransactionForm = ({categories, budgetCategories, parentCategories, onSubmit = () => {}}) => {
     const {t} = useTranslation();
 
     const required = value => (value ? undefined : t('Required'));
 
-    const groupByCategories = groupBy(categories, 'parentCategory.name');
+    const categoriesInBudget = categories.filter(category =>(
+            budgetCategories.find(budgetCat => budgetCat.categoryId === category.id)
+    ));
+
+    const groupByCategories = groupBy(categoriesInBudget, 'parentCategoryId');
     const groupedCategories = Object.assign({"Other": [{id:0, name:"Other"}]}, groupByCategories);
 
-    const categoriesToSelect = useMemo(() => Object.entries(groupedCategories).map(category => (
-        <optgroup key={category[0]} label={category[0]}>
+    const categoriesToSelect = useMemo(() => Object.entries(groupedCategories).map(category => {
+        let label;
+        const parentObject = parentCategories.find(parentCategory => (category[0] === parentCategory.id));
+        if (parentObject) label = parentObject.name;
+        else label = t('Other')
+        return <optgroup key={category[0]} label={label}>
             {category[1].map(cat => (
                 <option key={cat.id} value={cat.id}>{cat.name}</option>
             ))}
         </optgroup>
-    )),[groupedCategories]);
+    }),[groupedCategories, parentCategories, t]);
 
     return(
         <>

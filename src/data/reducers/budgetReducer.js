@@ -9,6 +9,7 @@ const startBudget = {
     budget: {},
     categories: [],
     activeCategories: [],
+    otherCategoryId: '60c7bcc8cbd57a2b0cb3a610',
 }
 
 const budget = (state= startBudget, action) => {

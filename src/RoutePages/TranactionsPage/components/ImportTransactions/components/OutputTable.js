@@ -9,14 +9,15 @@ import {useTranslation} from "react-i18next";
 import {connect} from "react-redux";
 import {useMutation, useQueryClient} from "react-query";
 import {informationNotification} from "utilities/functions";
+import API from "../../../../../data/fetch";
 
-const OutputTable = ({data, addTransition, budgetCategories, allCategories, activeBudget}) => {
+const OutputTable = ({data, budgetCategories, allCategories, activeBudget, otherCategoryId}) => {
     const {t} = useTranslation();
     const queryClient = useQueryClient();
 
-    const budgetCategoriesWithNames = budgetCategories.map(budgetCategory => (
+    const budgetCategoriesWithNames = budgetCategories.budgetCategories.map(budgetCategory => (
         {...budgetCategory, ...allCategories.find(category => budgetCategory.categoryId === category.id)}
-        ));
+    ));
 
     const transactions = useMemo(() => data.map(transaction => {
         if(transaction.length >= 4) {
@@ -27,7 +28,7 @@ const OutputTable = ({data, addTransition, budgetCategories, allCategories, acti
             if (amountIndex && typeof(transaction[amountIndex-1])==='string'
                 && typeof(transaction[amountIndex+1])==='string' && typeof(transaction[amountIndex+2])==='string'){
                 let categoryId = budgetCategoriesWithNames.find(category => category.name === transaction[amountIndex+2]);
-                if (!categoryId) categoryId = 0;
+                if (!categoryId) categoryId = otherCategoryId;
                 else categoryId = categoryId.categoryId;
                 const date = transaction[amountIndex+1].substring(0,10).replaceAll('.','-').split('-')
                 const year = date.find(val => val.length === 4);
@@ -43,7 +44,7 @@ const OutputTable = ({data, addTransition, budgetCategories, allCategories, acti
             }
         }
         return null;
-    }).filter(trans => trans !== null),[budgetCategoriesWithNames, data]);
+    }).filter(trans => trans !== null),[budgetCategoriesWithNames, data, otherCategoryId]);
 
     const rowsNumber = useMemo( () => transactions.length,[transactions.length]);
 
@@ -55,19 +56,15 @@ const OutputTable = ({data, addTransition, budgetCategories, allCategories, acti
 
     const correctTransactionsToShow = rowsNumber > 7 ? transactionDescriptions.slice(0,7) : transactionDescriptions;
 
-    const addTransitionMutation = useMutation(addTransition, {
-        onSuccess: () => {
-            queryClient.invalidateQueries('budget')
-        },
-    })
+    const addTransactionMutation = useMutation(API.budget.addTransition)
 
     const handleCheckAndSubmit = () => {
-        transactions.forEach(transaction =>
-            addTransitionMutation.mutate({
-                budgetId: activeBudget.toString(),
-                data: transaction
-            })
-        )
+        transactions.forEach(transaction => {
+            transaction.budgetId = activeBudget.toString();
+            addTransactionMutation.mutate({data: transaction}, {onSuccess: () => {
+                queryClient.refetchQueries()
+            }})
+        })
         informationNotification("Succeeded in adding Transactions");
     };
 
@@ -93,6 +90,11 @@ const OutputTable = ({data, addTransition, budgetCategories, allCategories, acti
     );
 };
 
-const ConnectedOutputTable = connect(state => ({activeBudget: state.common.activeBudget,}))(OutputTable);
+const ConnectedOutputTable = connect(state =>
+    ({
+        activeBudget: state.common.activeBudget,
+        otherCategoryId: state.budget.otherCategoryId,
+    }))
+(OutputTable);
 
 export default ConnectedOutputTable;

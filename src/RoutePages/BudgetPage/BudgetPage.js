@@ -72,17 +72,11 @@ const BudgetPage = ({activeBudget, activeBudgetSet}) => {
     });
 
     const handleSubmitAddBudgetForm = async (values) => {
-        // const newBudgetId = allBudgets.length > parseInt(allBudgets[allBudgets.length-1].id)
-        //     ? (allBudgets.length).toString()
-        //     :  (parseInt(allBudgets[allBudgets.length-1].id)+1).toString();
-        //
-        // ///
         const name = values['name'];
         const totalAmount = parseInt(values['totalAmount']);
         const categories = values['categories'];
         const budgetData = {name, totalAmount};
         const data = await addBudgetMutation.mutateAsync(budgetData);
-        console.log(data)
         await Object.keys(categories).forEach(function eachKey(key) {
             const categoryObject = {};
             categoryObject['categoryId'] = key;
@@ -90,6 +84,11 @@ const BudgetPage = ({activeBudget, activeBudgetSet}) => {
             categoryObject['budgetId'] = data.createdBudget.id;
             addBudgetCategoryMutation.mutate(categoryObject);
         });
+        const otherCategoryObject = {};
+        otherCategoryObject['categoryId'] = '60c7bcc8cbd57a2b0cb3a610';
+        otherCategoryObject['budget'] = 0;
+        otherCategoryObject['budgetId'] = data.createdBudget.id;
+        addBudgetCategoryMutation.mutate(otherCategoryObject);
         informationNotification("Succeeded in adding Budget");
     };
 

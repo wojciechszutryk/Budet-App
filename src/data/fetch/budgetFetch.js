@@ -13,8 +13,8 @@ export const fetchBudgetCategoriesFromAPI = async({id}) => {
     return await response.json()
 };
 
-export const addTransition = async({budgetId, data}) => {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/budgets/${budgetId}/transactions`,{
+export const addTransition = async({data}) => {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/transactions`,{
         method: 'POST',
         body: JSON.stringify(data),
         headers: {'Content-type': 'application/json'}

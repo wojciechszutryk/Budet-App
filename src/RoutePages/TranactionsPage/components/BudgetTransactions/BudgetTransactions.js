@@ -31,9 +31,7 @@ const BudgetTransactions = ({activeCategories, budget, allCategories, parentCate
             seen.add(el.id);
             return !duplicate;
         });
-    },[activeCategories, allCategories, budget.transactions]);
-
-    console.log(filteredBySelectedCategory)
+    },[activeCategories, allCategories, budget.transactions, parentCategories]);
 
     return (
         <SortTransactions allTransactions={budget.transactions} categories={allCategories} transactions={filteredBySelectedCategory}/>

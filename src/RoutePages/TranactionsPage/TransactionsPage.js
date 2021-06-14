@@ -15,8 +15,7 @@ const TransactionForm = React.lazy(() => import('./components/TransactionForm'))
 const ExportTransactions = React.lazy(() => import('./components/ExportTransactions'));
 const ImportTransactions = React.lazy(() => import('./components/ImportTransactions'));
 
-const TransactionsPage = ({activeBudget, activeBudgetSet}) => {
-
+const TransactionsPage = ({activeBudget, activeBudgetSet, otherCategoryId}) => {
     const queryClient = useQueryClient();
     const {t} = useTranslation();
     const {data:allBudgets} = useQuery('allBudgets', API.common.fetchAllBudgetsFromAPI);
@@ -25,32 +24,24 @@ const TransactionsPage = ({activeBudget, activeBudgetSet}) => {
     const {data:parentCategories} = useQuery('parentCategories', API.common.fetchParentCategoriesFromAPI);
     const {data:budget} = useQuery(['budgetTransactions',{id: activeBudget}], () => API.budget.fetchBudgetTransactionsFromAPI({id: activeBudget}));
 
-    const addTransitionMutation = useMutation(API.budget.addTransition, {
-        onSuccess: () => {
-            queryClient.invalidateQueries('budget').then(r => JSON.stringify(r));
-            queryClient.invalidateQueries('budgetCategories').then(r => JSON.stringify(r));
-        },
-    })
-
-    const removeBudgetMutation = useMutation(API.common.removeBudget, {
-        onSuccess: () => {
-            queryClient.invalidateQueries('allBudgets');
-        },
-    })
+    const addTransactionMutation = useMutation(API.budget.addTransition)
+    const removeBudgetMutation = useMutation(API.common.removeBudget)
 
     const handleSubmitAddTransactionForm = (values) => {
-        addTransitionMutation.mutate({
-            budgetId: activeBudget.toString(),
-            data: values
-        });
+        values.budgetId = activeBudget;
+        if (values.categoryId === '0') values.categoryId = otherCategoryId;
+        addTransactionMutation.mutate({data: values}, {onSuccess: () => {
+            queryClient.refetchQueries()
+        }});
         informationNotification("Succeeded in adding Transaction");
-
     };
 
     const handleRemoveBudget = (id) => {
         if (allBudgets.length<2) informationNotification("You must have at least one budget.");
         else if (id === activeBudget.toString() && allBudgets.length > 0) {
-            removeBudgetMutation.mutate(id);
+            removeBudgetMutation.mutate(id, {onSuccess: () => {
+                queryClient.refetchQueries()
+            }});
             activeBudgetSet(allBudgets[0].id);
             informationNotification("Succeeded in removing Budget");
         }
@@ -92,7 +83,11 @@ const TransactionsPage = ({activeBudget, activeBudgetSet}) => {
             <Switch>
                 <Route path='/transactions/new' exact>
                     <Modal>
-                        <TransactionForm categories={allCategories} onSubmit={handleSubmitAddTransactionForm}/>
+                        <TransactionForm
+                            categories={allCategories}
+                            budgetCategories={budgetCategories.budgetCategories}
+                            parentCategories={parentCategories}
+                            onSubmit={handleSubmitAddTransactionForm}/>
                     </Modal>
                 </Route>
                 <Route path='/transactions/import' exact>
@@ -107,7 +102,8 @@ const TransactionsPage = ({activeBudget, activeBudgetSet}) => {
 
 const ConnectedTransactionsPage = connect(
 state => ({
-    activeBudget: state.common.activeBudget
+    activeBudget: state.common.activeBudget,
+    otherCategoryId: state.budget.otherCategoryId
 }),
     {
         activeBudgetSet,

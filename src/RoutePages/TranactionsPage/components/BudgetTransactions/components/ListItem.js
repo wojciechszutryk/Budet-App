@@ -9,13 +9,11 @@ import API from "data/fetch";
 
 const ListItem = ({amount, category, date, description, id}) => {
     const queryClient = useQueryClient();
-    const removeTransactionMutation = useMutation(API.budget.removeTransition, {
-        onSuccess: () => {
-            queryClient.invalidateQueries('budget');
-        },
-    })
+    const removeTransactionMutation = useMutation(API.budget.removeTransition)
     const handleRemoveTransaction = () => {
-        removeTransactionMutation.mutate(id);
+        removeTransactionMutation.mutate(id, {onSuccess: () => {
+            queryClient.refetchQueries()
+        }});
         informationNotification("Succeeded in removing Transaction");
     }
     return (
