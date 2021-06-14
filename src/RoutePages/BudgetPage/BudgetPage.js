@@ -81,7 +81,8 @@ const BudgetPage = ({activeBudget, activeBudgetSet}) => {
         const totalAmount = parseInt(values['totalAmount']);
         const categories = values['categories'];
         const budgetData = {name, totalAmount};
-        const data = await API.budget.addBudget(budgetData);
+        const data = await addBudgetMutation.mutateAsync(budgetData);
+        console.log(data)
         await Object.keys(categories).forEach(function eachKey(key) {
             const categoryObject = {};
             categoryObject['categoryId'] = key;
@@ -92,11 +93,17 @@ const BudgetPage = ({activeBudget, activeBudgetSet}) => {
         informationNotification("Succeeded in adding Budget");
     };
 
-    const handleChangeCategories = (addedChildren, removedChildren, addedParents, removedParents) => {
-        if (removedChildren.length > 0) removedChildren.forEach(child => removeChildrenCategoryMutation.mutate(child.id));
-        if (addedChildren.length > 0) addedChildren.forEach(child => addChildrenCategoryMutation.mutate(child));
-        if (removedParents.length > 0) removedParents.forEach(parent => removeParentCategoryMutation.mutate(parent.id));
+    const handleChangeCategories = async (addedChildren, removedChildren, addedParents, removedParents, addedParentsWithChildren) => {
         if (addedParents.length > 0) addedParents.forEach(parent => addParentCategoryMutation.mutate(parent));
+        if (removedChildren.length > 0) removedChildren.forEach(child => removeChildrenCategoryMutation.mutate(child.id));
+        if (removedParents.length > 0) removedParents.forEach(parent => removeParentCategoryMutation.mutate(parent.id));
+        if (addedChildren.length > 0) addedChildren.forEach(child => addChildrenCategoryMutation.mutate(child));
+        if (addedParentsWithChildren.length > 0){
+            for(const group of addedParentsWithChildren){
+                const parentData = await addParentCategoryMutation.mutateAsync(group.parent);
+                for (const child of group.children) child.parentCategoryId = await parentData.createdParentCategory.id
+            }
+        }
         informationNotification("Categories changed successfully");
     };
 
