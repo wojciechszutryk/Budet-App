@@ -4,7 +4,6 @@ import {setCurrency} from "utilities/functions";
 import MoneyStatistics from "./MoneyStatistics";
 
 const ParentCategory = ({name, onClick, categoriesInside, transactions, other= null}) => {
-
     const moneyInParentCategory = useMemo(() => {
         if(!other){
             let budgetMoney = 0;
