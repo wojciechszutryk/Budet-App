@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Grid = styled.div`
   display: flex;
+  overflow-x: hidden;
   
   section:nth-child(1){
     position: relative;
@@ -15,6 +16,15 @@ export const Grid = styled.div`
   @media only screen and (max-width: 900px) {
     flex-direction: column;
   }
+`;
+
+export const UserButtons = styled.div`
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    & *:first-child{
+      margin-left: 20px;
+    }
 `;
 
 export const StyledHeader = styled.h1`

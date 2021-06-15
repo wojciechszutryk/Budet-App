@@ -13,7 +13,7 @@ import {groupBy} from "lodash";
 import {faTrashAlt, faPlus} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-const EditCategoriesForm = ({childrenCategories, parentCategories, onSubmit}) => {
+const EditCategoriesForm = ({childrenCategories, parentCategories, budgetCategories, onSubmit}) => {
     const {t} = useTranslation();
     const [parentCat, setParentCat] = useState(parentCategories);
     const [childrenCat, setChildrenCat] = useState(childrenCategories);

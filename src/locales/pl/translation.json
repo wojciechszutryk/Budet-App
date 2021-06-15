@@ -5,6 +5,7 @@
   "date": "Data",
   "amount": "Wartość",
   "category": "Kategoria",
+  "Categories": "Kategorie",
   "description": "Opis",
   "Show All Transactions": "Pokaż wszystkie transakcje",
   "Search transaction": "Szukaj transakcji",
@@ -60,5 +61,13 @@
   "Insert category name": "Wpisz nazwę kategori",
   "Category exists": "Kategoria istnieje",
   "New parent Category": "Nowa kategoria",
-  "Categories changed successfully": "Zmiana kategori zakończona skucesem"
+  "Categories changed successfully": "Zmiana kategori zakończona skucesem",
+  "Upload user photo": "Wybierz zdjęcie użytkownika",
+  "Register": "Zarejestruj się",
+  "Invalid Email": "Niepoprawny email",
+  "\"Password don't match\"": "Hasła nie pasują",
+  "user name": "nazwa użytkownika",
+  "password": "hasło",
+  "repeat password": "powtórz hasło",
+  "You have registered successfully": "Zarejestrowałeś/aś się pomyślnie"
 }

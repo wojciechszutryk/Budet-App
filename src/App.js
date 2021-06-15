@@ -11,6 +11,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import {BudgetPage, TransactionsPage, HomePage} from "./RoutePages";
 import {Navigation, SuspenseErrorBoundary, Wrapper} from 'components';
 import {QueryClient, QueryClientProvider} from "react-query";
+import RegisterPage from "./RoutePages/RegisterPage";
 
 function App() {
     const [theme, setTheme] = useState(darkStyles);
@@ -38,6 +39,7 @@ function App() {
                           <Route path='/' exact><HomePage reload={theme}/></Route>
                           <Route path='/budget'><BudgetPage/></Route>
                           <Route path='/transactions'><TransactionsPage/></Route>
+                          <Route path='/register'><RegisterPage/></Route>
                       </Switch>
                   </Wrapper>
               </SuspenseErrorBoundary>

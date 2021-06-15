@@ -61,3 +61,12 @@ export const removeCategory = (id) => {
         headers: {'Content-type': 'application/json'}
     });
 };
+
+export const userSignUp = async(data) => {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/users/signup`,{
+        method: 'POST',
+        body: data,
+        // headers: {"Content-Type": "multipart/form-data"}
+    })
+    return await response.json()
+};

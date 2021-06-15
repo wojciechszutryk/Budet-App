@@ -171,6 +171,7 @@ const BudgetPage = ({activeBudget, activeBudgetSet}) => {
                 <Route path='/budget/categories/edit' exact>
                     <Modal>
                         <EditCategoriesForm
+                            budgetCategories={budgetCategories.budgetCategories}
                             parentCategories={parentCategories}
                             childrenCategories={childrenCategories}
                             onSubmit={handleChangeCategories}

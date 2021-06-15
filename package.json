@@ -70,6 +70,7 @@
   "devDependencies": {
     "@styled-icons/octicons": "^10.28.0",
     "@styled-icons/styled-icon": "^10.6.3",
+    "axios": "^0.21.1",
     "css-loader": "^5.0.1",
     "redux-devtools-extension": "^2.13.8",
     "style-loader": "^2.0.0"

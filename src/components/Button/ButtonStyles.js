@@ -163,7 +163,7 @@ export const SubmitButton = styled(ParentButton)`
     padding: ${({theme}) => theme.spacing.xs}px ${({theme}) => theme.spacing.normal}px;
     border: none;
     line-height: 1.25;
-    background-color: ${({theme}) => theme.colors.orange.dark};
+    background-color: ${({theme}) => theme.colors.sadMac.eyes};
     text-decoration: none;
     color: white;
     font-size: 16px;

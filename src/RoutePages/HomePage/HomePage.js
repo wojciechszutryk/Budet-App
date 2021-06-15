@@ -1,12 +1,13 @@
 import React, {useEffect} from 'react';
 import SadMac from "components/SadMac";
-import {Grid, StyledFeatureItem, StyledFeatureList, StyledHeader, SubHeader} from "./HomePageStyles";
+import {Grid, StyledFeatureItem, StyledFeatureList, StyledHeader, SubHeader, UserButtons} from "./HomePageStyles";
 import Aos from "aos"
 import "aos/dist/aos.css"
 import {useTranslation} from "react-i18next";
+import {Button} from "../../components";
+import {Link} from "react-router-dom";
 
 const HomePage = ({reload}) => {
-    console.log(reload)
     useEffect(() => {
         Aos.init();
     },[reload]);
@@ -46,6 +47,18 @@ const HomePage = ({reload}) => {
     return (
         <Grid>
             <section data-aos="fade-right">
+                <UserButtons>
+                    <Link  to='/login'>
+                        <Button
+                            buttonType='submit'
+                        >{t('Login')}</Button>
+                    </Link>
+                    <Link  to='/register'>
+                        <Button
+                            buttonType='submit'
+                        >{t('Register')}</Button>
+                    </Link>
+                </UserButtons>
                 <SadMac sad={false}/>
             </section>
             <section>

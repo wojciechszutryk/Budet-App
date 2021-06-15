@@ -49,6 +49,24 @@ const AddBudgetForm = ({categories, onSubmit}) => {
         <>
             <h1>{t('Add Budget')}</h1>
             <form id="budgetForm">
+                <FormGroup >
+                    <Select
+                        theme={theme => ({
+                            ...theme,
+                            colors: {
+                                ...theme.colors,
+                                primary25: 'orange',
+                                primary: 'black',
+                            },
+                        })}
+                        onChange={setSelectedCategories}
+                        placeholder={t('Categories')}
+                        closeMenuOnSelect={false}
+                        isMulti
+                        options={categoriesToSelect}
+                    />
+                </FormGroup>
+
                 <FormGroup>
                     <FormField
                         type="text"
@@ -69,16 +87,6 @@ const AddBudgetForm = ({categories, onSubmit}) => {
                     />
                     <Label>{t('amount')}</Label>
                     {FoundsError ? <Message>{t('Required')}</Message> : null}
-                </FormGroup>
-
-                <FormGroup>
-                    <Select
-                        onChange={setSelectedCategories}
-                        placeholder={t('category')}
-                        closeMenuOnSelect={false}
-                        isMulti
-                        options={categoriesToSelect}
-                    />
                 </FormGroup>
 
                 <FormGroup>

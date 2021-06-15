@@ -5,6 +5,7 @@
   "date": "Date",
   "amount": "Amount",
   "category": "Category",
+  "Categories": "Categories",
   "description": "Description",
   "Show All Transactions": "Show All Transactions",
   "Search transaction": "Search transaction",
@@ -56,5 +57,13 @@
   "Insert category name": "Insert category name",
   "Category exists": "Category exists",
   "New parent Category": "New parent Category",
-  "Categories changed successfully": "Categories changed successfully"
+  "Categories changed successfully": "Categories changed successfully",
+  "Upload user photo": "Upload user photo",
+  "Register": "Sign up",
+  "Invalid Email": "Invalid Email",
+  "\"Password don't match\"": "Password don't match",
+  "user name": "user name",
+  "password": "password",
+  "repeat password": "repeat password",
+  "You have registered successfully": "You have registered successfully"
 }
