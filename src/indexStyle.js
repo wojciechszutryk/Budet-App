@@ -19,7 +19,11 @@ const GlobalStyles = createGlobalStyle`
     }
     
     a{
-      text-decoration: none;
+      text-decoration: none !important;
+    }
+    
+    a a{
+      color: ${({theme}) => theme.colors.sadMac.eyes} !important;
     }
     
     a.selected button::after{

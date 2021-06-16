@@ -65,5 +65,6 @@
   "user name": "Nutzername",
   "password": "Passwort",
   "repeat password": "Wiederhole das Passwort",
-  "You have registered successfully": "Du hast dich erfolgreich registriert"
+  "You have registered successfully": "Du hast dich erfolgreich registriert",
+  "Login": "Login"
 }

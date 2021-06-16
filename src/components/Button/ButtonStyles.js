@@ -315,3 +315,24 @@ export const SetLightButton = styled(SetDarkButton)`
         font-size: 20px;
     }
 `;
+
+export const UserButton = styled(ParentButton)`
+  
+  background-color: red;
+  background-image: url("${props => props.userImage}");
+  background-size: cover;
+  color: ${({theme}) => theme.colors.black.normal};
+  display: inline-block;
+  position: relative;
+  width: 34px;
+  height: 34px;
+  margin-right: ${({theme}) => theme.spacing.sm}px;
+  border: 2px solid ${({theme}) => theme.colors.black.normal};
+  border-radius: 20%;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border .2s;
+  &:hover{
+    border: 2px solid ${({theme}) => theme.colors.sadMac.eyes};
+  }
+`;

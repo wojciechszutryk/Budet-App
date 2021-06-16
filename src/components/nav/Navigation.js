@@ -10,8 +10,9 @@ import {connect} from "react-redux";
 import {themeToggle} from "../../data/actions/commonActions";
 import {Navbar, Nav, NavDropdown} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import UserAccount from "../UserAccount";
 
-const Navigation = ({pages= [], theme, themeSet, themeToggle}) => {
+const Navigation = ({pages= [], theme, themeSet, themeToggle, token}) => {
     const {t} = useTranslation();
 
     const list = pages.map(page => (
@@ -37,15 +38,26 @@ const Navigation = ({pages= [], theme, themeSet, themeToggle}) => {
                     </NavList>
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="ml-auto">
-                            <NavList>
-                                <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-                                    <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                                    <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                                    <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                                    <NavDropdown.Divider />
-                                    <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                                </NavDropdown>
-                            </NavList>
+                            {
+                                token
+                                    ?
+                                <NavList style={{marginTop: '14px'}}>
+                                     <UserAccount/>
+                                </NavList>
+                                    :
+                                <NavList>
+                                    <NavDropdown title={t("Account")} id="collasible-nav-dropdown">
+                                        <NavDropdown.Item>
+                                            <NavLink to={'/login'}>{t("Login")}</NavLink>
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Item>
+                                            <NavLink to={'/register'}>{t("Register")}</NavLink>
+                                        </NavDropdown.Item>
+                                    </NavDropdown>
+                                </NavList>
+                            }
+
                             <NavList className="pt-1">
                                 {theme === 'lightTheme' ?
                                     <SetDarkButton onClick={handleThemeChange}><FontAwesomeIcon icon={faCloud} /><FontAwesomeIcon icon={faMoon} /></SetDarkButton> :
@@ -65,4 +77,6 @@ const mapDispatchToProps = {
     themeToggle
 };
 
-export default connect(null,mapDispatchToProps)(Navigation);
+export default connect(state => ({
+    token: state.common.token
+}),mapDispatchToProps)(Navigation);

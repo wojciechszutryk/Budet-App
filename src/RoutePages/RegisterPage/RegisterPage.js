@@ -81,7 +81,8 @@ const RegisterPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         let currentFile = selectedFiles[0];
-        if (validate() && !InvalidEmailError){
+        validate();
+        if (!EmptyEmailError && !EmptyPasswordError && !EmptyRepeatPasswordError && !PasswordDontMatchError && !EmptyFileError && !InvalidEmailError){
             let formData = new FormData();
             formData.append("userImage", currentFile);
             formData.append("userName", userName);
@@ -132,81 +133,83 @@ const RegisterPage = () => {
     return (
         <Grid>
             <section data-aos="fade-right">
-                {
-                    response ?  responseMessage :
-                    <SadMac sad={false}/>
-                }
+                <SadMac sad={false}/>
             </section>
             <section>
-                <StyledHeader>{t('Register')}</StyledHeader>
-                <form id="budgetForm" onSubmit={handleSubmit}>
-                    <FormGroup>
-                        <FormField
-                            type="text"
-                            placeholder="Email"
-                            onChange={handleEmailChange}
-                        />
-                        <Label>{t('email')}</Label>
-                        {EmptyEmailError ? <Message>{t('Required')}</Message> : null}
-                    </FormGroup>
+                {response ? responseMessage :
+                    <>
+                        <StyledHeader>{t('Register')}</StyledHeader>
+                        <form id="budgetForm" onSubmit={handleSubmit}>
+                            <FormGroup>
+                                <FormField
+                                    type="text"
+                                    placeholder="Email"
+                                    onChange={handleEmailChange}
+                                />
+                                <Label>{t('email')}</Label>
+                                {EmptyEmailError ? <Message>{t('Required')}</Message> : null}
+                            </FormGroup>
 
-                    <FormGroup>
-                        <FormField
-                            type="text"
-                            placeholder={t("user name")}
-                            onChange={handleUserNameChange}
-                        />
-                        <Label>{t('user name')}</Label>
-                        {EmptyUserNameError ? <Message>{t('Required')}</Message> : null}
-                    </FormGroup>
+                            <FormGroup>
+                                <FormField
+                                    type="text"
+                                    placeholder={t("user name")}
+                                    onChange={handleUserNameChange}
+                                />
+                                <Label>{t('user name')}</Label>
+                                {EmptyUserNameError ? <Message>{t('Required')}</Message> : null}
+                            </FormGroup>
 
-                    <FormGroup>
-                        <FormField
-                            type="password"
-                            placeholder={t("password")}
-                            onChange={handlePasswordChange}
-                        />
-                        <Label>{t('password')}</Label>
-                        {EmptyPasswordError ? <Message>{t('Required')}</Message> : null}
-                    </FormGroup>
+                            <FormGroup>
+                                <FormField
+                                    type="password"
+                                    placeholder={t("password")}
+                                    onChange={handlePasswordChange}
+                                />
+                                <Label>{t('password')}</Label>
+                                {EmptyPasswordError ? <Message>{t('Required')}</Message> : null}
+                            </FormGroup>
 
-                    <FormGroup>
-                        <FormField
-                            type="password"
-                            placeholder={t("repeat password")}
-                            onChange={handleRepeatPasswordChange}
-                        />
-                        <Label>{t("repeat password")}</Label>
-                        {EmptyRepeatPasswordError ? <Message>{t('Required')}</Message> : null}
-                    </FormGroup>
+                            <FormGroup>
+                                <FormField
+                                    type="password"
+                                    placeholder={t("repeat password")}
+                                    onChange={handleRepeatPasswordChange}
+                                />
+                                <Label>{t("repeat password")}</Label>
+                                {EmptyRepeatPasswordError ? <Message>{t('Required')}</Message> : null}
+                            </FormGroup>
 
-                    <FormGroup style={{color: 'gray'}}>
-                        <label className="btn btn-default" htmlFor="photo" style={{color: 'gray'}}>
-                            {t('Upload user photo')}
-                        </label>
-                        <input name="photo" type="file" accept="image/png, image/jpeg" onChange={handleSelectFile} />
-                        {EmptyFileError ? <Message>{t('Required')}</Message> : null}
-                    </FormGroup>
+                            <FormGroup style={{color: 'gray'}}>
+                                <label className="btn btn-default" htmlFor="photo" style={{color: 'gray'}}>
+                                    {t('Upload user photo')}
+                                </label>
+                                <input name="photo" type="file" accept="image/png, image/jpeg"
+                                       onChange={handleSelectFile}/>
+                                {EmptyFileError ? <Message>{t('Required')}</Message> : null}
+                            </FormGroup>
 
-                    <FormGroup>
-                        {PasswordDontMatchError ? <Message>{t("Password don't match")}</Message> : null}
-                        {InvalidEmailError ? <Message>{t("Invalid Email")}</Message> : null}
-                        <ButtonsStyle>
-                            <Button
-                                disabled={PasswordDontMatchError || EmptyEmailError || EmptyPasswordError || EmptyRepeatPasswordError}
-                                buttonType='submit'
-                                type='submit'
-                            >{t('Register')}</Button>
-                            <Button
-                                buttonType="reset"
-                                type="button"
-                                onClick={resetForm}
-                            >
-                                Reset
-                            </Button>
-                        </ButtonsStyle>
-                    </FormGroup>
-                </form>
+                            <FormGroup>
+                                {PasswordDontMatchError ? <Message>{t("Password don't match")}</Message> : null}
+                                {InvalidEmailError ? <Message>{t("Invalid Email")}</Message> : null}
+                                <ButtonsStyle>
+                                    <Button
+                                        disabled={PasswordDontMatchError || EmptyEmailError || EmptyPasswordError || EmptyRepeatPasswordError}
+                                        buttonType='submit'
+                                        type='submit'
+                                    >{t('Register')}</Button>
+                                    <Button
+                                        buttonType="reset"
+                                        type="button"
+                                        onClick={resetForm}
+                                    >
+                                        Reset
+                                    </Button>
+                                </ButtonsStyle>
+                            </FormGroup>
+                        </form>
+                    </>
+                }
             </section>
         </Grid>
     );
