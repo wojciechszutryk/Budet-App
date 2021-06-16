@@ -3,6 +3,11 @@ export const fetchAllCategoriesFromAPI = async() => {
     return await response.json();
 }
 
+export const fetchAllBudgetCategoriesFromAPI = async() => {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/budgetCategories`);
+    return await response.json();
+}
+
 export const fetchParentCategoriesFromAPI = async() => {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/parentCategories`);
     return await response.json();
