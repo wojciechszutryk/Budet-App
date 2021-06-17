@@ -69,7 +69,7 @@ const LoginPage = ({appTokenSet, loggedUserNameSet, loggedUserIdSet, loggedUserI
                 appTokenSet(res.token);
                 loggedUserNameSet(res.userName);
                 loggedUserIdSet(res.id);
-                loggedUserImageSet(process.env.REACT_APP_API_URL + '/' + res.userImage);
+                loggedUserImageSet(process.env.REACT_APP_API_URL + '/' + res.userImage.replaceAll("\\","/"));
             }
             else{
                 setResponse(res.message);

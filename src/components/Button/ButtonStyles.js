@@ -317,13 +317,12 @@ export const SetLightButton = styled(SetDarkButton)`
 `;
 
 export const UserButton = styled(ParentButton)`
-  
-  background-color: red;
-  background-image: url("${props => props.userImage}");
+  position: relative;
+  background-color: ${({theme}) => theme.colors.background.normal};
+  //background-image: url("${props => props.userImage}");
   background-size: cover;
   color: ${({theme}) => theme.colors.black.normal};
   display: inline-block;
-  position: relative;
   width: 34px;
   height: 34px;
   margin-right: ${({theme}) => theme.spacing.sm}px;
