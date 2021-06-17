@@ -66,5 +66,7 @@
   "password": "Passwort",
   "repeat password": "Wiederhole das Passwort",
   "You have registered successfully": "Du hast dich erfolgreich registriert",
-  "Login": "Login"
+  "Login": "Login",
+  "Logout": "Ausloggen",
+  "Logged as": "Angemeldet als"
 }

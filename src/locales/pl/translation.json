@@ -70,5 +70,7 @@
   "password": "hasło",
   "repeat password": "powtórz hasło",
   "You have registered successfully": "Zarejestrowałeś/aś się pomyślnie",
-  "Login": "Login"
+  "Login": "Login",
+  "Logout": "Wyloguj",
+  "Logged as": "Zalogowano jako"
 }
