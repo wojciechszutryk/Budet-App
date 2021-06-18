@@ -7,8 +7,9 @@ import './indexStyle';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './i18n';
+import store from 'data/store';
 
-const store = configureStore();
+// const store = configureStore();
 
 ReactDOM.render(
     <Provider store={store}>

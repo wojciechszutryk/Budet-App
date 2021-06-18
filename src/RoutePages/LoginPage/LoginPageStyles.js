@@ -20,10 +20,6 @@ export const Grid = styled.div`
   }
 `;
 
-export const StyledInfo = styled.div`
-    color: ${({theme}) => theme.colors.black.normal};
-`;
-
 export const ButtonsStyle = styled.div`
     display: flex;
     justify-content: center;

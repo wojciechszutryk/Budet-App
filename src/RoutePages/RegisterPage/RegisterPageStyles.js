@@ -20,6 +20,12 @@ export const Grid = styled.div`
   }
 `;
 
+export const BottomMessage = styled.span`
+    text-align: center;
+	color: rgb(255, 26, 26);
+    display: block;
+`;
+
 export const StyledInfo = styled.div`
     color: ${({theme}) => theme.colors.black.normal};
 `;

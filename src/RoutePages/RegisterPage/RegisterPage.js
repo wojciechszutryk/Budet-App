@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import SadMac from "components/SadMac";
-import {ButtonsStyle, Grid, StyledHeader, StyledInfo} from "./RegisterPageStyles";
+import {BottomMessage, ButtonsStyle, Grid, StyledHeader, StyledInfo} from "./RegisterPageStyles";
 import {useTranslation} from "react-i18next";
 import {FormField, FormGroup, Label, Message} from "../../components/Input/InputStyles";
 import {Button} from "../../components";
@@ -8,7 +8,6 @@ import {useMutation} from "react-query";
 import API from "../../data/fetch";
 import Aos from "aos";
 import {Link} from "react-router-dom";
-import {UserButtons} from "../HomePage/HomePageStyles";
 
 const RegisterPage = () => {
     const {t} = useTranslation();
@@ -26,6 +25,9 @@ const RegisterPage = () => {
     const [EmptyFileError, setEmptyFileError] = useState(true);
     const [PasswordDontMatchError, setPasswordDontMatchError] = useState(false);
     const [InvalidEmailError, setInvalidEmailError] = useState(false);
+    const [TooShortUserNameError, setTooShortUserNameError] = useState(true);
+    const [TooLongUserNameError, setTooLongUserNameError] = useState(true);
+    const [TooShortPasswordError, setTooShortPasswordError] = useState(true);
     const [response, setResponse] = useState('');
 
     useEffect(() => {
@@ -40,6 +42,10 @@ const RegisterPage = () => {
     }
     const handleUserNameChange = (event) => {
         if (event.target.value) setEmptyUserNameError(false)
+        if (event.target.value.length > 12) setTooLongUserNameError(true)
+        else setTooLongUserNameError(false);
+        if (event.target.value.length < 4) setTooShortUserNameError(true)
+        else setTooShortUserNameError(false);
         setUserName(event.target.value);
     }
     const handlePasswordChange = (event) => {
@@ -48,6 +54,8 @@ const RegisterPage = () => {
         passwordRef.current = event.target.value;
         if (passwordRef.current === repeatPasswordRef.current) setPasswordDontMatchError(false)
         else setPasswordDontMatchError(true)
+        if (passwordRef.current < 4) setTooShortPasswordError(true)
+        else setTooShortPasswordError(false);
     }
     const handleRepeatPasswordChange = (event) => {
         if (event.target.value) setEmptyRepeatPasswordError(false)
@@ -71,6 +79,9 @@ const RegisterPage = () => {
     const validate = () => {
         if (email==='') setEmptyEmailError(true);
         if (password==='') setEmptyPasswordError(true);
+        if (password.length < 7) setTooShortPasswordError(true);
+        if (userName.length < 4) setTooShortUserNameError( true);
+        if (userName.length > 12) setTooLongUserNameError( true);
         const re = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
         if (!re.test(email)) setInvalidEmailError(true)
         else setInvalidEmailError(false)
@@ -82,7 +93,7 @@ const RegisterPage = () => {
         e.preventDefault();
         let currentFile = selectedFiles[0];
         validate();
-        if (!EmptyEmailError && !EmptyPasswordError && !EmptyRepeatPasswordError && !PasswordDontMatchError && !EmptyFileError && !InvalidEmailError){
+        if (!EmptyEmailError && !EmptyPasswordError && !EmptyRepeatPasswordError && !PasswordDontMatchError && !EmptyFileError && !InvalidEmailError && !TooShortUserNameError && !TooShortPasswordError && !TooLongUserNameError){
             let formData = new FormData();
             formData.append("userImage", currentFile);
             formData.append("userName", userName);
@@ -90,7 +101,6 @@ const RegisterPage = () => {
             formData.append("email", email);
 
             const res = await signupUserMutation.mutateAsync(formData);
-            await console.log(res)
             if (res.id){
                 setEmail('')
                 setUserName('')
@@ -190,11 +200,14 @@ const RegisterPage = () => {
                             </FormGroup>
 
                             <FormGroup>
-                                {PasswordDontMatchError ? <Message>{t("Password don't match")}</Message> : null}
-                                {InvalidEmailError ? <Message>{t("Invalid Email")}</Message> : null}
+                                {PasswordDontMatchError ? <BottomMessage>{t("Password don't match")}</BottomMessage> : null}
+                                {InvalidEmailError ? <BottomMessage>{t("Invalid Email")}</BottomMessage> : null}
+                                {TooShortUserNameError ? <BottomMessage>{t("Too short name")}</BottomMessage> : null}
+                                {TooShortPasswordError ? <BottomMessage>{t("Too short password")}</BottomMessage> : null}
+                                {TooLongUserNameError ? <BottomMessage>{t("Too long name")}</BottomMessage> : null}
                                 <ButtonsStyle>
                                     <Button
-                                        disabled={PasswordDontMatchError || EmptyEmailError || EmptyPasswordError || EmptyRepeatPasswordError}
+                                        disabled={PasswordDontMatchError || EmptyEmailError || EmptyPasswordError || EmptyRepeatPasswordError || TooShortUserNameError || TooShortPasswordError || TooLongUserNameError}
                                         buttonType='submit'
                                         type='submit'
                                     >{t('Register')}</Button>
