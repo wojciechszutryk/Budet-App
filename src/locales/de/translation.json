@@ -68,5 +68,9 @@
   "You have registered successfully": "Du hast dich erfolgreich registriert",
   "Login": "Login",
   "Logout": "Ausloggen",
-  "Logged as": "Angemeldet als"
+  "Logged as": "Angemeldet als",
+  "Too short name": "Zu kurzer Name",
+  "Too short password" : "Zu kurzes Passwort",
+  "Too long name": "Zu langer Name"
+
 }

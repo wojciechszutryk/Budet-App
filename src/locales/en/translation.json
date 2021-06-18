@@ -68,5 +68,8 @@
   "You have registered successfully": "You have registered successfully",
   "Login": "Login",
   "Logout": "Logout",
-  "Logged as": "Logged as"
+  "Logged as": "Logged as",
+  "Too short name": "Too short name",
+  "Too short password" : "Too short password",
+  "Too long name": "Too long name"
 }
