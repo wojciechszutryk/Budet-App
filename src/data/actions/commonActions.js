@@ -3,6 +3,7 @@ import {
 } from 'data/constants';
 
 export const appTokenSet = token => {
+    console.log(token)
     return{
         type: TOKEN_SET,
         payload: token

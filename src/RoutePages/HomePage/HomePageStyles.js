@@ -18,6 +18,13 @@ export const Grid = styled.div`
   }
 `;
 
+export const UserInformation = styled.div`
+    width: 100%;
+    font-weight: 700;
+    text-align: center;
+    color: ${({theme}) => theme.colors.black.normal};
+`;
+
 export const UserButtons = styled.div`
     width: 300px;
     margin-left: auto;

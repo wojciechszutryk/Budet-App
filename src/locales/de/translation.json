@@ -71,6 +71,8 @@
   "Logged as": "Angemeldet als",
   "Too short name": "Zu kurzer Name",
   "Too short password" : "Zu kurzes Passwort",
-  "Too long name": "Zu langer Name"
-
+  "Too long name": "Zu langer Name",
+  "Password don't match": "Passwort stimmt nicht überein",
+  "Auth failed" : "Autorisierung fehlgeschlagen, E-Mail und Passwort prüfen",
+  "Logged in successfully, you can access Budget and Transaction Page": "Nach erfolgreicher Anmeldung können Sie auf die Budget- und Transaktionsseite zugreifen"
 }

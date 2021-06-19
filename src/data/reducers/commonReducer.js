@@ -5,7 +5,7 @@ import {
 const startCommon = {
     activeBudget: '60c5feac45f7a33bf07701b1',
     // activeBudget: '1',
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndvanRlay5zenV0cnlrQGdtYWlsLmNvbSIsInVzZXJJZCI6IjYwY2NhMWYzYTIwYjc5MDQ1NGQzYTBjMSIsImlhdCI6MTYyNDAzMjI3NCwiZXhwIjoxNjI0MDM1ODc0fQ.xH8fknmZ9d2sdbu6nBR2a_L4q5VmN8bMqTvEPJ1y4wQ',
+    token: '',
     userId: '',
     userImage: '',
     userName: '',
@@ -27,6 +27,7 @@ const common = (state= startCommon, action) => {
             }
 
         case TOKEN_SET:
+            console.log(action.payload)
             return {
                 ...state,
                 token: action.payload,

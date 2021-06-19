@@ -71,5 +71,8 @@
   "Logged as": "Logged as",
   "Too short name": "Too short name",
   "Too short password" : "Too short password",
-  "Too long name": "Too long name"
+  "Too long name": "Too long name",
+  "Password don't match": "Password don't match",
+  "Auth failed" : "Authorisation failed, check email and password",
+  "Logged in successfully, you can access Budget and Transaction Page": "Logged in successfully, you can access Budget and Transaction Page"
 }

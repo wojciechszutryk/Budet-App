@@ -1,13 +1,22 @@
 import React, {useEffect} from 'react';
 import SadMac from "components/SadMac";
-import {Grid, StyledFeatureItem, StyledFeatureList, StyledHeader, SubHeader, UserButtons} from "./HomePageStyles";
+import {
+    Grid,
+    StyledFeatureItem,
+    StyledFeatureList,
+    StyledHeader,
+    SubHeader,
+    UserButtons,
+    UserInformation
+} from "./HomePageStyles";
 import Aos from "aos"
 import "aos/dist/aos.css"
 import {useTranslation} from "react-i18next";
 import {Button} from "../../components";
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
 
-const HomePage = ({reload}) => {
+const HomePage = ({reload, token}) => {
     useEffect(() => {
         Aos.init();
     },[reload]);
@@ -47,18 +56,25 @@ const HomePage = ({reload}) => {
     return (
         <Grid>
             <section data-aos="fade-right">
-                <UserButtons>
-                    <Link  to='/login'>
-                        <Button
-                            buttonType='submit'
-                        >{t('Login')}</Button>
-                    </Link>
-                    <Link  to='/register'>
-                        <Button
-                            buttonType='submit'
-                        >{t('Register')}</Button>
-                    </Link>
-                </UserButtons>
+                {
+                    !token ?
+                    <UserButtons>
+                        <Link  to='/login'>
+                            <Button
+                                buttonType='submit'
+                            >{t('Login')}</Button>
+                        </Link>
+                        <Link  to='/register'>
+                            <Button
+                                buttonType='submit'
+                            >{t('Register')}</Button>
+                        </Link>
+                    </UserButtons>
+                        :
+                    <UserInformation>
+                        {t('Logged in successfully, you can access Budget and Transaction Page')}
+                    </UserInformation>
+                }
                 <SadMac sad={false}/>
             </section>
             <section>
@@ -72,4 +88,9 @@ const HomePage = ({reload}) => {
     );
 };
 
-export default HomePage;
+const ConnectedHomePage = connect(state => ({
+        token: state.common.token
+    })
+)(HomePage);
+
+export default ConnectedHomePage;

@@ -10,6 +10,7 @@ import Aos from "aos";
 import {useHistory} from "react-router-dom";
 import {connect} from "react-redux";
 import {appTokenSet, loggedUserIdSet, loggedUserImageSet, loggedUserNameSet} from "../../data/actions/commonActions";
+import {UserInformation} from "../HomePage/HomePageStyles";
 
 const LoginPage = ({appTokenSet, loggedUserNameSet, loggedUserIdSet, loggedUserImageSet}) => {
     const {t} = useTranslation();
@@ -66,10 +67,13 @@ const LoginPage = ({appTokenSet, loggedUserNameSet, loggedUserIdSet, loggedUserI
                 setEmptyPasswordError(true)
                 setInvalidEmailError(true)
                 setResponse('success');
+                console.log(appTokenSet)
                 appTokenSet(res.token);
                 loggedUserNameSet(res.userName);
                 loggedUserIdSet(res.id);
                 loggedUserImageSet(process.env.REACT_APP_API_URL + '/' + res.userImage.replaceAll("\\","/"));
+                console.log(res.id)
+                history.push('/');
             }
             else{
                 setResponse(res.message);
@@ -85,7 +89,12 @@ const LoginPage = ({appTokenSet, loggedUserNameSet, loggedUserIdSet, loggedUserI
         <Grid>
             <section data-aos="fade-right">
                 {
-                    responseMessage ?  responseMessage :
+                    responseMessage
+                        ?
+                    <UserInformation>
+                        {t(responseMessage)}
+                    </UserInformation>
+                        :
                     <SadMac sad={false}/>
                 }
             </section>
@@ -118,8 +127,9 @@ const LoginPage = ({appTokenSet, loggedUserNameSet, loggedUserIdSet, loggedUserI
                             <Button
                                 disabled={EmptyEmailError || EmptyPasswordError}
                                 buttonType='submit'
-                                type='submit'
+                                type="submit"
                             >{t('Login')}</Button>
+
                             <Button
                                 buttonType="reset"
                                 type="button"
