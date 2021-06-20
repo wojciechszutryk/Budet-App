@@ -74,5 +74,6 @@
   "Too long name": "Too long name",
   "Password don't match": "Password don't match",
   "Auth failed" : "Authorisation failed, check email and password",
-  "Logged in successfully, you can access Budget and Transaction Page": "Logged in successfully, you can access Budget and Transaction Page"
+  "Logged in successfully, you can access Budget and Transaction Page": "Logged in successfully, you can access Budget and Transaction Page",
+  "You must be logged in to access this page.": "You must be logged in to access this page."
 }

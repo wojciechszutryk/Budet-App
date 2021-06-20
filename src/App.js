@@ -13,6 +13,7 @@ import {Navigation, SuspenseErrorBoundary, Wrapper} from 'components';
 import {QueryClient, QueryClientProvider} from "react-query";
 import RegisterPage from "./RoutePages/RegisterPage";
 import LoginPage from "./RoutePages/LoginPage";
+import CheckAuth from "./utilities/CheckAuth";
 
 function App() {
     const [theme, setTheme] = useState(darkStyles);
@@ -38,8 +39,8 @@ function App() {
                   <Wrapper>
                       <Switch>
                           <Route path='/' exact><HomePage reload={theme}/></Route>
-                          <Route path='/budget'><BudgetPage/></Route>
-                          <Route path='/transactions'><TransactionsPage/></Route>
+                          <CheckAuth path='/budget'><BudgetPage/></CheckAuth>
+                          <CheckAuth path='/transactions'><TransactionsPage/></CheckAuth>
                           <Route path='/register'><RegisterPage/></Route>
                           <Route path='/login'><LoginPage/></Route>
                       </Switch>

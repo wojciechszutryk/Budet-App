@@ -78,5 +78,6 @@
   "Too long name": "Za długa nazwa użytkownika",
   "Password don't match": "Podane hasła nie zgadzają się",
   "Auth failed" : "Nie udało się zalogować, sprawdź podane dane",
-  "Logged in successfully, you can access Budget and Transaction Page": "Zalogowano pomyślnie, masz dostęp do stron z budżetem i transakcjami"
+  "Logged in successfully, you can access Budget and Transaction Page": "Zalogowano pomyślnie, masz dostęp do stron z budżetem i transakcjami",
+  "You must be logged in to access this page.": "Musisz być zalogowany, aby uzyskać dostęp do tej strony."
 }

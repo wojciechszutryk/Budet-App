@@ -5,11 +5,12 @@ export const Grid = styled.div`
   
   section:nth-child(1){
     position: relative;
-    flex: 1;
+    flex: 3;
+    padding: ${({theme})=> theme.spacing.xl}px ${({theme})=> theme.spacing.normal}px;
   }
   section:nth-child(2){
     position: relative;
-    flex: 7;
+    flex: 6;
     padding: 0 100px;
   }
   @media only screen and (max-width: 900px) {
@@ -23,11 +24,4 @@ export const Grid = styled.div`
 export const ButtonsStyle = styled.div`
     display: flex;
     justify-content: center;
-`;
-
-export const StyledHeader = styled.h1`
-    display: block;
-    width: 100%;
-    color: ${({theme}) => theme.colors.black.normal};
-    text-align: center;
 `;

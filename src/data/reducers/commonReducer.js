@@ -4,7 +4,6 @@ import {
 
 const startCommon = {
     activeBudget: '60c5feac45f7a33bf07701b1',
-    // activeBudget: '1',
     token: '',
     userId: '',
     userImage: '',
@@ -27,7 +26,6 @@ const common = (state= startCommon, action) => {
             }
 
         case TOKEN_SET:
-            console.log(action.payload)
             return {
                 ...state,
                 token: action.payload,

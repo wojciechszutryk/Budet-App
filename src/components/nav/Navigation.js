@@ -2,26 +2,32 @@ import React from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faSun, faMoon, faCloud} from "@fortawesome/free-solid-svg-icons";
 import {NavLink } from 'react-router-dom'
-import {NavList, NavigationContainer, NavigationWrapper, Toggler} from './NavigationStyles'
+import {NavList, NavigationContainer, NavigationWrapper, Toggler, UserActionsButtons} from './NavigationStyles'
 import {useTranslation} from "react-i18next";
 import LanguageSwitcher from "../LanguageSwitcher";
 import {InlineButton, SetDarkButton, SetLightButton} from "../Button/ButtonStyles";
 import {connect} from "react-redux";
 import {themeToggle} from "../../data/actions/commonActions";
-import {Navbar, Nav, NavDropdown} from "react-bootstrap";
+import {Navbar, Nav} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import UserAccount from "../UserAccount";
+import CheckAuth from "../../utilities/CheckAuth";
+
 
 const Navigation = ({pages= [], theme, themeSet, themeToggle, token}) => {
     const {t} = useTranslation();
 
     const list = pages.map(page => (
-        <NavLink key={page.name} exact activeClassName="selected" to={page.link}>
+        <NavLink key={page.name} exact activeClassName="selected" to={page.link} onClick={() => handleRedirect(page.link)}>
             <InlineButton>
                 {t(page.name)}
             </InlineButton>
         </NavLink >
     ))
+
+    const handleRedirect = (link) => {
+        return <CheckAuth redirectURL={link}/>
+    }
 
     const handleThemeChange = () => {
         themeSet();
@@ -31,7 +37,7 @@ const Navigation = ({pages= [], theme, themeSet, themeToggle, token}) => {
     return (
         <NavigationWrapper>
             <NavigationContainer>
-                <Navbar collapseOnSelect expand="sm">
+                <Navbar collapseOnSelect expand="md">
                     <Navbar.Toggle as={Toggler} variant="link" aria-controls="responsive-navbar-nav"/>
                     <NavList>
                         {list}
@@ -45,17 +51,14 @@ const Navigation = ({pages= [], theme, themeSet, themeToggle, token}) => {
                                      <UserAccount/>
                                 </NavList>
                                     :
-                                <NavList>
-                                    <NavDropdown title={t("Account")} id="collasible-nav-dropdown">
-                                        <NavDropdown.Item>
-                                            <NavLink to={'/login'}>{t("Login")}</NavLink>
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item>
-                                            <NavLink to={'/register'}>{t("Register")}</NavLink>
-                                        </NavDropdown.Item>
-                                    </NavDropdown>
-                                </NavList>
+                                <UserActionsButtons>
+                                    <NavLink exact to={'/login'}>
+                                        <InlineButton>{t("Login")}</InlineButton>
+                                    </NavLink>
+                                    <NavLink exact to={'/register'}>
+                                        <InlineButton>{t("Register")}</InlineButton>
+                                    </NavLink>
+                                </UserActionsButtons>
                             }
 
                             <NavList className="pt-1">

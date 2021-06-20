@@ -68,53 +68,15 @@ export const Toggler = styled.button`
     }
 `;
 
-export const Togglera = styled.button`
-  width: 30px;
-  height: 30px;
-  border: none;
-  background: red !important;
-  & .sr-only {
-    background: black;
-    width: 22px;
-    height: 5px;
-    transition: all 0.2s;
+export const UserActionsButtons = styled.div`
+  margin-top: ${({theme}) => theme.spacing.sm}px;
+  margin-bottom: ${({theme}) => theme.spacing.sm}px;
+  margin-right: 10px;
+  padding-top: 4px;
+  & button:nth-child(1) & button:nth-child(2){
+    height: 30px;
   }
-  &:hover {
-    background: transparent !important;
-  }
-  span.icon-bar {
-    background: black !important;
-    height: 3px !important;
-    width: 22px !important;
-    transition: all 0.2s;
-  }
-  & *:nth-child(1) {
-    background: black;
-    height: 3px;
-    width: 22px;
-    transform: rotate(45deg);
-    transform-origin: 10% 10%;
-  }
-  & .middle-bar {
-    width: 22px;
-    height: 3px;
-    background: black;
-    opacity: 0;
-  }
-  & .bottom-bar {
-    height: 3px;
-    width: 22px;
-    background: black;
-    transform: rotate(-45deg);
-    transform-origin: 10% 90%;
-  }
-  &.collapsed .top-bar {
-    transform: rotate(0);
-  }
-  &.collapsed .middle-bar {
-    opacity: 1;
-  }
-  &.collapsed .bottom-bar {
-    transform: rotate(0);
+  & button:nth-child(1){
+    margin-left: 0;
   }
 `;

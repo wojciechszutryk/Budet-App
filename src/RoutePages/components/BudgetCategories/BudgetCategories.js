@@ -13,7 +13,7 @@ import {useTranslation} from "react-i18next";
 import {useQuery} from "react-query";
 import API from "data/fetch";
 
-const BudgetCategories = ({addActiveCategory, activeBudget, activeCategories, removeActiveCategory, allCategories, budgetCategories, parentCategories, otherCategoryId}) => {
+const BudgetCategories = ({addActiveCategory, activeBudget, activeCategories, removeActiveCategory, allCategories, budgetCategories, parentCategories, otherCategoryId, token}) => {
     const {t} = useTranslation();
     const {data:budget} = useQuery(['budgetTransactions',{id: activeBudget}], () => API.budget.fetchBudgetTransactionsFromAPI({id: activeBudget}));
 
@@ -122,6 +122,7 @@ const BudgetCategories = ({addActiveCategory, activeBudget, activeCategories, re
 
 const mapStateToProps = state => ({
     activeBudget: state.common.activeBudget,
+    token: state.common.token,
     activeCategories: state.budget.activeCategories,
     otherCategoryId: state.budget.otherCategoryId
 });

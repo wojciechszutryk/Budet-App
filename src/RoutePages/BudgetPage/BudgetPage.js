@@ -18,13 +18,13 @@ const EditCategoriesForm = React.lazy(() => import('../components/editCategories
 const BudgetPage = ({activeBudget, activeBudgetSet}) => {
     const {t} = useTranslation();
     const queryClient = useQueryClient();
-    const [newBudgetData, setNewBudgetData] = useState({});
     const {data:allBudgets} = useQuery('allBudgets', API.common.fetchAllBudgetsFromAPI);
     const {data:allCategories} = useQuery('allCategories', API.common.fetchAllCategoriesFromAPI);
     const {data:parentCategories} = useQuery('parentCategories', API.common.fetchParentCategoriesFromAPI);
     const {data:childrenCategories} = useQuery('childrenCategories', API.common.fetchChildrenCategoriesFromAPI);
     const {data:budgetCategories} = useQuery(['budgetCategories',{id: activeBudget}], () => API.budget.fetchBudgetCategoriesFromAPI({id: activeBudget}));
     const {data:budgetTransactions} = useQuery(['budgetTransactions',{id: activeBudget}], () => API.budget.fetchBudgetTransactionsFromAPI({id: activeBudget}));
+    const [newBudgetData, setNewBudgetData] = useState({});
 
     const addBudgetCategoryMutation = useMutation(API.budget.addBudgetCategory, {
         onSuccess: () => {
@@ -117,74 +117,74 @@ const BudgetPage = ({activeBudget, activeBudgetSet}) => {
     };
 
     return (
-        <>
-            <Grid>
-                <section>
-                    <SuspenseErrorBoundary>
-                        <SetBudget
-                            allBudgets={allBudgets}
-                            setCurrentBudget={activeBudgetSet}
-                            handleRemoveBudget={handleRemoveBudget}
-                            activeBudget={activeBudget}
-                        />
-                        <BudgetCategories
-                            allCategories={allCategories}
-                            budgetCategories={budgetCategories}
-                            parentCategories={parentCategories}
-                        />
-                        <Link  to='/budget/new'>
-                            <Button buttonType='addBudget'>{t("Add new budget")}</Button>
-                        </Link>
-                        <Link  to='/budget/categories/edit'>
-                            <Button buttonType='addBudget'>{t("Menage categories")}</Button>
-                        </Link>
-                    </SuspenseErrorBoundary>
-                </section>
-                <section>
-                    <SuspenseErrorBoundary>
-                        <Charts
-                            budget={budgetTransactions}
-                            parentCategories={parentCategories}
-                            allCategories={allCategories}
-                            budgetCategories={budgetCategories}
-                        />
-                    </SuspenseErrorBoundary>
-                </section>
-            </Grid>
+            <>
+                <Grid>
+                    <section>
+                        <SuspenseErrorBoundary>
+                            <SetBudget
+                                allBudgets={allBudgets}
+                                setCurrentBudget={activeBudgetSet}
+                                handleRemoveBudget={handleRemoveBudget}
+                                activeBudget={activeBudget}
+                            />
+                            <BudgetCategories
+                                allCategories={allCategories}
+                                budgetCategories={budgetCategories}
+                                parentCategories={parentCategories}
+                            />
+                            <Link  to='/budget/new'>
+                                <Button buttonType='addBudget'>{t("Add new budget")}</Button>
+                            </Link>
+                            <Link  to='/budget/categories/edit'>
+                                <Button buttonType='addBudget'>{t("Menage categories")}</Button>
+                            </Link>
+                        </SuspenseErrorBoundary>
+                    </section>
+                    <section>
+                        <SuspenseErrorBoundary>
+                            <Charts
+                                budget={budgetTransactions}
+                                parentCategories={parentCategories}
+                                allCategories={allCategories}
+                                budgetCategories={budgetCategories}
+                            />
+                        </SuspenseErrorBoundary>
+                    </section>
+                </Grid>
 
-            <Switch>
-                <Route path='/budget/new' exact>
-                    <Modal>
-                        <AddBudgetForm categories={allCategories} onSubmit={setNewBudgetData}/>
-                    </Modal>
-                </Route>
-                <Route path='/budget/categories' exact>
-                    <Modal>
-                        <AddBudgetCategoriesForm
-                            name={newBudgetData['name']}
-                            totalAmount={newBudgetData['totalAmount']}
-                            categories={newBudgetData['categories']}
-                            onSubmit={handleSubmitAddBudgetForm}
-                        />
-                    </Modal>
-                </Route>
-                <Route path='/budget/categories/edit' exact>
-                    <Modal>
-                        <EditCategoriesForm
-                            budgetCategories={budgetCategories.budgetCategories}
-                            parentCategories={parentCategories}
-                            childrenCategories={childrenCategories}
-                            onSubmit={handleChangeCategories}
-                        />
-                    </Modal>
-                </Route>
-            </Switch>
-        </>
+                <Switch>
+                    <Route path='/budget/new' exact>
+                        <Modal>
+                            <AddBudgetForm categories={allCategories} onSubmit={setNewBudgetData}/>
+                        </Modal>
+                    </Route>
+                    <Route path='/budget/categories' exact>
+                        <Modal>
+                            <AddBudgetCategoriesForm
+                                name={newBudgetData['name']}
+                                totalAmount={newBudgetData['totalAmount']}
+                                categories={newBudgetData['categories']}
+                                onSubmit={handleSubmitAddBudgetForm}
+                            />
+                        </Modal>
+                    </Route>
+                    <Route path='/budget/categories/edit' exact>
+                        <Modal>
+                            <EditCategoriesForm
+                                budgetCategories={budgetCategories.budgetCategories}
+                                parentCategories={parentCategories}
+                                childrenCategories={childrenCategories}
+                                onSubmit={handleChangeCategories}
+                            />
+                        </Modal>
+                    </Route>
+                </Switch>
+            </>
     );
 };
 
 const ConnectedBudgetPage = connect(state => ({
-    activeBudget: state.common.activeBudget
+    activeBudget: state.common.activeBudget,
 }),
 {
     activeBudgetSet,

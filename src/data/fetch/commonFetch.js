@@ -1,9 +1,7 @@
 import store from '../store';
 
-const state = store.getState();
-const token = state.common.token;
-
 export const fetchAllCategoriesFromAPI = async() => {
+    const token = store.getState().common.token;
     const response = await fetch(`${process.env.REACT_APP_API_URL}/categories/?_expand=parentCategory`,{
         headers: {
             'Authorization': 'Bearer '+token,
@@ -13,6 +11,7 @@ export const fetchAllCategoriesFromAPI = async() => {
 }
 
 export const fetchParentCategoriesFromAPI = async() => {
+    const token = store.getState().common.token;
     const response = await fetch(`${process.env.REACT_APP_API_URL}/parentCategories`,{
         headers: {
             'Authorization': 'Bearer '+token,
@@ -22,6 +21,7 @@ export const fetchParentCategoriesFromAPI = async() => {
 }
 
 export const fetchChildrenCategoriesFromAPI = async() => {
+    const token = store.getState().common.token;
     const response = await fetch(`${process.env.REACT_APP_API_URL}/categories`,{
         headers: {
             'Authorization': 'Bearer '+token,
@@ -31,6 +31,7 @@ export const fetchChildrenCategoriesFromAPI = async() => {
 }
 
 export const fetchAllTransactionsFromAPI = async() => {
+    const token = store.getState().common.token;
     const response = await fetch(`${process.env.REACT_APP_API_URL}/transactions`,{
         headers: {
             'Authorization': 'Bearer '+token,
@@ -40,6 +41,7 @@ export const fetchAllTransactionsFromAPI = async() => {
 }
 
 export const fetchAllBudgetsFromAPI = async() => {
+    const token = store.getState().common.token;
     const response = await  fetch(`${process.env.REACT_APP_API_URL}/budgets`,{
         headers: {
             'Authorization': 'Bearer '+token,
@@ -49,6 +51,7 @@ export const fetchAllBudgetsFromAPI = async() => {
 }
 
 export const removeBudget = (id) => {
+    const token = store.getState().common.token;
     return fetch(`${process.env.REACT_APP_API_URL}/budgets/${id}`,{
         method: 'DELETE',
         headers: {
@@ -59,6 +62,7 @@ export const removeBudget = (id) => {
 };
 
 export const addParentCategory = async(data) => {
+    const token = store.getState().common.token;
     const response = await fetch(`${process.env.REACT_APP_API_URL}/parentCategories`,{
         method: 'POST',
         body: JSON.stringify(data),
@@ -71,6 +75,7 @@ export const addParentCategory = async(data) => {
 };
 
 export const removeParentCategory = (id) => {
+    const token = store.getState().common.token;
     return fetch(`${process.env.REACT_APP_API_URL}/parentCategories/${id}`,{
         method: 'DELETE',
         headers: {
@@ -81,6 +86,7 @@ export const removeParentCategory = (id) => {
 };
 
 export const addCategory = async(data) => {
+    const token = store.getState().common.token;
     const response = await fetch(`${process.env.REACT_APP_API_URL}/categories`,{
         method: 'POST',
         body: JSON.stringify(data),
@@ -100,7 +106,6 @@ export const removeCategory = (id) => {
 };
 
 export const userSignUp = async(data) => {
-    console.log(data)
     const response = await fetch(`${process.env.REACT_APP_API_URL}/users/signup`,{
         method: 'POST',
         body: data,
@@ -121,6 +126,7 @@ export const userLogin = async(data) => {
 };
 
 export const userPhotoChange = async({id, data}) => {
+    const token = store.getState().common.token;
     const response = await fetch(`${process.env.REACT_APP_API_URL}/users/${id}/changePhoto`,{
         method: 'PUT',
         body: data,
@@ -137,6 +143,7 @@ export const userPhotoGet = async({id}) => {
 };
 
 export const userAccountDelete = async({id}) => {
+    const token = store.getState().common.token;
     const response = await fetch(`${process.env.REACT_APP_API_URL}/users/${id}`,{
         method: 'DELETE',
         headers: {

@@ -16,7 +16,7 @@ import {Button} from "../../components";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 
-const HomePage = ({reload, token}) => {
+const HomePage = ({reload, token, message}) => {
     useEffect(() => {
         Aos.init();
     },[reload]);
@@ -56,6 +56,12 @@ const HomePage = ({reload, token}) => {
     return (
         <Grid>
             <section data-aos="fade-right">
+                {
+                    message &&
+                    <UserInformation>
+                        {t(message)}
+                    </UserInformation>
+                }
                 {
                     !token ?
                     <UserButtons>
