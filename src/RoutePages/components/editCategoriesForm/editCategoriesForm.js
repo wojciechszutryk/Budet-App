@@ -81,7 +81,7 @@ const EditCategoriesForm = ({childrenCategories, parentCategories, budgetCategor
 
     const groupedCategories = useMemo(()=> Object.entries(groupBy(childrenCat,
         childrenCategory => parentCat.find(
-            parentCategory => parentCategory.id === childrenCategory.parentCategoryId).name
+            parentCategory => parentCategory.id === childrenCategory.parentCategory).name
     )),[childrenCat, parentCat]);
     
     const nonEmptyParents = groupedCategories.map(category => category[0]);

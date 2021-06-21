@@ -2,7 +2,8 @@ import store from '../store';
 
 export const fetchAllCategoriesFromAPI = async() => {
     const token = store.getState().common.token;
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/categories/?_expand=parentCategory`,{
+    const id = store.getState().common.userId;
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/users/${id}/getCategories/?_expand=parentCategory`,{
         headers: {
             'Authorization': 'Bearer '+token,
         }
@@ -12,7 +13,8 @@ export const fetchAllCategoriesFromAPI = async() => {
 
 export const fetchParentCategoriesFromAPI = async() => {
     const token = store.getState().common.token;
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/parentCategories`,{
+    const id = store.getState().common.userId;
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/users/${id}/getParentCategories`,{
         headers: {
             'Authorization': 'Bearer '+token,
         }
@@ -22,7 +24,8 @@ export const fetchParentCategoriesFromAPI = async() => {
 
 export const fetchChildrenCategoriesFromAPI = async() => {
     const token = store.getState().common.token;
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/categories`,{
+    const id = store.getState().common.userId;
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/users/${id}/getCategories`,{
         headers: {
             'Authorization': 'Bearer '+token,
         }
@@ -32,7 +35,8 @@ export const fetchChildrenCategoriesFromAPI = async() => {
 
 export const fetchAllTransactionsFromAPI = async() => {
     const token = store.getState().common.token;
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/transactions`,{
+    const id = store.getState().common.userId;
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/users/${id}/getTransactions`,{
         headers: {
             'Authorization': 'Bearer '+token,
         }
@@ -42,7 +46,8 @@ export const fetchAllTransactionsFromAPI = async() => {
 
 export const fetchAllBudgetsFromAPI = async() => {
     const token = store.getState().common.token;
-    const response = await  fetch(`${process.env.REACT_APP_API_URL}/budgets`,{
+    const id = store.getState().common.userId;
+    const response = await  fetch(`${process.env.REACT_APP_API_URL}/users/${id}/getBudgets`,{
         headers: {
             'Authorization': 'Bearer '+token,
         }
@@ -99,9 +104,13 @@ export const addCategory = async(data) => {
 };
 
 export const removeCategory = (id) => {
+    const token = store.getState().common.token;
     return fetch(`${process.env.REACT_APP_API_URL}/categories/${id}`,{
         method: 'DELETE',
-        headers: {'Content-type': 'application/json'}
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': 'Bearer '+token,
+        }
     });
 };
 

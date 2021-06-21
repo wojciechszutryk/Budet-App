@@ -13,14 +13,14 @@ import {useTranslation} from "react-i18next";
 import {useQuery} from "react-query";
 import API from "data/fetch";
 
-const BudgetCategories = ({addActiveCategory, activeBudget, activeCategories, removeActiveCategory, allCategories, budgetCategories, parentCategories, otherCategoryId, token}) => {
+const BudgetCategories = ({addActiveCategory, activeBudget, activeCategories, removeActiveCategory, allCategories, budgetCategories, parentCategories, otherCategoryId}) => {
     const {t} = useTranslation();
     const {data:budget} = useQuery(['budgetTransactions',{id: activeBudget}], () => API.budget.fetchBudgetTransactionsFromAPI({id: activeBudget}));
 
     const groupedCategories = useMemo(() => (groupBy(budgetCategories.budgetCategories,
         budgetCategory => {
             const parentCategoryId = allCategories.find(category => budgetCategory.categoryId === category.id);
-            if (parentCategoryId) return parentCategories.find(category => category.id === parentCategoryId.parentCategoryId).name;
+            if (parentCategoryId) return parentCategories.find(category => category.id === parentCategoryId.parentCategory).name;
         }
     )), [allCategories, budgetCategories.budgetCategories, parentCategories]);
 
@@ -82,7 +82,9 @@ const BudgetCategories = ({addActiveCategory, activeBudget, activeCategories, re
                 />
             ),
             children: category[1].map(budgetCategory => {
-                const name = allCategories.find(cat => budgetCategory.categoryId === cat.id).name;
+                const category = allCategories.find(cat => budgetCategory.categoryId === cat.id);
+                let name = 'New'
+                if (category !== undefined) name = category.name;
                 return (<ChildrenCategory
                     key={name+budgetCategory.budget+Math.random()}
                     name={name}
@@ -122,9 +124,8 @@ const BudgetCategories = ({addActiveCategory, activeBudget, activeCategories, re
 
 const mapStateToProps = state => ({
     activeBudget: state.common.activeBudget,
-    token: state.common.token,
     activeCategories: state.budget.activeCategories,
-    otherCategoryId: state.budget.otherCategoryId
+    otherCategoryId: state.budget.otherCategoryId,
 });
 
 const mapDispatchToProps = {

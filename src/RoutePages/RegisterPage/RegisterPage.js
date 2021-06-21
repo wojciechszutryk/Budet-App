@@ -29,6 +29,11 @@ const RegisterPage = () => {
     const [TooLongUserNameError, setTooLongUserNameError] = useState(true);
     const [TooShortPasswordError, setTooShortPasswordError] = useState(true);
     const [response, setResponse] = useState('');
+    const addBudgetCategoryMutation = useMutation(API.budget.addBudgetCategory);
+    const addBudgetMutation = useMutation(API.budget.addBudget);
+    const addParentCategoryMutation = useMutation(API.common.addParentCategory);
+    const addChildrenCategoryMutation = useMutation(API.common.addCategory);
+    const addTransactionMutation = useMutation(API.budget.addTransition)
 
     useEffect(() => {
         Aos.init();
@@ -112,6 +117,79 @@ const RegisterPage = () => {
                 setEmptyRepeatPasswordError(true)
                 setEmptyPasswordError(true)
                 setInvalidEmailError(true)
+                const budgetRes = await addBudgetMutation.mutateAsync({
+                    name: 'Example Budget',
+                    totalAmount: 1000,
+                    userId: res.id
+                })
+                const parentRes = await addParentCategoryMutation.mutateAsync({
+                    name: 'Prent category',
+                    userId: res.id,
+                })
+                await addParentCategoryMutation.mutateAsync({
+                    name: 'Prent category No.2',
+                    userId: res.id,
+                })
+                const childRes1 = await addChildrenCategoryMutation.mutateAsync({
+                    name: 'Child category No.1',
+                    totalAmount: 300,
+                    userId: res.id,
+                    parentCategoryId: parentRes.createdParentCategory.id
+                })
+                const childRes2 = await addChildrenCategoryMutation.mutateAsync({
+                    name: 'Child category No.2',
+                    totalAmount: 500,
+                    userId: res.id,
+                    parentCategoryId: parentRes.createdParentCategory.id
+                })
+                await addChildrenCategoryMutation.mutateAsync({
+                    name: 'Child category No.3',
+                    totalAmount: 300,
+                    userId: res.id,
+                    parentCategoryId: parentRes.createdParentCategory.id
+                })
+                await addBudgetCategoryMutation.mutateAsync({
+                    budget: 330,
+                    budgetId: budgetRes.createdBudget.id,
+                    categoryId: childRes1.createdCategory.id,
+                })
+                await addBudgetCategoryMutation.mutateAsync({
+                    budget: 520,
+                    budgetId: budgetRes.createdBudget.id,
+                    categoryId: childRes2.createdCategory.id
+                })
+                await addTransactionMutation.mutateAsync({data:{
+                    budgetId: budgetRes.createdBudget.id,
+                    categoryId: childRes1.createdCategory.id,
+                    amount: 100,
+                    date: new Date().toISOString(),
+                    description: 'Example Transaction No.1',
+                    userId: res.id,
+                }})
+                await addTransactionMutation.mutateAsync({data:{
+                    budgetId: budgetRes.createdBudget.id,
+                    categoryId: childRes1.createdCategory.id,
+                    amount: 120,
+                    date: new Date().toISOString(),
+                    description: 'Example Transaction No.2',
+                    userId: res.id,
+                }})
+                await addTransactionMutation.mutateAsync({data:{
+                    budgetId: budgetRes.createdBudget.id,
+                    categoryId: childRes2.createdCategory.id,
+                    amount: 200,
+                    date: new Date().toISOString(),
+                    description: 'Example Transaction No.3',
+                    userId: res.id,
+                }})
+                await addTransactionMutation.mutateAsync({data:{
+                    budgetId: budgetRes.createdBudget.id,
+                    categoryId: childRes2.createdCategory.id,
+                    amount: 30,
+                    date: new Date().toISOString(),
+                    description: 'Example Transaction No.4',
+                    userId: res.id,
+                }})
                 setResponse('success');
             }
             else{

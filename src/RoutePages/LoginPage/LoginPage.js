@@ -9,10 +9,17 @@ import API from "../../data/fetch";
 import Aos from "aos";
 import {useHistory} from "react-router-dom";
 import {connect} from "react-redux";
-import {appTokenSet, loggedUserIdSet, loggedUserImageSet, loggedUserNameSet} from "../../data/actions/commonActions";
+import {
+    activeBudgetSet,
+    appTokenSet,
+    loggedUserIdSet,
+    loggedUserImageSet,
+    loggedUserNameSet
+} from "../../data/actions/commonActions";
 import {UserInformation, StyledHeader} from "../HomePage/HomePageStyles";
+import {fetchAllBudgetsFromAPI} from "../../data/fetch/commonFetch";
 
-const LoginPage = ({appTokenSet, loggedUserNameSet, loggedUserIdSet, loggedUserImageSet}) => {
+const LoginPage = ({appTokenSet, loggedUserNameSet, loggedUserIdSet, loggedUserImageSet, activeBudgetSet}) => {
     const {t} = useTranslation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -71,6 +78,8 @@ const LoginPage = ({appTokenSet, loggedUserNameSet, loggedUserIdSet, loggedUserI
                 loggedUserNameSet(res.userName);
                 loggedUserIdSet(res.id);
                 loggedUserImageSet(process.env.REACT_APP_API_URL + '/' + res.userImage.replaceAll("\\","/"));
+                const budget = await fetchAllBudgetsFromAPI()
+                activeBudgetSet(budget[0].id)
                 history.push('/');
             }
             else{
@@ -152,6 +161,7 @@ const ConnectedLoginPage = connect(null,
         loggedUserNameSet,
         loggedUserIdSet,
         loggedUserImageSet,
+        activeBudgetSet,
     }
 )(LoginPage);
 

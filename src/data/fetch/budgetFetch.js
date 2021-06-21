@@ -1,15 +1,5 @@
 import store from '../store';
 
-export const fetchBudgetFromAPI = async({id}) => {
-    const token = store.getState().common.token;
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/budgets/${id}/?_embed=transactions`,{
-        headers: {
-            'Authorization': 'Bearer '+token,
-        }
-    });
-    return await response.json()
-};
-
 export const fetchBudgetTransactionsFromAPI = async({id}) => {
     const token = store.getState().common.token;
     const response = await fetch(`${process.env.REACT_APP_API_URL}/budgets/${id}/transactions`,{

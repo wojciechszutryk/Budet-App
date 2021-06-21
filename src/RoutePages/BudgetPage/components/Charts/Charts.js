@@ -12,8 +12,13 @@ const Charts = ({activeCategories, lightTheme,
 
     const groupedCategories = useMemo(() => (groupBy(budgetCategories.budgetCategories,
         budgetCategory => {
-            const parentCategoryId = allCategories.find(category => budgetCategory.categoryId === category.id).parentCategoryId;
-            return parentCategories.find(category => category.id === parentCategoryId).name;
+            const category = allCategories.find(category => budgetCategory.categoryId === category.id);
+            let parentCategoryId = '0'
+            if (category !== undefined) parentCategoryId = category.parentCategoryId;
+            const categoryObj = parentCategories.find(category => category.id === parentCategoryId);
+            let name = 'New'
+            if (categoryObj !== undefined) name = categoryObj.name;
+            return name;
         }
     )), [allCategories, budgetCategories.budgetCategories, parentCategories]);
 

@@ -15,7 +15,7 @@ const AddBudgetForm = React.lazy(() => import('../components/addBudgetForm'));
 const AddBudgetCategoriesForm = React.lazy(() => import('../components/addBudgetCategoriesForm'));
 const EditCategoriesForm = React.lazy(() => import('../components/editCategoriesForm'));
 
-const BudgetPage = ({activeBudget, activeBudgetSet}) => {
+const BudgetPage = ({activeBudget, activeBudgetSet, userId}) => {
     const {t} = useTranslation();
     const queryClient = useQueryClient();
     const {data:allBudgets} = useQuery('allBudgets', API.common.fetchAllBudgetsFromAPI);
@@ -75,13 +75,15 @@ const BudgetPage = ({activeBudget, activeBudgetSet}) => {
         const name = values['name'];
         const totalAmount = parseInt(values['totalAmount']);
         const categories = values['categories'];
-        const budgetData = {name, totalAmount};
+        const UID = userId;
+        const budgetData = {name, totalAmount, userId:UID};
         const data = await addBudgetMutation.mutateAsync(budgetData);
         await Object.keys(categories).forEach(function eachKey(key) {
             const categoryObject = {};
             categoryObject['categoryId'] = key;
             categoryObject['budget'] = categories[key];
             categoryObject['budgetId'] = data.createdBudget.id;
+            categoryObject['userId'] = userId;
             addBudgetCategoryMutation.mutate(categoryObject);
         });
         const otherCategoryObject = {};
@@ -185,6 +187,7 @@ const BudgetPage = ({activeBudget, activeBudgetSet}) => {
 
 const ConnectedBudgetPage = connect(state => ({
     activeBudget: state.common.activeBudget,
+    userId: state.common.userId,
 }),
 {
     activeBudgetSet,

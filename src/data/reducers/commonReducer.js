@@ -3,7 +3,8 @@ import {
 } from 'data/constants'
 
 const startCommon = {
-    activeBudget: '60c5feac45f7a33bf07701b1',
+    // activeBudget: '60c5feac45f7a33bf07701b1',
+    activeBudget: '',
     token: '',
     userId: '',
     userImage: '',
