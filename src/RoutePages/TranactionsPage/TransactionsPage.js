@@ -15,7 +15,7 @@ const TransactionForm = React.lazy(() => import('./components/TransactionForm'))
 const ExportTransactions = React.lazy(() => import('./components/ExportTransactions'));
 const ImportTransactions = React.lazy(() => import('./components/ImportTransactions'));
 
-const TransactionsPage = ({activeBudget, activeBudgetSet, otherCategoryId}) => {
+const TransactionsPage = ({activeBudget, activeBudgetSet, otherCategoryId, userId}) => {
     const queryClient = useQueryClient();
     const {t} = useTranslation();
     const {data:allBudgets} = useQuery('allBudgets', API.common.fetchAllBudgetsFromAPI);
@@ -29,6 +29,8 @@ const TransactionsPage = ({activeBudget, activeBudgetSet, otherCategoryId}) => {
 
     const handleSubmitAddTransactionForm = (values) => {
         values.budgetId = activeBudget;
+        values.userId = userId;
+        console.log(values.categoryId)
         if (values.categoryId === '0') values.categoryId = otherCategoryId;
         addTransactionMutation.mutate({data: values}, {onSuccess: () => {
             queryClient.refetchQueries()
@@ -103,7 +105,8 @@ const TransactionsPage = ({activeBudget, activeBudgetSet, otherCategoryId}) => {
 const ConnectedTransactionsPage = connect(
 state => ({
     activeBudget: state.common.activeBudget,
-    otherCategoryId: state.budget.otherCategoryId
+    otherCategoryId: state.budget.otherCategoryId,
+    userId: state.common.userId,
 }),
     {
         activeBudgetSet,

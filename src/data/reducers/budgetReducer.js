@@ -1,7 +1,7 @@
 import {
     BUDGET_ACTIVE_CATEGORIES_ADD,
     BUDGET_ACTIVE_CATEGORIES_REMOVE,
-    BUDGET_ACTIVE_CATEGORIES_CLEAN,
+    BUDGET_ACTIVE_CATEGORIES_CLEAN, SET_OTHER_CATEGORY_ID,
 } from 'data/constants'
 
 const startBudget = {
@@ -9,13 +9,12 @@ const startBudget = {
     budget: {},
     categories: [],
     activeCategories: [],
-    otherCategoryId: '60c7bcc8cbd57a2b0cb3a610',
+    otherCategoryId: '',
 }
 
 const budget = (state= startBudget, action) => {
     const newActiveCategories = [...state.activeCategories];
     switch (action.type) {
-
         case BUDGET_ACTIVE_CATEGORIES_ADD:
             if (newActiveCategories.includes(action.payload)) return {...state}
             return{
@@ -38,6 +37,11 @@ const budget = (state= startBudget, action) => {
             return{
                 ...state,
                 activeCategories: []
+            }
+        case SET_OTHER_CATEGORY_ID:
+            return{
+                ...state,
+                otherCategoryId: action.payload
             }
 
         default:

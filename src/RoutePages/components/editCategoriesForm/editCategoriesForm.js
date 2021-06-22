@@ -12,8 +12,9 @@ import {
 import {groupBy} from "lodash";
 import {faTrashAlt, faPlus} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {connect} from "react-redux";
 
-const EditCategoriesForm = ({childrenCategories, parentCategories, budgetCategories, onSubmit}) => {
+const EditCategoriesForm = ({childrenCategories, parentCategories, userId, onSubmit}) => {
     const {t} = useTranslation();
     const [parentCat, setParentCat] = useState(parentCategories);
     const [childrenCat, setChildrenCat] = useState(childrenCategories);
@@ -34,14 +35,14 @@ const EditCategoriesForm = ({childrenCategories, parentCategories, budgetCategor
         else {
             const id = (childrenCat.length+1) > (parseInt(childrenCat.slice(-1)[0].id)+1) ? (childrenCat.length+1).toString() : (parseInt(childrenCat.slice(-1)[0].id)+1).toString();
             const newChildCat = {
-                //backend
                 id,
-                parentCategoryId,
-                name: input.value
+                parentCategory: parentCategoryId,
+                name: input.value,
+                userId,
             }
             setChildrenCat([...childrenCat, newChildCat]);
         }
-    },[childrenCat, handleInputEmpty, parentCat]);
+    },[childrenCat, handleInputEmpty, parentCat, userId]);
 
     const addParent =  useCallback(() => {
         const input = document.getElementById('newParent');
@@ -55,11 +56,12 @@ const EditCategoriesForm = ({childrenCategories, parentCategories, budgetCategor
             const newParentCat = {
                 //backend
                 id,
-                name: input.value
+                name: input.value,
+                userId,
             }
             setParentCat([...parentCat, newParentCat]);
         }
-    },[handleInputEmpty, parentCat]);
+    },[handleInputEmpty, parentCat, userId]);
 
     const removeChild = useCallback((id, parentCategoryId) => {
         const childrenCopy = [...childrenCat];
@@ -80,28 +82,33 @@ const EditCategoriesForm = ({childrenCategories, parentCategories, budgetCategor
     },[childrenCat, parentCat]);
 
     const groupedCategories = useMemo(()=> Object.entries(groupBy(childrenCat,
-        childrenCategory => parentCat.find(
-            parentCategory => parentCategory.id === childrenCategory.parentCategory).name
-    )),[childrenCat, parentCat]);
+        childrenCategory => {
+            const parentCategory = parentCat.find(parentCategory => {
+                    return (parentCategory.id === childrenCategory.parentCategory)
+                });
+            if (parentCategory !== undefined) return parentCategory.name
+        })),[childrenCat, parentCat]);
     
     const nonEmptyParents = groupedCategories.map(category => category[0]);
     const allParents = parentCat.map(category => category.name);
     const emptyParents = allParents.filter(parent => !nonEmptyParents.includes(parent));
     const emptyParentsObjects = parentCat.filter(parent => emptyParents.includes(parent.name));
-    const emptyParentsList = emptyParentsObjects.map(parent => (
-        <StyledCategoryBox key={parent.name+Math.random()*100}>
-            <StyledParent>
-                {parent.name}
-                <Button buttonType={'delete'} onClick={() => removeParent(parent.name)}><FontAwesomeIcon icon={faTrashAlt} /></Button>
-            </StyledParent>
-            <StyledChildrenCategoriesBox>
-                <StyledChild>
-                    <button onClick={() => addChild(parent.name)}><FontAwesomeIcon icon={faPlus}/></button>
-                    <input type="text" id={parent.name} placeholder={t('Add new')}/>
-                </StyledChild>
-            </StyledChildrenCategoriesBox>
-        </StyledCategoryBox>
-    ));
+    const emptyParentsList = emptyParentsObjects.map(parent => {
+        return(
+            <StyledCategoryBox key={parent.name+Math.random()*100}>
+                <StyledParent>
+                    {parent.name}
+                    <Button buttonType={'delete'} onClick={() => removeParent(parent.name)}><FontAwesomeIcon icon={faTrashAlt} /></Button>
+                </StyledParent>
+                <StyledChildrenCategoriesBox>
+                    <StyledChild>
+                        <button onClick={() => addChild(parent.name)}><FontAwesomeIcon icon={faPlus}/></button>
+                        <input type="text" id={parent.name} placeholder={t('Add new')}/>
+                    </StyledChild>
+                </StyledChildrenCategoriesBox>
+            </StyledCategoryBox>
+        )
+    });
     
     const groupedCategoriesList = useMemo(() => groupedCategories.map(parentCategory => {
         const [parentName, children] = parentCategory;
@@ -134,6 +141,7 @@ const EditCategoriesForm = ({childrenCategories, parentCategories, budgetCategor
     },[childrenCategories, parentCategories]);
 
     const handleSubmit = () => {
+        childrenCat.forEach(child => delete child.id);
         const addedChildren = childrenCat.filter(child => !childrenCategories.includes(child));
         const removedChildren = childrenCategories.filter(child => !childrenCat.includes(child));
         const addedParents = parentCat.filter(parent => !parentCategories.includes(parent));
@@ -141,7 +149,7 @@ const EditCategoriesForm = ({childrenCategories, parentCategories, budgetCategor
         const addedParentsWithChildren = addedParents.map(parent => {
             const parentsChildren = addedChildren.filter(child => child.parentCategoryId === parent.id);
             parentsChildren.forEach(child => delete child.id)
-            return {
+            if (parentsChildren.length > 1) return {
                 parent: parent,
                 children: parentsChildren,
             }
@@ -180,4 +188,9 @@ const EditCategoriesForm = ({childrenCategories, parentCategories, budgetCategor
     );
 };
 
-export default EditCategoriesForm;
+const ConnectedEditCategoriesForm = connect(state => ({
+        userId: state.common.userId,
+    })
+)(EditCategoriesForm);
+
+export default ConnectedEditCategoriesForm;

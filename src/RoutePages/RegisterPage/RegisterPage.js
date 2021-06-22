@@ -8,8 +8,10 @@ import {useMutation} from "react-query";
 import API from "../../data/fetch";
 import Aos from "aos";
 import {Link} from "react-router-dom";
+import {setOtherCategoryId} from "../../data/actions/budgetActions";
+import {connect} from "react-redux";
 
-const RegisterPage = () => {
+const RegisterPage = ({setOtherCategoryId}) => {
     const {t} = useTranslation();
     const [email, setEmail] = useState('');
     const [userName, setUserName] = useState('');
@@ -126,27 +128,39 @@ const RegisterPage = () => {
                     name: 'Prent category',
                     userId: res.id,
                 })
+                const otherParentRes = await addParentCategoryMutation.mutateAsync({
+                    name: 'Other',
+                    userId: res.id,
+                })
                 await addParentCategoryMutation.mutateAsync({
                     name: 'Prent category No.2',
                     userId: res.id,
                 })
+                const otherChildRes = await addChildrenCategoryMutation.mutateAsync({
+                    name: 'Other',
+                    userId: res.id,
+                    parentCategory: otherParentRes.createdParentCategory.id
+                })
                 const childRes1 = await addChildrenCategoryMutation.mutateAsync({
                     name: 'Child category No.1',
-                    totalAmount: 300,
                     userId: res.id,
-                    parentCategoryId: parentRes.createdParentCategory.id
+                    parentCategory: parentRes.createdParentCategory.id
                 })
                 const childRes2 = await addChildrenCategoryMutation.mutateAsync({
                     name: 'Child category No.2',
-                    totalAmount: 500,
                     userId: res.id,
-                    parentCategoryId: parentRes.createdParentCategory.id
+                    parentCategory: parentRes.createdParentCategory.id
                 })
                 await addChildrenCategoryMutation.mutateAsync({
                     name: 'Child category No.3',
                     totalAmount: 300,
                     userId: res.id,
-                    parentCategoryId: parentRes.createdParentCategory.id
+                    parentCategory: parentRes.createdParentCategory.id
+                })
+                await addBudgetCategoryMutation.mutateAsync({
+                    budget: 0,
+                    budgetId: budgetRes.createdBudget.id,
+                    categoryId: otherChildRes.createdCategory.id,
                 })
                 await addBudgetCategoryMutation.mutateAsync({
                     budget: 330,
@@ -195,11 +209,6 @@ const RegisterPage = () => {
             else{
                 setResponse(res.message);
             }
-
-            // UploadService.upload(currentFile,email,password)
-            //     .then(response => response.json())
-            //     .then(data => console.log(data))
-            //     .catch((err) => console.error(err));
         }
     }
 
@@ -306,4 +315,8 @@ const RegisterPage = () => {
     );
 };
 
-export default RegisterPage;
+const mapDispatchToProps = {
+    setOtherCategoryId,
+};
+
+export default connect(null, mapDispatchToProps)(RegisterPage);

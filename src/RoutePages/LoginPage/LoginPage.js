@@ -17,9 +17,10 @@ import {
     loggedUserNameSet
 } from "../../data/actions/commonActions";
 import {UserInformation, StyledHeader} from "../HomePage/HomePageStyles";
-import {fetchAllBudgetsFromAPI} from "../../data/fetch/commonFetch";
+import {fetchAllBudgetsFromAPI, fetchChildrenCategoriesFromAPI} from "../../data/fetch/commonFetch";
+import {setOtherCategoryId} from "../../data/actions/budgetActions";
 
-const LoginPage = ({appTokenSet, loggedUserNameSet, loggedUserIdSet, loggedUserImageSet, activeBudgetSet}) => {
+const LoginPage = ({appTokenSet, loggedUserNameSet, loggedUserIdSet, loggedUserImageSet, activeBudgetSet, setOtherCategoryId}) => {
     const {t} = useTranslation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -78,7 +79,10 @@ const LoginPage = ({appTokenSet, loggedUserNameSet, loggedUserIdSet, loggedUserI
                 loggedUserNameSet(res.userName);
                 loggedUserIdSet(res.id);
                 loggedUserImageSet(process.env.REACT_APP_API_URL + '/' + res.userImage.replaceAll("\\","/"));
-                const budget = await fetchAllBudgetsFromAPI()
+                const budget = await fetchAllBudgetsFromAPI();
+                const categories = await fetchChildrenCategoriesFromAPI();
+                const otherCategoryId = categories.find(category => category.name === 'Other').id;
+                setOtherCategoryId(otherCategoryId)
                 activeBudgetSet(budget[0].id)
                 history.push('/');
             }
@@ -162,6 +166,7 @@ const ConnectedLoginPage = connect(null,
         loggedUserIdSet,
         loggedUserImageSet,
         activeBudgetSet,
+        setOtherCategoryId,
     }
 )(LoginPage);
 
