@@ -75,5 +75,7 @@
   "Password don't match": "Passwort stimmt nicht überein",
   "Auth failed" : "Autorisierung fehlgeschlagen, E-Mail und Passwort prüfen",
   "Logged in successfully, you can access Budget and Transaction Page": "Nach erfolgreicher Anmeldung können Sie auf die Budget- und Transaktionsseite zugreifen",
-  "You must be logged in to access this page.": "Sie müssen angemeldet sein, um auf diese Seite zuzugreifen."
+  "You must be logged in to access this page.": "Sie müssen angemeldet sein, um auf diese Seite zuzugreifen.",
+  "creating account with own avatar": "Konto mit eigenem Avatar erstellen",
+  "changing user avatar": "Benutzer-Avatar ändern"
 }

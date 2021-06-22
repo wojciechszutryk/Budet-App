@@ -24,6 +24,8 @@ const HomePage = ({reload, token, message}) => {
     const {t} = useTranslation();
     const delay = 200;
     const features = [
+        t('creating account with own avatar'),
+        t('changing user avatar'),
         t('adding and removing custom budget with categories'),
         t('switching languages at any time'),
         t('switching between budget at any time'),
