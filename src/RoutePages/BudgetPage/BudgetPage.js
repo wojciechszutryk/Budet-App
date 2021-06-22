@@ -95,7 +95,6 @@ const BudgetPage = ({activeBudget, activeBudgetSet, userId}) => {
     };
 
     const handleChangeCategories = async (addedChildren, removedChildren, addedParents, removedParents, addedParentsWithChildren) => {
-        console.log(addedChildren)
         if (addedParents.length > 0) addedParents.forEach(parent => addParentCategoryMutation.mutate(parent));
         if (removedChildren.length > 0) removedChildren.forEach(child => removeChildrenCategoryMutation.mutate(child.id));
         if (removedParents.length > 0) removedParents.forEach(parent => removeParentCategoryMutation.mutate(parent.id));
@@ -104,8 +103,9 @@ const BudgetPage = ({activeBudget, activeBudgetSet, userId}) => {
             for(const group of addedParentsWithChildren){
                 if (group){
                     const parentData = await addParentCategoryMutation.mutateAsync(group.parent);
+                    console.log(parentData);
                     for (const child of group.children){
-                        child.parentCategoryId = await parentData.createdParentCategory.id
+                        child.parentCategory = await parentData.createdParentCategory.id
                         await addChildrenCategoryMutation.mutateAsync(child);
                     }
                 }

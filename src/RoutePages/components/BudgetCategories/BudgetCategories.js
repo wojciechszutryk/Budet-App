@@ -17,7 +17,6 @@ const BudgetCategories = ({addActiveCategory, activeBudget, activeCategories, re
     const {t} = useTranslation();
     const {data:budget} = useQuery(['budgetTransactions',{id: activeBudget}], () => API.budget.fetchBudgetTransactionsFromAPI({id: activeBudget}));
 
-    console.log(budgetCategories.budgetCategories)
     const groupedCategories = useMemo(() => (groupBy(budgetCategories.budgetCategories,
         budgetCategory => {
             const parentCategoryId = allCategories.find(category => budgetCategory.categoryId === category.id);
@@ -45,7 +44,6 @@ const BudgetCategories = ({addActiveCategory, activeBudget, activeCategories, re
     const leftToSpendOnOther = budget.totalAmount - amountToSpendOnCategories;
 
     const categoriesList = Object.entries(groupedCategories).map(category => {
-        console.log(category)
         if (category[0] === 'Other'){
             return {
                 id: 'Other',

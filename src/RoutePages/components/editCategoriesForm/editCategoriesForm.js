@@ -54,7 +54,6 @@ const EditCategoriesForm = ({childrenCategories, parentCategories, userId, onSub
         else {
             const id = (parentCat.length+1) > (parseInt(parentCat.slice(-1)[0].id)+1) ? (parentCat.length+1).toString() : (parseInt(parentCat.slice(-1)[0].id)+1).toString();
             const newParentCat = {
-                //backend
                 id,
                 name: input.value,
                 userId,
@@ -75,7 +74,7 @@ const EditCategoriesForm = ({childrenCategories, parentCategories, userId, onSub
         const parentCopy = [...parentCat];
         const parentIndex = parentCopy.indexOf(parentCopy.find(parent => parent.name === parentName));
         setChildrenCat(childrenCopy.filter(child => (
-            child.parentCategoryId !== parentCopy[parentIndex].id
+            child.parentCategory !== parentCopy[parentIndex].id
         )))
         parentCopy.splice(parentIndex,1);
         setParentCat(parentCopy);
@@ -88,11 +87,15 @@ const EditCategoriesForm = ({childrenCategories, parentCategories, userId, onSub
                 });
             if (parentCategory !== undefined) return parentCategory.name
         })),[childrenCat, parentCat]);
+    const otherCatInGroupedCatIndex = groupedCategories.indexOf(groupedCategories.find(group => group[0] === 'Other'));
+    groupedCategories.splice(otherCatInGroupedCatIndex, 1);
     
     const nonEmptyParents = groupedCategories.map(category => category[0]);
     const allParents = parentCat.map(category => category.name);
     const emptyParents = allParents.filter(parent => !nonEmptyParents.includes(parent));
     const emptyParentsObjects = parentCat.filter(parent => emptyParents.includes(parent.name));
+    const otherCatInEmptyParentsObjects = emptyParentsObjects.indexOf(emptyParentsObjects.find(parent => parent.name === 'Other'));
+    emptyParentsObjects.splice(otherCatInEmptyParentsObjects, 1);
     const emptyParentsList = emptyParentsObjects.map(parent => {
         return(
             <StyledCategoryBox key={parent.name+Math.random()*100}>
@@ -147,9 +150,9 @@ const EditCategoriesForm = ({childrenCategories, parentCategories, userId, onSub
         const addedParents = parentCat.filter(parent => !parentCategories.includes(parent));
         const removedParents = parentCategories.filter(parent => !parentCat.includes(parent));
         const addedParentsWithChildren = addedParents.map(parent => {
-            const parentsChildren = addedChildren.filter(child => child.parentCategoryId === parent.id);
+            const parentsChildren = addedChildren.filter(child => child.parentCategory === parent.id);
             parentsChildren.forEach(child => delete child.id)
-            if (parentsChildren.length > 1) return {
+            if (parentsChildren.length > 0) return {
                 parent: parent,
                 children: parentsChildren,
             }
