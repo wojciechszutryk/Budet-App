@@ -7,7 +7,7 @@ import {MoneyBar} from "../MoneyBar";
 import {useTranslation} from "react-i18next";
 
 const Charts = ({activeCategories, lightTheme,
-                    budget, allCategories, budgetCategories, parentCategories}) => {
+                    budget, allCategories, budgetCategories, parentCategories, otherCategoryId}) => {
     const {t} = useTranslation();
 
     const groupedCategories = useMemo(() => (groupBy(budgetCategories.budgetCategories,
@@ -52,9 +52,9 @@ const Charts = ({activeCategories, lightTheme,
         ).reduce((acc,transaction) => acc + transaction.amount, 0)
     }).flat();
 
-    const otherExpenses = useMemo(() => budget.transactions.filter(
-        transaction => !budgetCategories.budgetCategories.find(budgetCategory => budgetCategory.categoryId === transaction.categoryId)
-    ).reduce((acc,transaction) => acc + transaction.amount, 0), [budget.transactions, budgetCategories]);
+    const otherExpenses = useMemo(() => budget.transactions.filter(transaction => {
+        return transaction.categoryId === otherCategoryId
+    }).reduce((acc,transaction) => acc + transaction.amount, 0), [budget.transactions, otherCategoryId]);
     moneySpentOnCategory.push(otherExpenses);
 
     const budgetData = {
@@ -87,6 +87,7 @@ const Charts = ({activeCategories, lightTheme,
 const mapStateToProps = state => ({
     activeCategories: state.budget.activeCategories,
     lightTheme: state.common.lightTheme,
+    otherCategoryId: state.budget.otherCategoryId,
 });
 
 export default connect(mapStateToProps)(Charts);

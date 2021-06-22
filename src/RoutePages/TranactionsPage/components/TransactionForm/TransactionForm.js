@@ -14,8 +14,7 @@ const TransactionForm = ({categories, budgetCategories, parentCategories, onSubm
             budgetCategories.find(budgetCat => budgetCat.categoryId === category.id)
     ));
 
-    const groupByCategories = groupBy(categoriesInBudget, 'parentCategoryId');
-    const groupedCategories = Object.assign({"Other": [{id:0, name:"Other"}]}, groupByCategories);
+    const groupedCategories = groupBy(categoriesInBudget, 'parentCategory');
 
     const categoriesToSelect = useMemo(() => Object.entries(groupedCategories).map(category => {
         let label;

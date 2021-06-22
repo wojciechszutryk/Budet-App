@@ -149,10 +149,13 @@ const EditCategoriesForm = ({childrenCategories, parentCategories, userId, onSub
         const removedChildren = childrenCategories.filter(child => !childrenCat.includes(child));
         const addedParents = parentCat.filter(parent => !parentCategories.includes(parent));
         const removedParents = parentCategories.filter(parent => !parentCat.includes(parent));
-        const addedParentsWithChildren = addedParents.map(parent => {
+        const addedParentsWithChildren = addedParents.filter(parent => {
             const parentsChildren = addedChildren.filter(child => child.parentCategory === parent.id);
             parentsChildren.forEach(child => delete child.id)
-            if (parentsChildren.length > 0) return {
+            return parentsChildren.length > 0;
+        }).map(parent => {
+            const parentsChildren = addedChildren.filter(child => child.parentCategory === parent.id);
+            return {
                 parent: parent,
                 children: parentsChildren,
             }

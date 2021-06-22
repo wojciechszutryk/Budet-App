@@ -141,7 +141,7 @@ const LoginPage = ({appTokenSet, loggedUserNameSet, loggedUserIdSet, loggedUserI
                             <Button
                                 disabled={EmptyEmailError || EmptyPasswordError}
                                 buttonType='submit'
-                                type="submit"
+                                // type="submit"
                             >{t('Login')}</Button>
 
                             <Button

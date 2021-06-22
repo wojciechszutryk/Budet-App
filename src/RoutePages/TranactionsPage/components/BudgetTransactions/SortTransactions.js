@@ -15,7 +15,6 @@ import {SearchTransaction} from "components/Input/InputStyles";
 
 const SortTransactions = ({allTransactions, transactions, categories}) => {
     const {t} = useTranslation();
-
     const makeListFromTransaction = useCallback((transactions) => {
         return transactions.map(transaction => {
             const category = (categories.find(category => category.id === transaction.categoryId) || {}).name || t('Other');
