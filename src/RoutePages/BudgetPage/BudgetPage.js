@@ -11,6 +11,7 @@ import {useMutation, useQuery, useQueryClient} from "react-query";
 import API from "data/fetch";
 import {informationNotification} from "utilities/functions";
 import {useTranslation} from "react-i18next";
+
 const AddBudgetForm = React.lazy(() => import('../components/addBudgetForm'));
 const AddBudgetCategoriesForm = React.lazy(() => import('../components/addBudgetCategoriesForm'));
 const EditCategoriesForm = React.lazy(() => import('../components/editCategoriesForm'));
@@ -86,11 +87,11 @@ const BudgetPage = ({activeBudget, activeBudgetSet, userId}) => {
             categoryObject['userId'] = userId;
             addBudgetCategoryMutation.mutate(categoryObject);
         });
-        const otherCategoryObject = {};
-        otherCategoryObject['categoryId'] = '60c7bcc8cbd57a2b0cb3a610';
-        otherCategoryObject['budget'] = 0;
-        otherCategoryObject['budgetId'] = data.createdBudget.id;
-        addBudgetCategoryMutation.mutate(otherCategoryObject);
+        const otherBudgetCategoryObject = {};
+        otherBudgetCategoryObject['categoryId'] = allCategories.find(category => category.name === 'Other').id;
+        otherBudgetCategoryObject['budget'] = 0;
+        otherBudgetCategoryObject['budgetId'] = data.createdBudget.id;
+        await addBudgetCategoryMutation.mutate(otherBudgetCategoryObject);
         informationNotification("Succeeded in adding Budget");
     };
 
@@ -103,7 +104,6 @@ const BudgetPage = ({activeBudget, activeBudgetSet, userId}) => {
             for(const group of addedParentsWithChildren){
                 if (group){
                     const parentData = await addParentCategoryMutation.mutateAsync(group.parent);
-                    console.log(parentData);
                     for (const child of group.children){
                         child.parentCategory = await parentData.createdParentCategory.id
                         await addChildrenCategoryMutation.mutateAsync(child);

@@ -41,9 +41,11 @@ const AddBudgetForm = ({categories, onSubmit}) => {
         }
     }
 
-    const categoriesToSelect = useMemo(() => Object.entries(categories).map(category => (
+    const categoriesWithoutOther = categories.filter(c => c.name !== 'Other');
+
+    const categoriesToSelect = useMemo(() => Object.entries(categoriesWithoutOther).map(category => (
         {value: category[1].id, label:category[1].name}
-    )),[categories]);
+    )),[categoriesWithoutOther]);
 
     return(
         <>

@@ -14,13 +14,14 @@ const Charts = ({activeCategories, lightTheme,
         budgetCategory => {
             const category = allCategories.find(category => budgetCategory.categoryId === category.id);
             let parentCategoryId = '0'
-            if (category !== undefined) parentCategoryId = category.parentCategoryId;
+            if (category !== undefined) parentCategoryId = category.parentCategory;
             const categoryObj = parentCategories.find(category => category.id === parentCategoryId);
             let name = 'New'
             if (categoryObj !== undefined) name = categoryObj.name;
             return name;
         }
     )), [allCategories, budgetCategories.budgetCategories, parentCategories]);
+    delete groupedCategories['Other'];
 
     const colors = [];
 

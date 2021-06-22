@@ -30,7 +30,6 @@ const TransactionsPage = ({activeBudget, activeBudgetSet, otherCategoryId, userI
     const handleSubmitAddTransactionForm = (values) => {
         values.budgetId = activeBudget;
         values.userId = userId;
-        console.log(values.categoryId)
         if (values.categoryId === '0') values.categoryId = otherCategoryId;
         addTransactionMutation.mutate({data: values}, {onSuccess: () => {
             queryClient.refetchQueries()
