@@ -45,11 +45,11 @@ const UserAccount = ({userImage, userName, userId, appTokenSet, loggedUserImageS
 
     const submitPhoto = async (e) => {
         let formData = new FormData();
-        formData.append("userImage", e.target.files[0]);
+        formData.append("file", e.target.files[0]);
         const res = await changePhotoUserMutation.mutateAsync({id: userId, data: formData});
         if (res.message === 'Photo updated'){
             const resGet = await getPhotoUserMutation.mutateAsync({id: userId});
-            if (resGet.userImage) loggedUserImageSet(process.env.REACT_APP_API_URL + '/' + resGet.userImage.replaceAll("\\","/"));
+            if(!resGet.message && !resGet.err) loggedUserImageSet(process.env.REACT_APP_API_URL + '/users/image/'+resGet);
         }
     }
 

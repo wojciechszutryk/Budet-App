@@ -145,10 +145,11 @@ export const userPhotoChange = async({id, data}) => {
 };
 
 export const userPhotoGet = async({id}) => {
+    // const response = await fetch(`${process.env.REACT_APP_API_URL}/users/image/${id}`,{
     const response = await fetch(`${process.env.REACT_APP_API_URL}/users/${id}/getPhoto`,{
         method: 'GET',
     })
-    return await response.json()
+    return await response.json();
 };
 
 export const userAccountDelete = async({id}) => {

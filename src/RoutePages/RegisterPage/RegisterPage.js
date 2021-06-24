@@ -102,7 +102,7 @@ const RegisterPage = ({setOtherCategoryId}) => {
         validate();
         if (!EmptyEmailError && !EmptyPasswordError && !EmptyRepeatPasswordError && !PasswordDontMatchError && !EmptyFileError && !InvalidEmailError && !TooShortUserNameError && !TooShortPasswordError && !TooLongUserNameError){
             let formData = new FormData();
-            formData.append("userImage", currentFile);
+            formData.append("file", currentFile);
             formData.append("userName", userName);
             formData.append("password", password);
             formData.append("email", email);
