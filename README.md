@@ -4,9 +4,9 @@ DEMO: https://wojciechszutryk.github.io/Budet-App/
 
 ## Project Status
 
-This project is currently in development. Frontend part done in 80%. Backend is currently in progress.
+This project is currently in development. Done in ~90%. Ther are some cosmetc changes to be made.
 
-## Project Screen Shot(s)
+## Project Screen Shot(s) && Demo video
 
 https://user-images.githubusercontent.com/72247608/123413491-244fbd80-d5b3-11eb-80c3-5277a9265a56.mp4
 
@@ -41,6 +41,10 @@ https://user-images.githubusercontent.com/72247608/123413491-244fbd80-d5b3-11eb-
 -website will look well at any device
 
 -showing notification
+
+-logging and signing up
+
+-changeing user photo
 
 
 ## Installation and Setup Instructions
