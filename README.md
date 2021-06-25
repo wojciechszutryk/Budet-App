@@ -8,9 +8,11 @@ This project is currently in development. Frontend part done in 80%. Backend is 
 
 ## Project Screen Shot(s)
 
-![image](https://user-images.githubusercontent.com/72247608/119134087-fec41700-ba3c-11eb-8277-755383853606.png)
+https://user-images.githubusercontent.com/72247608/123413491-244fbd80-d5b3-11eb-80c3-5277a9265a56.mp4
 
-![image](https://user-images.githubusercontent.com/72247608/119134118-05528e80-ba3d-11eb-8fd3-2846fa8dae6a.png)
+![image](https://user-images.githubusercontent.com/72247608/123413740-65e06880-d5b3-11eb-8d00-ca7e81daf899.png)
+
+![image](https://user-images.githubusercontent.com/72247608/123414028-acce5e00-d5b3-11eb-917d-491d7dd8a48f.png)
 
 ## Features
 
