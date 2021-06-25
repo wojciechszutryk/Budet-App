@@ -11,7 +11,7 @@ import {useMutation, useQueryClient} from "react-query";
 import {informationNotification} from "utilities/functions";
 import API from "../../../../../data/fetch";
 
-const OutputTable = ({data, budgetCategories, allCategories, activeBudget, otherCategoryId}) => {
+const OutputTable = ({data, budgetCategories, allCategories, activeBudget, otherCategoryId, userId}) => {
     const {t} = useTranslation();
     const queryClient = useQueryClient();
 
@@ -61,6 +61,7 @@ const OutputTable = ({data, budgetCategories, allCategories, activeBudget, other
     const handleCheckAndSubmit = () => {
         transactions.forEach(transaction => {
             transaction.budgetId = activeBudget.toString();
+            transaction.userId = userId;
             addTransactionMutation.mutate({data: transaction}, {onSuccess: () => {
                 queryClient.refetchQueries()
             }})
@@ -93,6 +94,7 @@ const OutputTable = ({data, budgetCategories, allCategories, activeBudget, other
 const ConnectedOutputTable = connect(state =>
     ({
         activeBudget: state.common.activeBudget,
+        userId: state.common.userId,
         otherCategoryId: state.budget.otherCategoryId,
     }))
 (OutputTable);
