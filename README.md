@@ -2,6 +2,8 @@
 
 DEMO: https://wojciechszutryk.github.io/Budet-App/
 
+backend repo: https://github.com/wojciechszutryk/budgetApp-backend
+
 ## Project Status
 
 This project is currently in development. Done in ~90%. Ther are some cosmetc changes to be made.
